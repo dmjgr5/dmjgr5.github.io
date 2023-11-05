@@ -1,12 +1,9 @@
 ---
 layout: default
-title: Proxy 란
+title: 프록시(Proxy)
 parent: Network & Security
-nav_order: 3
----
-
-# Lists
-{: .no_toc }
+nav_order: 1
+--- 
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -26,6 +23,7 @@ nav_order: 3
 프록시 서버가 중간에 위치함으로써 클라이언트는 프록시 서버를 `서버`라고 인식하고, 서버 입장에서는 프록시 서버를 `클라이언트`로 인식하게 된다.
 
 ![프록시 서버의 구조](/assets/images/proxy1.png)
+
 *[프록시 서버의 구조]*
 {: .text-center }
 

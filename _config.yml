@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Just the abcdefe
-description: A Jekyll theme for documentationdd
+title: Just the Notes
+description: Notes for All things
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://just-the-docs.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://github.com/dmjgr5/dmjgr5.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: just-the-docs/just-the-docs # for github-metadata
 
 permalink: pretty
@@ -101,8 +101,8 @@ heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Just the Docs on GitHub":
-    - "https://github.com/just-the-docs/just-the-docs"
+  "Just the Notes on GitHub":
+    - "https://github.com/dmjgr5/dmjgr5.github.io"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
@@ -113,8 +113,8 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # External navigation links
 nav_external_links:
-  - title: Just the Docs on GitHub
-    url: https://github.com/just-the-docs/just-the-docs
+  - title: Just the Notes on GitHub
+    url: https://github.com/dmjgr5/dmjgr5.github.io
 
 # Footer content
 # appears at the bottom of every page's main content
