@@ -16,84 +16,85 @@ nav_order: 3
 
 ---
 
-Most lists can be rendered with pure Markdown.
 
-## Unordered list
+개발을 하지 않더라도 `프록시`라는 단어는 종종 듣게 되는데 정확히 프록시가 무엇이고, 어떤 역할을 하는지 정리하고자 한다.
 
-<div class="code-example" markdown="1">
-- Item 1
-- Item 2
-- Item 3
+## 프록시(Proxy) 란?
 
-_or_
+프록시의 사전적 의미는 `대신`, `대리`이다. 말 그대로 두 PC가 통신을 할 때 직접 하지 않고 중간에서 대리로 통신을 하는 것을 `프록시` 라고 하고, 중계 역할을 하는 것을 `프록시 서버` 라고 부른다. 즉, 클라이언트와 서버 사이의 `중계 서버` 라고 생각하면 된다. 프록시 서버는 보안 목적이나 캐싱 등의 기능을 제공한다.
 
-* Item 1
-* Item 2
-* Item 3
-</div>
-```markdown
-- Item 1
-- Item 2
-- Item 3
+프록시 서버가 중간에 위치함으로써 클라이언트는 프록시 서버를 `서버`라고 인식하고, 서버 입장에서는 프록시 서버를 `클라이언트`로 인식하게 된다.
 
-_or_
+![프록시 서버의 구조](/assets/images/proxy1.png)
+*[프록시 서버의 구조]*
+{: .text-center }
 
-* Item 1
-* Item 2
-* Item 3
-```
+## 포워드 프록시(Forward Proxy)
 
-## Ordered list
+일반적으로 프록시라고 말하면 포워드 프록시를 말한다.
 
-<div class="code-example" markdown="1">
-1. Item 1
-1. Item 2
-1. Item 3
-</div>
-```markdown
-1. Item 1
-1. Item 2
-1. Item 3
-```
+클라이언트에서 서버로 리소스를 요청할 때 직접 요청하지 않고 프록시 서버를 거쳐서 요청한다. 이 경우 서버에서 받는 IP는 클라이언트의 IP가 아닌 프록시 서브의 IP이기 때문에 서버는 클라이언트가 누군지 알 수 없다. 즉, 서버에게 클라이언트가 누구인지 감춰주는 역할을 한다.
 
-## Task list
+이러한 특징 때문에 기업 사내망에서 주로 사용된다.
 
-<div class="code-example" markdown="1">
-- [ ] hello, this is a todo item
-- [ ] hello, this is another todo item
-- [x] goodbye, this item is done
-</div>
-```markdown
-- [ ] hello, this is a todo item
-- [ ] hello, this is another todo item
-- [x] goodbye, this item is done
-```
+### 포워드 프록시의 특징/역할
 
-## Definition list
+-   `캐싱`  
+    첫 번째 요청 이후부터는 동일한 요청이 들어올 경우, 프록시 서버에 캐싱된 내용을 전달해줌으로써 성능을 향상시킬 수 있다.
 
-Definition lists require HTML syntax and aren't supported with the GitHub Flavored Markdown compiler.
+웹 서비스에서 요청이 발생할 때마다 1) 요청 → 2) 요청 전송 → 3) 요청 접수 → 4) 응답 생성 → 5) 응답 전송 → 6) 응답 수신 과 같은 과정을 반복해서 거친다. 요청이 한 번 뿐일 때는 괜찮지만, 중복되는 요청을 매번 처리하기에는 심한 자원낭비가 생기고, 웹 서버의 부하가 증가할 것이다.
 
-<div class="code-example" markdown="1">
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-</div>
-```html
-<dl>
-  <dt>Name</dt>
-  <dd>Godzilla</dd>
-  <dt>Born</dt>
-  <dd>1952</dd>
-  <dt>Birthplace</dt>
-  <dd>Japan</dd>
-  <dt>Color</dt>
-  <dd>Green</dd>
-</dl>
-```
+이를 위해 포워드 프록시는 정적 데이터를 저장해두고 동일한 요청의 경우 웹서버 까지 가지 않고 포워드 프록시에서 처리할 수 있는 캐싱 역할을 수행한다.
+
+-   `IP 우회`
+
+위에 언급했듯이 클라이언트 측에서 프록시 서버를 거쳐 웹 서비스를 이용할 경우, 서버 측에서는 요청을 받을 때 클라이언트의 IP가 아닌 프록시 서버의 IP를 전달받게 된다.  
+즉, 서버 측에 클라이언트의 정보를 숨길 수 있게 되는 것이다.
+
+-   `제한`  
+    보안이 중요한 사내망에서 정해진 사이트에만 연결 할 수 있도록 설정하는 등 웹 사용 환경을 제한할 수 있다.
+
+
+![Forward Proxy](/assets/images/proxy2.png)
+
+*[Forward Proxy]*
+{: .text-center }
+
+
+## 리버스 프록시(Reverse Proxy)
+
+`리버스 프록시`는 포워드 프록시와 반대 개념이다. 애플리케이션 서버의 앞에 위치하여 클라이언트가 서버를 요청할 때 리버스 프록시를 호출하고, 리버스 프록시가 서버로부터 응답을 전달받아 다시 클라이언트에게 전송하는 역할을 한다.
+
+이 경우, 클라이언트는 애플리케이션 서버를 직접 호출하는 것이 아니라 `프록시 서버`를 통해 호출하기 때문에 리버스 프록시는 애플리케이션 서버를 감추는 역할을 하게 된다.
+
+### 리버스 프록시의 예시
+
+`NginX`, `Apache Web Server`
+
+### 리버스 프록시의 특징/역할
+
+-   `로드밸런싱`  
+    리버스 프록시 뒤에 여러 개의 WAS를 둠으로써, 사용자 요청을 분산할 수 있다. End-point 마다 호출 서버를 설정할 수 있어 역할에 따라 서버의 트래픽을 분산할 수도 있다.
+-   `보안`  
+    보안 상의 이유로 서버에 직접 접근하는 것을 막기 위해 DMZ같은 네트워크에 리버스 프록시를 구성하여 접근하도록 한다.
+
+
+![Reverse Proxy](/assets/images/proxy3.png)
+*[Reverse Proxy]*
+{: .text-center }
+
+
+### 리버스 프록시의 장점
+
+보통 기업의 네트워크 환경은 비무장 지대(DMZ; Demilitarized Zone) 라고 하는 내부 네트워크와 외부 네트워크 사이에 위치하는 구간이 존재합니다.
+
+![리버스 프록시 구성의 예](/assets/images/proxy4.png)
+*[리버스 프록시 구성의 예]*
+{: .text-center }
+
+
+-   **DMZ 내에 외부에 서비스를 제공하는 서버**(메일 서버, 웹 서버, DNS 서버)를 배치하고 **네트워크는 1, 2차 방화벽으로 보호**
+-   서비스를 제공하려면 WAS 를 DMZ 에 놓고 서비스해도 되지만 이런 서비스는 보통 내부의 DBMS 서버와 연결
+-   만약 WAS 가 최전방에 있으면 **WAS 가 털릴 경우 DBMS 와 관련 서버까지 모두 같이 털리는** 심각한 보안 문제가 발생
+-   이때문에 DMZ 존에 **웹 서버를 두고 리버스 프락시로 설정**하고 **WAS 는 내부망에 위치**시키게 설정
+-   리버스 프락시로 동작하는 **웹 서버만 내부 WAS 와 연결**하도록 설정하므로 웹 서버가 해킹당해도 2차 방화벽을 다시 뚫어야 하므로 더 보안에 강함
