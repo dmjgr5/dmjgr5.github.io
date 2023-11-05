@@ -2,7 +2,7 @@
 layout: default
 title: Tables
 parent: UI Components
-nav_order: 104
+nav_order: 4
 ---
 
 # Tables

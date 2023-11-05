@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Markdown kitchen sink
-nav_order: 109
+nav_order: 99
 ---
 
 <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
