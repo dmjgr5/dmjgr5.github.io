@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Lists
-parent: UI Components
-nav_order: 105
+title: Proxy 란
+parent: Network & Security
+nav_order: 3
 ---
 
 # Lists

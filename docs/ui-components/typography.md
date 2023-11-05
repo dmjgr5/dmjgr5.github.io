@@ -2,7 +2,7 @@
 layout: default
 title: Typography
 parent: UI Components
-nav_order: 1
+nav_order: 101
 ---
 
 # Typography

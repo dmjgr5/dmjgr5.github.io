@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Navigation Structure
-nav_order: 5
+nav_order: 105
 ---
 
 # Navigation Structure
@@ -37,7 +37,7 @@ To specify a page order, you can use the `nav_order` parameter in your pages' YA
 ---
 layout: default
 title: Customization
-nav_order: 4
+nav_order: 104
 ---
 
 ```
@@ -115,7 +115,7 @@ On the parent pages, add this YAML front matter parameter:
 ---
 layout: default
 title: UI Components
-nav_order: 2
+nav_order: 102
 has_children: true
 ---
 
@@ -137,7 +137,7 @@ On child pages, simply set the `parent:` YAML front matter to whatever the paren
 layout: default
 title: Buttons
 parent: UI Components
-nav_order: 2
+nav_order: 102
 ---
 
 ```
@@ -175,7 +175,7 @@ By default, all pages with children will automatically append a Table of Content
 ---
 layout: default
 title: UI Components
-nav_order: 2
+nav_order: 102
 has_children: true
 has_toc: false
 ---
@@ -199,7 +199,7 @@ Child pages can also have children (grandchildren). This is achieved by using a 
 layout: default
 title: Buttons
 parent: UI Components
-nav_order: 2
+nav_order: 102
 has_children: true
 ---
 
@@ -211,7 +211,7 @@ layout: default
 title: Buttons Child Page
 parent: Buttons
 grand_parent: UI Components
-nav_order: 1
+nav_order: 101
 ---
 
 ```
