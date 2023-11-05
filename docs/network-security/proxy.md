@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 프록시(Proxy)
+title: Proxy
 parent: Network & Security
 nav_order: 1
 --- 

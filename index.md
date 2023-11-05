@@ -6,6 +6,10 @@ description: "Just the Docs is a responsive Jekyll theme with built-in search th
 permalink: /
 ---
 
+
+
+ [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdmjgr5)](https://hits.seeyoufarm.com)
+
 # Focus on writing good documentation
 {: .fs-9 }
 
