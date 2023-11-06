@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Network & Security
-nav_order: 30
+nav_order: 20
 has_children: true
 permalink: /docs/network-security
 ---
