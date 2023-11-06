@@ -16,7 +16,8 @@ nav_order: 20
 
 
 
-## `ps [option]`
+## Process 확인하기
+
 
 전체적인 프로세스와 관련된 옵션이다.
 
@@ -31,7 +32,7 @@ root      1957 15646  0 02:39 pts/0    00:00:00 grep --color=auto docker
 root@master:~/labfile/service#
 ```
 
-## `curl [option]`
+## Curl 사용하기
 
 `curl`(client url) 명령어는 프로토콜들을 이용해 URL 로 데이터를 전송하여 서버에 데이터를 보내거나 가져올때 사용하기 위한 명령줄 도구 및 라이브러리이다.
 
@@ -55,7 +56,7 @@ root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello
 root@master:~/labfile/service#
 ```
 
-## shell script 실행
+## Shell 스크립트 실행하기
 
 `.sh` 확장자가 나오길래, 뭐지 싶었는데 찾아보니 shell script 확장자였다.
 
@@ -76,7 +77,7 @@ helm installed into /usr/local/bin/helm
 root@master:~#
 ```
 
-## 파일 압축 및 해제
+## 파일 압축 및 해제하기
 
 `tar -zcvf target.tar.gz file1 file2 dir1 dir2` : 파일 압축  
 `tar -zxvf target.tar.gz` : 압축 해제
@@ -136,7 +137,7 @@ root@docker1:~/labfile/dockerfile_dir#
 
 ```
 
-## CPU 정보
+## CPU 정보 확인하기
 
 ```bash
 root@docker1:~# lscpu
@@ -167,7 +168,7 @@ Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cm
 root@docker1:~#
 ```
 
-## Linux 디스크 용량 확인 하기
+## Disk 용량 확인 하기
 
 ```bash
 df : 디스크 남은 용량 확인 (기본 명령어)
@@ -182,9 +183,7 @@ du -h : 깔끔하게 보여줌
 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌
 ```
 
-## `free`
-
-RAM size 확인
+## RAM 사이즈 확인하기
 
 ```bash
 root@docker1:~# free
@@ -193,6 +192,42 @@ Mem:        4039328     1140088     1636088       34088     1263152     2608324
 Swap:       2017276           0     2017276
 root@docker1:~#
 ```
+
+## Listen Port 확인하기
+
+`Netstat` 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다.
+
+ 
+
+- -l 옵션 : netstat에 모든 수신 소켓을 표시한다.
+- -t 옵션 : 모든 TCP 연결을 표시한다.
+- -u 옵션 : 모든 UDP 연결을 표시한다.
+- -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다.
+- -n 옵션 : 서비스 이름 대신 port 번호를 표시한다.
+
+```bash
+user@user:~$ sudo netstat -ltup
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 localhost:ipp           0.0.0.0:*               LISTEN      899/cupsd           
+tcp        0      0 localhost:37485         0.0.0.0:*               LISTEN      1034/containerd     
+tcp        0      0 localhost:postgresql    0.0.0.0:*               LISTEN      1129/postgres       
+tcp        0      0 localhost:domain        0.0.0.0:*               LISTEN      796/systemd-resolve 
+tcp        0      0 localhost:4000          0.0.0.0:*               LISTEN      35497/ruby2.7       
+tcp6       0      0 ip6-localhost:ipp       [::]:*                  LISTEN      899/cupsd           
+tcp6       0      0 [::]:9090               [::]:*                  LISTEN      982/java            
+udp        0      0 0.0.0.0:58210           0.0.0.0:*                           894/avahi-daemon: r 
+udp        0      0 mdns.mcast.net:mdns     0.0.0.0:*                           2999/chrome         
+udp        0      0 0.0.0.0:mdns            0.0.0.0:*                           894/avahi-daemon: r 
+udp        0      0 dcpark-500R5K-501:34197 0.0.0.0:*                           2999/chrome         
+udp        0      0 localhost:domain        0.0.0.0:*                           796/systemd-resolve 
+udp        0      0 0.0.0.0:631             0.0.0.0:*                           975/cups-browsed    
+udp6       0      0 [::]:mdns               [::]:*                              894/avahi-daemon: r 
+udp6       0      0 [::]:44146              [::]:*                              894/avahi-daemon: r 
+```
+
+
+
 
 ## Alias 설정하기
 
