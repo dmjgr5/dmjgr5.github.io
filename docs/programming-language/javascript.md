@@ -6,7 +6,7 @@ has_children: true
 nav_order: 20
 ---
 
-# Code
+# Java Script
 {: .no_toc }
 
 ## Table of contents
