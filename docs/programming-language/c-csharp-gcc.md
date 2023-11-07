@@ -3,7 +3,7 @@ layout: default
 title: gcc 컴파일하기
 parent: C, C#
 grand_parent: Programming Language
-permalink: /docs/programming-language/
+permalink: /docs/programming-language/gcc/
 nav_order: 10
 ---
 

@@ -3,7 +3,7 @@ layout: default
 title: Node.js 기본 개념
 parent: Node.js
 grand_parent: Programming Language
-permalink: /docs/programming-language/
+permalink: /docs/programming-language/nodejs-basic/
 nav_order: 10
 ---
 

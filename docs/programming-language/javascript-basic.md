@@ -3,7 +3,7 @@ layout: default
 title: Java Script 기본 개념
 parent: Java Script
 grand_parent: Programming Language
-permalink: /docs/programming-language/
+permalink: /docs/programming-language/js-basic/
 nav_order: 10
 ---
 

@@ -3,7 +3,7 @@ layout: default
 title: Vue.js 기본 개념
 parent: Vue.js
 grand_parent: Programming Language
-permalink: /docs/programming-language/
+permalink: /docs/programming-language/vuejs-basic/
 nav_order: 10
 ---
 

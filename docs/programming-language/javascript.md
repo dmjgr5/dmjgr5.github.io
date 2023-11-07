@@ -7,10 +7,5 @@ nav_order: 20
 ---
 
 # Java Script
-{: .no_toc }
 
-## Table of contents
 {: .no_toc .text-delta }
-
-1. TOC
-{:toc}
