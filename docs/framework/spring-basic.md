@@ -7,6 +7,9 @@ permalink: /docs/framework/spring-basic/
 nav_order: 10
 ---
 
+# Spring 기본 개념
+{: .no_toc }
+
 ## Table of contents
 {: .no_toc .text-delta }
 

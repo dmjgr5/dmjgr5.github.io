@@ -7,6 +7,8 @@ permalink: /docs/programming-language/vuejs-basic/
 nav_order: 10
 ---
 
+# Vue.js 기본 개념
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }

@@ -7,6 +7,9 @@ permalink: /docs/os-systems/linux-basics/
 nav_order: 10
 ---
 
+# Linux Basics
+{: .no_toc }
+
 ## Table of contents
 {: .no_toc .text-delta }
 

@@ -8,6 +8,7 @@ nav_order: 10
 ---
 
 
+# gcc 컴파일하기
 
 리눅스에서는 간단하게 `gcc` (GNU compiler collection) 컴파일러를 이용하여 컴파일 할 수 있다.
 예제로 아래의 코드를 작성한 후 gcctest.c 파일로 저장한다.

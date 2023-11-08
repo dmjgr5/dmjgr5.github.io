@@ -7,9 +7,14 @@ permalink: /docs/framework/spring-reference/
 nav_order: 10
 ---
 
-Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다.
+# Spring Boot 참조 자료
+{: .no_toc }
 
 ---
+
+Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다.
+
+
 
 추천 자료
 {: .label .label-green }

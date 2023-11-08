@@ -7,6 +7,8 @@ permalink: /docs/programming-language/js-basic/
 nav_order: 10
 ---
 
+# Java Script 기본 개념
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }

@@ -1,11 +1,14 @@
 ---
 layout: default
-title: Ubuntu 18.04 Docker 설치
+title: Ubuntu 에 Docker 설치
 parent: Docker
 grand_parent: Cloud
 permalink: /docs/cloud/docker-install-18-04/
 nav_order: 10
 ---
+
+# Ubuntu 18.04 Docker 설치
+{: .no_toc }
 
 ## Table of contents
 {: .no_toc .text-delta }

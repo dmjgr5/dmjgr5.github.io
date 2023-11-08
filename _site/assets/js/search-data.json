@@ -657,1126 +657,1287 @@
     
     "relUrl": "/docs/layout/minimal/default-child/"
   },"94": {
-    "doc": "Ubuntu 18.04 Docker 설치",
+    "doc": "Docker Architecture",
+    "title": "Docker Architecture",
+    "content": ". Docker 는 2010 년 docCloud 회사로 설립하였으며, 2013 년에 Docker 회사명 변경하였다. [Docker 구조 ] . | Docker Daemon : dockerd 라는 이름의 데몬프로그램, 컨테이너 내에 설치되며 도커 서버의 역할을 한다. | Docker Client : dockerCLI 이며 명령어를 보내는 작업을 일컫는다. | Registries : 중앙 이미지 저장소, 도커가 운영하는 퍼블릭 레지스트리 (https://hub.docker.com) . | Image : Docker Container 를 생성할 때 필요한 읽기 전용의 템플릿, 파일들의 모음 docker.io/myrepo/centos:1.0 : 각 순서대로 레지스트리, 저장소, 이미지, 태그를 일컫는다. | Container : 격리된 실행 환경, 이미지를 기반으로 실행된 응용프로그램의 프로세스 - 읽기 전용의 image 에 변경된 사항을 컨테이너 계층(Container Layer) 즉, upperdir 에 저장하므로 image 의 변함은 없다. | . ",
+    "url": "/docs/cloud/docker-arch/",
+    
+    "relUrl": "/docs/cloud/docker-arch/"
+  },"95": {
+    "doc": "Container 기반 기술",
+    "title": "Container 기반 기술",
+    "content": " ",
+    "url": "/docs/cloud/docker-container-tech/",
+    
+    "relUrl": "/docs/cloud/docker-container-tech/"
+  },"96": {
+    "doc": "Container 기반 기술",
+    "title": "Table of contents",
+    "content": ". | chroot . | chroot 프로그램 확인 및 신규 root 생성 | chroot 적용 확인 | . | namespace . | PID NameSpace | UTS NameSpace | NET NameSpace | . | cGroups (Control Groups) . | 사전 환경 구성 | . | OverlayFS (in Union File System) . | 테스트 데이터 생성 | 파일시스템 Overlay 마운트하기 | . | . 컨테이너 기반 기술 종류가 각각의 의미를 살펴보기로 한다. ",
+    "url": "/docs/cloud/docker-container-tech/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/docker-container-tech/#table-of-contents"
+  },"97": {
+    "doc": "Container 기반 기술",
+    "title": "chroot",
+    "content": "호스트 시스템과는 별도의 실행환경으로서, 루트 디렉토리 격리 기술 로 이해할 수 있으며 시스템 콜을 사용하여 프로세스가 바라보는 특정 디렉토리 루트(/) 디렉토리로 변경한다. 디렉토리를 격리하는 기술이다. chroot 프로그램 확인 및 신규 root 생성 . root@docker1:~# pwd /root root@docker1:~# chroot --version chroot (GNU coreutils) 8.28 Copyright (C) 2017 Free Software Foundation, Inc. License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;. This is free software: you are free to change and redistribute it. There is NO WARRANTY, to the extent permitted by law. root@docker1:~# mkdir -p /root/newroot/{bin,lib,lib64} root@docker1:~# root@docker1:~# apt install tree Reading package lists... Done Building dependency tree Reading state information... Done The following NEW packages will be installed: tree 0 upgraded, 1 newly installed, 0 to remove and 216 not upgraded. Need to get 40.7 kB of archives. After this operation, 105 kB of additional disk space will be used. Get:1 http://kr.archive.ubuntu.com/ubuntu bionic/universe amd64 tree amd64 1.7.0-5 [40.7 kB] Fetched 40.7 kB in 1s (30.6 kB/s) Selecting previously unselected package tree. (Reading database ... 169510 files and directories currently installed.) Preparing to unpack .../tree_1.7.0-5_amd64.deb ... Unpacking tree (1.7.0-5) ... Setting up tree (1.7.0-5) ... Processing triggers for man-db (2.8.3-2ubuntu0.1) ... root@docker1:~# tree . ├── labfilre.tgz └── newroot ├── bin ├── lib └── lib64 4 directories, 1 file . 루트의 bash 파일을 생성한 newroot 내에 복사한다. root@docker1:~# ls -l /bin/bash -rwxr-xr-x 1 root root 1113504 Jun 6 2019 /bin/bash root@docker1:~# cp /bin/bash /root/newroot/bin/bash root@docker1:~# cp /bin/ls /root/newroot/bin/ls . bash 가 참조하는 라이브러리를 새로 생성한 폴더에 복사한다. ldd : 프로그램이 참조하는 라이브러리를 확인할 수 있는 명령어 . root@docker1:~# pwd /root root@docker1:~# ldd /bin/bash linux-vdso.so.1 (0x00007fffdd59d000) libtinfo.so.5 =&gt; /lib/x86_64-linux-gnu/libtinfo.so.5 (0x00007fbb244dd000) libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fbb242d9000) libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbb23ee8000) /lib64/ld-linux-x86-64.so.2 (0x00007fbb24a21000) root@docker1:~# root@docker1:~# mkdir /root/newroot/lib/x86_64-linux-gnu root@docker1:~# root@docker1:~# cp /lib/x86_64-linux-gnu/libtinfo.so.5 /root/newroot/lib/x86_64-linux-gnu/libtinfo.so.5 root@docker1:~# cp /lib/x86_64-linux-gnu/libdl.so.2 /root/newroot/lib/x86_64-linux-gnu/libdl.so.2 root@docker1:~# cp /lib/x86_64-linux-gnu/libc.so.6 /root/newroot/lib/x86_64-linux-gnu/libc.so.6 root@docker1:~# cp /lib64/ld-linux-x86-64.so.2 /root/newroot/lib64/ld-linux-x86-64.so.2 root@docker1:~# root@docker1:~# root@docker1:~# root@docker1:~# ldd /bin/ls linux-vdso.so.1 (0x00007ffcf237b000) libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007fb97f26f000) libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb97ee7e000) libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007fb97ec0c000) libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fb97ea08000) /lib64/ld-linux-x86-64.so.2 (0x00007fb97f6b9000) libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fb97e7e9000) root@docker1:~# root@docker1:~# cp /lib/x86_64-linux-gnu/libselinux.so.1 /root/newroot/lib/x86_64-linux-gnu/libselinux.so.1 root@docker1:~# cp /lib/x86_64-linux-gnu/libc.so.6 /root/newroot/lib/x86_64-linux-gnu/libc.so.6 root@docker1:~# cp /lib/x86_64-linux-gnu/libpcre.so.3 /root/newroot/lib/x86_64-linux-gnu/libpcre.so.3 root@docker1:~# cp /lib/x86_64-linux-gnu/libdl.so.2 /root/newroot/lib/x86_64-linux-gnu/libdl.so.2 root@docker1:~# cp /lib64/ld-linux-x86-64.so.2 /root/newroot/lib64/ld-linux-x86-64.so.2 root@docker1:~# cp /lib/x86_64-linux-gnu/libpthread.so.0 /root/newroot/lib/x86_64-linux-gnu/libpthread.so.0 root@docker1:~# root@docker1:~# root@docker1:~# tree . ├── labfilre.tgz └── newroot ├── bin │ ├── bash │ └── ls ├── lib │ └── x86_64-linux-gnu │ ├── libc.so.6 │ ├── libdl.so.2 │ ├── libpcre.so.3 │ ├── libpthread.so.0 │ ├── libselinux.so.1 │ └── libtinfo.so.5 └── lib64 └── ld-linux-x86-64.so.2 5 directories, 10 files . chroot 적용 확인 . chroot 명령어로 루트가 변경되는지 확인할 수 있다. root@docker1:~# chroot /root/newroot/ /bin/bash bash-4.4# pwd / bash-4.4# bash-4.4# ls bin lib lib64 bash-4.4# bash-4.4# date bash: date: command not found bash-4.4# bash-4.4# exit exit root@docker1:~# . ",
+    "url": "/docs/cloud/docker-container-tech/#chroot",
+    
+    "relUrl": "/docs/cloud/docker-container-tech/#chroot"
+  },"98": {
+    "doc": "Container 기반 기술",
+    "title": "namespace",
+    "content": "특정 프로세스(컨테이너)에 대해 시스템 리소스(운영체제 커널 관련 리소스) 를 논리적으로 격리하는 기능이며 아래로 구분할 수 있다. | PID NameSpace : 프로세스ID 를 분리하여 관리, 프로세스 목록을 따로 관리 | UTS NameSpace : UNIX Time Sharing, hostname, NIS domain name 을 프로세스에게 독립적으로 할당한다. | NET NameSpace : 각 Network Namespace 별로 개별적인 인터페이스와 IP 구성을 가진다. Peering 형태로 연결한다 | . PID NameSpace . init(systemd) 프로세스에게 부여도던 PID 1번을 각 PID 네임스페이스별로 할당한다. 또한 컨테이너별로 개별적인 PID 트리가 구성되기 때문에 PID 충돌없이 실행 가능하다. ps -ef : process status, -e every -f full . -pid 를 사용하여 unshare 한다. root@docker1:~# unshare --pid --fork --mount-proc=/proc /bin/bash root@docker1:~# ps -ef UID PID PPID C STIME TTY TIME CMD root 1 0 0 06:00 pts/1 00:00:00 /bin/bash root 11 1 0 06:00 pts/1 00:00:00 ps -ef . UTS NameSpace . uname() 시스템 콜에 의해 반환되는 시스템 정보 중에서 hostname, NIS domain name 을 프로세스에게 독립적으로 할당한다. UTS 네임스페이스 별로 hostname 을 격리한다. root@docker1:~# uname -n docker1 root@docker1:~# hostname docker1 root@docker1:~# ls -l /proc/$$/ns/uts lrwxrwxrwx 1 root root 0 Jan 7 06:02 /proc/1/ns/uts -&gt; 'uts:[4026531838]' root@docker1:~# root@docker1:~# root@docker1:~# unshare -u /bin/bash root@docker1:~# hostname happy.life.com root@docker1:~# root@docker1:~# hostname happy.life.com root@docker1:~# root@docker1:~# uname -n happy.life.com root@docker1:~# root@docker1:~# ls -l /proc/$$/ns/uts lrwxrwxrwx 1 root root 0 Jan 7 06:04 /proc/16/ns/uts -&gt; 'uts:[4026532254]' root@docker1:~# root@docker1:~# exit exit . NET NameSpace . 각 Network Namespcace 별로 개별적인 인터페이스와 IP 구성을 가지며, 중복 포트 바인딩 등을 통한 네트워크 충돌을 방지한다. 네트워크 장치, 주소, 경로 및 방화벽 규칙 같은 네트워크 자원을 격리한다. root@docker1:~# ip addr 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever preferred_lft forever inet6 ::1/128 scope host valid_lft forever preferred_lft forever 2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000 link/ether 08:00:27:a7:a6:d4 brd ff:ff:ff:ff:ff:ff inet 192.168.137.101/24 brd 192.168.137.255 scope global enp0s3 valid_lft forever preferred_lft forever inet6 fe80::a00:27ff:fea7:a6d4/64 scope link valid_lft forever preferred_lft forever root@docker1:~# root@docker1:~# ip netns add guestnet // guestnet 새로운 NET namespace 생성 root@docker1:~# ip netns ls guestnet root@docker1:~# root@docker1:~# ip netns exec guestnet ip link // guestnet namespace 의 loopback 활성화 1: lo: &lt;LOOPBACK&gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 root@docker1:~# ip netns exec guestnet ip link set lo up root@docker1:~# ip netns exec guestnet ip link 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 root@docker1:~# root@docker1:~# root@docker1:~# ip link add host type veth peer name guest // default namespace 의 host(veth) 와 guestnet namespace guest(veth) 를 연결 root@docker1:~# root@docker1:~# ip link 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000 link/ether 08:00:27:a7:a6:d4 brd ff:ff:ff:ff:ff:ff 3: guest@host: &lt;BROADCAST,MULTICAST,M-DOWN&gt; mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/ether ce:cb:f9:46:8f:73 brd ff:ff:ff:ff:ff:ff 4: host@guest: &lt;BROADCAST,MULTICAST,M-DOWN&gt; mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/ether 02:09:d9:13:4f:e7 brd ff:ff:ff:ff:ff:ff root@docker1:~# root@docker1:~# root@docker1:~# ip link set guest netns guestnet // guest(veth) 를 guestnet namespace 에 할당 root@docker1:~# ip link // guest@host 이 guestnet 으로 이동 확인 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000 link/ether 08:00:27:a7:a6:d4 brd ff:ff:ff:ff:ff:ff 4: host@if3: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/ether 02:09:d9:13:4f:e7 brd ff:ff:ff:ff:ff:ff link-netnsid 0 root@docker1:~# root@docker1:~# root@docker1:~# ip link set host up // host(veth) 에 IP 할당 root@docker1:~# ip address add 1.2.3.4/24 dev host root@docker1:~# root@docker1:~# ip netns exec guestnet ip link set guest up // guest(veth) 에 IP 할당 root@docker1:~# ip netns exec guestnet ip address add 1.2.3.5/24 dev guest root@docker1:~# ip netns exec guestnet ip address show dev guest 3: guest@if4: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000 link/ether ce:cb:f9:46:8f:73 brd ff:ff:ff:ff:ff:ff link-netnsid 0 inet 1.2.3.5/24 scope global guest valid_lft forever preferred_lft forever inet6 fe80::cccb:f9ff:fe46:8f73/64 scope link valid_lft forever preferred_lft forever root@docker1:~# root@docker1:~# root@docker1:~# ping 1.2.3.5 // 통신 확인 PING 1.2.3.5 (1.2.3.5) 56(84) bytes of data. 64 bytes from 1.2.3.5: icmp_seq=1 ttl=64 time=0.102 ms 64 bytes from 1.2.3.5: icmp_seq=2 ttl=64 time=0.068 ms ^C --- 1.2.3.5 ping statistics --- 2 packets transmitted, 2 received, 0% packet loss, time 1023ms rtt min/avg/max/mdev = 0.068/0.085/0.102/0.017 ms root@docker1:~# root@docker1:~# root@docker1:~# ip netns del guestnet // guestnet 삭제 root@docker1:~# ip netns ls root@docker1:~# . ",
+    "url": "/docs/cloud/docker-container-tech/#namespace",
+    
+    "relUrl": "/docs/cloud/docker-container-tech/#namespace"
+  },"99": {
+    "doc": "Container 기반 기술",
+    "title": "cGroups (Control Groups)",
+    "content": "cGroups (control Groups) 는 커널이 가지고 있는 기능이며, task 라 불리는 프로세스 그룹에 대한 CPU, Memory, Network, Storage 자원 할당 및 제어하는 커널 기능이다. 사전 환경 구성 . CPU 사용이 많은 환경을 구성하기 위해 아래의 프로그램을 작성한다. gcc : 처음에는 C 컴파일러였으며 GNU C Compiler의 약어였다. 하지만 기능이 추가되면서 C++ 같은 다른 언어도 지원하게 되었고, GNU Compiler Collectio으로 이름을 변경하였다. 물론 약어는 여전히 GCC이다. 공식적으로 지원하는 언어는 C(gcc), C++(g++), Objective-C(gobjc), Fortran(gfortran), Ada(gnat), Go(gccgo), D(gdc)이다. Java(gcj)는 GCC 7.1 버전부터 지원이 중단되었다. GNU 진영에서는 GCC로 컴파일을 하고 Make를 이용해 빌드하는 것이 일반적이다. top : 시스템의 상태를 전반적으로 가장 빠르게 파악 가능(CPU, Memory, Process) 하며 주로 CPU 사용률을 정렬해서 프로세스 목록을 출력하고자 할 떄 쓰인다. # apt-get update # apt install -y gcc # nano a.c void main() { for(;;); } // 저장 시 ctrl+o (저장) &gt; enter &gt; ctrl+x (종료) # cat a.c # gcc a.c # cp a.out b.out . a.out 과 b.out 을 실행하면 아래와 같이 50% 의 동일한 CPU 를 점유한다. # ./a.out &amp; // &amp;: 백그라운드 실행 # ./b.out &amp; . 1024 : 1024 50%:50% 512 : 1024 (1:2 33%:66%) 256 : 1024 (1:4 20%:80%) # cd /sys/fs/cgroup # ls # cd cpu # mkdir limit_50_percent # cd limit_50_percent/ # ls # PS1=\"# \" # echo $(pgrep a.out) &gt; tasks &lt;-- 자원을 제어할 프로세스의 PID (a.out) + echo 8385 # cat cpu.shares # echo 512 &gt; cpu.shares &lt;-- 경쟁이 발생했을 떄 상대적 가중치를 지정한다.(기본값은 1024) # echo 256 &gt; cpu.shares . 테스트 이후 실행한 프로세스를 종료한다. # pkill b.out (process kill : 프로세스 종료) # pkill a.out . ",
+    "url": "/docs/cloud/docker-container-tech/#cgroups-control-groups",
+    
+    "relUrl": "/docs/cloud/docker-container-tech/#cgroups-control-groups"
+  },"100": {
+    "doc": "Container 기반 기술",
+    "title": "OverlayFS (in Union File System)",
+    "content": "두개의 레이어만 가지고 있어 기존의 AUFS (Advanced multi layered Unification File System) 보다 단순한 디자이을 갖는다. 이미지 레이어마다 /var/lib/docker/overlay 디렉토리 밑에 자신만의 디렉토리를 가진다. [Overlay FS 구조] . 테스트 데이터 생성 . 아래와 같이 container, image1, image2, work merge 폴더 및 파일을 생성한다. root@docker1:~# pwd /root root@docker1:~# mkdir overlayfs root@docker1:~# mkdir container image1 image2 work merge root@docker1:~# echo Hello, a &gt; image1/a root@docker1:~# echo Hello, b &gt; image1/b root@docker1:~# echo HEllo, c &gt; image2/c root@docker1:~# tree . ├── a.c ├── a.out ├── b.out ├── container ├── image1 │ ├── a │ └── b ├── image2 │ └── c ├── labfilre.tgz ├── merge ├── newroot │ ├── bin │ │ ├── bash │ │ └── ls │ ├── lib │ │ └── x86_64-linux-gnu │ │ ├── libc.so.6 │ │ ├── libdl.so.2 │ │ ├── libpcre.so.3 │ │ ├── libpthread.so.0 │ │ ├── libselinux.so.1 │ │ └── libtinfo.so.5 │ └── lib64 │ └── ld-linux-x86-64.so.2 ├── overlayfs ├── tasks └── work 11 directories, 17 files root@docker1:~# . mount : 기본 파일 시스템을 커널이 인식하도록 한다. 파일 시스템이 연결되면 마우트 지점이 마운트된 파일 시스템의 루트 디렉터리가 된다. 파일시스템 Overlay 마운트하기 . root@docker1:~# mount -t overlay overlay -o lowerdir=image2:image1,upperdir=container,workdir=work merge . | overlay : 타입 종류 | overlay : 장치명 | lowerdir, upperdir | workdir : 작업용 디렉토리 | merge : 실제 참조되는 디렉토리 | . df : 리눅스 시스템 전체의 (마운트 된) 디스크 사용량을 확인할 수 있습니다. 파일시스템, 디스크 크기, 사용량, 여유공간, 사용률, 마운트지점 순으로 나타납니다. -t : type . root@docker1:~# mount -t overlay overlay -o lowerdir=image2:image1,upperdir=container,workdir=work merge root@docker1:~# root@docker1:~# df Filesystem 1K-blocks Used Available Use% Mounted on /dev/mapper/ubuntu--vg-ubuntu--lv 19475088 6674836 11787928 37% / udev 1986084 0 1986084 0% /dev tmpfs 2019700 0 2019700 0% /dev/shm tmpfs 403940 1304 402636 1% /run tmpfs 5120 4 5116 1% /run/lock tmpfs 403940 28 403912 1% /run/user/125 tmpfs 403940 0 403940 0% /run/user/0 tmpfs 2019700 0 2019700 0% /sys/fs/cgroup /dev/sda2 999320 153112 777396 17% /boot overlay 19475088 6674836 11787928 37% /root/merge root@docker1:~# . merge 폴더에 overlay 된 파일들이 생성된다. root@docker1:~# tree . ├── a.c ├── a.out ├── b.out ├── container ├── image1 │ ├── a │ └── b ├── image2 │ └── c ├── labfilre.tgz ├── merge │ ├── a │ ├── b │ └── c ├── newroot │ ├── bin │ │ ├── bash │ │ └── ls │ ├── lib │ │ └── x86_64-linux-gnu │ │ ├── libc.so.6 │ │ ├── libdl.so.2 │ │ ├── libpcre.so.3 │ │ ├── libpthread.so.0 │ │ ├── libselinux.so.1 │ │ └── libtinfo.so.5 │ └── lib64 │ └── ld-linux-x86-64.so.2 ├── overlayfs ├── tasks └── work └── work 12 directories, 20 files . merge 파일 내용을 변경하면 container 에 반영이 된다. root@docker1:~# cat merge/a Hello, a root@docker1:~# echo Hello, yumi &gt; merge/a root@docker1:~# cat merge/a Hello, yumi root@docker1:~# cat container/a Hello, yumi root@docker1:~# . merge 에 파일을 생성하면 container 에도 생성이 된다. root@docker1:~# root@docker1:~# echo Hello, d &gt; merge/d root@docker1:~# tree . ├── a.c ├── a.out ├── b.out ├── container │ ├── a │ └── d ├── image1 │ ├── a │ └── b ├── image2 │ └── c ├── labfilre.tgz ├── merge │ ├── a │ ├── b │ ├── c │ └── d ├── newroot │ ├── bin │ │ ├── bash │ │ └── ls │ ├── lib │ │ └── x86_64-linux-gnu │ │ ├── libc.so.6 │ │ ├── libdl.so.2 │ │ ├── libpcre.so.3 │ │ ├── libpthread.so.0 │ │ ├── libselinux.so.1 │ │ └── libtinfo.so.5 │ └── lib64 │ └── ld-linux-x86-64.so.2 ├── overlayfs ├── tasks └── work └── work 12 directories, 23 files . ",
+    "url": "/docs/cloud/docker-container-tech/#overlayfs-in-union-file-system",
+    
+    "relUrl": "/docs/cloud/docker-container-tech/#overlayfs-in-union-file-system"
+  },"101": {
+    "doc": "Ubuntu 에 Docker 설치",
+    "title": "Ubuntu 18.04 Docker 설치",
+    "content": " ",
+    "url": "/docs/cloud/docker-install-18-04/#ubuntu-1804-docker-%EC%84%A4%EC%B9%98",
+    
+    "relUrl": "/docs/cloud/docker-install-18-04/#ubuntu-1804-docker-설치"
+  },"102": {
+    "doc": "Ubuntu 에 Docker 설치",
     "title": "Table of contents",
     "content": ". | Docker 설치 방법 | docker.sock 권한 부여 . | 방법1. docker.sock 권한 변경 | 방법2. Docker 그룹을 만들어서. 사용자 추가하기 | . | . ",
     "url": "/docs/cloud/docker-install-18-04/#table-of-contents",
     
     "relUrl": "/docs/cloud/docker-install-18-04/#table-of-contents"
-  },"95": {
-    "doc": "Ubuntu 18.04 Docker 설치",
+  },"103": {
+    "doc": "Ubuntu 에 Docker 설치",
     "title": "Docker 설치 방법",
     "content": "apt 패키지 관리자를 이용하여 먼저 패키지 목록 업데이트를 한다. $ sudo apt update -y . 도커CE는 몇가지 패키지에 의존하므로, 아래 4가지 패키지를 설치한다. $ sudo apt install -y apt-transport-https ca-certificates curl software-properties-common . 도커 패키지 저장소를 apt에 등록한다. $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - . 도커CE를 설치한다 . $ sudo apt install -y docker-ce . 도커를 시작한다 . $ sudo systemctl start docker . 도커 상태 확인한다. $ sudo systemctl status docker . 도커 버전 확인한다. $ docker version Client: Docker Engine - Community Version: 24.0.2 API version: 1.43 Go version: go1.20.4 Git commit: cb74dfc Built: Thu May 25 21:52:13 2023 OS/Arch: linux/amd64 Context: default permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.24/version\": dial unix /var/run/docker.sock: connect: permission denied . 위와 같이 출력되면 도커가 정상적으로 출력된 것이다. ",
     "url": "/docs/cloud/docker-install-18-04/#docker-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95",
     
     "relUrl": "/docs/cloud/docker-install-18-04/#docker-설치-방법"
-  },"96": {
-    "doc": "Ubuntu 18.04 Docker 설치",
+  },"104": {
+    "doc": "Ubuntu 에 Docker 설치",
     "title": "docker.sock 권한 부여",
     "content": "Jenkins Script를 통해 docker image를 만들고 배포하려고 할 때, Jenkins Agent를 구동하는 계정이 root가 아닌 일반 사용자계정이면 아래의 오류가 발생한다. Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.38/build?buildargs=%7B%7D&amp;cachefrom=%5B%5D&amp;cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;labels=%7B%7D&amp;memory=0&amp;memswap=0&amp;networkmode=default&amp;rm=1&amp;session=klv1s7gcvua6o8j7srtt572zk&amp;target=&amp;ulimits=null&amp;version=1: dial unix /var/run/docker.sock: connect: permission denied . 방법1. docker.sock 권한 변경 . Chmod 666 /var/run/docker.sock . 특이사항 : 권한을 변경한 경우, 일시적인 조치 입니다. docker 서비스를 재시작하면 권한이 660으로 돌아옵니다. 해당 방법은 권장하지 않습니다. 방법2. Docker 그룹을 만들어서. 사용자 추가하기 . $ Sudo groupadd docker $ sudo usermod -aG docker $USER $ newgrp . 해당 사용자 계정이 docker group 권한이 부여되었음을 확인하는 방법 . $ id [testhost@testhost ~]$ id uid=1001(testhost) gid=1002(testhost) groups=1002(testhost),1003(docker) . $sudo chown root:docker /var/run/docker.sock $ systemctl restart docker . 만약 docker 재시작 이후에 권한설정이 돌아온다면? . 파일생성 : /etc/docker/daemon.json . { \"group\" : \"docker\" } . 위 작업이 완료된 이후에 systemctl reboot 실행이 필요하다. ",
     "url": "/docs/cloud/docker-install-18-04/#dockersock-%EA%B6%8C%ED%95%9C-%EB%B6%80%EC%97%AC",
     
     "relUrl": "/docs/cloud/docker-install-18-04/#dockersock-권한-부여"
-  },"97": {
-    "doc": "Ubuntu 18.04 Docker 설치",
-    "title": "Ubuntu 18.04 Docker 설치",
+  },"105": {
+    "doc": "Ubuntu 에 Docker 설치",
+    "title": "Ubuntu 에 Docker 설치",
     "content": " ",
     "url": "/docs/cloud/docker-install-18-04/",
     
     "relUrl": "/docs/cloud/docker-install-18-04/"
-  },"98": {
+  },"106": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "Virtual Box 에서 가상머신 이미지 가져오기",
+    "content": " ",
+    "url": "/docs/cloud/docker-install-image-vb/#virtual-box-%EC%97%90%EC%84%9C-%EA%B0%80%EC%83%81%EB%A8%B8%EC%8B%A0-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#virtual-box-에서-가상머신-이미지-가져오기"
+  },"107": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "Table of contents",
+    "content": ". | 실습 전 확인 사항 | VirtualBox 프로그램 설치 . | VirtualBox 설치 | 가상머신 이미지 가져오기 | 가상 머신 시작하기 | 사용자 전환 및 네트워크 연결 체크 | . | NAT 네트워크 생성 | 기타 설정 | putty 터미널 사용하기 . | NatNetwork port-forwarding 설정 | putty 설정 | . | Slave 설정 | . 본 장은 master.ova 이미지 파일에 docker 가 설치되어 있다는 가정하에 docker 실습을 위한 환경 설정을 구성한다. ",
+    "url": "/docs/cloud/docker-install-image-vb/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#table-of-contents"
+  },"108": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "실습 전 확인 사항",
+    "content": "명령 프롬프트에서 systeminfo 명령어를 통해 Hyper-V 요구 사항이 예 로 되어 있는지 확인한다. C:\\Users\\dcjam&gt;systeminfo 호스트 이름: DESKTOP-605KI17 ... 중간 생략 ... Hyper-V 요구 사항: VM 모니터 모드 확장: 예 펌웨어에 가상화 사용: 예 두 번째 수준 주소 변환: 예 데이터 실행 방지 사용 가능: 예 . ",
+    "url": "/docs/cloud/docker-install-image-vb/#%EC%8B%A4%EC%8A%B5-%EC%A0%84-%ED%99%95%EC%9D%B8-%EC%82%AC%ED%95%AD",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#실습-전-확인-사항"
+  },"109": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "VirtualBox 프로그램 설치",
+    "content": "VirtualBox 설치 . www.virtualbox.org 에서 다운로드 가능하며, VirtualBox-6.1.32-149290-Win.exe 를 실행한다. 가상머신 이미지 가져오기 . 파일 &gt; 가상시스템 가져오기 &gt; master.ova 파일 선택 &gt; 다음 클릭 후 아래를 선택한다. | USB 컨트롤러 : 선택 해제 | MAC 주소 정책 : 모든 네트워크 어댑터의 새 MAC 주소 생성 이후 가져오기 를 클릭한다. | . 가져오기 시 오류 발생하면 C:\\Users\\HPE\\VirtualBox VMs\\master 폴더 삭제 후 다시 진행한다. 가상 머신 시작하기 . Oracle VM VirtualBox 관리자에서 master 가상 머신 선택하여 시작을 클릭한다. 이후 로그인 창에서 worker1 선택 ubuntu 를 패스워드로 하여 로그인 진행한다. | 화면 해상도 변경하기 . | 우측 상단 (전원) –&gt; 드라이버 &amp; 스패너(설정) | Power &gt; Blank screen &gt; Never | Devices -&gt; Resolution &gt; 1600 x 1200 &gt; Apply Changes? (더블클릭) &gt; Apply &gt; Keep Changes . | 바탕화면에 마우스 올려놓으시고 “우클릭” –&gt; Open Terminal | . | . | . 사용자 전환 및 네트워크 연결 체크 . | root(관리자, Administrator) / ubuntu | $ su - root (su, switch user : 사용자 전환) Password: ubuntu # ping google.com -- 이 때는 NAT 네트워크 미생성 단계이므로 연결 안됨 | . ",
+    "url": "/docs/cloud/docker-install-image-vb/#virtualbox-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%84%A4%EC%B9%98",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#virtualbox-프로그램-설치"
+  },"110": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "NAT 네트워크 생성",
+    "content": ". | NatNetwork 생성 및 네트워크 설정한다. | Oracle VM VirtualBox 관리자에서 파일 &gt; 환경 설정 . | 네트워크 –&gt; [+] | NatNetwork 선택 –&gt; 톱니바퀴 설정 –&gt; 네트워크 CIDR 192.168.137.0/24 입력 &gt; 확인 | . | . | Virtualbox Host-Only ethernet adapter IP 설정 확인 . | Oracle VM VirtualBox 관리자 . | 도구(3개의 선) &gt; 네트워크 &gt; Virtualbox host-only ethernet adapter 선택 | 하단의 어댑터 탭 선택 . | IPv4 주소 : 192.168.56.1 | IPv4 서브넷 마스크 : 255.255.255.0 | . | . | . | 가상 머신 네트워크 인터페이스 타입 변경 . | Oracle VM VirtualBox 관리자 &gt; master 가상 머신 선택 &gt; 네트워크 &gt; 어댑터 1 . | 다음에 연결됨 : NAT 네트워크 선택 | . | . | 네트워크 연결 확인 리눅스 시스템으로 돌아와서 외부 인터넷과 연결 상태 확인 | . # ping google.com [CTRL+C] . | 고정 IP 설정 확인 cat /etc/netplan/00-installer-config.yaml | . | 설정된 IP 확인 ip addr | . ",
+    "url": "/docs/cloud/docker-install-image-vb/#nat-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%83%9D%EC%84%B1",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#nat-네트워크-생성"
+  },"111": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "기타 설정",
+    "content": "server1:~ # echo \"kernel.watchdog_thresh=20\" &gt; /etc/sysctl.d/99-watchdog_thresh.conf server1:~ # sysctl -p /etc/sysctl.d/99-watchdog_thresh.conf . ",
+    "url": "/docs/cloud/docker-install-image-vb/#%EA%B8%B0%ED%83%80-%EC%84%A4%EC%A0%95",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#기타-설정"
+  },"112": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "putty 터미널 사용하기",
+    "content": "NatNetwork port-forwarding 설정 . Oracle VM VirtualBox 관리자에서 파일 &gt; 환경설정 &gt; 네트워크 &gt; NatNetwork &gt; 톱니바퀴 (설정) &gt; 포트포워딩 &gt; [+] . 이름 프로토콜 호스트IP 호스트 포트 게스트IP 게스트포트 master TCP 192.168.56.1 101 192.168.137.101 22 . 이후 putty 접속시 방화벽에서 “액세스 허용” 선택한다. putty 설정 . putty 사이트에서 다운로드 및 설치 진행 후 putty.exe 실행한다. Host Name : 192.168.56.1 Port: 101 Terminal &gt; Keyboard &gt; The Backspace key (Control-H) Window &gt; Appearance &gt; Font Settings &gt; Change Window &gt; Colours &gt; Default Foreground (글자색) Default Background(배경색) Session &gt; [Saved Sessions : master] &gt; Save . VirtualBox 가 실행된 상태에서 저장된 세션 연결 정보 더블클릭해서 연결 요청을 할 수 있다. [Accept] login as : root Password : ubuntu . ",
+    "url": "/docs/cloud/docker-install-image-vb/#putty-%ED%84%B0%EB%AF%B8%EB%84%90-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#putty-터미널-사용하기"
+  },"113": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "Slave 설정",
+    "content": "06-02-01-01 Kubernetes 실습환경구성 내용 에서 참조할 것. ",
+    "url": "/docs/cloud/docker-install-image-vb/#slave-%EC%84%A4%EC%A0%95",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/#slave-설정"
+  },"114": {
+    "doc": "가상머신 이미지 가져오기",
+    "title": "가상머신 이미지 가져오기",
+    "content": " ",
+    "url": "/docs/cloud/docker-install-image-vb/",
+    
+    "relUrl": "/docs/cloud/docker-install-image-vb/"
+  },"115": {
     "doc": "Docker",
     "title": "Docker",
     "content": " ",
     "url": "/docs/cloud/docker/",
     
     "relUrl": "/docs/cloud/docker/"
-  },"99": {
+  },"116": {
     "doc": "Framework",
     "title": "Framework",
     "content": "프레임워크의 종류와 그의 특징과 기능을 정리해 보고자 한다. ",
     "url": "/docs/framework",
     
     "relUrl": "/docs/framework"
-  },"100": {
+  },"117": {
+    "doc": "Git Command",
+    "title": "Git Command",
+    "content": " ",
+    "url": "/docs/cloud/git-command/",
+    
+    "relUrl": "/docs/cloud/git-command/"
+  },"118": {
+    "doc": "Git Command",
+    "title": "Table of contents",
+    "content": ". | 단계별 명령어 . | Git 폴더 생성하기 | Staging / Commit 하기 | Git 이력 보기 | 로컬 레포지토리에서 Main 브랜치명 변경하기 | Push 하기 | remote 대상을 origin 으로 저장하기 | 현재 remote 대상 정보보기 | origin 주소의 main 브랜치로 Push 하기 | . | 협업 시 간단 절차 | . ",
+    "url": "/docs/cloud/git-command/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/git-command/#table-of-contents"
+  },"119": {
+    "doc": "Git Command",
+    "title": "단계별 명령어",
+    "content": "Git 폴더 생성하기 . PS D:\\codingapple_git&gt; git add . Staging / Commit 하기 . PS D:\\codingapple_git&gt; git add . PS D:\\codingapple_git&gt; git commit -m \"save...\" . Git 이력 보기 . PS D:\\codingapple_git&gt; git log --oneline . 로컬 레포지토리에서 Main 브랜치명 변경하기 . PS D:\\codingapple_git&gt; git branch -M main . Push 하기 . PS D:\\codingapple_git&gt; git push -u https://github.com/dmjgr5/gitlesson.git main . remote 대상을 origin 으로 저장하기 . PS D:\\codingapple_git&gt; git remote add origin https://github.com/dmjgr5/gitlesson.git . 현재 remote 대상 정보보기 . PS D:\\codingapple_git&gt; git remote -v . origin 주소의 main 브랜치로 Push 하기 . PS D:\\codingapple_git&gt; git push origin main . Github 에 다른 사람에 의해 Push 된게 있다면? . push 되지 않는다. git pull [git 주소] 이후 git push 하여야 한다. 따라서 git push 이전에는 git pull 을 하여야 한다. PS D:\\codingapple_git&gt; git push origin main To https://github.com/dmjgr5/gitlesson.git ! [rejected] main -&gt; main (non-fast-forward) error: failed to push some refs to 'https://github.com/dmjgr5/gitlesson.git' hint: Updates were rejected because the tip of your current branch is behind hint: its remote counterpart. Integrate the remote changes (e.g. hint: 'git pull ...') before pushing again. hint: See the 'Note about fast-forwards' in 'git push --help' for details. PS D:\\codingapple_git&gt; git pull https://github.com/dmjgr5/gitlesson.git From https://github.com/dmjgr5/gitlesson * branch main -&gt; FETCH_HEAD Merge made by the 'ort' strategy. zzz | 1 + 1 file changed, 1 insertion(+) create mode 100644 zzz PS D:\\codingapple_git&gt; git push origin main Enumerating objects: 7, done. Counting objects: 100% (7/7), done. Delta compression using up to 8 threads Compressing objects: 100% (4/4), done. Writing objects: 100% (5/5), 473 bytes | 473.00 KiB/s, done. Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 remote: Resolving deltas: 100% (2/2), completed with 1 local object. To https://github.com/dmjgr5/gitlesson.git 48a79a9..a75f918 main -&gt; main . ",
+    "url": "/docs/cloud/git-command/#%EB%8B%A8%EA%B3%84%EB%B3%84-%EB%AA%85%EB%A0%B9%EC%96%B4",
+    
+    "relUrl": "/docs/cloud/git-command/#단계별-명령어"
+  },"120": {
+    "doc": "Git Command",
+    "title": "협업 시 간단 절차",
+    "content": ". | 개발자는 자기 브랜치로 만듦 | PS D:\\codingapple_git&gt; git branch mining PS D:\\codingapple_git&gt; git switch mining | 개발 후 Push 자기브랜치 | github 에서 pull request | 리뷰어는 pull request 에서 merge . | 충돌나는게 있다면 파일별로 수정하여 resolve 처리 이후 merge | . | . ",
+    "url": "/docs/cloud/git-command/#%ED%98%91%EC%97%85-%EC%8B%9C-%EA%B0%84%EB%8B%A8-%EC%A0%88%EC%B0%A8",
+    
+    "relUrl": "/docs/cloud/git-command/#협업-시-간단-절차"
+  },"121": {
+    "doc": "Git",
+    "title": "Git",
+    "content": " ",
+    "url": "/docs/cloud/git/",
+    
+    "relUrl": "/docs/cloud/git/"
+  },"122": {
     "doc": "===== Guide page starts =====",
     "title": "===== Guide page starts =====",
     "content": " ",
     "url": "/docs/guide/",
     
     "relUrl": "/docs/guide/"
-  },"101": {
+  },"123": {
     "doc": "Markdown kitchen sink",
     "title": "Header 1",
     "content": "This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere. ",
     "url": "/docs/index-test/#header-1",
     
     "relUrl": "/docs/index-test/#header-1"
-  },"102": {
+  },"124": {
     "doc": "Markdown kitchen sink",
     "title": "Header 2",
     "content": "This is a blockquote following a header. When something is important enough, you do it even if the odds are not in your favor. Header 3 . // Javascript code with syntax highlighting. var fun = function lang(l) { dateformat.i18n = require('./lang/' + l) return true; } . # Ruby code with syntax highlighting GitHubPages::Dependencies.gems.each do |gem, version| s.add_dependency(gem, \"= #{version}\") end . Header 4 with code not transformed . | This is an unordered list following a header. | This is an unordered list following a header. | This is an unordered list following a header. | . Header 5 . | This is an ordered list following a header. | This is an ordered list following a header. | This is an ordered list following a header. | . Header 6 . This is a very long link which wraps and therefore doesn’t overflow even when it comes at the beginning of the line. | This is a very long link which wraps and therefore doesn’t overflow the line when used first in an item in a list. | . | head1 | head two | three | . | ok | good swedish fish | nice | . | out of stock | good and plenty | nice | . | ok | good oreos | hmm | . | ok | good zoute drop | yumm | . There’s a horizontal rule below this. Here is an unordered list: . | Item foo | Item bar | Item baz | Item zip | . And an ordered list: . | Item one | Item two | Item three | Item four | . And an ordered list, continued: . | Item one | Item two | . Some text . | Item three | Item four | . And an ordered list starting from 42: . | Item 42 | Item 43 | Item 44 | . And a nested list: . | level 1 item . | level 2 item | level 2 item . | level 3 item | level 3 item | . | . | level 1 item . | level 2 item | level 2 item | level 2 item | . | level 1 item . | level 2 item | level 2 item | . | level 1 item | . Nesting an ol in ul in an ol . | level 1 item (ul) . | level 2 item (ol) | level 2 item (ol) . | level 3 item (ul) | level 3 item (ul) | . | . | level 1 item (ul) . | level 2 item (ol) | level 2 item (ol) . | level 3 item (ul) | level 3 item (ul) | . | level 4 item (ol) | level 4 item (ol) . | level 3 item (ul) | level 3 item (ul) | . | . | level 1 item (ul) | . And a task list . | Hello, this is a TODO item | Hello, this is another TODO item | Goodbye, this item is done | . Nesting task lists . | level 1 item (task) . | level 2 item (task) | level 2 item (task) | . | level 1 item (task) | level 1 item (task) | . Nesting a ul in a task list . | level 1 item (task) . | level 2 item (ul) | level 2 item (ul) | . | level 1 item (task) | level 1 item (task) | . Nesting a task list in a ul . | level 1 item (ul) . | level 2 item (task) | level 2 item (task) | . | level 1 item (ul) | level 1 item (ul) | . Small image . Large image . “Wroclaw University Library digitizing rare archival texts” by j_cadmus is marked with CC BY 2.0. Labels . I’m a label . blue . green . purple . yellow . red . bold . italic . bold + italic . Definition lists can be used with HTML syntax. Name Godzilla Born 1952 Birthplace Japan Color Green Multiple description terms and values . Term Brief description of Term Longer Term Longer description of Term, possibly more than one line Term First description of Term, possibly more than one line Second description of Term, possibly more than one line . Term1 Term2 Single description of Term1 and Term2, possibly more than one line Term1 Term2 First description of Term1 and Term2, possibly more than one line Second description of Term1 and Term2, possibly more than one line . More code . def dump_args(func): \"This decorator dumps out the arguments passed to a function before calling it\" argnames = func.func_code.co_varnames[:func.func_code.co_argcount] fname = func.func_name def echo_func(*args,**kwargs): print fname, \":\", ', '.join( '%s=%r' % entry for entry in zip(argnames,args) + kwargs.items()) return func(*args, **kwargs) return echo_func @dump_args def f1(a,b,c): print a + b + c f1(1, 2, 3) def precondition(precondition, use_conditions=DEFAULT_ON): return conditions(precondition, None, use_conditions) def postcondition(postcondition, use_conditions=DEFAULT_ON): return conditions(None, postcondition, use_conditions) class conditions(object): __slots__ = ('__precondition', '__postcondition') def __init__(self, pre, post, use_conditions=DEFAULT_ON): if not use_conditions: pre, post = None, None self.__precondition = pre self.__postcondition = post . Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this. Mermaid Diagrams . The following code is displayed as a diagram only when a mermaid key supplied in _config.yml. graph TD; A--&gt;B; A--&gt;C; B--&gt;D; C--&gt;D; . Collapsed Section . The following uses the &lt;details&gt; tag to create a collapsed section. Shopping list (click me!) This is content inside a &lt;details&gt; dropdown. | Apples | Oranges | Milk | . ",
     "url": "/docs/index-test/#header-2",
     
     "relUrl": "/docs/index-test/#header-2"
-  },"103": {
+  },"125": {
     "doc": "Markdown kitchen sink",
     "title": "Markdown kitchen sink",
     "content": "Preview dark color scheme . Text can be bold, italic, or strikethrough. Link to another page. There should be whitespace between paragraphs. There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project. ",
     "url": "/docs/index-test/",
     
     "relUrl": "/docs/index-test/"
-  },"104": {
+  },"126": {
     "doc": "Home",
     "title": "Focus on writing good documentation",
     "content": "Just the Docs gives your documentation a jumpstart with a responsive Jekyll theme that is easily customizable and hosted on GitHub Pages. Get started now View it on GitHub . This website documents the features of the current main branch of the Just the Docs theme. See the CHANGELOG for a list of releases, new features, and bug fixes. Just the Docs is a theme for generating static websites with Jekyll. You can write source files for your web pages using Markdown, the Liquid templating language, and HTML.1 Jekyll builds your site by converting all files that have front matter to HTML. Your Jekyll configuration file determines which theme to use, and sets general parameters for your site, such as the URL of its home page. Jekyll builds this Just the Docs theme docs website using the theme itself. These web pages show how your web pages will look by default when you use this theme. But you can easily customize the theme to make them look completely different! . Browse the docs to learn more about how to use this theme. ",
     "url": "/#focus-on-writing-good-documentation",
     
     "relUrl": "/#focus-on-writing-good-documentation"
-  },"105": {
+  },"127": {
     "doc": "Home",
     "title": "Getting started",
     "content": "The Just the Docs Template provides the simplest, quickest, and easiest way to create a new website that uses the Just the Docs theme. To get started with creating a site, just click “use the template”! . To use the theme, you do not need to clone or fork the Just the Docs repo! You should do that only if you intend to browse the theme docs locally, contribute to the development of the theme, or develop a new theme based on Just the Docs. You can easily set the site created by the template to be published on GitHub Pages – the template README file explains how to do that, along with other details. If Jekyll is installed on your computer, you can also build and preview the created site locally. This lets you test changes before committing them, and avoids waiting for GitHub Pages.2 And you will be able to deploy your local build to a different platform than GitHub Pages. More specifically, the created site: . | uses a gem-based approach, i.e. uses a Gemfile and loads the just-the-docs gem | uses the GitHub Pages / Actions workflow to build and publish the site on GitHub Pages | . Other than that, you’re free to customize sites that you create with the template, however you like. You can easily change the versions of just-the-docs and Jekyll it uses, as well as adding further plugins. See the theme README for how to use the theme as a gem without creating a new site. ",
     "url": "/#getting-started",
     
     "relUrl": "/#getting-started"
-  },"106": {
+  },"128": {
     "doc": "Home",
     "title": "About the project",
     "content": "Just the Docs is © 2017-2023 by Patrick Marsceill. License . Just the Docs is distributed by an MIT license. Contributing . When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. Read more about becoming a contributor in our GitHub repo. Thank you to the contributors of Just the Docs! . | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | . Code of Conduct . Just the Docs is committed to fostering a welcoming community. View our Code of Conduct on our GitHub repository. | The source file for this page uses all three markup languages. &#8617; . | It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub. &#8617; . | . ",
     "url": "/#about-the-project",
     
     "relUrl": "/#about-the-project"
-  },"107": {
+  },"129": {
     "doc": "Home",
     "title": "Home",
     "content": ". ",
     "url": "/",
     
     "relUrl": "/"
-  },"108": {
+  },"130": {
     "doc": "Home",
     "title": "Focus on writing good documentation",
     "content": "Just the Docs gives your documentation a jumpstart with a responsive Jekyll theme that is easily customizable and hosted on GitHub Pages. Get started now View it on GitHub . This website documents the features of the current main branch of the Just the Docs theme. See the CHANGELOG for a list of releases, new features, and bug fixes. Just the Docs is a theme for generating static websites with Jekyll. You can write source files for your web pages using Markdown, the Liquid templating language, and HTML.1 Jekyll builds your site by converting all files that have front matter to HTML. Your Jekyll configuration file determines which theme to use, and sets general parameters for your site, such as the URL of its home page. Jekyll builds this Just the Docs theme docs website using the theme itself. These web pages show how your web pages will look by default when you use this theme. But you can easily customize the theme to make them look completely different! . Browse the docs to learn more about how to use this theme. ",
     "url": "/index_origin/#focus-on-writing-good-documentation",
     
     "relUrl": "/index_origin/#focus-on-writing-good-documentation"
-  },"109": {
+  },"131": {
     "doc": "Home",
     "title": "Getting started",
     "content": "The Just the Docs Template provides the simplest, quickest, and easiest way to create a new website that uses the Just the Docs theme. To get started with creating a site, just click “use the template”! . To use the theme, you do not need to clone or fork the Just the Docs repo! You should do that only if you intend to browse the theme docs locally, contribute to the development of the theme, or develop a new theme based on Just the Docs. You can easily set the site created by the template to be published on GitHub Pages – the template README file explains how to do that, along with other details. If Jekyll is installed on your computer, you can also build and preview the created site locally. This lets you test changes before committing them, and avoids waiting for GitHub Pages.2 And you will be able to deploy your local build to a different platform than GitHub Pages. More specifically, the created site: . | uses a gem-based approach, i.e. uses a Gemfile and loads the just-the-docs gem | uses the GitHub Pages / Actions workflow to build and publish the site on GitHub Pages | . Other than that, you’re free to customize sites that you create with the template, however you like. You can easily change the versions of just-the-docs and Jekyll it uses, as well as adding further plugins. See the theme README for how to use the theme as a gem without creating a new site. ",
     "url": "/index_origin/#getting-started",
     
     "relUrl": "/index_origin/#getting-started"
-  },"110": {
+  },"132": {
     "doc": "Home",
     "title": "About the project",
     "content": "Just the Docs is © 2017-2023 by Patrick Marsceill. License . Just the Docs is distributed by an MIT license. Contributing . When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. Read more about becoming a contributor in our GitHub repo. Thank you to the contributors of Just the Docs! . | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | . Code of Conduct . Just the Docs is committed to fostering a welcoming community. View our Code of Conduct on our GitHub repository. | The source file for this page uses all three markup languages. &#8617; . | It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub. &#8617; . | . ",
     "url": "/index_origin/#about-the-project",
     
     "relUrl": "/index_origin/#about-the-project"
-  },"111": {
+  },"133": {
     "doc": "Home",
     "title": "Home",
     "content": " ",
     "url": "/index_origin/",
     
     "relUrl": "/index_origin/"
-  },"112": {
-    "doc": "Java Script 기본 개념",
-    "title": "Table of contents",
-    "content": ". | 자바스크립트 목적 및 주요 기능 . | Variable | Equality | Function | Arrow Function | Object | Array APIs (map, filter, join) | JSON | . | 주요 특징 . | 선언형 var, let, const | 데이터 타입 | 반복문 | . | 전체 실습 코드 | . ​ . ",
-    "url": "/docs/programming-language/js-basic/#table-of-contents",
-    
-    "relUrl": "/docs/programming-language/js-basic/#table-of-contents"
-  },"113": {
-    "doc": "Java Script 기본 개념",
-    "title": "자바스크립트 목적 및 주요 기능",
-    "content": "​ . | input 창에 특정 값을 넣어주는 용도(input 태그) | 특정 element(DOM) 를 보여주고 안보여주는 용도(select 태그) | JavaScript 는 body 제일 밑에 쓴다. css 의 경우는 head 마지막에 쓴다. ​ Variable . ​ . | let (added in ES6) : var 는 사용하지 말것!, 숫자는 number 를 사용할 수 있음. | const | template literals | 숫자 + 문자는 숫자로 된다. ex( '1' + 2 ==&gt; 3) ​ Equality . ​ . | Loose equality : == , != 를 사용하며 타입이 다르더라도 값이 같으면 같다고 본다. | Strict equality : ===, !== 값이 동일해도 타입이 다르면 다른거다. ​ Function . ​ object 타입이기 때문에 파라미터로도 전달될 수 있다. ​ . | defalut parameter : 인자에 값을 넣는다. | function showMessage(message, from = 'defaultname') { ........ } | Rest parameters 점 3개 | function showMessage(...args) { for(let i = 0; i &lt; args.length; i++) { console.log(args[i]; } } ​ // 함수(익명함수)를 선언함과 동시에 변수에 할당이 된다. const print = function [함수이름] () { =&gt; [함수이름] 은 디버깅 용도로 추가할 수도 있다. console.log('print'); } print() ​ // 다른 변수에 할당이 가능하다. const printAgain = print; printAgain(); . ​ . Arrow Function . ​ 항상 이름이 없는 함수이다 ​ . // print 와 printArrow 는 동일하다. const print = function() { console.log('print'); } print(); ​ ​ const printArrow = () =&gt; { console.log('print'); } printArrow(); . ​ . Object . ​ object 는 key 와 value 의 집합체이다. ​ . Array APIs (map, filter, join) . ​ . | . JSON . ​ . | JSON.stringfy : Object to JSON | JSON.parse : JSON to Object | . ​ . ",
-    "url": "/docs/programming-language/js-basic/#%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EB%AA%A9%EC%A0%81-%EB%B0%8F-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5",
-    
-    "relUrl": "/docs/programming-language/js-basic/#자바스크립트-목적-및-주요-기능"
-  },"114": {
-    "doc": "Java Script 기본 개념",
-    "title": "주요 특징",
-    "content": "​ . 선언형 var, let, const . ​ 아래 3가지만 기억하자. ​ . | var 중복 선언을 허용한다. | var x = 1; x = x + 2; document.getElementById(\"test\").value = x; //3 ​ var x = 2; document.getElementById(“test”).value = x; //2 ​ | let 중복 선언을 허용하지 않는다. ​ let y = 1; y = y + 2; ​ let y = 2; // 동일 변수는 허용하지 않는다. ​ . | const 재정의 불가하다. ​ 데이터 타입 . ​ 숫자, 소수점 숫자, 문자, 참/거짓, 오브젝트, 배열 등등이 있다. 아래와 같이 선언된다. ​ . ​ let a = 1; a = 1.234; a = \"apple\" a = true; ​ // object ​ let obj ={ name:\"\", ////////////////////// 선언시점에 키를 선언안해도 된다!! city:\"\" ////////////////////// 선언시점에 키를 선언안해도 된다!! }; ​ obj.name = $(\"#name\").val(); obj.city = $(\"#city\").val(); ​ console.log(obj); ​ // 배열 let city = [ {code:\"02\", name:\"서울\"}, {code:\"064\", name:\"제주\"} ]; . ​ 다중 정의가 가능하다. Object 안에 Object 또는 배열을 담을 수 있다. ​ . let city = \\[ {code:\"02\", name:\"서울\"}, {code:\"064\", name:\"제주\"} \\]; . ​ . 반복문 . ​ . ​ for(let i=0; i&lt;city.length; i++){ ////////////////////////// 조건문 if(i==0) { $('#city').append('' + city\\[i\\].name + ''); } else if(1==0) { /// } else { $('#city').append('' + city\\[i\\].name + ''); } } . ​ . ",
-    "url": "/docs/programming-language/js-basic/#%EC%A3%BC%EC%9A%94-%ED%8A%B9%EC%A7%95",
-    
-    "relUrl": "/docs/programming-language/js-basic/#주요-특징"
-  },"115": {
-    "doc": "Java Script 기본 개념",
-    "title": "전체 실습 코드",
-    "content": "| . 이름: 지역: ​ 동네: 강남 서초 제주시 서귀포시 ​ test ​ 등록 ​ ​ ​ . ​ . &lt;div class=\"container\"&gt; &lt;div&gt;이름: &lt;input type=\"text\" id=\"name\" /&gt;&lt;/div&gt; &lt;div&gt;지역: &lt;select id=\"city\" onchange=\"changeCity();\"&gt; &lt;!-- &lt;option value=\"02\"&gt;서울&lt;/option&gt; &lt;option value=\"064\"&gt;제주&lt;/option&gt; --&gt; &lt;/select&gt; &lt;/div&gt; ​ &lt;div&gt;동네: &lt;select id=\"region_02\"&gt; &lt;option value=\"\"&gt;강남&lt;/option&gt; &lt;option value=\"\"&gt;서초&lt;/option&gt; &lt;/select&gt; &lt;select id=\"region_064\" style=\"display:none;\"&gt; &lt;option value=\"\"&gt;제주시&lt;/option&gt; &lt;option value=\"\"&gt;서귀포시&lt;/option&gt; &lt;/select&gt; &lt;/div&gt; ​ &lt;div&gt;test &lt;input type=\"text\" id=\"test\" value=\"\" /&gt;&lt;/div&gt; ​ &lt;button type=\"button\" onclick=\"regist();\"&gt;등록&lt;/button&gt; ​ &lt;/div&gt; ​ &lt;script src=\"https://code.jquery.com/jquery-3.6.3.min.js\" integrity=\"sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\" integrity=\"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\" integrity=\"sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js\" integrity=\"sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; ​ &lt;!-- 스크립트 시작 --&gt; &lt;script&gt; ​ ​ ​ function regist() { ////////////////////////// 본 document 에 있는 element 중에서 id 로 city 인 값을 가져와라. alert(document.getElementById(\"city\").value); ​ //jQuery 예제 ////////////////////////// jQuery 는 $ 를 쓰고, id 는 # 으로 표현한다. alert($(\"#name\").val()) ​ let obj ={ name:\"\", city:\"\" }; // 오브젝트 ​ ​ obj.name = $(\"#name\").val(); obj.city = $(\"#city\").val(); ​ console.log(obj); ​ } ​ function changeCity() { //let city = document.getElementById(\"city\").value; //document.getElementById(\"region_02\").style.display = \"none\"; // \"\" 또는 \"none\" //document.getElementById(\"region_064\").style.display = \"none\"; // \"\" 또는 \"none\" ​ //document.getElementById(\"region_\"+city).style.display = \"\"; // \"\" 또는 \"none\" ​ ////////////////////////// jQuery 라면 let city = $('#city').val(); $('#region_02').hide(); $('#region_064').hide(); $('#region_' + city).show(); ​ } ​ ​ function loadCity() { let city = [ {code:\"02\", name:\"서울\"}, {code:\"064\", name:\"제주\"} ]; ​ ​ //$('#city').append('&lt;option value=\"02\" selected&gt; 서울 &lt;/option&gt;'); // $('#city').append('&lt;option value=\"064\" &gt; 제주 &lt;/option&gt;'); ​ //////////////////////////// 반복문 for(let i=0; i&lt;city.length; i++){ ////////////////////////// 조건문 if(i==0) { $('#city').append('&lt;option value=\"' + city[i].code + '\" selected &gt;' + city[i].name + ' &lt;/option&gt;'); } else if(1==0) { /// } else { $('#city').append('&lt;option value=\"' + city[i].code + '\" &gt;' + city[i].name + ' &lt;/option&gt;'); } } ​ ​ } ​ ​ ​ loadCity();// 강제로 실행 ​ //var var x = 1; x = x + 2; document.getElementById(\"test\").value = x; //3 ​ var x = 2; document.getElementById(\"test\").value = x; //2 ​ ​ ​ ​ ////////////////////////// 형타입은 let 으로 일관된다. let a = 1; a = 1.234; a = \"apple\" a = true; ​ ​ ////////////////////////// 오브젝트 let obj ={ name:\"\", city:\"\" }; ​ ​ ​ ​ &lt;/script&gt; . ",
-    "url": "/docs/programming-language/js-basic/#%EC%A0%84%EC%B2%B4-%EC%8B%A4%EC%8A%B5-%EC%BD%94%EB%93%9C",
-    
-    "relUrl": "/docs/programming-language/js-basic/#전체-실습-코드"
-  },"116": {
+  },"134": {
     "doc": "Java Script 기본 개념",
     "title": "Java Script 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/js-basic/",
     
     "relUrl": "/docs/programming-language/js-basic/"
-  },"117": {
+  },"135": {
+    "doc": "Java Script 기본 개념",
+    "title": "Table of contents",
+    "content": ". | 자바스크립트 목적 및 주요 기능 . | Variable | Equality | Function | Arrow Function | Object | Array APIs (map, filter, join) | JSON | . | 주요 특징 . | 선언형 var, let, const | 데이터 타입 | 반복문 | . | 전체 실습 코드 | . ​ . ",
+    "url": "/docs/programming-language/js-basic/#table-of-contents",
+    
+    "relUrl": "/docs/programming-language/js-basic/#table-of-contents"
+  },"136": {
+    "doc": "Java Script 기본 개념",
+    "title": "자바스크립트 목적 및 주요 기능",
+    "content": "​ . | input 창에 특정 값을 넣어주는 용도(input 태그) | 특정 element(DOM) 를 보여주고 안보여주는 용도(select 태그) | JavaScript 는 body 제일 밑에 쓴다. css 의 경우는 head 마지막에 쓴다. ​ Variable . ​ . | let (added in ES6) : var 는 사용하지 말것!, 숫자는 number 를 사용할 수 있음. | const | template literals | 숫자 + 문자는 숫자로 된다. ex( '1' + 2 ==&gt; 3) ​ Equality . ​ . | Loose equality : == , != 를 사용하며 타입이 다르더라도 값이 같으면 같다고 본다. | Strict equality : ===, !== 값이 동일해도 타입이 다르면 다른거다. ​ Function . ​ object 타입이기 때문에 파라미터로도 전달될 수 있다. ​ . | defalut parameter : 인자에 값을 넣는다. | function showMessage(message, from = 'defaultname') { ........ } | Rest parameters 점 3개 | function showMessage(...args) { for(let i = 0; i &lt; args.length; i++) { console.log(args[i]; } } ​ // 함수(익명함수)를 선언함과 동시에 변수에 할당이 된다. const print = function [함수이름] () { =&gt; [함수이름] 은 디버깅 용도로 추가할 수도 있다. console.log('print'); } print() ​ // 다른 변수에 할당이 가능하다. const printAgain = print; printAgain(); . ​ . Arrow Function . ​ 항상 이름이 없는 함수이다 ​ . // print 와 printArrow 는 동일하다. const print = function() { console.log('print'); } print(); ​ ​ const printArrow = () =&gt; { console.log('print'); } printArrow(); . ​ . Object . ​ object 는 key 와 value 의 집합체이다. ​ . Array APIs (map, filter, join) . ​ . | . JSON . ​ . | JSON.stringfy : Object to JSON | JSON.parse : JSON to Object | . ​ . ",
+    "url": "/docs/programming-language/js-basic/#%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EB%AA%A9%EC%A0%81-%EB%B0%8F-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5",
+    
+    "relUrl": "/docs/programming-language/js-basic/#자바스크립트-목적-및-주요-기능"
+  },"137": {
+    "doc": "Java Script 기본 개념",
+    "title": "주요 특징",
+    "content": "​ . 선언형 var, let, const . ​ 아래 3가지만 기억하자. ​ . | var 중복 선언을 허용한다. | var x = 1; x = x + 2; document.getElementById(\"test\").value = x; //3 ​ var x = 2; document.getElementById(“test”).value = x; //2 ​ | let 중복 선언을 허용하지 않는다. ​ let y = 1; y = y + 2; ​ let y = 2; // 동일 변수는 허용하지 않는다. ​ . | const 재정의 불가하다. ​ 데이터 타입 . ​ 숫자, 소수점 숫자, 문자, 참/거짓, 오브젝트, 배열 등등이 있다. 아래와 같이 선언된다. ​ . ​ let a = 1; a = 1.234; a = \"apple\" a = true; ​ // object ​ let obj ={ name:\"\", ////////////////////// 선언시점에 키를 선언안해도 된다!! city:\"\" ////////////////////// 선언시점에 키를 선언안해도 된다!! }; ​ obj.name = $(\"#name\").val(); obj.city = $(\"#city\").val(); ​ console.log(obj); ​ // 배열 let city = [ {code:\"02\", name:\"서울\"}, {code:\"064\", name:\"제주\"} ]; . ​ 다중 정의가 가능하다. Object 안에 Object 또는 배열을 담을 수 있다. ​ . let city = \\[ {code:\"02\", name:\"서울\"}, {code:\"064\", name:\"제주\"} \\]; . ​ . 반복문 . ​ . ​ for(let i=0; i&lt;city.length; i++){ ////////////////////////// 조건문 if(i==0) { $('#city').append('' + city\\[i\\].name + ''); } else if(1==0) { /// } else { $('#city').append('' + city\\[i\\].name + ''); } } . ​ . ",
+    "url": "/docs/programming-language/js-basic/#%EC%A3%BC%EC%9A%94-%ED%8A%B9%EC%A7%95",
+    
+    "relUrl": "/docs/programming-language/js-basic/#주요-특징"
+  },"138": {
+    "doc": "Java Script 기본 개념",
+    "title": "전체 실습 코드",
+    "content": "| . 이름: 지역: ​ 동네: 강남 서초 제주시 서귀포시 ​ test ​ 등록 ​ ​ ​ . ​ . &lt;div class=\"container\"&gt; &lt;div&gt;이름: &lt;input type=\"text\" id=\"name\" /&gt;&lt;/div&gt; &lt;div&gt;지역: &lt;select id=\"city\" onchange=\"changeCity();\"&gt; &lt;!-- &lt;option value=\"02\"&gt;서울&lt;/option&gt; &lt;option value=\"064\"&gt;제주&lt;/option&gt; --&gt; &lt;/select&gt; &lt;/div&gt; ​ &lt;div&gt;동네: &lt;select id=\"region_02\"&gt; &lt;option value=\"\"&gt;강남&lt;/option&gt; &lt;option value=\"\"&gt;서초&lt;/option&gt; &lt;/select&gt; &lt;select id=\"region_064\" style=\"display:none;\"&gt; &lt;option value=\"\"&gt;제주시&lt;/option&gt; &lt;option value=\"\"&gt;서귀포시&lt;/option&gt; &lt;/select&gt; &lt;/div&gt; ​ &lt;div&gt;test &lt;input type=\"text\" id=\"test\" value=\"\" /&gt;&lt;/div&gt; ​ &lt;button type=\"button\" onclick=\"regist();\"&gt;등록&lt;/button&gt; ​ &lt;/div&gt; ​ &lt;script src=\"https://code.jquery.com/jquery-3.6.3.min.js\" integrity=\"sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\" integrity=\"sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js\" integrity=\"sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; &lt;script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js\" integrity=\"sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s\" crossorigin=\"anonymous\"&gt;&lt;/script&gt; ​ &lt;!-- 스크립트 시작 --&gt; &lt;script&gt; ​ ​ ​ function regist() { ////////////////////////// 본 document 에 있는 element 중에서 id 로 city 인 값을 가져와라. alert(document.getElementById(\"city\").value); ​ //jQuery 예제 ////////////////////////// jQuery 는 $ 를 쓰고, id 는 # 으로 표현한다. alert($(\"#name\").val()) ​ let obj ={ name:\"\", city:\"\" }; // 오브젝트 ​ ​ obj.name = $(\"#name\").val(); obj.city = $(\"#city\").val(); ​ console.log(obj); ​ } ​ function changeCity() { //let city = document.getElementById(\"city\").value; //document.getElementById(\"region_02\").style.display = \"none\"; // \"\" 또는 \"none\" //document.getElementById(\"region_064\").style.display = \"none\"; // \"\" 또는 \"none\" ​ //document.getElementById(\"region_\"+city).style.display = \"\"; // \"\" 또는 \"none\" ​ ////////////////////////// jQuery 라면 let city = $('#city').val(); $('#region_02').hide(); $('#region_064').hide(); $('#region_' + city).show(); ​ } ​ ​ function loadCity() { let city = [ {code:\"02\", name:\"서울\"}, {code:\"064\", name:\"제주\"} ]; ​ ​ //$('#city').append('&lt;option value=\"02\" selected&gt; 서울 &lt;/option&gt;'); // $('#city').append('&lt;option value=\"064\" &gt; 제주 &lt;/option&gt;'); ​ //////////////////////////// 반복문 for(let i=0; i&lt;city.length; i++){ ////////////////////////// 조건문 if(i==0) { $('#city').append('&lt;option value=\"' + city[i].code + '\" selected &gt;' + city[i].name + ' &lt;/option&gt;'); } else if(1==0) { /// } else { $('#city').append('&lt;option value=\"' + city[i].code + '\" &gt;' + city[i].name + ' &lt;/option&gt;'); } } ​ ​ } ​ ​ ​ loadCity();// 강제로 실행 ​ //var var x = 1; x = x + 2; document.getElementById(\"test\").value = x; //3 ​ var x = 2; document.getElementById(\"test\").value = x; //2 ​ ​ ​ ​ ////////////////////////// 형타입은 let 으로 일관된다. let a = 1; a = 1.234; a = \"apple\" a = true; ​ ​ ////////////////////////// 오브젝트 let obj ={ name:\"\", city:\"\" }; ​ ​ ​ ​ &lt;/script&gt; . ",
+    "url": "/docs/programming-language/js-basic/#%EC%A0%84%EC%B2%B4-%EC%8B%A4%EC%8A%B5-%EC%BD%94%EB%93%9C",
+    
+    "relUrl": "/docs/programming-language/js-basic/#전체-실습-코드"
+  },"139": {
     "doc": "Java Script",
     "title": "Java Script",
     "content": " ",
     "url": "/docs/programming-language/javascript/",
     
     "relUrl": "/docs/programming-language/javascript/"
-  },"118": {
+  },"140": {
     "doc": "Labels",
     "title": "Labels",
     "content": "Use labels as a way to add an additional mark to a section of your docs. Labels come in a few colors. By default, labels will be blue. Default label . Blue label . Stable . New release . Coming soon . Deprecated . Default label {: .label } Blue label {: .label .label-blue } Stable {: .label .label-green } New release {: .label .label-purple } Coming soon {: .label .label-yellow } Deprecated {: .label .label-red } . ",
     "url": "/docs/ui-components/labels/",
     
     "relUrl": "/docs/ui-components/labels/"
-  },"119": {
+  },"141": {
     "doc": "Layout",
     "title": "Layout Utilities",
     "content": " ",
     "url": "/docs/utilities/layout/#layout-utilities",
     
     "relUrl": "/docs/utilities/layout/#layout-utilities"
-  },"120": {
+  },"142": {
     "doc": "Layout",
     "title": "Table of contents",
     "content": ". | Spacing | Horizontal Alignment | Vertical Alignment | Display | . ",
     "url": "/docs/utilities/layout/#table-of-contents",
     
     "relUrl": "/docs/utilities/layout/#table-of-contents"
-  },"121": {
+  },"143": {
     "doc": "Layout",
     "title": "Spacing",
     "content": "These spacers are available to use for margins and padding with responsive utility classes. Combine these prefixes with a screen size and spacing scale to use them responsively. | Classname prefix | What it does | . | .m- | margin | . | .mx- | margin-left, margin-right | . | .my- | margin top, margin bottom | . | .mt- | margin-top | . | .mr- | margin-right | . | .mb- | margin-bottom | . | .ml- | margin-left | . | Classname prefix | What it does | . | .p- | padding | . | .px- | padding-left, padding-right | . | .py- | padding top, padding bottom | . | .pt- | padding-top | . | .pr- | padding-right | . | .pb- | padding-bottom | . | .pl- | padding-left | . Spacing values are based on a 1rem = 16px spacing scale, broken down into these units: . | Spacer/suffix | Size in rems | Rem converted to px | . | 1 | 0.25rem | 4px | . | 2 | 0.5rem | 8px | . | 3 | 0.75rem | 12px | . | 4 | 1rem | 16px | . | 5 | 1.5rem | 24px | . | 6 | 2rem | 32px | . | 7 | 2.5rem | 40px | . | 8 | 3rem | 48px | . | auto | auto | auto | . Use mx-auto to horizontally center elements. Examples . In Markdown, use the {: } wrapper to apply custom classes: . This paragraph will have a margin bottom of 1rem/16px on large screens. {: .mb-lg-4 } This paragraph will have 2rem/32px of padding on the right and left at all screen sizes. {: .px-6 } . ",
     "url": "/docs/utilities/layout/#spacing",
     
     "relUrl": "/docs/utilities/layout/#spacing"
-  },"122": {
+  },"144": {
     "doc": "Layout",
     "title": "Horizontal Alignment",
     "content": "| Classname | What it does | . | .float-left | float: left | . | .float-right | float: right | . | .flex-justify-start | justify-content: flex-start | . | .flex-justify-end | justify-content: flex-end | . | .flex-justify-between | justify-content: space-between | . | .flex-justify-around | justify-content: space-around | . Note: any of the flex- classes must be used on a parent element that has d-flex applied to it. ",
     "url": "/docs/utilities/layout/#horizontal-alignment",
     
     "relUrl": "/docs/utilities/layout/#horizontal-alignment"
-  },"123": {
+  },"145": {
     "doc": "Layout",
     "title": "Vertical Alignment",
     "content": "| Classname | What it does | . | .v-align-baseline | vertical-align: baseline | . | .v-align-bottom | vertical-align: bottom | . | .v-align-middle | vertical-align: middle | . | .v-align-text-bottom | vertical-align: text-bottom | . | .v-align-text-top | vertical-align: text-top | . | .v-align-top | vertical-align: top | . ",
     "url": "/docs/utilities/layout/#vertical-alignment",
     
     "relUrl": "/docs/utilities/layout/#vertical-alignment"
-  },"124": {
+  },"146": {
     "doc": "Layout",
     "title": "Display",
     "content": "Display classes aid in adapting the layout of the elements on a page: . | Class |   | . | .d-block | display: block | . | .d-flex | display: flex | . | .d-inline | display: inline | . | .d-inline-block | display: inline-block | . | .d-none | display: none | . Use these classes in conjunction with the responsive modifiers. Examples . In Markdown, use the {: } wrapper to apply custom classes: . This button will be hidden until medium screen sizes: [ A button ](#url) {: .d-none .d-md-inline-block } These headings will be `inline-block`: ### heading 3 {: .d-inline-block } ### heading 3 {: .d-inline-block } . ",
     "url": "/docs/utilities/layout/#display",
     
     "relUrl": "/docs/utilities/layout/#display"
-  },"125": {
+  },"147": {
     "doc": "Layout",
     "title": "Layout",
     "content": " ",
     "url": "/docs/utilities/layout/",
     
     "relUrl": "/docs/utilities/layout/"
-  },"126": {
+  },"148": {
     "doc": "Layout",
     "title": "Layout",
     "content": "You specify the layout for a page in its front matter. Just the Docs has a default layout with a sidebar, used for almost all pages in the theme docs, and a minimal layout that omits the sidebar. ",
     "url": "/docs/layout/layout/",
     
     "relUrl": "/docs/layout/layout/"
-  },"127": {
+  },"149": {
     "doc": "Layout",
     "title": "The layout concept",
     "content": "See the Jekyll docs page about layouts for an explanation of the general idea of layouts and how to specify them. You can use Jekyll’s front matter defaults to specify the same layout for many pages. ",
     "url": "/docs/layout/layout/#the-layout-concept",
     
     "relUrl": "/docs/layout/layout/#the-layout-concept"
-  },"128": {
+  },"150": {
     "doc": "Layout",
     "title": "The default layout",
     "content": "This page uses the default layout. It is a responsive layout: on medium and larger width displays, it displays a sidebar, including a navigation panel; on smaller width displays, the sidebar is automatically hidden under a button. Each child (and grandchild) page of a top-level page has so-called breadcrumbs: links to its parent (and grandparent) pages. It shows the breadcrumbs above the main content of the page. Each page that has child pages generally has a list of links to those pages (you can suppress it by has_toc: false in the front matter). It shows the list as a table of contents below the main content. ",
     "url": "/docs/layout/layout/#the-default-layout",
     
     "relUrl": "/docs/layout/layout/#the-default-layout"
-  },"129": {
+  },"151": {
     "doc": "Layout",
     "title": "The minimal layout",
     "content": "A child and grandchild page of this page use the minimal layout. This differs from the default layout by omitting the sidebar – and thereby also the navigation panel. To navigate between pages with the minimal layout, you can use the breadcrumbs and the tables of contents. ",
     "url": "/docs/layout/layout/#the-minimal-layout",
     
     "relUrl": "/docs/layout/layout/#the-minimal-layout"
-  },"130": {
+  },"152": {
     "doc": "Layout",
     "title": "Other layouts",
     "content": "Just the Docs has further layouts: about, home, page, and post. Currently, they are all based on the default layout. See the Jekyll docs about inheritance for how to customize them. ",
     "url": "/docs/layout/layout/#other-layouts",
     
     "relUrl": "/docs/layout/layout/#other-layouts"
-  },"131": {
+  },"153": {
     "doc": "Code with line numbers",
     "title": "Code snippets with line numbers",
     "content": "The default settings for HTML compression are incompatible with the HTML produced by Jekyll (4.1.1 or earlier) for line numbers from highlighted code – both when using Kramdown code fences and when using Liquid highlight tags. To avoid non-conforming HTML and unsatisfactory layout, HTML compression can be turned off by using the following configuration option: . compress_html: ignore: envs: all . When using Kramdown code fences, line numbers are turned on globally by the following configuration option: . kramdown: syntax_highlighter_opts: block: line_numbers: true . Line numbers can then be suppressed locally using Liquid tags (without the linenos option) instead of fences: . {% highlight some_language %} Some code {% endhighlight %} . ",
     "url": "/docs/ui-components/code/line-numbers/#code-snippets-with-line-numbers",
     
     "relUrl": "/docs/ui-components/code/line-numbers/#code-snippets-with-line-numbers"
-  },"132": {
+  },"154": {
     "doc": "Code with line numbers",
     "title": "Workarounds",
     "content": "To use HTML compression together with line numbers, all highlighted code needs to be wrapped using one of the following workarounds. (The variable name some_var can be changed to avoid clashes; it can also be replaced by code – but note that code=code cannot be removed). Code fences (three backticks) . {% capture some_var %} ```some_language Some code ``` {% endcapture %} {% assign some_var = some_var | markdownify %} {% include fix_linenos.html code=some_var %} . Liquid highlighting . {% capture some_var %} {% highlight some_language linenos %} Some code {% endhighlight %} {% endcapture %} {% include fix_linenos.html code=some_var %} . Credit: The original version of the above workaround was suggested by Dmitry Hrabrov at https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901. ",
     "url": "/docs/ui-components/code/line-numbers/#workarounds",
     
     "relUrl": "/docs/ui-components/code/line-numbers/#workarounds"
-  },"133": {
+  },"155": {
     "doc": "Code with line numbers",
     "title": "Examples",
     "content": "✅ Using code fences + workaround (will only show line numbers if enabled globally in _config.yml): . // Javascript code with syntax highlighting in fences var fun = function lang(l) { dateformat.i18n = require('./lang/' + l) return true; } . ✅ Using liquid highlighting + workaround: . | 1 2 3 4 . | # Ruby code with syntax highlighting and fixed line numbers using Liquid GitHubPages::Dependencies.gems.each do |gem, version| s.add_dependency(gem, \"= #{version}\") end . | . Narrow code stays close to the line numbers: . | 1 2 3 . | def foo puts 'foo' end . | . The following generates incorrect and invalid HTML. It should not be used as a positive example; the improper layout (with the broken HTML tags) is intentional. ❌ With the compression options used for the theme docs, the following example illustrates the incorrect formatting arising from the incompatibility of HTML compression and the non-conforming HTML produced by Jekyll for line numbers: . | 1 2 3 . | def foo puts 'foo' end . | . ",
     "url": "/docs/ui-components/code/line-numbers/#examples",
     
     "relUrl": "/docs/ui-components/code/line-numbers/#examples"
-  },"134": {
+  },"156": {
     "doc": "Code with line numbers",
     "title": "Code with line numbers",
     "content": " ",
     "url": "/docs/ui-components/code/line-numbers/",
     
     "relUrl": "/docs/ui-components/code/line-numbers/"
-  },"135": {
-    "doc": "Linux Basics",
-    "title": "Table of contents",
-    "content": ". | PID = 1 번 프로세스는 무엇인가 | 파일 권한 알아보기 . | 파일 종류 및 유저/그룹 | 약자의 의미 | . | . 주요 개념을 정리해 본다. ",
-    "url": "/docs/os-systems/linux-basics/#table-of-contents",
-    
-    "relUrl": "/docs/os-systems/linux-basics/#table-of-contents"
-  },"136": {
-    "doc": "Linux Basics",
-    "title": "PID = 1 번 프로세스는 무엇인가",
-    "content": "PID = 1 번 프로세스는 systemd 이다. root@docker1:~# top top - 15:55:44 up 57 min, 2 users, load average: 0.00, 0.08, 0.07 Tasks: 208 total, 1 running, 165 sleeping, 0 stopped, 0 zombie %Cpu(s): 0.0 us, 0.7 sy, 0.0 ni, 99.3 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st KiB Mem : 4039384 total, 1208128 free, 1027444 used, 1803812 buff/cache KiB Swap: 2017276 total, 2017276 free, 0 used. 2730296 avail Mem PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND 1896 root 20 0 107788 7120 6116 S 0.3 0.2 0:00.59 sshd 4038 root 20 0 42952 3992 3300 R 0.3 0.1 0:00.04 top 1 root 20 0 160148 9288 6548 S 0.0 0.2 0:02.30 systemd . ",
-    "url": "/docs/os-systems/linux-basics/#pid--1-%EB%B2%88-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80",
-    
-    "relUrl": "/docs/os-systems/linux-basics/#pid--1-번-프로세스는-무엇인가"
-  },"137": {
-    "doc": "Linux Basics",
-    "title": "파일 권한 알아보기",
-    "content": "파일 종류 및 유저/그룹 . 파일 권한은 4개로 등분하여 확인할 수 있다. | 1번은 파일의 종류 | 2번은 파일과 폴더의 유저 권한 | 3번은 파일과 폴더의 그룹 권한 | 4번은 파일에 대한 모든 유저의 권한 | . 약자의 의미 . | r : read | w : wrtie | x : excute | d : Directory | r : Regular file | s : Symbolic link | . ",
-    "url": "/docs/os-systems/linux-basics/#%ED%8C%8C%EC%9D%BC-%EA%B6%8C%ED%95%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-basics/#파일-권한-알아보기"
-  },"138": {
+  },"157": {
     "doc": "Linux Basics",
     "title": "Linux Basics",
     "content": " ",
     "url": "/docs/os-systems/linux-basics/",
     
     "relUrl": "/docs/os-systems/linux-basics/"
-  },"139": {
-    "doc": "Linux Command",
+  },"158": {
+    "doc": "Linux Basics",
     "title": "Table of contents",
-    "content": ". | Process 확인하기 | Curl 사용하기 | Shell 스크립트 실행하기 | 파일 압축 및 해제하기 | CPU 정보 확인하기 | Disk 용량 확인 하기 | RAM 사이즈 확인하기 | Listen Port 확인하기 | Alias 설정하기 | . ",
-    "url": "/docs/os-systems/linux-command/#table-of-contents",
+    "content": ". | PID = 1 번 프로세스는 무엇인가 | 파일 권한 알아보기 . | 파일 종류 및 유저/그룹 | 약자의 의미 | . | . 주요 개념을 정리해 본다. ",
+    "url": "/docs/os-systems/linux-basics/#table-of-contents",
     
-    "relUrl": "/docs/os-systems/linux-command/#table-of-contents"
-  },"140": {
-    "doc": "Linux Command",
-    "title": "Process 확인하기",
-    "content": "전체적인 프로세스와 관련된 옵션이다. | -e : 커널 프로세스를 제외한 모든 프로세스를 보여준다. | f : UID, PID, PPID, C, STIME, TTY, TIME, CMD 등의 필드목록으로, CMD필드의 전체 명령어 형태를 보여준다. | . root@master:~/labfile/service# ps -ef | grep docker root 1485 1 1 Jan14 ? 00:11:50 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock root 1939 6201 0 02:39 ? 00:00:00 runc --root /var/run/docker/runtime-runc/moby --log /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/log.json --log-format json --systemd-cgroup exec --process /tmp/runc-process236202202 --detach --pid-file /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/0a2cb1a2031224ed66bb0bb8b9a23bc295c7b0c7d29a37ed774f14d8072f8f6d.pid f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a root 1957 15646 0 02:39 pts/0 00:00:00 grep --color=auto docker root@master:~/labfile/service# . ",
-    "url": "/docs/os-systems/linux-command/#process-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
+    "relUrl": "/docs/os-systems/linux-basics/#table-of-contents"
+  },"159": {
+    "doc": "Linux Basics",
+    "title": "PID = 1 번 프로세스는 무엇인가",
+    "content": "PID = 1 번 프로세스는 systemd 이다. root@docker1:~# top top - 15:55:44 up 57 min, 2 users, load average: 0.00, 0.08, 0.07 Tasks: 208 total, 1 running, 165 sleeping, 0 stopped, 0 zombie %Cpu(s): 0.0 us, 0.7 sy, 0.0 ni, 99.3 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st KiB Mem : 4039384 total, 1208128 free, 1027444 used, 1803812 buff/cache KiB Swap: 2017276 total, 2017276 free, 0 used. 2730296 avail Mem PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND 1896 root 20 0 107788 7120 6116 S 0.3 0.2 0:00.59 sshd 4038 root 20 0 42952 3992 3300 R 0.3 0.1 0:00.04 top 1 root 20 0 160148 9288 6548 S 0.0 0.2 0:02.30 systemd . ",
+    "url": "/docs/os-systems/linux-basics/#pid--1-%EB%B2%88-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80",
     
-    "relUrl": "/docs/os-systems/linux-command/#process-확인하기"
-  },"141": {
-    "doc": "Linux Command",
-    "title": "Curl 사용하기",
-    "content": "curl(client url) 명령어는 프로토콜들을 이용해 URL 로 데이터를 전송하여 서버에 데이터를 보내거나 가져올때 사용하기 위한 명령줄 도구 및 라이브러리이다. 쉽게말해 예를들어 자바스크립트 환경에서 REST API(http)를 테스트하고싶다면 보통 ajax, fetch 를 이용해 요청을 보내는 것과 같이, SHELL(커맨드라인 환경)에서 REST API(http) 테스트 하고 싶으면 curl 명령어를 이용하면 된다 라고 이해하면 된다. -s : –silent 진행 내용이나 메시지들을 출력하지 않음 -f : –fail HTTP 오류 시 자동으로 실패 (출력 없음) . root@master:~/labfile/service# curl http://10.105.74.121 | grep Hello % Total % Received % Xferd Average Speed Time Time Time Current Dload Upload Total Spent Left Speed 100 318 100 318 0 0 63600 0 --:--:-- --:--:-- --:--:-- 63600 &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . ",
-    "url": "/docs/os-systems/linux-command/#curl-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0",
+    "relUrl": "/docs/os-systems/linux-basics/#pid--1-번-프로세스는-무엇인가"
+  },"160": {
+    "doc": "Linux Basics",
+    "title": "파일 권한 알아보기",
+    "content": "파일 종류 및 유저/그룹 . 파일 권한은 4개로 등분하여 확인할 수 있다. | 1번은 파일의 종류 | 2번은 파일과 폴더의 유저 권한 | 3번은 파일과 폴더의 그룹 권한 | 4번은 파일에 대한 모든 유저의 권한 | . 약자의 의미 . | r : read | w : wrtie | x : excute | d : Directory | r : Regular file | s : Symbolic link | . ",
+    "url": "/docs/os-systems/linux-basics/#%ED%8C%8C%EC%9D%BC-%EA%B6%8C%ED%95%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
     
-    "relUrl": "/docs/os-systems/linux-command/#curl-사용하기"
-  },"142": {
-    "doc": "Linux Command",
-    "title": "Shell 스크립트 실행하기",
-    "content": ".sh 확장자가 나오길래, 뭐지 싶었는데 찾아보니 shell script 확장자였다. 실행하는 방법은 파일 권한을 변경 후 실행하면 된다…고 한다. 우선 파일 권한은 chmod 명령어를 사용하여 변경해준다. 744 등을 주어도 되지만, 간단하게 $chmod +x filename.sh &lt;– 쓰기 권한 추가하기 로 실행이 된다. sh filename.sh 또는 ./filename.sh 으로 실행한다. root@master:~# ./get_helm.sh Downloading https://get.helm.sh/helm-v3.10.3-linux-amd64.tar.gz Verifying checksum... Done. Preparing to install helm into /usr/local/bin helm installed into /usr/local/bin/helm root@master:~# . ",
-    "url": "/docs/os-systems/linux-command/#shell-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#shell-스크립트-실행하기"
-  },"143": {
-    "doc": "Linux Command",
-    "title": "파일 압축 및 해제하기",
-    "content": "tar -zcvf target.tar.gz file1 file2 dir1 dir2 : 파일 압축 tar -zxvf target.tar.gz : 압축 해제 . -c : –create 신규 아카이브 생성 -x : –extract 아카이브 풀기 -v : –verbose 처리 과정을 상세히 표시 -f : –file=ARCHIVE 파일을 대상으로 아카이빙 . root@master:~# tar -zcvf testtar2.tar.gz a.out b.out a.out b.out root@master:~# root@master:~# root@master:~# mv testtar1.tar.gz ./test/testtar1.tar.gz^C root@master:~# mkdir testtar root@master:~# mv testtar1.tar.gz ./testtar/testtar1.tar.gz root@master:~# root@master:~# cd testtar/ root@master:~/testtar# ls testtar1.tar.gz root@master:~/testtar# tar zxvf testtar1.tar.gz a.out b.out root@master:~/testtar# ls a.out b.out testtar1.tar.gz . root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile Dockerfile.11 Dockerfile.3 Dockerfile.5 host.html copy_data.tgz Dockerfile.1 Dockerfile.2 Dockerfile.4 Dockerfile.6 index.html root@docker1:~/labfile/dockerfile_dir# // 파일 압축 root@docker1:~/labfile/dockerfile_dir# tar -cvf target.tar Dockerfile.1 Dockerfile.2 Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# // 압축 해제 root@docker1:~/labfile/dockerfile_dir# tar -xvf target.tar Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# . ",
-    "url": "/docs/os-systems/linux-command/#%ED%8C%8C%EC%9D%BC-%EC%95%95%EC%B6%95-%EB%B0%8F-%ED%95%B4%EC%A0%9C%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#파일-압축-및-해제하기"
-  },"144": {
-    "doc": "Linux Command",
-    "title": "CPU 정보 확인하기",
-    "content": "root@docker1:~# lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 1 On-line CPU(s) list: 0 Thread(s) per core: 1 Core(s) per socket: 1 Socket(s): 1 NUMA node(s): 1 Vendor ID: GenuineIntel CPU family: 6 Model: 140 Model name: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz Stepping: 1 CPU MHz: 2803.200 BogoMIPS: 5606.40 Hypervisor vendor: KVM Virtualization type: full L1d cache: 48K L1i cache: 32K L2 cache: 1280K L3 cache: 12288K NUMA node0 CPU(s): 0 Flags: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq monitor ssse3 cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single fsgsbase avx2 invpcid rdseed clflushopt md_clear flush_l1d arch_capabilities root@docker1:~# . ",
-    "url": "/docs/os-systems/linux-command/#cpu-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#cpu-정보-확인하기"
-  },"145": {
-    "doc": "Linux Command",
-    "title": "Disk 용량 확인 하기",
-    "content": "df : 디스크 남은 용량 확인 (기본 명령어) df -k : 킬로바이트 단위로 남은 용량 확인 df -m : 메가 바이트 단위로 남은 용량 확인 df -h : 깔끔하게 보여줌 df . : 현재 디렉토리가 포함된 파티션의 남은 용량 확인 du : 현재 디렉토리에서 서브 디렉토리까지 용량 확인 du -a : 현재 디렉토리의 사용량 파일단위로 출력 du -s : 총 사용량 du -h : 깔끔하게 보여줌 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌 . ",
-    "url": "/docs/os-systems/linux-command/#disk-%EC%9A%A9%EB%9F%89-%ED%99%95%EC%9D%B8-%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#disk-용량-확인-하기"
-  },"146": {
-    "doc": "Linux Command",
-    "title": "RAM 사이즈 확인하기",
-    "content": "root@docker1:~# free total used free shared buff/cache available Mem: 4039328 1140088 1636088 34088 1263152 2608324 Swap: 2017276 0 2017276 root@docker1:~# . ",
-    "url": "/docs/os-systems/linux-command/#ram-%EC%82%AC%EC%9D%B4%EC%A6%88-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#ram-사이즈-확인하기"
-  },"147": {
-    "doc": "Linux Command",
-    "title": "Listen Port 확인하기",
-    "content": "Netstat 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다. | -l 옵션 : netstat에 모든 수신 소켓을 표시한다. | -t 옵션 : 모든 TCP 연결을 표시한다. | -u 옵션 : 모든 UDP 연결을 표시한다. | -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다. | -n 옵션 : 서비스 이름 대신 port 번호를 표시한다. | . user@user:~$ sudo netstat -ltup Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program name tcp 0 0 localhost:ipp 0.0.0.0:* LISTEN 899/cupsd tcp 0 0 localhost:37485 0.0.0.0:* LISTEN 1034/containerd tcp 0 0 localhost:postgresql 0.0.0.0:* LISTEN 1129/postgres tcp 0 0 localhost:domain 0.0.0.0:* LISTEN 796/systemd-resolve tcp 0 0 localhost:4000 0.0.0.0:* LISTEN 35497/ruby2.7 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 899/cupsd tcp6 0 0 [::]:9090 [::]:* LISTEN 982/java udp 0 0 0.0.0.0:58210 0.0.0.0:* 894/avahi-daemon: r udp 0 0 mdns.mcast.net:mdns 0.0.0.0:* 2999/chrome udp 0 0 0.0.0.0:mdns 0.0.0.0:* 894/avahi-daemon: r udp 0 0 dcpark-500R5K-501:34197 0.0.0.0:* 2999/chrome udp 0 0 localhost:domain 0.0.0.0:* 796/systemd-resolve udp 0 0 0.0.0.0:631 0.0.0.0:* 975/cups-browsed udp6 0 0 [::]:mdns [::]:* 894/avahi-daemon: r udp6 0 0 [::]:44146 [::]:* 894/avahi-daemon: r . ",
-    "url": "/docs/os-systems/linux-command/#listen-port-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#listen-port-확인하기"
-  },"148": {
-    "doc": "Linux Command",
-    "title": "Alias 설정하기",
-    "content": "# nano /root/.bashrc 파일에서 맨 아래 줄에 다음 내용 추가한다. alias conrm='docker container rm -f $(docker container ps -aq)' . 이후 ctrl+o (저장) &gt; enter &gt; ctrl+x (종료) 를 통해 저장한다. ",
-    "url": "/docs/os-systems/linux-command/#alias-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0",
-    
-    "relUrl": "/docs/os-systems/linux-command/#alias-설정하기"
-  },"149": {
+    "relUrl": "/docs/os-systems/linux-basics/#파일-권한-알아보기"
+  },"161": {
     "doc": "Linux Command",
     "title": "Linux Command",
     "content": " ",
     "url": "/docs/os-systems/linux-command/",
     
     "relUrl": "/docs/os-systems/linux-command/"
-  },"150": {
+  },"162": {
+    "doc": "Linux Command",
+    "title": "Table of contents",
+    "content": ". | Process 확인하기 | Curl 사용하기 | Shell 스크립트 실행하기 | 파일 압축 및 해제하기 | CPU 정보 확인하기 | Disk 용량 확인 하기 | RAM 사이즈 확인하기 | Listen Port 확인하기 | Alias 설정하기 | . ",
+    "url": "/docs/os-systems/linux-command/#table-of-contents",
+    
+    "relUrl": "/docs/os-systems/linux-command/#table-of-contents"
+  },"163": {
+    "doc": "Linux Command",
+    "title": "Process 확인하기",
+    "content": "전체적인 프로세스와 관련된 옵션이다. | -e : 커널 프로세스를 제외한 모든 프로세스를 보여준다. | f : UID, PID, PPID, C, STIME, TTY, TIME, CMD 등의 필드목록으로, CMD필드의 전체 명령어 형태를 보여준다. | . root@master:~/labfile/service# ps -ef | grep docker root 1485 1 1 Jan14 ? 00:11:50 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock root 1939 6201 0 02:39 ? 00:00:00 runc --root /var/run/docker/runtime-runc/moby --log /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/log.json --log-format json --systemd-cgroup exec --process /tmp/runc-process236202202 --detach --pid-file /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/0a2cb1a2031224ed66bb0bb8b9a23bc295c7b0c7d29a37ed774f14d8072f8f6d.pid f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a root 1957 15646 0 02:39 pts/0 00:00:00 grep --color=auto docker root@master:~/labfile/service# . ",
+    "url": "/docs/os-systems/linux-command/#process-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#process-확인하기"
+  },"164": {
+    "doc": "Linux Command",
+    "title": "Curl 사용하기",
+    "content": "curl(client url) 명령어는 프로토콜들을 이용해 URL 로 데이터를 전송하여 서버에 데이터를 보내거나 가져올때 사용하기 위한 명령줄 도구 및 라이브러리이다. 쉽게말해 예를들어 자바스크립트 환경에서 REST API(http)를 테스트하고싶다면 보통 ajax, fetch 를 이용해 요청을 보내는 것과 같이, SHELL(커맨드라인 환경)에서 REST API(http) 테스트 하고 싶으면 curl 명령어를 이용하면 된다 라고 이해하면 된다. -s : –silent 진행 내용이나 메시지들을 출력하지 않음 -f : –fail HTTP 오류 시 자동으로 실패 (출력 없음) . root@master:~/labfile/service# curl http://10.105.74.121 | grep Hello % Total % Received % Xferd Average Speed Time Time Time Current Dload Upload Total Spent Left Speed 100 318 100 318 0 0 63600 0 --:--:-- --:--:-- --:--:-- 63600 &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . ",
+    "url": "/docs/os-systems/linux-command/#curl-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#curl-사용하기"
+  },"165": {
+    "doc": "Linux Command",
+    "title": "Shell 스크립트 실행하기",
+    "content": ".sh 확장자가 나오길래, 뭐지 싶었는데 찾아보니 shell script 확장자였다. 실행하는 방법은 파일 권한을 변경 후 실행하면 된다…고 한다. 우선 파일 권한은 chmod 명령어를 사용하여 변경해준다. 744 등을 주어도 되지만, 간단하게 $chmod +x filename.sh &lt;– 쓰기 권한 추가하기 로 실행이 된다. sh filename.sh 또는 ./filename.sh 으로 실행한다. root@master:~# ./get_helm.sh Downloading https://get.helm.sh/helm-v3.10.3-linux-amd64.tar.gz Verifying checksum... Done. Preparing to install helm into /usr/local/bin helm installed into /usr/local/bin/helm root@master:~# . ",
+    "url": "/docs/os-systems/linux-command/#shell-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#shell-스크립트-실행하기"
+  },"166": {
+    "doc": "Linux Command",
+    "title": "파일 압축 및 해제하기",
+    "content": "tar -zcvf target.tar.gz file1 file2 dir1 dir2 : 파일 압축 tar -zxvf target.tar.gz : 압축 해제 . -c : –create 신규 아카이브 생성 -x : –extract 아카이브 풀기 -v : –verbose 처리 과정을 상세히 표시 -f : –file=ARCHIVE 파일을 대상으로 아카이빙 . root@master:~# tar -zcvf testtar2.tar.gz a.out b.out a.out b.out root@master:~# root@master:~# root@master:~# mv testtar1.tar.gz ./test/testtar1.tar.gz^C root@master:~# mkdir testtar root@master:~# mv testtar1.tar.gz ./testtar/testtar1.tar.gz root@master:~# root@master:~# cd testtar/ root@master:~/testtar# ls testtar1.tar.gz root@master:~/testtar# tar zxvf testtar1.tar.gz a.out b.out root@master:~/testtar# ls a.out b.out testtar1.tar.gz . root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile Dockerfile.11 Dockerfile.3 Dockerfile.5 host.html copy_data.tgz Dockerfile.1 Dockerfile.2 Dockerfile.4 Dockerfile.6 index.html root@docker1:~/labfile/dockerfile_dir# // 파일 압축 root@docker1:~/labfile/dockerfile_dir# tar -cvf target.tar Dockerfile.1 Dockerfile.2 Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# // 압축 해제 root@docker1:~/labfile/dockerfile_dir# tar -xvf target.tar Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# . ",
+    "url": "/docs/os-systems/linux-command/#%ED%8C%8C%EC%9D%BC-%EC%95%95%EC%B6%95-%EB%B0%8F-%ED%95%B4%EC%A0%9C%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#파일-압축-및-해제하기"
+  },"167": {
+    "doc": "Linux Command",
+    "title": "CPU 정보 확인하기",
+    "content": "root@docker1:~# lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 1 On-line CPU(s) list: 0 Thread(s) per core: 1 Core(s) per socket: 1 Socket(s): 1 NUMA node(s): 1 Vendor ID: GenuineIntel CPU family: 6 Model: 140 Model name: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz Stepping: 1 CPU MHz: 2803.200 BogoMIPS: 5606.40 Hypervisor vendor: KVM Virtualization type: full L1d cache: 48K L1i cache: 32K L2 cache: 1280K L3 cache: 12288K NUMA node0 CPU(s): 0 Flags: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq monitor ssse3 cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single fsgsbase avx2 invpcid rdseed clflushopt md_clear flush_l1d arch_capabilities root@docker1:~# . ",
+    "url": "/docs/os-systems/linux-command/#cpu-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#cpu-정보-확인하기"
+  },"168": {
+    "doc": "Linux Command",
+    "title": "Disk 용량 확인 하기",
+    "content": "df : 디스크 남은 용량 확인 (기본 명령어) df -k : 킬로바이트 단위로 남은 용량 확인 df -m : 메가 바이트 단위로 남은 용량 확인 df -h : 깔끔하게 보여줌 df . : 현재 디렉토리가 포함된 파티션의 남은 용량 확인 du : 현재 디렉토리에서 서브 디렉토리까지 용량 확인 du -a : 현재 디렉토리의 사용량 파일단위로 출력 du -s : 총 사용량 du -h : 깔끔하게 보여줌 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌 . ",
+    "url": "/docs/os-systems/linux-command/#disk-%EC%9A%A9%EB%9F%89-%ED%99%95%EC%9D%B8-%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#disk-용량-확인-하기"
+  },"169": {
+    "doc": "Linux Command",
+    "title": "RAM 사이즈 확인하기",
+    "content": "root@docker1:~# free total used free shared buff/cache available Mem: 4039328 1140088 1636088 34088 1263152 2608324 Swap: 2017276 0 2017276 root@docker1:~# . ",
+    "url": "/docs/os-systems/linux-command/#ram-%EC%82%AC%EC%9D%B4%EC%A6%88-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#ram-사이즈-확인하기"
+  },"170": {
+    "doc": "Linux Command",
+    "title": "Listen Port 확인하기",
+    "content": "Netstat 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다. | -l 옵션 : netstat에 모든 수신 소켓을 표시한다. | -t 옵션 : 모든 TCP 연결을 표시한다. | -u 옵션 : 모든 UDP 연결을 표시한다. | -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다. | -n 옵션 : 서비스 이름 대신 port 번호를 표시한다. | . user@user:~$ sudo netstat -ltup Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program name tcp 0 0 localhost:ipp 0.0.0.0:* LISTEN 899/cupsd tcp 0 0 localhost:37485 0.0.0.0:* LISTEN 1034/containerd tcp 0 0 localhost:postgresql 0.0.0.0:* LISTEN 1129/postgres tcp 0 0 localhost:domain 0.0.0.0:* LISTEN 796/systemd-resolve tcp 0 0 localhost:4000 0.0.0.0:* LISTEN 35497/ruby2.7 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 899/cupsd tcp6 0 0 [::]:9090 [::]:* LISTEN 982/java udp 0 0 0.0.0.0:58210 0.0.0.0:* 894/avahi-daemon: r udp 0 0 mdns.mcast.net:mdns 0.0.0.0:* 2999/chrome udp 0 0 0.0.0.0:mdns 0.0.0.0:* 894/avahi-daemon: r udp 0 0 dcpark-500R5K-501:34197 0.0.0.0:* 2999/chrome udp 0 0 localhost:domain 0.0.0.0:* 796/systemd-resolve udp 0 0 0.0.0.0:631 0.0.0.0:* 975/cups-browsed udp6 0 0 [::]:mdns [::]:* 894/avahi-daemon: r udp6 0 0 [::]:44146 [::]:* 894/avahi-daemon: r . ",
+    "url": "/docs/os-systems/linux-command/#listen-port-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#listen-port-확인하기"
+  },"171": {
+    "doc": "Linux Command",
+    "title": "Alias 설정하기",
+    "content": "# nano /root/.bashrc 파일에서 맨 아래 줄에 다음 내용 추가한다. alias conrm='docker container rm -f $(docker container ps -aq)' . 이후 ctrl+o (저장) &gt; enter &gt; ctrl+x (종료) 를 통해 저장한다. ",
+    "url": "/docs/os-systems/linux-command/#alias-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/os-systems/linux-command/#alias-설정하기"
+  },"172": {
     "doc": "Linux",
     "title": "Linuxs",
     "content": " ",
     "url": "/docs/os-systems/linux/#linuxs",
     
     "relUrl": "/docs/os-systems/linux/#linuxs"
-  },"151": {
+  },"173": {
     "doc": "Linux",
     "title": "Linux",
     "content": " ",
     "url": "/docs/os-systems/linux/",
     
     "relUrl": "/docs/os-systems/linux/"
-  },"152": {
+  },"174": {
     "doc": "Lists",
     "title": "Lists",
     "content": " ",
     "url": "/docs/ui-components/lists/",
     
     "relUrl": "/docs/ui-components/lists/"
-  },"153": {
+  },"175": {
     "doc": "Lists",
     "title": "Table of contents",
     "content": ". | Unordered list | Ordered list | Task list | Definition list | . Most lists can be rendered with pure Markdown. ",
     "url": "/docs/ui-components/lists/#table-of-contents",
     
     "relUrl": "/docs/ui-components/lists/#table-of-contents"
-  },"154": {
+  },"176": {
     "doc": "Lists",
     "title": "Unordered list",
     "content": ". | Item 1 | Item 2 | Item 3 | . or . | Item 1 | Item 2 | Item 3 | . - Item 1 - Item 2 - Item 3 _or_ * Item 1 * Item 2 * Item 3 . ",
     "url": "/docs/ui-components/lists/#unordered-list",
     
     "relUrl": "/docs/ui-components/lists/#unordered-list"
-  },"155": {
+  },"177": {
     "doc": "Lists",
     "title": "Ordered list",
     "content": ". | Item 1 | Item 2 | Item 3 | . 1. Item 1 1. Item 2 1. Item 3 . ",
     "url": "/docs/ui-components/lists/#ordered-list",
     
     "relUrl": "/docs/ui-components/lists/#ordered-list"
-  },"156": {
+  },"178": {
     "doc": "Lists",
     "title": "Task list",
     "content": ". | hello, this is a todo item | hello, this is another todo item | goodbye, this item is done | . - [ ] hello, this is a todo item - [ ] hello, this is another todo item - [x] goodbye, this item is done . ",
     "url": "/docs/ui-components/lists/#task-list",
     
     "relUrl": "/docs/ui-components/lists/#task-list"
-  },"157": {
+  },"179": {
     "doc": "Lists",
     "title": "Definition list",
     "content": "Definition lists require HTML syntax and aren’t supported with the GitHub Flavored Markdown compiler. Name Godzilla Born 1952 Birthplace Japan Color Green &lt;dl&gt; &lt;dt&gt;Name&lt;/dt&gt; &lt;dd&gt;Godzilla&lt;/dd&gt; &lt;dt&gt;Born&lt;/dt&gt; &lt;dd&gt;1952&lt;/dd&gt; &lt;dt&gt;Birthplace&lt;/dt&gt; &lt;dd&gt;Japan&lt;/dd&gt; &lt;dt&gt;Color&lt;/dt&gt; &lt;dd&gt;Green&lt;/dd&gt; &lt;/dl&gt; . ",
     "url": "/docs/ui-components/lists/#definition-list",
     
     "relUrl": "/docs/ui-components/lists/#definition-list"
-  },"158": {
+  },"180": {
     "doc": "Minimal layout child page",
     "title": "Minimal layout child page",
     "content": "This is a child page that uses the same minimal layout as its parent page. ",
     "url": "/docs/layout/minimal/minimal-child/",
     
     "relUrl": "/docs/layout/minimal/minimal-child/"
-  },"159": {
+  },"181": {
     "doc": "Minimal layout test",
     "title": "Minimal layout test",
     "content": "Return to main website. This page demonstrates the packaged minimal layout, which does not render the sidebar or header. It can be used for standalone pages. It is also an example of using the new modular site components to define custom layouts; see “Custom layouts and includes” in the customization docs for more information. ",
     "url": "/docs/minimal-test/",
     
     "relUrl": "/docs/minimal-test/"
-  },"160": {
+  },"182": {
     "doc": "A minimal layout page",
     "title": "A minimal layout page",
     "content": "This page illustrates the built-in layout minimal. One of its child pages also uses the minimal layout; the other child pages uses the default layout. ",
     "url": "/docs/layout/minimal/minimal/",
     
     "relUrl": "/docs/layout/minimal/minimal/"
-  },"161": {
+  },"183": {
     "doc": "Navigation Structure",
     "title": "Navigation Structure",
     "content": ". | Main navigation | Ordering pages | Excluding pages | Pages with children . | Child pages | Ordering child pages | Auto-generating Table of Contents | Children with children | . | Auxiliary Links | External Navigation Links . | Opening external links in a new tab | . | In-page navigation with Table of Contents . | Collapsible Table of Contents | . | . ",
     "url": "/docs/navigation-structure/",
     
     "relUrl": "/docs/navigation-structure/"
-  },"162": {
+  },"184": {
     "doc": "Navigation Structure",
     "title": "Main navigation",
     "content": "The main navigation for your Just the Docs site is on the left side of the page on large screens and on the top (behind a tap) on small screens. The main navigation can be structured to accommodate a multi-level menu system (pages with children and grandchildren). By default, all pages will appear as top level pages in the main nav unless a parent page is defined (see Pages with Children). ",
     "url": "/docs/navigation-structure/#main-navigation",
     
     "relUrl": "/docs/navigation-structure/#main-navigation"
-  },"163": {
+  },"185": {
     "doc": "Navigation Structure",
     "title": "Ordering pages",
     "content": "To specify a page order, you can use the nav_order parameter in your pages’ YAML front matter. Example (ordering pages) . --- layout: default title: Customization nav_order: 104 --- . The parameter values determine the order of the top-level pages, and of child pages with the same parent. You can reuse the same parameter values (e.g., integers starting from 1) for the child pages of different parents. The parameter values can be numbers (integers, floats) and/or strings. Pages with numerical nav_order parameters always come before those with string nav_order parameters. When you omit nav_order parameters, they default to the titles of the pages. If you want to make the page order independent of the page titles, you can set explicit nav_order parameters on all pages. All pages with explicit nav_order parameters come before all pages ordered by their title values. By default, all Capital letters come before all lowercase letters; you can add nav_sort: case_insensitive in the configuration file to ignore the case. Enclosing strings in (single or double) quotation marks is optional. Numeric values are not enclosed in quotation marks, e.g., 42, -1.0; numbers in quotation marks are lexicographically ordered, so \"10\" comes before \"2\", for example. ",
     "url": "/docs/navigation-structure/#ordering-pages",
     
     "relUrl": "/docs/navigation-structure/#ordering-pages"
-  },"164": {
+  },"186": {
     "doc": "Navigation Structure",
     "title": "Excluding pages",
     "content": "For specific pages that you do not wish to include in the main navigation, e.g. a 404 page or a landing page, use the nav_exclude: true parameter in the YAML front matter for that page. Example (excluding pages) . --- layout: default title: 404 nav_exclude: true --- . The nav_exclude parameter does not affect the auto-generating list of child pages, which you can use to access pages excluded from the main navigation. Pages with no title are automatically excluded from the main navigation. ",
     "url": "/docs/navigation-structure/#excluding-pages",
     
     "relUrl": "/docs/navigation-structure/#excluding-pages"
-  },"165": {
+  },"187": {
     "doc": "Navigation Structure",
     "title": "Pages with children",
     "content": "Sometimes you will want to create a page with many children (a section). First, it is recommended that you keep pages that are related in a directory together… For example, in these docs, we keep all of the written documentation in the ./docs directory and each of the sections in subdirectories like ./docs/ui-components and ./docs/utilities. This gives us an organization like: . +-- .. |-- (Jekyll files) |-- docs |-- ui-components | |-- index.md (parent page) | |-- buttons.md | |-- code.md | |-- labels.md | |-- tables.md | +-- typography.md | |-- utilities | |-- index.md (parent page) | |-- color.md | |-- layout.md | |-- responsive-modifiers.md | +-- typography.md | |-- (other md files, pages with no children) | +-- .. |-- (Jekyll files) +-- .. On the parent pages, add this YAML front matter parameter: . | has_children: true (tells us that this is a parent page) | . Example (parent pages) . --- layout: default title: UI Components nav_order: 102 has_children: true --- . Here we’re setting up the UI Components landing page that is available at /docs/ui-components, which has children and is ordered second in the main nav. Child pages . On child pages, simply set the parent: YAML front matter to whatever the parent’s page title is and set a nav order (this number is now scoped within the section). Example (child pages) . --- layout: default title: Buttons parent: UI Components nav_order: 102 --- . The Buttons page appears as a child of UI Components and appears second in the UI Components section. Ordering child pages . New (v0.4.0) . You can optionally add the following to the YAML front matter to reverse the default sort order of child pages: . | child_nav_order: reversed | . Example (ordering child pages) . --- layout: default title: Reversed Child Pages child_nav_order: reversed --- . Auto-generating Table of Contents . By default, all pages with children will automatically append a Table of Contents which lists the child pages after the parent page’s content. To disable this auto Table of Contents, set has_toc: false in the parent page’s YAML front matter. Example (auto-generating Table of Contents) . --- layout: default title: UI Components nav_order: 102 has_children: true has_toc: false --- . Children with children . Child pages can also have children (grandchildren). This is achieved by using a similar pattern on the child and grandchild pages. | Add the has_children attribute to the child | Add the parent and grand_parent attribute to the grandchild | . Example (children within children) . --- layout: default title: Buttons parent: UI Components nav_order: 102 has_children: true --- . --- layout: default title: Buttons Child Page parent: Buttons grand_parent: UI Components nav_order: 101 --- . This would create the following navigation structure: . +-- .. |-- UI Components |-- .. | |-- Buttons | |-- Button Child Page | |-- .. | +-- .. Currently, the navigation structure is limited to 3 levels: grandchild pages cannot themselves have child pages. ",
     "url": "/docs/navigation-structure/#pages-with-children",
     
     "relUrl": "/docs/navigation-structure/#pages-with-children"
-  },"166": {
+  },"188": {
     "doc": "Navigation Structure",
     "title": "Auxiliary Links",
     "content": "To add auxiliary links to your site (in the upper right on all pages), add it to the aux_links configuration option in your site’s _config.yml file. Example (auxiliary links) . # Aux links for the upper right navigation aux_links: \"Just the Docs on GitHub\": - \"//github.com/just-the-docs/just-the-docs\" . ",
     "url": "/docs/navigation-structure/#auxiliary-links",
     
     "relUrl": "/docs/navigation-structure/#auxiliary-links"
-  },"167": {
+  },"189": {
     "doc": "Navigation Structure",
     "title": "External Navigation Links",
     "content": "New (v0.4.0) . To add external links to the navigation, add them to the nav_external_links configuration option in your site’s _config.yml file. External links will appear in the navigation after the links to ordinary pages, but before any collections. Example (external navigation links) . # External navigation links nav_external_links: - title: Just the Docs on GitHub url: https://github.com/just-the-docs/just-the-docs hide_icon: false # set to true to hide the external link icon - defaults to false opens_in_new_tab: false # set to true to open this link in a new tab - defaults to false . Opening external links in a new tab . New (unreleased) . The external links are decorated by an icon, which distinguishes them from internal links. You can suppress the icon by setting hide_icon: true. By default, external links are not opened in a new tab. However, this can be enabled by: . | setting opens_in_new_tab: true in the link’s configuration object | setting the configuration option nav_external_links_new_tab: true in _config.yml | . When they conflict, opens_in_new_tab takes precedence. ",
     "url": "/docs/navigation-structure/#external-navigation-links",
     
     "relUrl": "/docs/navigation-structure/#external-navigation-links"
-  },"168": {
+  },"190": {
     "doc": "Navigation Structure",
     "title": "In-page navigation with Table of Contents",
     "content": "To generate a Table of Contents on your docs pages, you can use the {:toc} method from Kramdown, immediately after an &lt;ol&gt; in Markdown. This will automatically generate an ordered list of anchor links to various sections of the page based on headings and heading levels. There may be occasions where you’re using a heading and you don’t want it to show up in the TOC, so to skip a particular heading use the {: .no_toc } CSS class. Example (in-page navigation with Table of Contents) . # Navigation Structure {: .no_toc } ## {: .no_toc .text-delta } 1. TOC {:toc} . This example skips the page name heading (#) from the TOC, as well as the heading for the Table of Contents itself (##) because it is redundant, followed by the table of contents itself. To get an unordered list, replace 1. TOC above by - TOC. Collapsible Table of Contents . The Table of Contents can be made collapsible using the &lt;details&gt; and &lt;summary&gt; elements, as in the following example. The attribute open (expands the Table of Contents by default) and the styling with {: .text-delta } are optional. &lt;details open markdown=\"block\"&gt; &lt;summary&gt; &lt;/summary&gt; {: .text-delta } 1. TOC {:toc} &lt;/details&gt; . The result is shown at the top of this page ({:toc} can be used only once on each page). ",
     "url": "/docs/navigation-structure/#in-page-navigation-with-table-of-contents",
     
     "relUrl": "/docs/navigation-structure/#in-page-navigation-with-table-of-contents"
-  },"169": {
-    "doc": "Proxy",
-    "title": "Table of contents",
-    "content": ". | 프록시(Proxy) 란? | 포워드 프록시(Forward Proxy) . | 포워드 프록시의 특징/역할 | . | 리버스 프록시(Reverse Proxy) . | 리버스 프록시의 예시 | 리버스 프록시의 특징/역할 | 리버스 프록시의 장점 | . | . 개발을 하지 않더라도 프록시라는 단어는 종종 듣게 되는데 정확히 프록시가 무엇이고, 어떤 역할을 하는지 정리하고자 한다. ",
-    "url": "/docs/network-security/network-security-proxy/#table-of-contents",
-    
-    "relUrl": "/docs/network-security/network-security-proxy/#table-of-contents"
-  },"170": {
-    "doc": "Proxy",
-    "title": "프록시(Proxy) 란?",
-    "content": "프록시의 사전적 의미는 대신, 대리이다. 말 그대로 두 PC가 통신을 할 때 직접 하지 않고 중간에서 대리로 통신을 하는 것을 프록시 라고 하고, 중계 역할을 하는 것을 프록시 서버 라고 부른다. 즉, 클라이언트와 서버 사이의 중계 서버 라고 생각하면 된다. 프록시 서버는 보안 목적이나 캐싱 등의 기능을 제공한다. 프록시 서버가 중간에 위치함으로써 클라이언트는 프록시 서버를 서버라고 인식하고, 서버 입장에서는 프록시 서버를 클라이언트로 인식하게 된다. [프록시 서버의 구조] . ",
-    "url": "/docs/network-security/network-security-proxy/#%ED%94%84%EB%A1%9D%EC%8B%9Cproxy-%EB%9E%80",
-    
-    "relUrl": "/docs/network-security/network-security-proxy/#프록시proxy-란"
-  },"171": {
-    "doc": "Proxy",
-    "title": "포워드 프록시(Forward Proxy)",
-    "content": "일반적으로 프록시라고 말하면 포워드 프록시를 말한다. 클라이언트에서 서버로 리소스를 요청할 때 직접 요청하지 않고 프록시 서버를 거쳐서 요청한다. 이 경우 서버에서 받는 IP는 클라이언트의 IP가 아닌 프록시 서브의 IP이기 때문에 서버는 클라이언트가 누군지 알 수 없다. 즉, 서버에게 클라이언트가 누구인지 감춰주는 역할을 한다. 이러한 특징 때문에 기업 사내망에서 주로 사용된다. 포워드 프록시의 특징/역할 . | 캐싱 첫 번째 요청 이후부터는 동일한 요청이 들어올 경우, 프록시 서버에 캐싱된 내용을 전달해줌으로써 성능을 향상시킬 수 있다. | . 웹 서비스에서 요청이 발생할 때마다 1) 요청 → 2) 요청 전송 → 3) 요청 접수 → 4) 응답 생성 → 5) 응답 전송 → 6) 응답 수신 과 같은 과정을 반복해서 거친다. 요청이 한 번 뿐일 때는 괜찮지만, 중복되는 요청을 매번 처리하기에는 심한 자원낭비가 생기고, 웹 서버의 부하가 증가할 것이다. 이를 위해 포워드 프록시는 정적 데이터를 저장해두고 동일한 요청의 경우 웹서버 까지 가지 않고 포워드 프록시에서 처리할 수 있는 캐싱 역할을 수행한다. | IP 우회 | . 위에 언급했듯이 클라이언트 측에서 프록시 서버를 거쳐 웹 서비스를 이용할 경우, 서버 측에서는 요청을 받을 때 클라이언트의 IP가 아닌 프록시 서버의 IP를 전달받게 된다. 즉, 서버 측에 클라이언트의 정보를 숨길 수 있게 되는 것이다. | 제한 보안이 중요한 사내망에서 정해진 사이트에만 연결 할 수 있도록 설정하는 등 웹 사용 환경을 제한할 수 있다. | . [Forward Proxy] . ",
-    "url": "/docs/network-security/network-security-proxy/#%ED%8F%AC%EC%9B%8C%EB%93%9C-%ED%94%84%EB%A1%9D%EC%8B%9Cforward-proxy",
-    
-    "relUrl": "/docs/network-security/network-security-proxy/#포워드-프록시forward-proxy"
-  },"172": {
-    "doc": "Proxy",
-    "title": "리버스 프록시(Reverse Proxy)",
-    "content": "리버스 프록시는 포워드 프록시와 반대 개념이다. 애플리케이션 서버의 앞에 위치하여 클라이언트가 서버를 요청할 때 리버스 프록시를 호출하고, 리버스 프록시가 서버로부터 응답을 전달받아 다시 클라이언트에게 전송하는 역할을 한다. 이 경우, 클라이언트는 애플리케이션 서버를 직접 호출하는 것이 아니라 프록시 서버를 통해 호출하기 때문에 리버스 프록시는 애플리케이션 서버를 감추는 역할을 하게 된다. 리버스 프록시의 예시 . NginX, Apache Web Server . 리버스 프록시의 특징/역할 . | 로드밸런싱 리버스 프록시 뒤에 여러 개의 WAS를 둠으로써, 사용자 요청을 분산할 수 있다. End-point 마다 호출 서버를 설정할 수 있어 역할에 따라 서버의 트래픽을 분산할 수도 있다. | 보안 보안 상의 이유로 서버에 직접 접근하는 것을 막기 위해 DMZ같은 네트워크에 리버스 프록시를 구성하여 접근하도록 한다. | . [Reverse Proxy] . 리버스 프록시의 장점 . 보통 기업의 네트워크 환경은 비무장 지대(DMZ; Demilitarized Zone) 라고 하는 내부 네트워크와 외부 네트워크 사이에 위치하는 구간이 존재합니다. [리버스 프록시 구성의 예] . | DMZ 내에 외부에 서비스를 제공하는 서버(메일 서버, 웹 서버, DNS 서버)를 배치하고 네트워크는 1, 2차 방화벽으로 보호 | 서비스를 제공하려면 WAS 를 DMZ 에 놓고 서비스해도 되지만 이런 서비스는 보통 내부의 DBMS 서버와 연결 | 만약 WAS 가 최전방에 있으면 WAS 가 털릴 경우 DBMS 와 관련 서버까지 모두 같이 털리는 심각한 보안 문제가 발생 | 이때문에 DMZ 존에 웹 서버를 두고 리버스 프락시로 설정하고 WAS 는 내부망에 위치시키게 설정 | 리버스 프락시로 동작하는 웹 서버만 내부 WAS 와 연결하도록 설정하므로 웹 서버가 해킹당해도 2차 방화벽을 다시 뚫어야 하므로 더 보안에 강함 | . ",
-    "url": "/docs/network-security/network-security-proxy/#%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9Creverse-proxy",
-    
-    "relUrl": "/docs/network-security/network-security-proxy/#리버스-프록시reverse-proxy"
-  },"173": {
+  },"191": {
     "doc": "Proxy",
     "title": "Proxy",
     "content": " ",
     "url": "/docs/network-security/network-security-proxy/",
     
     "relUrl": "/docs/network-security/network-security-proxy/"
-  },"174": {
+  },"192": {
+    "doc": "Proxy",
+    "title": "Table of contents",
+    "content": ". | 프록시(Proxy) 란? | 포워드 프록시(Forward Proxy) . | 포워드 프록시의 특징/역할 | . | 리버스 프록시(Reverse Proxy) . | 리버스 프록시의 예시 | 리버스 프록시의 특징/역할 | 리버스 프록시의 장점 | . | . 개발을 하지 않더라도 프록시라는 단어는 종종 듣게 되는데 정확히 프록시가 무엇이고, 어떤 역할을 하는지 정리하고자 한다. ",
+    "url": "/docs/network-security/network-security-proxy/#table-of-contents",
+    
+    "relUrl": "/docs/network-security/network-security-proxy/#table-of-contents"
+  },"193": {
+    "doc": "Proxy",
+    "title": "프록시(Proxy) 란?",
+    "content": "프록시의 사전적 의미는 대신, 대리이다. 말 그대로 두 PC가 통신을 할 때 직접 하지 않고 중간에서 대리로 통신을 하는 것을 프록시 라고 하고, 중계 역할을 하는 것을 프록시 서버 라고 부른다. 즉, 클라이언트와 서버 사이의 중계 서버 라고 생각하면 된다. 프록시 서버는 보안 목적이나 캐싱 등의 기능을 제공한다. 프록시 서버가 중간에 위치함으로써 클라이언트는 프록시 서버를 서버라고 인식하고, 서버 입장에서는 프록시 서버를 클라이언트로 인식하게 된다. [프록시 서버의 구조] . ",
+    "url": "/docs/network-security/network-security-proxy/#%ED%94%84%EB%A1%9D%EC%8B%9Cproxy-%EB%9E%80",
+    
+    "relUrl": "/docs/network-security/network-security-proxy/#프록시proxy-란"
+  },"194": {
+    "doc": "Proxy",
+    "title": "포워드 프록시(Forward Proxy)",
+    "content": "일반적으로 프록시라고 말하면 포워드 프록시를 말한다. 클라이언트에서 서버로 리소스를 요청할 때 직접 요청하지 않고 프록시 서버를 거쳐서 요청한다. 이 경우 서버에서 받는 IP는 클라이언트의 IP가 아닌 프록시 서브의 IP이기 때문에 서버는 클라이언트가 누군지 알 수 없다. 즉, 서버에게 클라이언트가 누구인지 감춰주는 역할을 한다. 이러한 특징 때문에 기업 사내망에서 주로 사용된다. 포워드 프록시의 특징/역할 . | 캐싱 첫 번째 요청 이후부터는 동일한 요청이 들어올 경우, 프록시 서버에 캐싱된 내용을 전달해줌으로써 성능을 향상시킬 수 있다. | . 웹 서비스에서 요청이 발생할 때마다 1) 요청 → 2) 요청 전송 → 3) 요청 접수 → 4) 응답 생성 → 5) 응답 전송 → 6) 응답 수신 과 같은 과정을 반복해서 거친다. 요청이 한 번 뿐일 때는 괜찮지만, 중복되는 요청을 매번 처리하기에는 심한 자원낭비가 생기고, 웹 서버의 부하가 증가할 것이다. 이를 위해 포워드 프록시는 정적 데이터를 저장해두고 동일한 요청의 경우 웹서버 까지 가지 않고 포워드 프록시에서 처리할 수 있는 캐싱 역할을 수행한다. | IP 우회 | . 위에 언급했듯이 클라이언트 측에서 프록시 서버를 거쳐 웹 서비스를 이용할 경우, 서버 측에서는 요청을 받을 때 클라이언트의 IP가 아닌 프록시 서버의 IP를 전달받게 된다. 즉, 서버 측에 클라이언트의 정보를 숨길 수 있게 되는 것이다. | 제한 보안이 중요한 사내망에서 정해진 사이트에만 연결 할 수 있도록 설정하는 등 웹 사용 환경을 제한할 수 있다. | . [Forward Proxy] . ",
+    "url": "/docs/network-security/network-security-proxy/#%ED%8F%AC%EC%9B%8C%EB%93%9C-%ED%94%84%EB%A1%9D%EC%8B%9Cforward-proxy",
+    
+    "relUrl": "/docs/network-security/network-security-proxy/#포워드-프록시forward-proxy"
+  },"195": {
+    "doc": "Proxy",
+    "title": "리버스 프록시(Reverse Proxy)",
+    "content": "리버스 프록시는 포워드 프록시와 반대 개념이다. 애플리케이션 서버의 앞에 위치하여 클라이언트가 서버를 요청할 때 리버스 프록시를 호출하고, 리버스 프록시가 서버로부터 응답을 전달받아 다시 클라이언트에게 전송하는 역할을 한다. 이 경우, 클라이언트는 애플리케이션 서버를 직접 호출하는 것이 아니라 프록시 서버를 통해 호출하기 때문에 리버스 프록시는 애플리케이션 서버를 감추는 역할을 하게 된다. 리버스 프록시의 예시 . NginX, Apache Web Server . 리버스 프록시의 특징/역할 . | 로드밸런싱 리버스 프록시 뒤에 여러 개의 WAS를 둠으로써, 사용자 요청을 분산할 수 있다. End-point 마다 호출 서버를 설정할 수 있어 역할에 따라 서버의 트래픽을 분산할 수도 있다. | 보안 보안 상의 이유로 서버에 직접 접근하는 것을 막기 위해 DMZ같은 네트워크에 리버스 프록시를 구성하여 접근하도록 한다. | . [Reverse Proxy] . 리버스 프록시의 장점 . 보통 기업의 네트워크 환경은 비무장 지대(DMZ; Demilitarized Zone) 라고 하는 내부 네트워크와 외부 네트워크 사이에 위치하는 구간이 존재합니다. [리버스 프록시 구성의 예] . | DMZ 내에 외부에 서비스를 제공하는 서버(메일 서버, 웹 서버, DNS 서버)를 배치하고 네트워크는 1, 2차 방화벽으로 보호 | 서비스를 제공하려면 WAS 를 DMZ 에 놓고 서비스해도 되지만 이런 서비스는 보통 내부의 DBMS 서버와 연결 | 만약 WAS 가 최전방에 있으면 WAS 가 털릴 경우 DBMS 와 관련 서버까지 모두 같이 털리는 심각한 보안 문제가 발생 | 이때문에 DMZ 존에 웹 서버를 두고 리버스 프락시로 설정하고 WAS 는 내부망에 위치시키게 설정 | 리버스 프락시로 동작하는 웹 서버만 내부 WAS 와 연결하도록 설정하므로 웹 서버가 해킹당해도 2차 방화벽을 다시 뚫어야 하므로 더 보안에 강함 | . ",
+    "url": "/docs/network-security/network-security-proxy/#%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9Creverse-proxy",
+    
+    "relUrl": "/docs/network-security/network-security-proxy/#리버스-프록시reverse-proxy"
+  },"196": {
+    "doc": "Web Server & WAS",
+    "title": "Web Server &amp; WAS",
+    "content": " ",
+    "url": "/docs/network-security/network-security-webserver-was/#web-server--was",
+    
+    "relUrl": "/docs/network-security/network-security-webserver-was/#web-server--was"
+  },"197": {
     "doc": "Web Server & WAS",
     "title": "Table of contents",
     "content": ". | Static Pages | Dynamic Pages | Web Server와 WAS의 차이 . | Web Server | Web Application Server, WAS | . | Web Server 와 WAS 를 분리하는 이유 | . ",
     "url": "/docs/network-security/network-security-webserver-was/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#table-of-contents"
-  },"175": {
+  },"198": {
     "doc": "Web Server & WAS",
     "title": "Static Pages",
     "content": ". | Web Server는 파일 경로 이름을 받아 경로와 일치하는 file contents를 반환합니다. | 항상 동일한 페이지를 반환합니다. | html, css, js, image 파일과 같이 컴퓨터에 저장되어 있는 파일들입니다. | . [정적 페이지 ] . ",
     "url": "/docs/network-security/network-security-webserver-was/#static-pages",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#static-pages"
-  },"176": {
+  },"199": {
     "doc": "Web Server & WAS",
     "title": "Dynamic Pages",
     "content": ". | 인자의 내용에 맞게 동적인 Contents를 반환합니다. | 즉, 웹 서버에 의해서 실행되는 프로그램을 통해서 만들어진 결과물입니다. | 아래 이미지에서 개발자는 Servlet에 doGet()을 구현합니다. | . [동적 페이지 ] . ",
     "url": "/docs/network-security/network-security-webserver-was/#dynamic-pages",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#dynamic-pages"
-  },"177": {
+  },"200": {
     "doc": "Web Server & WAS",
     "title": "Web Server와 WAS의 차이",
     "content": "Web Server . 웹 서버는 클라이언트로부터 HTTP 요청을 받아 HTML 문서나 각종 리소스(Resource)를 전달하는 컴퓨터입니다. 따라서 요청에 따라 아래의 두 가지 기능 중 적절하게 선택하여 수행합니다. | 정적인 컨텐츠를 제공한다. | 동적인 컨텐츠 제공을 위한 요청을 전달한다. | . Web Server에는 Apache Server와 NginX가 있는데 각각의 특성은 아래와 같습니다. | Apache Server: BSD, Linux 등 Unix계열뿐 아니라 Windows와 같은 기종에서도 운용 가능. | NginX: 가벼움과 높은 성능을 목표로 함, 웹 서버, 리퍼스 프록시 및 메일 프록시 기능을 가짐. | . Apache Tomcat이라고 하는 이유 . 웹서버는 Apache, WAS는 Tomcat 2008년에 릴리즈된 Tomcat 5.5 부터 정적 컨텐츠 처리기능 추가 -&gt; 순수 Apache를 사용하는것에 비해 성능 차이 없음 -&gt; Tomcat이 Apache의 기능을 포함하므로 Apache Tomcat이라고함 . Web Application Server, WAS . WAS는 웹 애플리케이션과 서버 환경을 만들어 동작시키는 기능을 제공하는 소프트웨어 미들웨어 프레임워크 입니다. [Web Application Server, WAS] . 위 이미지와 같이 WAS는 Web Server와 Web Container(JSP, Servlet)으로 이루어져 있습니다. Web Server와의 차이점은 Web Container를 가진다는 점이며 WAS는 HTML 같은 정적인 페이지에서 처리할 수 없는 비즈니스 로직이나 DB 조회 같은 동적인 콘텐츠를 제공합니다. ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server%EC%99%80-was%EC%9D%98-%EC%B0%A8%EC%9D%B4",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server와-was의-차이"
-  },"178": {
+  },"201": {
     "doc": "Web Server & WAS",
     "title": "Web Server 와 WAS 를 분리하는 이유",
     "content": "그런데 대규모 프로젝트를 보면 아래와 같이 WAS와 Web Server를 분리한 형태를 볼 수 있습니다. 분리를 하면 생기는 장점이 무엇일까요? . [Web Server와 WAS 분리] . 1. 기능을 분리하여 서버 부하 방지 가능 . WAS는 DB 조회 등 페이지를 만들기 위한 다양한 로직을 처리하는데, 단순한 정적 콘텐츠를 WAS에서 제공한다면 다른 작업에 사용하는 리소스들로 인해 지연이 생겨날 수 있다. tomcat 5.5 이상부터는 성능이 크게 떨어지지 않는다고 한다. 2. 물리적으로 분리하여 보안 강화 . SSL에 대한 암복호화 처리에 Web Server를 사용한다. 공격에 대해 Web Server를 앞단에 두어 중요한 정보가 담긴 DB나 로직까지(WAS까지) 전파되지 못하게 한다. 3. 여러 대의 WAS를 연결이 가능하다. Load Balancing(부하의 균등화) 가능 -&gt; 한 서버가 다운되더라도 서비스를 이어갈 수 있다는 장점이 있다. fail over(장애 극복), fail back 가능 대용량 웹 애플리케이션의 경우(여러 개의 서버 사용) Wev Server와 WAS를 분리하여 무중단 운영을 위한 장애 극복에 쉽게 대응할 수 있다. [여러대의 WAS 운용] . 4. 다른 종류의 WAS로 서비스 가능 . ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server-%EC%99%80-was-%EB%A5%BC-%EB%B6%84%EB%A6%AC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server-와-was-를-분리하는-이유"
-  },"179": {
+  },"202": {
     "doc": "Web Server & WAS",
     "title": "Web Server & WAS",
     "content": " ",
     "url": "/docs/network-security/network-security-webserver-was/",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/"
-  },"180": {
+  },"203": {
     "doc": "Network & Security",
     "title": "Network &amp; Security",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/network-security#network--security",
     
     "relUrl": "/docs/network-security#network--security"
-  },"181": {
+  },"204": {
     "doc": "Network & Security",
     "title": "Network & Security",
     "content": " ",
     "url": "/docs/network-security",
     
     "relUrl": "/docs/network-security"
-  },"182": {
-    "doc": "Node.js 기본 개념",
-    "title": "Table of contents",
-    "content": ". | Node.js 의 특징 | 모듈 설치 및 실행 | 실습 예제 . | 이메일 전송하기 | 웹서버 만들기 | MySQL 사용하기 | . | . ​node.js 의 종류와 사용방법에 대해 정리한다. 참고 자료 . 한시간만에 끝내는 Node.js 입문 . ",
-    "url": "/docs/programming-language/nodejs-basic/#table-of-contents",
-    
-    "relUrl": "/docs/programming-language/nodejs-basic/#table-of-contents"
-  },"183": {
-    "doc": "Node.js 기본 개념",
-    "title": "Node.js 의 특징",
-    "content": ". | javaScript 를 이용한다. | 엄청나게 많은 패키지를 이용할 수 있다. | . ",
-    "url": "/docs/programming-language/nodejs-basic/#nodejs-%EC%9D%98-%ED%8A%B9%EC%A7%95",
-    
-    "relUrl": "/docs/programming-language/nodejs-basic/#nodejs-의-특징"
-  },"184": {
-    "doc": "Node.js 기본 개념",
-    "title": "모듈 설치 및 실행",
-    "content": "https://www.npmjs.com/ 에서 원하는 모듈을 찾는다. npm install [모듈명] 으로 아래와 같이 설치한다. nodemailer 라는 모듈을 예시로 든다. D:\\99_nodeJs&gt;npm install nodemailer added 1 package, and audited 2 packages in 1s found 0 vulnerabilitie . 아래 그림과 같이 node_modules, package json 파일 등이 생성된다. require 를 이용해서 패키지를 불러온다. const nodemailer = require('nodemailer'); . ",
-    "url": "/docs/programming-language/nodejs-basic/#%EB%AA%A8%EB%93%88-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%8B%A4%ED%96%89",
-    
-    "relUrl": "/docs/programming-language/nodejs-basic/#모듈-설치-및-실행"
-  },"185": {
-    "doc": "Node.js 기본 개념",
-    "title": "실습 예제",
-    "content": "이메일 전송하기 . nodemailer 모듈을 사용한다. const nodemailer = require('nodemailer'); const email= { host: \"smtp.mailtrap.io\", port: 2525, auth: { user: \"80e8c610c6dace\", pass: \"aad60e1f687512\" } }; const send = async (option) =&gt; { nodemailer.createTransport( email ).sendMail(option, (error, info) =&gt; { if(error){ console.log(error) } else { console.log(info); return info.response; } }); }; let email_data = { from: \"dmjgr5@gmail.com\", to: \"dmjgr5@gmail.com\", subject: \"테스트 메일입니다.\", text: \"node.js 테스트입니다. \" } send(email_data); . 웹서버 만들기 . express 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); app.set('views', __dirname + '/views'); app.set('view engine', 'ejs'); app.engine('html', require('ejs').renderFile); app.get('/', function (req, res) { res.render('index.html'); }) app.get('/about', function (req, res) { res.render('about.html'); }) . `node test.js’ . MySQL 사용하기 . npm install mysql --save 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); var mysql = require('mysql'); var pool = mysql.createPool({ host : '127.0.0.1', user : 'root', password : '', database : 'yse_spring_mvc' }); app.get('/db', function (req, res) { pool.getConnection(function(err, connection) { if (err) throw err; // not connected! // Use the connection connection.query('select 1+1 sum from dual', function (error, results, fields) { res.send(JSON.stringify(results)); console.log('results', results); // When done with the connection, release it. connection.release(); // Handle error after the release. if (error) throw error; // Don't use the connection here, it has been returned to the pool. }); }); }) . ",
-    "url": "/docs/programming-language/nodejs-basic/#%EC%8B%A4%EC%8A%B5-%EC%98%88%EC%A0%9C",
-    
-    "relUrl": "/docs/programming-language/nodejs-basic/#실습-예제"
-  },"186": {
+  },"205": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/nodejs-basic/",
     
     "relUrl": "/docs/programming-language/nodejs-basic/"
-  },"187": {
+  },"206": {
+    "doc": "Node.js 기본 개념",
+    "title": "Table of contents",
+    "content": ". | Node.js 의 특징 | 모듈 설치 및 실행 | 실습 예제 . | 이메일 전송하기 | 웹서버 만들기 | MySQL 사용하기 | . | . ​node.js 의 종류와 사용방법에 대해 정리한다. 참고 자료 . 한시간만에 끝내는 Node.js 입문 . ",
+    "url": "/docs/programming-language/nodejs-basic/#table-of-contents",
+    
+    "relUrl": "/docs/programming-language/nodejs-basic/#table-of-contents"
+  },"207": {
+    "doc": "Node.js 기본 개념",
+    "title": "Node.js 의 특징",
+    "content": ". | javaScript 를 이용한다. | 엄청나게 많은 패키지를 이용할 수 있다. | . ",
+    "url": "/docs/programming-language/nodejs-basic/#nodejs-%EC%9D%98-%ED%8A%B9%EC%A7%95",
+    
+    "relUrl": "/docs/programming-language/nodejs-basic/#nodejs-의-특징"
+  },"208": {
+    "doc": "Node.js 기본 개념",
+    "title": "모듈 설치 및 실행",
+    "content": "https://www.npmjs.com/ 에서 원하는 모듈을 찾는다. npm install [모듈명] 으로 아래와 같이 설치한다. nodemailer 라는 모듈을 예시로 든다. D:\\99_nodeJs&gt;npm install nodemailer added 1 package, and audited 2 packages in 1s found 0 vulnerabilitie . 아래 그림과 같이 node_modules, package json 파일 등이 생성된다. require 를 이용해서 패키지를 불러온다. const nodemailer = require('nodemailer'); . ",
+    "url": "/docs/programming-language/nodejs-basic/#%EB%AA%A8%EB%93%88-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%8B%A4%ED%96%89",
+    
+    "relUrl": "/docs/programming-language/nodejs-basic/#모듈-설치-및-실행"
+  },"209": {
+    "doc": "Node.js 기본 개념",
+    "title": "실습 예제",
+    "content": "이메일 전송하기 . nodemailer 모듈을 사용한다. const nodemailer = require('nodemailer'); const email= { host: \"smtp.mailtrap.io\", port: 2525, auth: { user: \"80e8c610c6dace\", pass: \"aad60e1f687512\" } }; const send = async (option) =&gt; { nodemailer.createTransport( email ).sendMail(option, (error, info) =&gt; { if(error){ console.log(error) } else { console.log(info); return info.response; } }); }; let email_data = { from: \"dmjgr5@gmail.com\", to: \"dmjgr5@gmail.com\", subject: \"테스트 메일입니다.\", text: \"node.js 테스트입니다. \" } send(email_data); . 웹서버 만들기 . express 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); app.set('views', __dirname + '/views'); app.set('view engine', 'ejs'); app.engine('html', require('ejs').renderFile); app.get('/', function (req, res) { res.render('index.html'); }) app.get('/about', function (req, res) { res.render('about.html'); }) . `node test.js’ . MySQL 사용하기 . npm install mysql --save 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); var mysql = require('mysql'); var pool = mysql.createPool({ host : '127.0.0.1', user : 'root', password : '', database : 'yse_spring_mvc' }); app.get('/db', function (req, res) { pool.getConnection(function(err, connection) { if (err) throw err; // not connected! // Use the connection connection.query('select 1+1 sum from dual', function (error, results, fields) { res.send(JSON.stringify(results)); console.log('results', results); // When done with the connection, release it. connection.release(); // Handle error after the release. if (error) throw error; // Don't use the connection here, it has been returned to the pool. }); }); }) . ",
+    "url": "/docs/programming-language/nodejs-basic/#%EC%8B%A4%EC%8A%B5-%EC%98%88%EC%A0%9C",
+    
+    "relUrl": "/docs/programming-language/nodejs-basic/#실습-예제"
+  },"210": {
     "doc": "Node.js",
     "title": "Node.js",
     "content": " ",
     "url": "/docs/programming-language/nodejs/",
     
     "relUrl": "/docs/programming-language/nodejs/"
-  },"188": {
+  },"211": {
     "doc": "OS Systems",
     "title": "OS Systems",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/os-systems",
     
     "relUrl": "/docs/os-systems"
-  },"189": {
+  },"212": {
     "doc": "Programming Language",
     "title": "Programming Language",
     "content": "프로그래밍 언어에 대해 정리해 보고, 언어별 특징 및 기본 개념에 대해 정리해 보고자 한다. ",
     "url": "/docs/programming-language",
     
     "relUrl": "/docs/programming-language"
-  },"190": {
+  },"213": {
     "doc": "Responsive Modifiers",
     "title": "Responsive modifiers",
     "content": "Just the Docs spacing works in conjunction with a variety of modifiers that allow you to target specific screen sizes responsively. Use these in conjunction with spacing and display prefix and suffix classes. | Modifier | Screen size | . | (none) | All screens until the next modifier | . | xs | 320px (20rem) and up | . | sm | 500px (31.25rem) and up | . | md | 740px (46.25rem) and up | . | lg | 1120px (70rem) and up | . | xl | 1400px (87.5rem) and up | . ",
     "url": "/docs/utilities/responsive-modifiers/#responsive-modifiers",
     
     "relUrl": "/docs/utilities/responsive-modifiers/#responsive-modifiers"
-  },"191": {
+  },"214": {
     "doc": "Responsive Modifiers",
     "title": "Responsive Modifiers",
     "content": " ",
     "url": "/docs/utilities/responsive-modifiers/",
     
     "relUrl": "/docs/utilities/responsive-modifiers/"
-  },"192": {
+  },"215": {
     "doc": "Search",
     "title": "Search",
     "content": " ",
     "url": "/docs/search/",
     
     "relUrl": "/docs/search/"
-  },"193": {
+  },"216": {
     "doc": "Search",
     "title": "Table of contents",
     "content": ". | Enable search in configuration . | Search granularity | Search previews | Search tokenizer | Display URL in search results | Display search button | . | Hiding pages from search . | Example | . | Generate search index when used as a gem | Custom content for search index . | Example | . | . Just the Docs uses lunr.js to add a client-side search interface powered by a JSON index that Jekyll generates. All search results are shown in an auto-complete style interface (there is no search results page). By default, all generated HTML pages are indexed using the following data points: . | Page title | Page content | Page URL | . ",
     "url": "/docs/search/#table-of-contents",
     
     "relUrl": "/docs/search/#table-of-contents"
-  },"194": {
+  },"217": {
     "doc": "Search",
     "title": "Enable search in configuration",
     "content": "In your site’s _config.yml, enable search: . # Enable or disable the site search # Supports true (default) or false search_enabled: true . Search granularity . Pages are split into sections that can be searched individually. The sections are defined by the headings on the page. Each section is displayed in a separate search result. # Split pages into sections that can be searched individually # Supports 1 - 6, default: 2 search.heading_level: 2 . Search previews . A search result can contain previews that show where the search words are found in the specific section. # Maximum amount of previews per search result # Default: 3 search.previews: 3 # Maximum amount of words to display before a matched word in the preview # Default: 5 search.preview_words_before: 5 # Maximum amount of words to display after a matched word in the preview # Default: 10 search.preview_words_after: 10 . Search tokenizer . The default is for hyphens to separate tokens in search terms: gem-based is equivalent to gem based, matching either word. To allow search for hyphenated words: . # Set the search token separator # Default: /[\\s\\-/]+/ # Example: enable support for hyphenated search words search.tokenizer_separator: /[\\s/]+/ . Display URL in search results . # Display the relative url in search results # Supports true (default) or false search.rel_url: false . Display search button . The search button displays in the bottom right corner of the screen and triggers the search input when clicked. # Enable or disable the search button that appears in the bottom right corner of every page # Supports true or false (default) search.button: true . ",
     "url": "/docs/search/#enable-search-in-configuration",
     
     "relUrl": "/docs/search/#enable-search-in-configuration"
-  },"195": {
+  },"218": {
     "doc": "Search",
     "title": "Hiding pages from search",
     "content": "Sometimes you might have a page that you don’t want to be indexed for the search nor to show up in search results, e.g., a 404 page. To exclude a page from search, add the search_exclude: true parameter to the page’s YAML front matter: . Example . --- layout: default title: Page not found nav_exclude: true search_exclude: true --- . ",
     "url": "/docs/search/#hiding-pages-from-search",
     
     "relUrl": "/docs/search/#hiding-pages-from-search"
-  },"196": {
+  },"219": {
     "doc": "Search",
     "title": "Generate search index when used as a gem",
     "content": "If you use Just the Docs as a remote theme, you do not need the following steps. If you use the theme as a gem, you must initialize the search by running this rake command that comes with just-the-docs: . $ bundle exec just-the-docs rake search:init . This command creates the assets/js/zzzz-search-data.json file that Jekyll uses to create your search index. Alternatively, you can create the file manually with this content. ",
     "url": "/docs/search/#generate-search-index-when-used-as-a-gem",
     
     "relUrl": "/docs/search/#generate-search-index-when-used-as-a-gem"
-  },"197": {
+  },"220": {
     "doc": "Search",
     "title": "Custom content for search index",
     "content": "New (v0.4.0) . Advanced . By default, the search feature indexes a page’s .content, .title, and some headers within the .content. Other data (e.g. front matter, files in _data and assets) is not indexed. Users can customize what is indexed. Customizing search indices is an advanced feature that requires Javascript and Liquid knowledge. | When Just the Docs is a local or gem theme, ensure assets/js/zzzz-search-data.json is up-to-date with Generate search index when used as a gem. | Add a new file named _includes/lunr/custom-data.json. Insert custom Liquid code that reads your data (e.g. the page object at include.page) then generates custom Javascript fields that hold the custom data you want to index. Verify these fields in the generated assets/js/search-data.json. | Add a new file named _includes/lunr/custom-index.js. Insert custom Javascript code that reads your custom Javascript fields and inserts them into the search index. You may want to inspect assets/js/just-the-docs.js to better understand the code. | . Example . This example adds front matter usage and examples fields to the search index. _includes/lunr/custom-data.json custom code reads the page usage and examples fields, normalizes the text, and writes the text to custom Javascript myusage and myexamples fields. Javascript fields are similar yet not the same as JSON. jsonify will probably work for most scenarios. {%- capture newline %} {% endcapture -%} \"myusage\": {{ include.page.usage | markdownify | replace:newline,' ' | strip_html | normalize_whitespace | strip | jsonify }}, \"myexamples\": {{ include.page.examples | markdownify | replace:newline,' ' | strip_html | normalize_whitespace | strip | jsonify }}, . _includes/lunr/custom-index.js custom code is inserted into the Javascript loop of assets/js/just-the-docs.js. All custom Javascript fields are accessed as fields of docs[i] such as docs[i].myusage. Finally, append your custom fields on to the already existing docs[i].content. const content_to_merge = [docs[i].content, docs[i].myusage, docs[i].myexamples]; docs[i].content = content_to_merge.join(' '); . ",
     "url": "/docs/search/#custom-content-for-search-index",
     
     "relUrl": "/docs/search/#custom-content-for-search-index"
-  },"198": {
-    "doc": "Spring 기본 개념",
-    "title": "Table of contents",
-    "content": ". | Tomcat | HTTP 요청과 응답 | WAS | 설정파일 . | server.xml | web.xml | . | Tabbed Postman | 저장소 . | pageContext : page 별 | request : request 별 | session : 사용자별 | application : context 전체 | . | 서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트 | @RequestParam 과 @ModelAttribute | @GetMapping , @PostMapping | redirect 와 forward | 쿠키 : 브라우저에 저장 | 세션 : 서버에 저장 | 예외처리 | Spring DI | Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean | SQL &amp; SQL Workbench | Spring DB 다루기 &amp; Junit Test | DAO | AOP 개념과 용어 : 중복코드 분리위함 | Controller &gt; Service &gt; Repository(Dao) &gt; DB | @Transactional : 롤백 가능 | Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청 | Forward : 다른 곳으로 요청 | . 남궁성의 Spring framework 강좌 가 개인적으로 가장 잘 설명해주시고 이해하기 쉬웠던 강의라 생각한다. 잊지 않기 위해 정리한다. 참조자료 : https://github.com/castello/spring_basic . ",
-    "url": "/docs/framework/spring-basic/#table-of-contents",
-    
-    "relUrl": "/docs/framework/spring-basic/#table-of-contents"
-  },"199": {
-    "doc": "Spring 기본 개념",
-    "title": "Tomcat",
-    "content": ". | webapps 폴더에 war 파일을 넣어주면 해당 파일 압축 후에 서비스 된다. | . ",
-    "url": "/docs/framework/spring-basic/#tomcat",
-    
-    "relUrl": "/docs/framework/spring-basic/#tomcat"
-  },"200": {
-    "doc": "Spring 기본 개념",
-    "title": "HTTP 요청과 응답",
-    "content": ". | QueryString 을 처리하는 방법 . | @Controller -&gt; @RequestMapping -&gt; request.getParameter(\"aaa\") | . | HTTP 요청 -&gt; HttpServeltRequest request 매개변수 를 받아서 톰캣에서 처리한다. | . [실행결과] http://localhost:8080/ch2/requestInfo?year=2021&amp;month=10&amp;day=1 request.getCharacterEncoding()=UTF-8 request.getContentLength()=-1 request.getContentType()=null request.getMethod()=GET request.getProtocol()=HTTP/1.1 request.getScheme()=http request.getServerName()=localhost request.getServerPort()=8080 request.getRequestURI()=http://localhost:8080/ch2/requestInfo request.getRequestURI()=/ch2/requestInfo request.getContextPath()=/ch2 request.getServletPath()=/requestInfo request.getQueryString()=year=2021&amp;month=10&amp;day=1 request.getLocalName()=localhost request.getLocalPort()=8080 request.getRemoteAddr()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemoteHost()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemotePort()=54855 . | HttpServeltResponse 를 매개변수에 넣어 response 객체를 얻는다. | . ",
-    "url": "/docs/framework/spring-basic/#http-%EC%9A%94%EC%B2%AD%EA%B3%BC-%EC%9D%91%EB%8B%B5",
-    
-    "relUrl": "/docs/framework/spring-basic/#http-요청과-응답"
-  },"201": {
-    "doc": "Spring 기본 개념",
-    "title": "WAS",
-    "content": "Web Application Server : 서버에 프로그램을 설치한다. 예) 프로그램 업데이트를 서버에서만 하면 된다. ",
-    "url": "/docs/framework/spring-basic/#was",
-    
-    "relUrl": "/docs/framework/spring-basic/#was"
-  },"202": {
-    "doc": "Spring 기본 개념",
-    "title": "설정파일",
-    "content": "server.xml . | 톰캣 설치경로/conf/server.xml : 톰갯 서버 설정파일 | . web.xml . | 톰갯 설치경로/conf/web.xml : Tomcat 의 모든 web app 의 공통설정 | 웹앱이름/WEB-INF/web.xml : wep app 의 개별 설정 | . ",
-    "url": "/docs/framework/spring-basic/#%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC",
-    
-    "relUrl": "/docs/framework/spring-basic/#설정파일"
-  },"203": {
-    "doc": "Spring 기본 개념",
-    "title": "Tabbed Postman",
-    "content": ". | 크롬 확장프로그램에서 제공되는 Rest Client 로 포스트맨 설치 대신 사용이 가능하다. | . ",
-    "url": "/docs/framework/spring-basic/#tabbed-postman",
-    
-    "relUrl": "/docs/framework/spring-basic/#tabbed-postman"
-  },"204": {
-    "doc": "Spring 기본 개념",
-    "title": "저장소",
-    "content": "pageContext : page 별 . request : request 별 . session : 사용자별 . application : context 전체 . ",
-    "url": "/docs/framework/spring-basic/#%EC%A0%80%EC%9E%A5%EC%86%8C",
-    
-    "relUrl": "/docs/framework/spring-basic/#저장소"
-  },"205": {
-    "doc": "Spring 기본 개념",
-    "title": "서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#%EC%84%9C%EB%B8%94%EB%A6%BF--jsp--%EC%8A%A4%ED%94%84%EB%A7%81--%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
-    
-    "relUrl": "/docs/framework/spring-basic/#서블릿--jsp--스프링--스프링부트"
-  },"206": {
-    "doc": "Spring 기본 개념",
-    "title": "@RequestParam 과 @ModelAttribute",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#requestparam-%EA%B3%BC-modelattribute",
-    
-    "relUrl": "/docs/framework/spring-basic/#requestparam-과-modelattribute"
-  },"207": {
-    "doc": "Spring 기본 개념",
-    "title": "@GetMapping , @PostMapping",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#getmapping--postmapping",
-    
-    "relUrl": "/docs/framework/spring-basic/#getmapping--postmapping"
-  },"208": {
-    "doc": "Spring 기본 개념",
-    "title": "redirect 와 forward",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#redirect-%EC%99%80-forward",
-    
-    "relUrl": "/docs/framework/spring-basic/#redirect-와-forward"
-  },"209": {
-    "doc": "Spring 기본 개념",
-    "title": "쿠키 : 브라우저에 저장",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#%EC%BF%A0%ED%82%A4--%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%97%90-%EC%A0%80%EC%9E%A5",
-    
-    "relUrl": "/docs/framework/spring-basic/#쿠키--브라우저에-저장"
-  },"210": {
-    "doc": "Spring 기본 개념",
-    "title": "세션 : 서버에 저장",
-    "content": ". | 무조건 서버에서 생성하여 response 헤더에 세션정보를 넣어준다. | . ",
-    "url": "/docs/framework/spring-basic/#%EC%84%B8%EC%85%98--%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5",
-    
-    "relUrl": "/docs/framework/spring-basic/#세션--서버에-저장"
-  },"211": {
-    "doc": "Spring 기본 개념",
-    "title": "예외처리",
-    "content": ". | try-catch 를 사용한다. | @ContrlloerAdvice 내 @ExceptionHandler 에서 처리하도록 한다. | @ResponseStatus : 응답메시지의 상태코드를 변경할 때 사용한다. | . ",
-    "url": "/docs/framework/spring-basic/#%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC",
-    
-    "relUrl": "/docs/framework/spring-basic/#예외처리"
-  },"212": {
-    "doc": "Spring 기본 개념",
-    "title": "Spring DI",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#spring-di",
-    
-    "relUrl": "/docs/framework/spring-basic/#spring-di"
-  },"213": {
-    "doc": "Spring 기본 개념",
-    "title": "Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb%EB%B3%B5%EC%9E%A1--spring-bean",
-    
-    "relUrl": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb복잡--spring-bean"
-  },"214": {
-    "doc": "Spring 기본 개념",
-    "title": "SQL &amp; SQL Workbench",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#sql--sql-workbench",
-    
-    "relUrl": "/docs/framework/spring-basic/#sql--sql-workbench"
-  },"215": {
-    "doc": "Spring 기본 개념",
-    "title": "Spring DB 다루기 &amp; Junit Test",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#spring-db-%EB%8B%A4%EB%A3%A8%EA%B8%B0--junit-test",
-    
-    "relUrl": "/docs/framework/spring-basic/#spring-db-다루기--junit-test"
-  },"216": {
-    "doc": "Spring 기본 개념",
-    "title": "DAO",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#dao",
-    
-    "relUrl": "/docs/framework/spring-basic/#dao"
-  },"217": {
-    "doc": "Spring 기본 개념",
-    "title": "AOP 개념과 용어 : 중복코드 분리위함",
-    "content": ". | 메서드의 시작 또는 끝에 자동으로 코드(advice) 를 실행 중에 추가 | 횡단관심사 : 예) logging | @Before, @After, @Around | . ",
-    "url": "/docs/framework/spring-basic/#aop-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%9A%A9%EC%96%B4--%EC%A4%91%EB%B3%B5%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9C%84%ED%95%A8",
-    
-    "relUrl": "/docs/framework/spring-basic/#aop-개념과-용어--중복코드-분리위함"
-  },"218": {
-    "doc": "Spring 기본 개념",
-    "title": "Controller &gt; Service &gt; Repository(Dao) &gt; DB",
-    "content": ". | 위 3개 모두 Component 스캔이 된다. | . ",
-    "url": "/docs/framework/spring-basic/#controller--service--repositorydao--db",
-    
-    "relUrl": "/docs/framework/spring-basic/#controller--service--repositorydao--db"
-  },"219": {
-    "doc": "Spring 기본 개념",
-    "title": "@Transactional : 롤백 가능",
-    "content": ". | REQUIRES_NEW : 현재와 다른 새로운 transaction 생성한다. (default : REQUIRED) | . ",
-    "url": "/docs/framework/spring-basic/#transactional--%EB%A1%A4%EB%B0%B1-%EA%B0%80%EB%8A%A5",
-    
-    "relUrl": "/docs/framework/spring-basic/#transactional--롤백-가능"
-  },"220": {
-    "doc": "Spring 기본 개념",
-    "title": "Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#redirect--300%EB%B2%88-%EC%9D%91%EB%8B%B5-2%EB%B2%88-%EC%9A%94%EC%B2%AD-2%EB%B2%88-%EC%9D%91%EB%8B%B5-%EB%91%90%EB%B2%88%EC%A8%B0%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EA%B0%80-%EC%9E%90%EB%8F%99-get-%EC%9A%94%EC%B2%AD",
-    
-    "relUrl": "/docs/framework/spring-basic/#redirect--300번-응답-2번-요청-2번-응답-두번쨰는-브라우저가-자동-get-요청"
   },"221": {
-    "doc": "Spring 기본 개념",
-    "title": "Forward : 다른 곳으로 요청",
-    "content": " ",
-    "url": "/docs/framework/spring-basic/#forward--%EB%8B%A4%EB%A5%B8-%EA%B3%B3%EC%9C%BC%EB%A1%9C-%EC%9A%94%EC%B2%AD",
-    
-    "relUrl": "/docs/framework/spring-basic/#forward--다른-곳으로-요청"
-  },"222": {
     "doc": "Spring 기본 개념",
     "title": "Spring 기본 개념",
     "content": " ",
     "url": "/docs/framework/spring-basic/",
     
     "relUrl": "/docs/framework/spring-basic/"
+  },"222": {
+    "doc": "Spring 기본 개념",
+    "title": "Table of contents",
+    "content": ". | Tomcat | HTTP 요청과 응답 | WAS | 설정파일 . | server.xml | web.xml | . | Tabbed Postman | 저장소 . | pageContext : page 별 | request : request 별 | session : 사용자별 | application : context 전체 | . | 서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트 | @RequestParam 과 @ModelAttribute | @GetMapping , @PostMapping | redirect 와 forward | 쿠키 : 브라우저에 저장 | 세션 : 서버에 저장 | 예외처리 | Spring DI | Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean | SQL &amp; SQL Workbench | Spring DB 다루기 &amp; Junit Test | DAO | AOP 개념과 용어 : 중복코드 분리위함 | Controller &gt; Service &gt; Repository(Dao) &gt; DB | @Transactional : 롤백 가능 | Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청 | Forward : 다른 곳으로 요청 | . 남궁성의 Spring framework 강좌 가 개인적으로 가장 잘 설명해주시고 이해하기 쉬웠던 강의라 생각한다. 잊지 않기 위해 정리한다. 참조자료 : https://github.com/castello/spring_basic . ",
+    "url": "/docs/framework/spring-basic/#table-of-contents",
+    
+    "relUrl": "/docs/framework/spring-basic/#table-of-contents"
   },"223": {
+    "doc": "Spring 기본 개념",
+    "title": "Tomcat",
+    "content": ". | webapps 폴더에 war 파일을 넣어주면 해당 파일 압축 후에 서비스 된다. | . ",
+    "url": "/docs/framework/spring-basic/#tomcat",
+    
+    "relUrl": "/docs/framework/spring-basic/#tomcat"
+  },"224": {
+    "doc": "Spring 기본 개념",
+    "title": "HTTP 요청과 응답",
+    "content": ". | QueryString 을 처리하는 방법 . | @Controller -&gt; @RequestMapping -&gt; request.getParameter(\"aaa\") | . | HTTP 요청 -&gt; HttpServeltRequest request 매개변수 를 받아서 톰캣에서 처리한다. | . [실행결과] http://localhost:8080/ch2/requestInfo?year=2021&amp;month=10&amp;day=1 request.getCharacterEncoding()=UTF-8 request.getContentLength()=-1 request.getContentType()=null request.getMethod()=GET request.getProtocol()=HTTP/1.1 request.getScheme()=http request.getServerName()=localhost request.getServerPort()=8080 request.getRequestURI()=http://localhost:8080/ch2/requestInfo request.getRequestURI()=/ch2/requestInfo request.getContextPath()=/ch2 request.getServletPath()=/requestInfo request.getQueryString()=year=2021&amp;month=10&amp;day=1 request.getLocalName()=localhost request.getLocalPort()=8080 request.getRemoteAddr()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemoteHost()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemotePort()=54855 . | HttpServeltResponse 를 매개변수에 넣어 response 객체를 얻는다. | . ",
+    "url": "/docs/framework/spring-basic/#http-%EC%9A%94%EC%B2%AD%EA%B3%BC-%EC%9D%91%EB%8B%B5",
+    
+    "relUrl": "/docs/framework/spring-basic/#http-요청과-응답"
+  },"225": {
+    "doc": "Spring 기본 개념",
+    "title": "WAS",
+    "content": "Web Application Server : 서버에 프로그램을 설치한다. 예) 프로그램 업데이트를 서버에서만 하면 된다. ",
+    "url": "/docs/framework/spring-basic/#was",
+    
+    "relUrl": "/docs/framework/spring-basic/#was"
+  },"226": {
+    "doc": "Spring 기본 개념",
+    "title": "설정파일",
+    "content": "server.xml . | 톰캣 설치경로/conf/server.xml : 톰갯 서버 설정파일 | . web.xml . | 톰갯 설치경로/conf/web.xml : Tomcat 의 모든 web app 의 공통설정 | 웹앱이름/WEB-INF/web.xml : wep app 의 개별 설정 | . ",
+    "url": "/docs/framework/spring-basic/#%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC",
+    
+    "relUrl": "/docs/framework/spring-basic/#설정파일"
+  },"227": {
+    "doc": "Spring 기본 개념",
+    "title": "Tabbed Postman",
+    "content": ". | 크롬 확장프로그램에서 제공되는 Rest Client 로 포스트맨 설치 대신 사용이 가능하다. | . ",
+    "url": "/docs/framework/spring-basic/#tabbed-postman",
+    
+    "relUrl": "/docs/framework/spring-basic/#tabbed-postman"
+  },"228": {
+    "doc": "Spring 기본 개념",
+    "title": "저장소",
+    "content": "pageContext : page 별 . request : request 별 . session : 사용자별 . application : context 전체 . ",
+    "url": "/docs/framework/spring-basic/#%EC%A0%80%EC%9E%A5%EC%86%8C",
+    
+    "relUrl": "/docs/framework/spring-basic/#저장소"
+  },"229": {
+    "doc": "Spring 기본 개념",
+    "title": "서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#%EC%84%9C%EB%B8%94%EB%A6%BF--jsp--%EC%8A%A4%ED%94%84%EB%A7%81--%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
+    
+    "relUrl": "/docs/framework/spring-basic/#서블릿--jsp--스프링--스프링부트"
+  },"230": {
+    "doc": "Spring 기본 개념",
+    "title": "@RequestParam 과 @ModelAttribute",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#requestparam-%EA%B3%BC-modelattribute",
+    
+    "relUrl": "/docs/framework/spring-basic/#requestparam-과-modelattribute"
+  },"231": {
+    "doc": "Spring 기본 개념",
+    "title": "@GetMapping , @PostMapping",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#getmapping--postmapping",
+    
+    "relUrl": "/docs/framework/spring-basic/#getmapping--postmapping"
+  },"232": {
+    "doc": "Spring 기본 개념",
+    "title": "redirect 와 forward",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#redirect-%EC%99%80-forward",
+    
+    "relUrl": "/docs/framework/spring-basic/#redirect-와-forward"
+  },"233": {
+    "doc": "Spring 기본 개념",
+    "title": "쿠키 : 브라우저에 저장",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#%EC%BF%A0%ED%82%A4--%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%97%90-%EC%A0%80%EC%9E%A5",
+    
+    "relUrl": "/docs/framework/spring-basic/#쿠키--브라우저에-저장"
+  },"234": {
+    "doc": "Spring 기본 개념",
+    "title": "세션 : 서버에 저장",
+    "content": ". | 무조건 서버에서 생성하여 response 헤더에 세션정보를 넣어준다. | . ",
+    "url": "/docs/framework/spring-basic/#%EC%84%B8%EC%85%98--%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5",
+    
+    "relUrl": "/docs/framework/spring-basic/#세션--서버에-저장"
+  },"235": {
+    "doc": "Spring 기본 개념",
+    "title": "예외처리",
+    "content": ". | try-catch 를 사용한다. | @ContrlloerAdvice 내 @ExceptionHandler 에서 처리하도록 한다. | @ResponseStatus : 응답메시지의 상태코드를 변경할 때 사용한다. | . ",
+    "url": "/docs/framework/spring-basic/#%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC",
+    
+    "relUrl": "/docs/framework/spring-basic/#예외처리"
+  },"236": {
+    "doc": "Spring 기본 개념",
+    "title": "Spring DI",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#spring-di",
+    
+    "relUrl": "/docs/framework/spring-basic/#spring-di"
+  },"237": {
+    "doc": "Spring 기본 개념",
+    "title": "Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb%EB%B3%B5%EC%9E%A1--spring-bean",
+    
+    "relUrl": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb복잡--spring-bean"
+  },"238": {
+    "doc": "Spring 기본 개념",
+    "title": "SQL &amp; SQL Workbench",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#sql--sql-workbench",
+    
+    "relUrl": "/docs/framework/spring-basic/#sql--sql-workbench"
+  },"239": {
+    "doc": "Spring 기본 개념",
+    "title": "Spring DB 다루기 &amp; Junit Test",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#spring-db-%EB%8B%A4%EB%A3%A8%EA%B8%B0--junit-test",
+    
+    "relUrl": "/docs/framework/spring-basic/#spring-db-다루기--junit-test"
+  },"240": {
+    "doc": "Spring 기본 개념",
+    "title": "DAO",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#dao",
+    
+    "relUrl": "/docs/framework/spring-basic/#dao"
+  },"241": {
+    "doc": "Spring 기본 개념",
+    "title": "AOP 개념과 용어 : 중복코드 분리위함",
+    "content": ". | 메서드의 시작 또는 끝에 자동으로 코드(advice) 를 실행 중에 추가 | 횡단관심사 : 예) logging | @Before, @After, @Around | . ",
+    "url": "/docs/framework/spring-basic/#aop-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%9A%A9%EC%96%B4--%EC%A4%91%EB%B3%B5%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9C%84%ED%95%A8",
+    
+    "relUrl": "/docs/framework/spring-basic/#aop-개념과-용어--중복코드-분리위함"
+  },"242": {
+    "doc": "Spring 기본 개념",
+    "title": "Controller &gt; Service &gt; Repository(Dao) &gt; DB",
+    "content": ". | 위 3개 모두 Component 스캔이 된다. | . ",
+    "url": "/docs/framework/spring-basic/#controller--service--repositorydao--db",
+    
+    "relUrl": "/docs/framework/spring-basic/#controller--service--repositorydao--db"
+  },"243": {
+    "doc": "Spring 기본 개념",
+    "title": "@Transactional : 롤백 가능",
+    "content": ". | REQUIRES_NEW : 현재와 다른 새로운 transaction 생성한다. (default : REQUIRED) | . ",
+    "url": "/docs/framework/spring-basic/#transactional--%EB%A1%A4%EB%B0%B1-%EA%B0%80%EB%8A%A5",
+    
+    "relUrl": "/docs/framework/spring-basic/#transactional--롤백-가능"
+  },"244": {
+    "doc": "Spring 기본 개념",
+    "title": "Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#redirect--300%EB%B2%88-%EC%9D%91%EB%8B%B5-2%EB%B2%88-%EC%9A%94%EC%B2%AD-2%EB%B2%88-%EC%9D%91%EB%8B%B5-%EB%91%90%EB%B2%88%EC%A8%B0%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EA%B0%80-%EC%9E%90%EB%8F%99-get-%EC%9A%94%EC%B2%AD",
+    
+    "relUrl": "/docs/framework/spring-basic/#redirect--300번-응답-2번-요청-2번-응답-두번쨰는-브라우저가-자동-get-요청"
+  },"245": {
+    "doc": "Spring 기본 개념",
+    "title": "Forward : 다른 곳으로 요청",
+    "content": " ",
+    "url": "/docs/framework/spring-basic/#forward--%EB%8B%A4%EB%A5%B8-%EA%B3%B3%EC%9C%BC%EB%A1%9C-%EC%9A%94%EC%B2%AD",
+    
+    "relUrl": "/docs/framework/spring-basic/#forward--다른-곳으로-요청"
+  },"246": {
     "doc": "Spring",
     "title": "Spring",
     "content": " ",
     "url": "/docs/framework/spring/",
     
     "relUrl": "/docs/framework/spring/"
-  },"224": {
+  },"247": {
     "doc": "Spring Boot 참조 자료",
     "title": "Spring Boot 참조 자료",
-    "content": "Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다. 추천 자료 . | 점프 투 스프링부트 . | 남궁성의 Spring Boot 강좌 - 기본편 . | . ",
+    "content": ". Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다. 추천 자료 . | 점프 투 스프링부트 . | 남궁성의 Spring Boot 강좌 - 기본편 . | . ",
     "url": "/docs/framework/spring-reference/",
     
     "relUrl": "/docs/framework/spring-reference/"
-  },"225": {
+  },"248": {
     "doc": "Spring Boot",
     "title": "Spring Boot",
     "content": " ",
     "url": "/docs/framework/springboot/",
     
     "relUrl": "/docs/framework/springboot/"
-  },"226": {
+  },"249": {
     "doc": "Tables",
     "title": "Tables",
     "content": "Tables are responsive by default, allowing wide tables to have a horizontal scroll to access columns outside of the normal viewport. | head1 | head two | three | . | ok | good swedish fish | nice | . | out of stock | good and plenty | nice | . | ok | good oreos | hmm | . | ok | good zoute drop | yumm | . | head1 | head two | three |:-------------|:------------------|:------| ok | good swedish fish | nice | out of stock | good and plenty | nice | ok | good `oreos` | hmm | ok | good `zoute` drop | yumm | . ",
     "url": "/docs/ui-components/tables/",
     
     "relUrl": "/docs/ui-components/tables/"
-  },"227": {
+  },"250": {
     "doc": "Typography",
     "title": "Typography Utilities",
     "content": " ",
     "url": "/docs/utilities/typography/#typography-utilities",
     
     "relUrl": "/docs/utilities/typography/#typography-utilities"
-  },"228": {
+  },"251": {
     "doc": "Typography",
     "title": "Table of contents",
     "content": ". | Font size | Font weight | Line height | Text justification | . ",
     "url": "/docs/utilities/typography/#table-of-contents",
     
     "relUrl": "/docs/utilities/typography/#table-of-contents"
-  },"229": {
+  },"252": {
     "doc": "Typography",
     "title": "Font size",
     "content": "Use the .fs-1 - .fs-10 to set an explicit font-size. | Class | Small screen size font-size | Large screen size font-size | . | .fs-1 | 9px | 10px | . | .fs-2 | 11px | 12px | . | .fs-3 | 12px | 14px | . | .fs-4 | 14px | 16px | . | .fs-5 | 16px | 18px | . | .fs-6 | 18px | 24px | . | .fs-7 | 24px | 32px | . | .fs-8 | 32px | 38px | . | .fs-9 | 38px | 42px | . | .fs-10 | 42px | 48px | . Font size 1 . Font size 2 . Font size 3 . Font size 4 . Font size 5 . Font size 6 . Font size 7 . Font size 8 . Font size 9 . Font size 10 . In Markdown, use the `{: }` wrapper to apply custom classes: Font size 1 {: .fs-1 } Font size 2 {: .fs-2 } Font size 3 {: .fs-3 } Font size 4 {: .fs-4 } Font size 5 {: .fs-5 } Font size 6 {: .fs-6 } Font size 7 {: .fs-7 } Font size 8 {: .fs-8 } Font size 9 {: .fs-9 } Font size 10 {: .fs-10 } . ",
     "url": "/docs/utilities/typography/#font-size",
     
     "relUrl": "/docs/utilities/typography/#font-size"
-  },"230": {
+  },"253": {
     "doc": "Typography",
     "title": "Font weight",
     "content": "Use the .fw-300 - .fw-700 to set an explicit font-weight. Font weight 300 . Font weight 400 . Font weight 500 . Font weight 700 . In Markdown, use the `{: }` wrapper to apply custom classes: Font weight 300 {: .fw-300 } Font weight 400 {: .fw-400 } Font weight 500 {: .fw-500 } Font weight 700 {: .fw-700 } . ",
     "url": "/docs/utilities/typography/#font-weight",
     
     "relUrl": "/docs/utilities/typography/#font-weight"
-  },"231": {
+  },"254": {
     "doc": "Typography",
     "title": "Line height",
     "content": "Use the lh- classes to explicitly apply line height to text. | Class | line-height value | Notes | . | .lh-0 | 0 |   | . | .lh-tight | 1.1 | Default for headings | . | .lh-default | 1.4 | Default for body (paragraphs) | . No Line height No Line height . Tight line height Tight line height . Default line height Default line height . In Markdown, use the `{: }` wrapper to apply custom classes: No Line height No Line height {: .lh-0 } Tight line height Tight line height {: .lh-tight } Default line height Default line height {: .fh-default } . ",
     "url": "/docs/utilities/typography/#line-height",
     
     "relUrl": "/docs/utilities/typography/#line-height"
-  },"232": {
+  },"255": {
     "doc": "Typography",
     "title": "Text justification",
     "content": "By default text is justified left. Use these text- classes to override settings: . | Class | What it does | . | .text-left | text-align: left | . | .text-right | text-align: right | . | .text-center | text-align: center | . ",
     "url": "/docs/utilities/typography/#text-justification",
     
     "relUrl": "/docs/utilities/typography/#text-justification"
-  },"233": {
+  },"256": {
     "doc": "Typography",
     "title": "Typography",
     "content": " ",
     "url": "/docs/utilities/typography/",
     
     "relUrl": "/docs/utilities/typography/"
-  },"234": {
+  },"257": {
     "doc": "Typography",
     "title": "Typography",
     "content": " ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"235": {
+  },"258": {
     "doc": "Typography",
     "title": "Table of contents",
     "content": ". | Font stack | Responsive type scale | Headings | Body text | Inline elements | Typographic Utilities | . ",
     "url": "/docs/ui-components/typography/#table-of-contents",
     
     "relUrl": "/docs/ui-components/typography/#table-of-contents"
-  },"236": {
+  },"259": {
     "doc": "Typography",
     "title": "Font stack",
     "content": "By default, Just the Docs uses a native system font stack for sans-serif fonts: . system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Segoe UI Emoji\" . ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz . For monospace type, like code snippets or the &lt;pre&gt; element, Just the Docs uses a native system font stack for monospace fonts: . \"SFMono-Regular\", Menlo, Consolas, Monospace . ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz . ",
     "url": "/docs/ui-components/typography/#font-stack",
     
     "relUrl": "/docs/ui-components/typography/#font-stack"
-  },"237": {
+  },"260": {
     "doc": "Typography",
     "title": "Responsive type scale",
     "content": "Just the Docs uses a responsive type scale that shifts depending on the viewport size. | Selector | Small screen size font-size | Large screen size font-size | . | h1, .text-alpha | 32px | 36px | . | h2, .text-beta | 18px | 24px | . | h3, .text-gamma | 16px | 18px | . | h4, .text-delta | 14px | 16px | . | h5, .text-epsilon | 16px | 18px | . | h6, .text-zeta | 18px | 24px | . | body | 14px | 16px | . ",
     "url": "/docs/ui-components/typography/#responsive-type-scale",
     
     "relUrl": "/docs/ui-components/typography/#responsive-type-scale"
-  },"238": {
+  },"261": {
     "doc": "Typography",
     "title": "Headings",
     "content": "Headings are rendered like this: . ",
     "url": "/docs/ui-components/typography/#headings",
     
     "relUrl": "/docs/ui-components/typography/#headings"
-  },"239": {
+  },"262": {
     "doc": "Typography",
     "title": "Heading 1",
     "content": " ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"240": {
+  },"263": {
     "doc": "Typography",
     "title": "Heading 2",
     "content": "Heading 3 . Heading 4 . Heading 5 . Heading 6 . # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6 . ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"241": {
+  },"264": {
     "doc": "Typography",
     "title": "Body text",
     "content": "Default body text is rendered like this: . Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",
     "url": "/docs/ui-components/typography/#body-text",
     
     "relUrl": "/docs/ui-components/typography/#body-text"
-  },"242": {
+  },"265": {
     "doc": "Typography",
     "title": "Inline elements",
     "content": "Text can be bold, italic, or strikethrough. Link to another page. Text can be **bold**, _italic_, or ~~strikethrough~~. [Link to another page](/). ",
     "url": "/docs/ui-components/typography/#inline-elements",
     
     "relUrl": "/docs/ui-components/typography/#inline-elements"
-  },"243": {
+  },"266": {
     "doc": "Typography",
     "title": "Typographic Utilities",
     "content": "There are a number of specific typographic CSS classes that allow you to override default styling for font size, font weight, line height, and capitalization. View typography utilities . ",
     "url": "/docs/ui-components/typography/#typographic-utilities",
     
     "relUrl": "/docs/ui-components/typography/#typographic-utilities"
-  },"244": {
+  },"267": {
     "doc": "UI Components",
     "title": "UI Components",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/ui-components",
     
     "relUrl": "/docs/ui-components"
-  },"245": {
+  },"268": {
     "doc": "Utilities",
     "title": "Utilities",
     "content": "CSS utility classes come in handy when you want to override default styles to create additional whitespace (margins/padding), correct unexpected shifts in font size or weight, add color, or hide (or show) something at a specific screen size. ",
     "url": "/docs/utilities",
     
     "relUrl": "/docs/utilities"
-  },"246": {
-    "doc": "Vue.js 기본 개념",
-    "title": "Table of contents",
-    "content": ". | Vue 설치 | 데이터 바인딩 | 반복문 | 이벤트 핸들러 | 모달창 만들기 | export defalut . | 데이터 부분 | 가져오는 부분 | . | . 참조 자료 : [인스타그램을 만들며 배워보는 Vue.js 3 완벽 가이드] (https://codingapple.com/course/vue-js/) . ",
-    "url": "/docs/programming-language/vuejs-basic/#table-of-contents",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#table-of-contents"
-  },"247": {
-    "doc": "Vue.js 기본 개념",
-    "title": "Vue 설치",
-    "content": " ",
-    "url": "/docs/programming-language/vuejs-basic/#vue-%EC%84%A4%EC%B9%98",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#vue-설치"
-  },"248": {
-    "doc": "Vue.js 기본 개념",
-    "title": "데이터 바인딩",
-    "content": " ",
-    "url": "/docs/programming-language/vuejs-basic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#데이터-바인딩"
-  },"249": {
-    "doc": "Vue.js 기본 개념",
-    "title": "반복문",
-    "content": " ",
-    "url": "/docs/programming-language/vuejs-basic/#%EB%B0%98%EB%B3%B5%EB%AC%B8",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#반복문"
-  },"250": {
-    "doc": "Vue.js 기본 개념",
-    "title": "이벤트 핸들러",
-    "content": "&lt;button @mouseover =\"신고수--\" @click=\"신고수++\"&gt;허위매물신고&lt;/button&gt; &lt;span&gt;신고수 : &lt;/span&gt; . ",
-    "url": "/docs/programming-language/vuejs-basic/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%9F%AC",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#이벤트-핸들러"
-  },"251": {
-    "doc": "Vue.js 기본 개념",
-    "title": "모달창 만들기",
-    "content": "모달창을 미리 만들어 클릭 시 상태조건을 변경한다. &lt;div class=\"black-bg\" v-if=\"모달창열렸니 == true\"&gt; &lt;div class=\"white-bg\"&gt; &lt;h4&gt;상세페이지임&lt;/h4&gt; &lt;p&gt;상세페이지 내용임&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; . ",
-    "url": "/docs/programming-language/vuejs-basic/#%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#모달창-만들기"
-  },"252": {
-    "doc": "Vue.js 기본 개념",
-    "title": "export defalut",
-    "content": "데이터 부분 . export default [{ id : 0, title: \"Sinrim station 30 meters away\", image: \"https://codingapple1.github.io/vue/room0.jpg\", content: \"18년 신축공사한 남향 원룸 ☀️, 공기청정기 제공\", price: 340000 }, { . 가져오는 부분 . import data from './assets/oneroom.js'; export default { name: 'App', data() { return { 원룸들 : data, . &lt;img :src=\"원룸들[2].image\" class=\"room-img\"&gt; &lt;h4 @click=\"모달창열렸니 = true\"&gt; &lt;/h4&gt; &lt;p&gt; 원 &lt;/p&gt; . ",
-    "url": "/docs/programming-language/vuejs-basic/#export-defalut",
-    
-    "relUrl": "/docs/programming-language/vuejs-basic/#export-defalut"
-  },"253": {
+  },"269": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/",
     
     "relUrl": "/docs/programming-language/vuejs-basic/"
-  },"254": {
+  },"270": {
+    "doc": "Vue.js 기본 개념",
+    "title": "Table of contents",
+    "content": ". | Vue 설치 | 데이터 바인딩 | 반복문 | 이벤트 핸들러 | 모달창 만들기 | export defalut . | 데이터 부분 | 가져오는 부분 | . | . 참조 자료 : [인스타그램을 만들며 배워보는 Vue.js 3 완벽 가이드] (https://codingapple.com/course/vue-js/) . ",
+    "url": "/docs/programming-language/vuejs-basic/#table-of-contents",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#table-of-contents"
+  },"271": {
+    "doc": "Vue.js 기본 개념",
+    "title": "Vue 설치",
+    "content": " ",
+    "url": "/docs/programming-language/vuejs-basic/#vue-%EC%84%A4%EC%B9%98",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#vue-설치"
+  },"272": {
+    "doc": "Vue.js 기본 개념",
+    "title": "데이터 바인딩",
+    "content": " ",
+    "url": "/docs/programming-language/vuejs-basic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#데이터-바인딩"
+  },"273": {
+    "doc": "Vue.js 기본 개념",
+    "title": "반복문",
+    "content": " ",
+    "url": "/docs/programming-language/vuejs-basic/#%EB%B0%98%EB%B3%B5%EB%AC%B8",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#반복문"
+  },"274": {
+    "doc": "Vue.js 기본 개념",
+    "title": "이벤트 핸들러",
+    "content": "&lt;button @mouseover =\"신고수--\" @click=\"신고수++\"&gt;허위매물신고&lt;/button&gt; &lt;span&gt;신고수 : &lt;/span&gt; . ",
+    "url": "/docs/programming-language/vuejs-basic/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%9F%AC",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#이벤트-핸들러"
+  },"275": {
+    "doc": "Vue.js 기본 개념",
+    "title": "모달창 만들기",
+    "content": "모달창을 미리 만들어 클릭 시 상태조건을 변경한다. &lt;div class=\"black-bg\" v-if=\"모달창열렸니 == true\"&gt; &lt;div class=\"white-bg\"&gt; &lt;h4&gt;상세페이지임&lt;/h4&gt; &lt;p&gt;상세페이지 내용임&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; . ",
+    "url": "/docs/programming-language/vuejs-basic/#%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#모달창-만들기"
+  },"276": {
+    "doc": "Vue.js 기본 개념",
+    "title": "export defalut",
+    "content": "데이터 부분 . export default [{ id : 0, title: \"Sinrim station 30 meters away\", image: \"https://codingapple1.github.io/vue/room0.jpg\", content: \"18년 신축공사한 남향 원룸 ☀️, 공기청정기 제공\", price: 340000 }, { . 가져오는 부분 . import data from './assets/oneroom.js'; export default { name: 'App', data() { return { 원룸들 : data, . &lt;img :src=\"원룸들[2].image\" class=\"room-img\"&gt; &lt;h4 @click=\"모달창열렸니 = true\"&gt; &lt;/h4&gt; &lt;p&gt; 원 &lt;/p&gt; . ",
+    "url": "/docs/programming-language/vuejs-basic/#export-defalut",
+    
+    "relUrl": "/docs/programming-language/vuejs-basic/#export-defalut"
+  },"277": {
     "doc": "Vue.js",
     "title": "Vue.js",
     "content": " ",

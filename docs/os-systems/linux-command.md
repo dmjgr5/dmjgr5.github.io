@@ -7,6 +7,9 @@ permalink: /docs/os-systems/linux-command/
 nav_order: 20
 ---
 
+# Linux Command
+{: .no_toc }
+
 ## Table of contents
 {: .no_toc .text-delta }
 
