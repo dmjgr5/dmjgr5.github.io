@@ -1371,972 +1371,1133 @@
     
     "relUrl": "/docs/cloud/k8s-labelselector/"
   },"196": {
+    "doc": "Object & Controller",
+    "title": "Object &amp; Controller",
+    "content": " ",
+    "url": "/docs/cloud/k8s-object-controller/#object--controller",
+    
+    "relUrl": "/docs/cloud/k8s-object-controller/#object--controller"
+  },"197": {
+    "doc": "Object & Controller",
+    "title": "Table of contents",
+    "content": ". | Object . | Pod | Service | Volume | NameSpace | . | Controller . | ReplicaSet | Deployment | StatefulSet | DaemonSet | Job | CronJob | . | . 컨네이너는 크게 오브젝트(Object) 와 오브젝트를 관리하는 Controller 로 나뉜다. ",
+    "url": "/docs/cloud/k8s-object-controller/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/k8s-object-controller/#table-of-contents"
+  },"198": {
+    "doc": "Object & Controller",
+    "title": "Object",
+    "content": "관리 대상이다. Pod . Pod 란 콩깍지라는 어원으로 어플리케이션 기본 실행 단위(컨테이너) 를 배포할 수 있는 가장 작은 단위를 말한다. 즉, 하나의 컨테이너 또는 그를 보조하는 컨테이너까지 포함하여 이를 Pod 라고 일컫는다. Service . 파드는 일회성으로 제거 후 다시 생성되는데 이때 노드가 바뀔 경우 IP 도 달라지게 된다. 서비스로 인해 노드 외부에서는 고정 IP 주소 로 파드에 접근할 수 있다. Volume . 컨테이너가 삭제되더라고 데이터는 유지되어야 하므로 볼륩 을 통해 데이터를 관리한다. 도커의 볼륨과 의미는 동일하다. | PV (PersistantVolume) | PVC (PersistantVolumeClame) | . NameSpace . 동일 물리 클러스터에서 논리적으로 구분된 가상 클러스터를 일컫는다. 여러 팀이나 많은 사용자가 있을 경우 클러스터 내에서 여러 어플리케이션을 실행할 경우 사용한다. default 가 기본값이다. root@master:~# kubectl get namespace NAME STATUS AGE default Active 41h // 기본 네임스페이스 kube-node-lease Active 41h // 스케일링 관련 네임스페이스 kube-public Active 41h // 모든 사용자가 읽기 가능한 네임스페이스 kube-system Active 41h // 쿠버네티스 시스템에서 생성한 네임스페이스 . 추가/삭제 테스트 . root@master:~# kubectl get ns NAME STATUS AGE default Active 41h kube-node-lease Active 41h kube-public Active 41h kube-system Active 41h root@master:~# root@master:~# kubectl create ns test-system namespace/test-system created root@master:~# root@master:~# kubectl get ns NAME STATUS AGE default Active 42h kube-node-lease Active 42h kube-public Active 42h kube-system Active 42h test-system Active 4s root@master:~# root@master:~# kubectl delete ns test-system namespace \"test-system\" deleted root@master:~# kubectl get ns \\NAME STATUS AGE default Active 42h kube-node-lease Active 42h kube-public Active 42h kube-system Active 42h root@master:~# \\ . root@master:~# kubectl config current-context kubernetes-admin@kubernetes root@master:~# root@master:~# kubectl config get-contexts kubernetes-admin@kubernetes CURRENT NAME CLUSTER AUTHINFO NAMESPACE * kubernetes-admin@kubernetes kubernetes kubernetes-admin // namespace 수정 root@master:~# kubectl config set-context kubernetes-admin@kubernetes --namespace=kube-system Context \"kubernetes-admin@kubernetes\" modified. root@master:~# root@master:~# kubectl config get-contexts kubernetes-admin@kubernetes CURRENT NAME CLUSTER AUTHINFO NAMESPACE * kubernetes-admin@kubernetes kubernetes kubernetes-admin kube-system root@master:~# kubectl get pods NAME READY STATUS RESTARTS AGE calico-kube-controllers-846d7f49d8-hmc2h 1/1 Running 1 41h calico-node-2tvpz 1/1 Running 2 41h calico-node-ndnrd 1/1 Running 2 41h calico-node-s99pf 1/1 Running 1 41h coredns-558bd4d5db-cnnwp 1/1 Running 1 42h coredns-558bd4d5db-skncw 1/1 Running 1 42h etcd-master 1/1 Running 2 42h kube-apiserver-master 1/1 Running 2 42h kube-controller-manager-master 1/1 Running 2 42h kube-proxy-cbkjv 1/1 Running 2 41h kube-proxy-ln6sg 1/1 Running 2 42h kube-proxy-rvdnm 1/1 Running 2 41h kube-scheduler-master 1/1 Running 2 42h root@master:~# root@master:~# kubectl config set-context kubernetes-admin@kubernetes --namespace=default Context \"kubernetes-admin@kubernetes\" modified. root@master:~# kubectl get pods No resources found in default namespace. ",
+    "url": "/docs/cloud/k8s-object-controller/#object",
+    
+    "relUrl": "/docs/cloud/k8s-object-controller/#object"
+  },"199": {
+    "doc": "Object & Controller",
+    "title": "Controller",
+    "content": "Object 를 관리하는 얘들이다. 파드가 원하는 수만큼 배포/유지되도록 한다. ReplicaSet . 지정한 수만큼의 파드가 항상 실행되도록 관리한다. Deployment . 일정수의 파드 수 유지, 롤아웃/롤백, 배포 중 일시정지 등의 기능이 있다. 기존에는 Replicaset 을 사용했지만 현재는 Deployment 를 가장 많이 사용한다. StatefulSet . DaemonSet . Job . CronJob . ",
+    "url": "/docs/cloud/k8s-object-controller/#controller",
+    
+    "relUrl": "/docs/cloud/k8s-object-controller/#controller"
+  },"200": {
+    "doc": "Object & Controller",
+    "title": "Object & Controller",
+    "content": " ",
+    "url": "/docs/cloud/k8s-object-controller/",
+    
+    "relUrl": "/docs/cloud/k8s-object-controller/"
+  },"201": {
+    "doc": "Pod",
+    "title": "Pod",
+    "content": " ",
+    "url": "/docs/cloud/k8s-pod/",
+    
+    "relUrl": "/docs/cloud/k8s-pod/"
+  },"202": {
+    "doc": "Pod",
+    "title": "Table of contents",
+    "content": ". | Pod 생명 주기 | Pod 생성하기 . | Pod 관련 조회 . | kubectl get pods | kubectl describe pod [app] | kubectl delete pod --all | . | 명령으로 Pod 생성 . | kubectl run app --image takytaky/app:v1 | kubectl delete pod app | . | YAML 파일 사용하여 Pod 생성 . | kubectl apply -f app.yaml | kubectl delete -f app.yaml | . | . | Pod 리소스 할당 . | CPU | Memory | . | initContainer (초기화 컨테이너) | Static Pod (스태틱 파드) | . Pod 에 관해 설명한다. ",
+    "url": "/docs/cloud/k8s-pod/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/k8s-pod/#table-of-contents"
+  },"203": {
+    "doc": "Pod",
+    "title": "Pod 생명 주기",
+    "content": ". [Pod 및 컨테이너 ] . Pod 란 콩깍지라는 어원으로 어플리케이션 기본 실행 단위(컨테이너) 를 배포할 수 있는 가장 작은 단위를 말한다. 즉, 하나의 컨테이너 또는 그를 보조하는 컨테이너까지 포함하여 이를 Pod 라고 일컫는다. | Pending | Running | Succeeded | Failed | Unknown | . ",
+    "url": "/docs/cloud/k8s-pod/#pod-%EC%83%9D%EB%AA%85-%EC%A3%BC%EA%B8%B0",
+    
+    "relUrl": "/docs/cloud/k8s-pod/#pod-생명-주기"
+  },"204": {
+    "doc": "Pod",
+    "title": "Pod 생성하기",
+    "content": "Pod 관련 조회 . kubectl get pods . pod 조회한다. kubectl describe pod [app] . 상세 조회 . kubectl delete pod --all . 모든 파드를 삭제 . 명령으로 Pod 생성 . kubectl run app --image takytaky/app:v1 . kubectl delete pod app . root@master:~# kubectl delete pod app ^[[A^[[5~pod \"app\" deleted root@master:~# kubectl run app --image takytaky/app:v1 pod/app created root@master:~# kubectl describe pod app . YAML 파일 사용하여 Pod 생성 . yaml 파일 설정은 아래와 같은 때를 예로 한다. root@master:~/labfile/pod# cat app.yaml apiVersion: v1 kind: Pod metadata: name: app // 파드의 이름(Namespace 에서 유일한 식별정보) labels: app: webapp // 오브젝트를 식별하는 라벨(유일 X) spec: containers: - image: takytaky/app:v1 // 컨테이너에 사용할 이미지 name: app-container ports: - containerPort: 80 // 컨테이너에 접속할 포트 번호 protocol: TCP root@master:~/labfile/pod# . kubectl apply -f app.yaml . Pod 생성 명령어를 입력한다. root@master:~/labfile/pod# kubectl apply -f app.yaml pod/app created root@master:~/labfile/pod# // 확인 root@master:~/labfile/pod# kubectl get pods NAME READY STATUS RESTARTS AGE app 1/1 Running 0 17s root@master:~/labfile/pod# . kubectl delete -f app.yaml . root@master:~/labfile/pod# kubectl delete -f app.yaml pod “app” deleted . ",
+    "url": "/docs/cloud/k8s-pod/#pod-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0",
+    
+    "relUrl": "/docs/cloud/k8s-pod/#pod-생성하기"
+  },"205": {
+    "doc": "Pod",
+    "title": "Pod 리소스 할당",
+    "content": "CPU . root@master:~/labfile/pod/pod-resources# cat cpu-request-limit.yaml apiVersion: v1 kind: Pod metadata: name: cpu-demo namespace: cpu-example spec: containers: - name: cpu-demo-ctr image: vish/stress resources: limits: cpu: \"1\" requests: cpu: \"0.5\" args: - -cpus - \"2\" root@master:~/labfile/pod/pod-resources# root@master:~/labfile/pod/pod-resources# kubectl create namespace cpu-example namespace/cpu-example created root@master:~/labfile/pod/pod-resources# kubectl get ns NAME STATUS AGE cpu-example Active 5s default Active 43h kube-node-lease Active 43h kube-public Active 43h kube-system Active 43h root@master:~/labfile/pod/pod-resources# kubectl apply -f cpu-request-limit.yaml pod/cpu-demo created . worker1 에 생성됨 . Every 1.0s: kubectl get pods -o wide -n cpu-example master: Sat Jan 14 08:33:37 2023 NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES cpu-demo 1/1 Running 0 2m46s 172.16.235.131 worker1 &lt;none&gt; &lt;none&gt; . worker1 에서 docker stats 실시간 자원 사용량 조회 . CONTAINER ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS f82cf3210728 k8s_cpu-demo-ctr_cpu-demo_cpu-example_01bcc06c-4fb9-4d41-9ec0-8ed06f9a8f45_0 97.67% 1.191MiB / 3.852GiB 0.03% 0B / 0B 0B / 0B 5 7c06002bc43e k8s_POD_cpu-demo_cpu-example_01bcc06c-4fb9-4d41-9ec0-8ed06f9a8f45_0 0.00% 564KiB / 3.852GiB 0.01% 0B / 0B 0B / 0B 1 b2938116ec2a k8s_calico-node_calico-node-ndnrd_kube-system_8f163faa-d00f-4ed4-8a43-70239433078b_2 2.20% 93.87MiB / 3.852GiB 2.38% 0B / 0B 30.5MB / 233kB 64 db016fb7b959 k8s_kube-proxy_kube-proxy-rvdnm_kube-system_b0fd824c-953a-4014-8397-419a58d57d6c_2 0.00% 16.69MiB / 3.852GiB 0.42% 0B / 0B 44MB / 12.3kB 7 2d58d5594367 k8s_POD_calico-node-ndnrd_kube-system_8f163faa-d00f-4ed4-8a43-70239433078b_2 0.00% 1.312MiB / 3.852GiB 0.03% 0B / 0B 627kB / 0B 1 6b4b7d59384d k8s_POD_kube-proxy-rvdnm_kube-system_b0fd824c-953a-4014-8397-419a58d57d6c_2 0.00% 740KiB / 3.852GiB 0.02% 0B / 0B 0B / 0B 1 . Memory . root@master:~/labfile/pod/pod-resources# cat memory-request-limit.yaml apiVersion: v1 kind: Pod metadata: name: memory-demo namespace: mem-example spec: containers: - name: memory-demo-ctr image: polinux/stress resources: limits: memory: \"200Mi\" requests: memory: \"100Mi\" command: [\"stress\"] args: [\"--vm\", \"1\", \"--vm-bytes\", \"150M\", \"--vm-hang\", \"1\"] root@master:~/labfile/pod/pod-resources# // NS 생성 root@master:~/labfile/pod/pod-resources# kubectl create ns mem-example namespace/mem-example created root@master:~/labfile/pod/pod-resources# kubectl get ns NAME STATUS AGE default Active 43h kube-node-lease Active 43h kube-public Active 43h kube-system Active 43h mem-example Active 4s // 컨테이너 생성 root@master:~/labfile/pod/pod-resources# kubectl apply -f memory-request-limit.yaml pod/memory-demo created root@master:~/labfile/pod/pod-resources# root@master:~/labfile/pod/pod-resources# . 컨테이너 생성 확인한다. Every 1.0s: kubectl get pods -o wide -n mem-example master: Sat Jan 14 08:39:18 2023 NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES memory-demo 1/1 Running 0 2m43s 172.16.189.69 worker2 &lt;none&gt; &lt;none&gt; . worker2 에서 메모리 사용량 확인한다. root@worker2:~# docker stats --no-stream CONTAINER ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS 373dff622661 k8s_memory-demo-ctr_memory-demo_mem-example_4a24635a-760d-4e8b-93f1-db0d45f4f7a8_0 15.75% 151.1MiB / 200MiB 75.54% 0B / 0B 0B / 0B 2 38ce1f8aecee k8s_POD_memory-demo_mem-example_4a24635a-760d-4e8b-93f1-db0d45f4f7a8_0 0.00% 628KiB / 3.852GiB 0.02% 0B / 0B 0B / 0B 1 8479dcbb9470 k8s_calico-node_calico-node-s99pf_kube-system_640bad34-5dc5-4c64-91cb-5b21aeee4dce_1 2.07% 91.51MiB / 3.852GiB 2.32% 0B / 0B 29.2MB / 233kB 63 ee914529a024 k8s_kube-proxy_kube-proxy-cbkjv_kube-system_ad42f097-9ee0-4659-b46f-d01757439edd_2 0.00% 16.6MiB / 3.852GiB 0.42% 0B / 0B 44MB / 12.3kB 7 db632c6cc766 k8s_POD_calico-node-s99pf_kube-system_640bad34-5dc5-4c64-91cb-5b21aeee4dce_2 0.00% 760KiB / 3.852GiB 0.02% 0B / 0B 0B / 0B 1 47f87181b42e k8s_POD_kube-proxy-cbkjv_kube-system_ad42f097-9ee0-4659-b46f-d01757439edd_2 0.00% 1.305MiB / 3.852GiB 0.03% 0B / 0B 627kB / 0B 1 root@worker2:~# . ",
+    "url": "/docs/cloud/k8s-pod/#pod-%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%A0%EB%8B%B9",
+    
+    "relUrl": "/docs/cloud/k8s-pod/#pod-리소스-할당"
+  },"206": {
+    "doc": "Pod",
+    "title": "initContainer (초기화 컨테이너)",
+    "content": "컨테이너가 실행되기 전에 파드를 초기화 할 목적으로 사용된다. [초기화 컨테이너 예시] . root@master:~/labfile/pod# cat init-containers.yaml apiVersion: v1 kind: Pod metadata: name: init-demo spec: containers: - name: nginx image: nginx ports: - containerPort: 80 volumeMounts: - name: workdir mountPath: /usr/share/nginx/html # These containers are run during pod initialization initContainers: - name: install image: busybox command: - wget - \"-O\" - \"/work-dir/index.html\" - http://info.cern.ch volumeMounts: - name: workdir mountPath: \"/work-dir\" dnsPolicy: Default volumes: - name: workdir emptyDir: {} root@master:~/labfile/pod# kubectl apply -f init-containers.yaml pod/init-demo created root@master:~/labfile/pod# root@master:~/labfile/pod# curl -sf http://172.16.235.132 &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;header&gt; &lt;title&gt;http://info.cern.ch&lt;/title&gt; &lt;/header&gt; &lt;h1&gt;http://info.cern.ch - home of the first website&lt;/h1&gt; &lt;p&gt;From here you can:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;a href=\"http://info.cern.ch/hypertext/WWW/TheProject.html\"&gt;Browse the first website&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=\"http://line-mode.cern.ch/www/hypertext/WWW/TheProject.html\"&gt;Browse the first website using the line-mode browser simulator&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=\"http://home.web.cern.ch/topics/birth-web\"&gt;Learn about the birth of the web&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=\"http://home.web.cern.ch/about\"&gt;Learn about CERN, the physics laboratory where the web was born&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/body&gt;&lt;/html&gt; . ",
+    "url": "/docs/cloud/k8s-pod/#initcontainer-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88",
+    
+    "relUrl": "/docs/cloud/k8s-pod/#initcontainer-초기화-컨테이너"
+  },"207": {
+    "doc": "Pod",
+    "title": "Static Pod (스태틱 파드)",
+    "content": "apiserver 를 통하지 않고, kubelet 이 직접 실행하는 파드이며, 기본 경로는 /etc/kubernetes/manifests 이다. root@master:~/labfile/pod# cd /etc/kubernetes/manifests root@master:/etc/kubernetes/manifests# ll total 24 drwxr-xr-x 2 root root 4096 Jan 12 13:29 ./ drwxr-xr-x 4 root root 4096 Jan 14 07:35 ../ -rw------- 1 root root 2195 Jan 12 13:29 etcd.yaml -rw------- 1 root root 3978 Jan 12 13:29 kube-apiserver.yaml -rw------- 1 root root 3351 Jan 12 13:29 kube-controller-manager.yaml -rw------- 1 root root 1385 Jan 12 13:29 kube-scheduler.yaml . master 시작 시 kubelet 데몬 실행에서 위 static pod 가 실행된다. ",
+    "url": "/docs/cloud/k8s-pod/#static-pod-%EC%8A%A4%ED%83%9C%ED%8B%B1-%ED%8C%8C%EB%93%9C",
+    
+    "relUrl": "/docs/cloud/k8s-pod/#static-pod-스태틱-파드"
+  },"208": {
+    "doc": "Replicaset",
+    "title": "Replicaset",
+    "content": " ",
+    "url": "/docs/cloud/k8s-replicaset/",
+    
+    "relUrl": "/docs/cloud/k8s-replicaset/"
+  },"209": {
+    "doc": "Replicaset",
+    "title": "Table of contents",
+    "content": ". | YAML 포맷 | Replica 생성 . | kubectl apply -f deploy-nginx.yaml | . | Replica 변경 . | kubectl scale rs replicaset-nginx --replicas=4 | . | Replica 삭제 | . Replicatset 에 관해 설명한다. ",
+    "url": "/docs/cloud/k8s-replicaset/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/k8s-replicaset/#table-of-contents"
+  },"210": {
+    "doc": "Replicaset",
+    "title": "YAML 포맷",
+    "content": ". | kind : Replicaset . | spec &gt; selector &gt; matchLabels . | 여기에 정의된 라벨을 가진 파드에 대해서 먼저 확인한다. | . | spec &gt; template &gt; metadata &gt; labels . | 실행할 파드의 라벨을 정한다. | . | spec &gt; replicas . | 실행할 파드의 개수를 정한다. | . | . ",
+    "url": "/docs/cloud/k8s-replicaset/#yaml-%ED%8F%AC%EB%A7%B7",
+    
+    "relUrl": "/docs/cloud/k8s-replicaset/#yaml-포맷"
+  },"211": {
+    "doc": "Replicaset",
+    "title": "Replica 생성",
+    "content": "kubectl apply -f deploy-nginx.yaml . ",
+    "url": "/docs/cloud/k8s-replicaset/#replica-%EC%83%9D%EC%84%B1",
+    
+    "relUrl": "/docs/cloud/k8s-replicaset/#replica-생성"
+  },"212": {
+    "doc": "Replicaset",
+    "title": "Replica 변경",
+    "content": "kubectl scale rs replicaset-nginx --replicas=4 . ",
+    "url": "/docs/cloud/k8s-replicaset/#replica-%EB%B3%80%EA%B2%BD",
+    
+    "relUrl": "/docs/cloud/k8s-replicaset/#replica-변경"
+  },"213": {
+    "doc": "Replicaset",
+    "title": "Replica 삭제",
+    "content": "kubectl delete rs replicaset-nginx . | 레플리카셋 + 파드들 삭제 | . kubectl delete rs replicaset-nginx --cascade=orphan . | 레플리카셋만 삭제된다. | . terminal 2 # watch -n 1 kubectl get rs,pods -o wide # cd /root/labfile/controller/replicaset # cat rs-nginx.yaml # kubectl apply -f rs-nginx.yaml # kubectl get pods --show-labels # kubectl delete pod replicaset-nginx-p9bqp --&gt; 레플리카셋에 의해서 생성된 파드 이름 확인 후 진행 # kubectl scale rs replicaset-nginx --replicas=4 # kubectl scale rs replicaset-nginx --replicas=3 # kubectl delete rs replicaset-nginx --&gt; 레플리카셋 + 파드들 삭제 # kubectl apply -f rs-nginx.yaml # kubectl delete rs replicaset-nginx --cascade=orphan # kubectl apply -f rs-nginx.yaml . | kubectl delete rs replicaset-nginx . | kubectl delete rs --all . | . 실습 정리 . kubectl delete rs replicaset-nginx kubectl delete rs --all . ",
+    "url": "/docs/cloud/k8s-replicaset/#replica-%EC%82%AD%EC%A0%9C",
+    
+    "relUrl": "/docs/cloud/k8s-replicaset/#replica-삭제"
+  },"214": {
+    "doc": "Service",
+    "title": "Service",
+    "content": " ",
+    "url": "/docs/cloud/k8s-service/",
+    
+    "relUrl": "/docs/cloud/k8s-service/"
+  },"215": {
+    "doc": "Service",
+    "title": "Table of contents",
+    "content": ". | ClusterIP . | Deployment 실행하기 | 연결 확인 (curl -sf http://172.16.189.89 | grep Hello) | 서비스 생성하기 (spec &gt; type : ClusterIP) | 서비스 추가 확인하기 | . | NodePort . | 파드 생성하기 (hostname-server) | 서비스 생성하기 (spec &gt; type : NodePort) | pod, service 생성 확인 | 네트워크 환경 세팅하기 | 외부에서 접속하기 | . | NodeBalancer . | To install MetalLB, apply the manifest: | LoadBalancer 의 IP 정보 구성 | . | . Service 를 사용하면 파드가 클러스터 안 어디에 있던 고정 IP 주소 를 통해서 접근할 수 있다. 서비스는 아래와 같이 세가지의 타입이 있다. ",
+    "url": "/docs/cloud/k8s-service/#table-of-contents",
+    
+    "relUrl": "/docs/cloud/k8s-service/#table-of-contents"
+  },"216": {
+    "doc": "Service",
+    "title": "ClusterIP",
+    "content": "기본 서비스 타입으로 클러스터 내부에서만 사용가능하며 외부에서는 사용할 수 없다. Deployment 실행하기 . kubectl apply -f hostname-server.yaml 을 통해 파드를 생성한다. root@master:~/labfile/service# cat hostname-server.yaml apiVersion: apps/v1 kind: Deployment metadata: name: hostname-server labels: app: hostname-server spec: replicas: 2 selector: matchLabels: app: hostname-server template: metadata: labels: app: hostname-server spec: containers: - name: hostname-server image: takytaky/hostname ports: - containerPort: 80 root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# kubectl apply -f hostname-server.yaml deployment.apps/hostname-server created root@master:~/labfile/service# . 두 worker 노드에 172.16.189.89, 172.16.235.162 로 파드가 생성되었다. Every 1.0s: kubectl get svc,deploy,pods -o wide master: Sun Jan 15 02:23:53 2023 NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE SELECTOR service/kubernetes ClusterIP 10.96.0.1 &lt;none&gt; 443/TCP 2d12h &lt;none&gt; NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR deployment.apps/hostname-server 2/2 2 2 2m58s hostname-server takytaky/hostname app=hostname-server NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES pod/hostname-server-7c85cc96dc-2j9lv 1/1 Running 0 2m58s 172.16.189.89 worker2 &lt;none&gt; &lt;none&gt; pod/hostname-server-7c85cc96dc-gbvd8 1/1 Running 0 2m58s 172.16.235.162 worker1 &lt;none&gt; &lt;none&gt; . 연결 확인 (curl -sf http://172.16.189.89 | grep Hello) . root@master:~/labfile/service# curl -sf http://172.16.189.89 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://172.16.235.162 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-gbvd8&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . 서비스 생성하기 (spec &gt; type : ClusterIP) . root@master:~/labfile/service# cat clusterip-hostname.yaml apiVersion: v1 kind: Service metadata: name: clusterip-hostname-service spec: type: ClusterIP selector: app: hostname-server ports: - protocol: TCP port: 80 targetPort: 80 root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# kubectl apply -f clusterip-hostname.yaml service/clusterip-hostname-service created . 서비스 추가 확인하기 . Every 1.0s: kubectl get svc,deploy,pods -o wide master: Sun Jan 15 02:27:33 2023 NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE SELECTOR service/clusterip-hostname-service ClusterIP 10.105.74.121 &lt;none&gt; 80/TCP 74s app=hostname-server service/kubernetes ClusterIP 10.96.0.1 &lt;none&gt; 443/TCP 2d12h &lt;none&gt; NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR deployment.apps/hostname-server 2/2 2 2 6m39s hostname-server takytaky/hostname app=hostname-server NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES pod/hostname-server-7c85cc96dc-2j9lv 1/1 Running 0 6m39s 172.16.189.89 worker2 &lt;none&gt; &lt;none&gt; pod/hostname-server-7c85cc96dc-gbvd8 1/1 Running 0 6m39s 172.16.235.162 worker1 &lt;none&gt; &lt;none&gt; . ClusterIP 타입의 서비스 IP 확인한다. root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-gbvd8&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . 실습 정리 해당 서비스 및 deploy 삭제한다. root@master:~/labfile/service# kubectl delete svc clusterip-hostname-service service \"clusterip-hostname-service\" deleted root@master:~/labfile/service# root@master:~/labfile/service# curl http://10.105.74.121 | grep Hello^C root@master:~/labfile/service# kubectl delete deploy hostname-server deployment.apps \"hostname-server\" deleted . ",
+    "url": "/docs/cloud/k8s-service/#clusterip",
+    
+    "relUrl": "/docs/cloud/k8s-service/#clusterip"
+  },"217": {
+    "doc": "Service",
+    "title": "NodePort",
+    "content": "ClusterIP + 노드 포트 번호까지 할당하므로 클러스터 안 뿐만아니라 외부에서도 접근할 수 있따. 파드 생성하기 (hostname-server) . 서비스 생성하기 (spec &gt; type : NodePort) . root@master:~/labfile/service# cat nodeport-hostname.yaml apiVersion: v1 kind: Service metadata: name: nodeport-hostname-service spec: type: NodePort selector: app: hostname-server ports: - protocol: TCP port: 80 targetPort: 80 nodePort: 30080 root@master:~/labfile/service# root@master:~/labfile/service# kubectl apply -f nodeport-hostname.yaml service/nodeport-hostname-service created root@master:~/labfile/service# root@master:~/labfile/service# cat nodeport-hostname.yaml^C root@master:~/labfile/service# kubectl apply -f hostname-server.yaml deployment.apps/hostname-server created root@master:~/labfile/service# kubectl apply -f nodeport-hostname.yaml service/nodeport-hostname-service unchanged root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.97.128.131 | egrep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-95ltj&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . pod, service 생성 확인 . Every 1.0s: kubectl get svc,deploy,pods -o wide master: Sun Jan 15 03:02:14 2023 NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE SELECTOR service/kubernetes ClusterIP 10.96.0.1 &lt;none&gt; 443/TCP 2d13h &lt;none&gt; service/nodeport-hostname-service NodePort 10.97.128.131 &lt;none&gt; 80:30080/TCP 8m41s app=hostname-server NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR deployment.apps/hostname-server 2/2 2 2 7m55s hostname-server takytaky/hostname app=hostname-server NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES pod/hostname-server-7c85cc96dc-95ltj 1/1 Running 0 7m55s 172.16.189.90 worker2 &lt;none&gt; &lt;none&gt; pod/hostname-server-7c85cc96dc-fv42w 1/1 Running 0 7m55s 172.16.235.164 worker1 &lt;none&gt; &lt;none&gt; . 네트워크 환경 세팅하기 . Oracle VM VirtualBox 관리자 파일 --&gt; 환경설정 --&gt; 네트워크 --&gt; NatNetwork --&gt; 톱니바퀴 (설정) --&gt; 포트포워딩 --&gt; [+] (다음 항목 추가) 이름 프로토콜 호스트IP 호스트 포트 게스트IP 게스트포트 nodeport TCP 192.168.56.1 30080 192.168.137.101 30080 loadbalancer TCP 192.168.56.1 80 192.168.137.200 80 . 외부에서 접속하기 . 아래 ip 로 접속확인한다. | [##_Image | kage@cNK1FM/btsjnG3cPea/GHzVGkANwjdVRfgOCld2YK/img.png | CDM | 1.3 | {“originWidth”:800,”originHeight”:258,”style”:”alignLeft”}_##] | . 테스트 이후 서비스 삭제한다. kubectl delete svc nodeport-hostname-service . ",
+    "url": "/docs/cloud/k8s-service/#nodeport",
+    
+    "relUrl": "/docs/cloud/k8s-service/#nodeport"
+  },"218": {
+    "doc": "Service",
+    "title": "NodeBalancer",
+    "content": "가장 많은 기능을 가진 타입이다. (참고 : https://metallb.universe.tf/installation ) . To install MetalLB, apply the manifest: . # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml # kubectl get pods -n metallb-system . 1) The metallb-system/controller deployment. This is the cluster-wide controller that handles IP address assignments. 2) The metallb-system/speaker daemonset. This is the component that speaks the protocol(s) of your choice to make the services reachable. Service accounts for the controller and speaker, along with the RBAC permissions that the components need to function. LoadBalancer 의 IP 정보 구성 . # cat metallb-ip-config.yaml apiVersion: v1 kind: ConfigMap metadata: namespace: metallb-system name: config data: config: | address-pools: - name: my-ip protocol: layer2 addresses: - 192.168.137.200-192.168.137.209 # kubectl apply -f metallb-ip-config.yaml # cat loadbalancer-hostname.yaml apiVersion: v1 kind: Service metadata: name: loadbalancer-hostname-service spec: type: LoadBalancer selector: app: hostname-server ports: - protocol: TCP port: 80 targetPort: 80 # kubectl apply -f loadbalancer-hostname.yaml # curl -sf http://192.168.137.200 | grep Hello . 실습 정리 . kubectl delete svc nodeport-hostname-service kubectl delete svc loadbalancer-hostname-service kubectl delete deploy hostname-server . ",
+    "url": "/docs/cloud/k8s-service/#nodebalancer",
+    
+    "relUrl": "/docs/cloud/k8s-service/#nodebalancer"
+  },"219": {
     "doc": "Kubernetes",
     "title": "Kubernetes",
     "content": " ",
     "url": "/docs/cloud/k8s/",
     
     "relUrl": "/docs/cloud/k8s/"
-  },"197": {
+  },"220": {
     "doc": "Labels",
     "title": "Labels",
     "content": "Use labels as a way to add an additional mark to a section of your docs. Labels come in a few colors. By default, labels will be blue. Default label . Blue label . Stable . New release . Coming soon . Deprecated . Default label {: .label } Blue label {: .label .label-blue } Stable {: .label .label-green } New release {: .label .label-purple } Coming soon {: .label .label-yellow } Deprecated {: .label .label-red } . ",
     "url": "/docs/ui-components/labels/",
     
     "relUrl": "/docs/ui-components/labels/"
-  },"198": {
+  },"221": {
     "doc": "Layout",
     "title": "Layout Utilities",
     "content": " ",
     "url": "/docs/utilities/layout/#layout-utilities",
     
     "relUrl": "/docs/utilities/layout/#layout-utilities"
-  },"199": {
+  },"222": {
     "doc": "Layout",
     "title": "Table of contents",
     "content": ". | Spacing | Horizontal Alignment | Vertical Alignment | Display | . ",
     "url": "/docs/utilities/layout/#table-of-contents",
     
     "relUrl": "/docs/utilities/layout/#table-of-contents"
-  },"200": {
+  },"223": {
     "doc": "Layout",
     "title": "Spacing",
     "content": "These spacers are available to use for margins and padding with responsive utility classes. Combine these prefixes with a screen size and spacing scale to use them responsively. | Classname prefix | What it does | . | .m- | margin | . | .mx- | margin-left, margin-right | . | .my- | margin top, margin bottom | . | .mt- | margin-top | . | .mr- | margin-right | . | .mb- | margin-bottom | . | .ml- | margin-left | . | Classname prefix | What it does | . | .p- | padding | . | .px- | padding-left, padding-right | . | .py- | padding top, padding bottom | . | .pt- | padding-top | . | .pr- | padding-right | . | .pb- | padding-bottom | . | .pl- | padding-left | . Spacing values are based on a 1rem = 16px spacing scale, broken down into these units: . | Spacer/suffix | Size in rems | Rem converted to px | . | 1 | 0.25rem | 4px | . | 2 | 0.5rem | 8px | . | 3 | 0.75rem | 12px | . | 4 | 1rem | 16px | . | 5 | 1.5rem | 24px | . | 6 | 2rem | 32px | . | 7 | 2.5rem | 40px | . | 8 | 3rem | 48px | . | auto | auto | auto | . Use mx-auto to horizontally center elements. Examples . In Markdown, use the {: } wrapper to apply custom classes: . This paragraph will have a margin bottom of 1rem/16px on large screens. {: .mb-lg-4 } This paragraph will have 2rem/32px of padding on the right and left at all screen sizes. {: .px-6 } . ",
     "url": "/docs/utilities/layout/#spacing",
     
     "relUrl": "/docs/utilities/layout/#spacing"
-  },"201": {
+  },"224": {
     "doc": "Layout",
     "title": "Horizontal Alignment",
     "content": "| Classname | What it does | . | .float-left | float: left | . | .float-right | float: right | . | .flex-justify-start | justify-content: flex-start | . | .flex-justify-end | justify-content: flex-end | . | .flex-justify-between | justify-content: space-between | . | .flex-justify-around | justify-content: space-around | . Note: any of the flex- classes must be used on a parent element that has d-flex applied to it. ",
     "url": "/docs/utilities/layout/#horizontal-alignment",
     
     "relUrl": "/docs/utilities/layout/#horizontal-alignment"
-  },"202": {
+  },"225": {
     "doc": "Layout",
     "title": "Vertical Alignment",
     "content": "| Classname | What it does | . | .v-align-baseline | vertical-align: baseline | . | .v-align-bottom | vertical-align: bottom | . | .v-align-middle | vertical-align: middle | . | .v-align-text-bottom | vertical-align: text-bottom | . | .v-align-text-top | vertical-align: text-top | . | .v-align-top | vertical-align: top | . ",
     "url": "/docs/utilities/layout/#vertical-alignment",
     
     "relUrl": "/docs/utilities/layout/#vertical-alignment"
-  },"203": {
+  },"226": {
     "doc": "Layout",
     "title": "Display",
     "content": "Display classes aid in adapting the layout of the elements on a page: . | Class |   | . | .d-block | display: block | . | .d-flex | display: flex | . | .d-inline | display: inline | . | .d-inline-block | display: inline-block | . | .d-none | display: none | . Use these classes in conjunction with the responsive modifiers. Examples . In Markdown, use the {: } wrapper to apply custom classes: . This button will be hidden until medium screen sizes: [ A button ](#url) {: .d-none .d-md-inline-block } These headings will be `inline-block`: ### heading 3 {: .d-inline-block } ### heading 3 {: .d-inline-block } . ",
     "url": "/docs/utilities/layout/#display",
     
     "relUrl": "/docs/utilities/layout/#display"
-  },"204": {
+  },"227": {
     "doc": "Layout",
     "title": "Layout",
     "content": " ",
     "url": "/docs/utilities/layout/",
     
     "relUrl": "/docs/utilities/layout/"
-  },"205": {
+  },"228": {
     "doc": "Layout",
     "title": "Layout",
     "content": "You specify the layout for a page in its front matter. Just the Docs has a default layout with a sidebar, used for almost all pages in the theme docs, and a minimal layout that omits the sidebar. ",
     "url": "/docs/layout/layout/",
     
     "relUrl": "/docs/layout/layout/"
-  },"206": {
+  },"229": {
     "doc": "Layout",
     "title": "The layout concept",
     "content": "See the Jekyll docs page about layouts for an explanation of the general idea of layouts and how to specify them. You can use Jekyll’s front matter defaults to specify the same layout for many pages. ",
     "url": "/docs/layout/layout/#the-layout-concept",
     
     "relUrl": "/docs/layout/layout/#the-layout-concept"
-  },"207": {
+  },"230": {
     "doc": "Layout",
     "title": "The default layout",
     "content": "This page uses the default layout. It is a responsive layout: on medium and larger width displays, it displays a sidebar, including a navigation panel; on smaller width displays, the sidebar is automatically hidden under a button. Each child (and grandchild) page of a top-level page has so-called breadcrumbs: links to its parent (and grandparent) pages. It shows the breadcrumbs above the main content of the page. Each page that has child pages generally has a list of links to those pages (you can suppress it by has_toc: false in the front matter). It shows the list as a table of contents below the main content. ",
     "url": "/docs/layout/layout/#the-default-layout",
     
     "relUrl": "/docs/layout/layout/#the-default-layout"
-  },"208": {
+  },"231": {
     "doc": "Layout",
     "title": "The minimal layout",
     "content": "A child and grandchild page of this page use the minimal layout. This differs from the default layout by omitting the sidebar – and thereby also the navigation panel. To navigate between pages with the minimal layout, you can use the breadcrumbs and the tables of contents. ",
     "url": "/docs/layout/layout/#the-minimal-layout",
     
     "relUrl": "/docs/layout/layout/#the-minimal-layout"
-  },"209": {
+  },"232": {
     "doc": "Layout",
     "title": "Other layouts",
     "content": "Just the Docs has further layouts: about, home, page, and post. Currently, they are all based on the default layout. See the Jekyll docs about inheritance for how to customize them. ",
     "url": "/docs/layout/layout/#other-layouts",
     
     "relUrl": "/docs/layout/layout/#other-layouts"
-  },"210": {
+  },"233": {
     "doc": "Code with line numbers",
     "title": "Code snippets with line numbers",
     "content": "The default settings for HTML compression are incompatible with the HTML produced by Jekyll (4.1.1 or earlier) for line numbers from highlighted code – both when using Kramdown code fences and when using Liquid highlight tags. To avoid non-conforming HTML and unsatisfactory layout, HTML compression can be turned off by using the following configuration option: . compress_html: ignore: envs: all . When using Kramdown code fences, line numbers are turned on globally by the following configuration option: . kramdown: syntax_highlighter_opts: block: line_numbers: true . Line numbers can then be suppressed locally using Liquid tags (without the linenos option) instead of fences: . {% highlight some_language %} Some code {% endhighlight %} . ",
     "url": "/docs/ui-components/code/line-numbers/#code-snippets-with-line-numbers",
     
     "relUrl": "/docs/ui-components/code/line-numbers/#code-snippets-with-line-numbers"
-  },"211": {
+  },"234": {
     "doc": "Code with line numbers",
     "title": "Workarounds",
     "content": "To use HTML compression together with line numbers, all highlighted code needs to be wrapped using one of the following workarounds. (The variable name some_var can be changed to avoid clashes; it can also be replaced by code – but note that code=code cannot be removed). Code fences (three backticks) . {% capture some_var %} ```some_language Some code ``` {% endcapture %} {% assign some_var = some_var | markdownify %} {% include fix_linenos.html code=some_var %} . Liquid highlighting . {% capture some_var %} {% highlight some_language linenos %} Some code {% endhighlight %} {% endcapture %} {% include fix_linenos.html code=some_var %} . Credit: The original version of the above workaround was suggested by Dmitry Hrabrov at https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901. ",
     "url": "/docs/ui-components/code/line-numbers/#workarounds",
     
     "relUrl": "/docs/ui-components/code/line-numbers/#workarounds"
-  },"212": {
+  },"235": {
     "doc": "Code with line numbers",
     "title": "Examples",
     "content": "✅ Using code fences + workaround (will only show line numbers if enabled globally in _config.yml): . // Javascript code with syntax highlighting in fences var fun = function lang(l) { dateformat.i18n = require('./lang/' + l) return true; } . ✅ Using liquid highlighting + workaround: . | 1 2 3 4 . | # Ruby code with syntax highlighting and fixed line numbers using Liquid GitHubPages::Dependencies.gems.each do |gem, version| s.add_dependency(gem, \"= #{version}\") end . | . Narrow code stays close to the line numbers: . | 1 2 3 . | def foo puts 'foo' end . | . The following generates incorrect and invalid HTML. It should not be used as a positive example; the improper layout (with the broken HTML tags) is intentional. ❌ With the compression options used for the theme docs, the following example illustrates the incorrect formatting arising from the incompatibility of HTML compression and the non-conforming HTML produced by Jekyll for line numbers: . | 1 2 3 . | def foo puts 'foo' end . | . ",
     "url": "/docs/ui-components/code/line-numbers/#examples",
     
     "relUrl": "/docs/ui-components/code/line-numbers/#examples"
-  },"213": {
+  },"236": {
     "doc": "Code with line numbers",
     "title": "Code with line numbers",
     "content": " ",
     "url": "/docs/ui-components/code/line-numbers/",
     
     "relUrl": "/docs/ui-components/code/line-numbers/"
-  },"214": {
+  },"237": {
     "doc": "Linux Basics",
     "title": "Linux Basics",
     "content": " ",
     "url": "/docs/os-systems/linux-basics/",
     
     "relUrl": "/docs/os-systems/linux-basics/"
-  },"215": {
+  },"238": {
     "doc": "Linux Basics",
     "title": "Table of contents",
     "content": ". | PID = 1 번 프로세스는 무엇인가 | 파일 권한 알아보기 . | 파일 종류 및 유저/그룹 | 약자의 의미 | . | . 주요 개념을 정리해 본다. ",
     "url": "/docs/os-systems/linux-basics/#table-of-contents",
     
     "relUrl": "/docs/os-systems/linux-basics/#table-of-contents"
-  },"216": {
+  },"239": {
     "doc": "Linux Basics",
     "title": "PID = 1 번 프로세스는 무엇인가",
     "content": "PID = 1 번 프로세스는 systemd 이다. root@docker1:~# top top - 15:55:44 up 57 min, 2 users, load average: 0.00, 0.08, 0.07 Tasks: 208 total, 1 running, 165 sleeping, 0 stopped, 0 zombie %Cpu(s): 0.0 us, 0.7 sy, 0.0 ni, 99.3 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st KiB Mem : 4039384 total, 1208128 free, 1027444 used, 1803812 buff/cache KiB Swap: 2017276 total, 2017276 free, 0 used. 2730296 avail Mem PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND 1896 root 20 0 107788 7120 6116 S 0.3 0.2 0:00.59 sshd 4038 root 20 0 42952 3992 3300 R 0.3 0.1 0:00.04 top 1 root 20 0 160148 9288 6548 S 0.0 0.2 0:02.30 systemd . ",
     "url": "/docs/os-systems/linux-basics/#pid--1-%EB%B2%88-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80",
     
     "relUrl": "/docs/os-systems/linux-basics/#pid--1-번-프로세스는-무엇인가"
-  },"217": {
+  },"240": {
     "doc": "Linux Basics",
     "title": "파일 권한 알아보기",
     "content": "파일 종류 및 유저/그룹 . 파일 권한은 4개로 등분하여 확인할 수 있다. | 1번은 파일의 종류 | 2번은 파일과 폴더의 유저 권한 | 3번은 파일과 폴더의 그룹 권한 | 4번은 파일에 대한 모든 유저의 권한 | . 약자의 의미 . | r : read | w : wrtie | x : excute | d : Directory | r : Regular file | s : Symbolic link | . ",
     "url": "/docs/os-systems/linux-basics/#%ED%8C%8C%EC%9D%BC-%EA%B6%8C%ED%95%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-basics/#파일-권한-알아보기"
-  },"218": {
+  },"241": {
     "doc": "Linux Command",
     "title": "Linux Command",
     "content": " ",
     "url": "/docs/os-systems/linux-command/",
     
     "relUrl": "/docs/os-systems/linux-command/"
-  },"219": {
+  },"242": {
     "doc": "Linux Command",
     "title": "Table of contents",
     "content": ". | Process 확인하기 | Curl 사용하기 | Shell 스크립트 실행하기 | 파일 압축 및 해제하기 | CPU 정보 확인하기 | Disk 용량 확인 하기 | RAM 사이즈 확인하기 | Listen Port 확인하기 | Alias 설정하기 | . ",
     "url": "/docs/os-systems/linux-command/#table-of-contents",
     
     "relUrl": "/docs/os-systems/linux-command/#table-of-contents"
-  },"220": {
+  },"243": {
     "doc": "Linux Command",
     "title": "Process 확인하기",
     "content": "전체적인 프로세스와 관련된 옵션이다. | -e : 커널 프로세스를 제외한 모든 프로세스를 보여준다. | f : UID, PID, PPID, C, STIME, TTY, TIME, CMD 등의 필드목록으로, CMD필드의 전체 명령어 형태를 보여준다. | . root@master:~/labfile/service# ps -ef | grep docker root 1485 1 1 Jan14 ? 00:11:50 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock root 1939 6201 0 02:39 ? 00:00:00 runc --root /var/run/docker/runtime-runc/moby --log /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/log.json --log-format json --systemd-cgroup exec --process /tmp/runc-process236202202 --detach --pid-file /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/0a2cb1a2031224ed66bb0bb8b9a23bc295c7b0c7d29a37ed774f14d8072f8f6d.pid f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a root 1957 15646 0 02:39 pts/0 00:00:00 grep --color=auto docker root@master:~/labfile/service# . ",
     "url": "/docs/os-systems/linux-command/#process-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#process-확인하기"
-  },"221": {
+  },"244": {
     "doc": "Linux Command",
     "title": "Curl 사용하기",
     "content": "curl(client url) 명령어는 프로토콜들을 이용해 URL 로 데이터를 전송하여 서버에 데이터를 보내거나 가져올때 사용하기 위한 명령줄 도구 및 라이브러리이다. 쉽게말해 예를들어 자바스크립트 환경에서 REST API(http)를 테스트하고싶다면 보통 ajax, fetch 를 이용해 요청을 보내는 것과 같이, SHELL(커맨드라인 환경)에서 REST API(http) 테스트 하고 싶으면 curl 명령어를 이용하면 된다 라고 이해하면 된다. -s : –silent 진행 내용이나 메시지들을 출력하지 않음 -f : –fail HTTP 오류 시 자동으로 실패 (출력 없음) . root@master:~/labfile/service# curl http://10.105.74.121 | grep Hello % Total % Received % Xferd Average Speed Time Time Time Current Dload Upload Total Spent Left Speed 100 318 100 318 0 0 63600 0 --:--:-- --:--:-- --:--:-- 63600 &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . ",
     "url": "/docs/os-systems/linux-command/#curl-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#curl-사용하기"
-  },"222": {
+  },"245": {
     "doc": "Linux Command",
     "title": "Shell 스크립트 실행하기",
     "content": ".sh 확장자가 나오길래, 뭐지 싶었는데 찾아보니 shell script 확장자였다. 실행하는 방법은 파일 권한을 변경 후 실행하면 된다…고 한다. 우선 파일 권한은 chmod 명령어를 사용하여 변경해준다. 744 등을 주어도 되지만, 간단하게 $chmod +x filename.sh &lt;– 쓰기 권한 추가하기 로 실행이 된다. sh filename.sh 또는 ./filename.sh 으로 실행한다. root@master:~# ./get_helm.sh Downloading https://get.helm.sh/helm-v3.10.3-linux-amd64.tar.gz Verifying checksum... Done. Preparing to install helm into /usr/local/bin helm installed into /usr/local/bin/helm root@master:~# . ",
     "url": "/docs/os-systems/linux-command/#shell-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#shell-스크립트-실행하기"
-  },"223": {
+  },"246": {
     "doc": "Linux Command",
     "title": "파일 압축 및 해제하기",
     "content": "tar -zcvf target.tar.gz file1 file2 dir1 dir2 : 파일 압축 tar -zxvf target.tar.gz : 압축 해제 . -c : –create 신규 아카이브 생성 -x : –extract 아카이브 풀기 -v : –verbose 처리 과정을 상세히 표시 -f : –file=ARCHIVE 파일을 대상으로 아카이빙 . root@master:~# tar -zcvf testtar2.tar.gz a.out b.out a.out b.out root@master:~# root@master:~# root@master:~# mv testtar1.tar.gz ./test/testtar1.tar.gz^C root@master:~# mkdir testtar root@master:~# mv testtar1.tar.gz ./testtar/testtar1.tar.gz root@master:~# root@master:~# cd testtar/ root@master:~/testtar# ls testtar1.tar.gz root@master:~/testtar# tar zxvf testtar1.tar.gz a.out b.out root@master:~/testtar# ls a.out b.out testtar1.tar.gz . root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile Dockerfile.11 Dockerfile.3 Dockerfile.5 host.html copy_data.tgz Dockerfile.1 Dockerfile.2 Dockerfile.4 Dockerfile.6 index.html root@docker1:~/labfile/dockerfile_dir# // 파일 압축 root@docker1:~/labfile/dockerfile_dir# tar -cvf target.tar Dockerfile.1 Dockerfile.2 Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# // 압축 해제 root@docker1:~/labfile/dockerfile_dir# tar -xvf target.tar Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# . ",
     "url": "/docs/os-systems/linux-command/#%ED%8C%8C%EC%9D%BC-%EC%95%95%EC%B6%95-%EB%B0%8F-%ED%95%B4%EC%A0%9C%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#파일-압축-및-해제하기"
-  },"224": {
+  },"247": {
     "doc": "Linux Command",
     "title": "CPU 정보 확인하기",
     "content": "root@docker1:~# lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 1 On-line CPU(s) list: 0 Thread(s) per core: 1 Core(s) per socket: 1 Socket(s): 1 NUMA node(s): 1 Vendor ID: GenuineIntel CPU family: 6 Model: 140 Model name: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz Stepping: 1 CPU MHz: 2803.200 BogoMIPS: 5606.40 Hypervisor vendor: KVM Virtualization type: full L1d cache: 48K L1i cache: 32K L2 cache: 1280K L3 cache: 12288K NUMA node0 CPU(s): 0 Flags: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq monitor ssse3 cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single fsgsbase avx2 invpcid rdseed clflushopt md_clear flush_l1d arch_capabilities root@docker1:~# . ",
     "url": "/docs/os-systems/linux-command/#cpu-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#cpu-정보-확인하기"
-  },"225": {
+  },"248": {
     "doc": "Linux Command",
     "title": "Disk 용량 확인 하기",
     "content": "df : 디스크 남은 용량 확인 (기본 명령어) df -k : 킬로바이트 단위로 남은 용량 확인 df -m : 메가 바이트 단위로 남은 용량 확인 df -h : 깔끔하게 보여줌 df . : 현재 디렉토리가 포함된 파티션의 남은 용량 확인 du : 현재 디렉토리에서 서브 디렉토리까지 용량 확인 du -a : 현재 디렉토리의 사용량 파일단위로 출력 du -s : 총 사용량 du -h : 깔끔하게 보여줌 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌 . ",
     "url": "/docs/os-systems/linux-command/#disk-%EC%9A%A9%EB%9F%89-%ED%99%95%EC%9D%B8-%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#disk-용량-확인-하기"
-  },"226": {
+  },"249": {
     "doc": "Linux Command",
     "title": "RAM 사이즈 확인하기",
     "content": "root@docker1:~# free total used free shared buff/cache available Mem: 4039328 1140088 1636088 34088 1263152 2608324 Swap: 2017276 0 2017276 root@docker1:~# . ",
     "url": "/docs/os-systems/linux-command/#ram-%EC%82%AC%EC%9D%B4%EC%A6%88-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#ram-사이즈-확인하기"
-  },"227": {
+  },"250": {
     "doc": "Linux Command",
     "title": "Listen Port 확인하기",
     "content": "Netstat 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다. | -l 옵션 : netstat에 모든 수신 소켓을 표시한다. | -t 옵션 : 모든 TCP 연결을 표시한다. | -u 옵션 : 모든 UDP 연결을 표시한다. | -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다. | -n 옵션 : 서비스 이름 대신 port 번호를 표시한다. | . user@user:~$ sudo netstat -ltup Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program name tcp 0 0 localhost:ipp 0.0.0.0:* LISTEN 899/cupsd tcp 0 0 localhost:37485 0.0.0.0:* LISTEN 1034/containerd tcp 0 0 localhost:postgresql 0.0.0.0:* LISTEN 1129/postgres tcp 0 0 localhost:domain 0.0.0.0:* LISTEN 796/systemd-resolve tcp 0 0 localhost:4000 0.0.0.0:* LISTEN 35497/ruby2.7 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 899/cupsd tcp6 0 0 [::]:9090 [::]:* LISTEN 982/java udp 0 0 0.0.0.0:58210 0.0.0.0:* 894/avahi-daemon: r udp 0 0 mdns.mcast.net:mdns 0.0.0.0:* 2999/chrome udp 0 0 0.0.0.0:mdns 0.0.0.0:* 894/avahi-daemon: r udp 0 0 dcpark-500R5K-501:34197 0.0.0.0:* 2999/chrome udp 0 0 localhost:domain 0.0.0.0:* 796/systemd-resolve udp 0 0 0.0.0.0:631 0.0.0.0:* 975/cups-browsed udp6 0 0 [::]:mdns [::]:* 894/avahi-daemon: r udp6 0 0 [::]:44146 [::]:* 894/avahi-daemon: r . ",
     "url": "/docs/os-systems/linux-command/#listen-port-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#listen-port-확인하기"
-  },"228": {
+  },"251": {
     "doc": "Linux Command",
     "title": "Alias 설정하기",
     "content": "# nano /root/.bashrc 파일에서 맨 아래 줄에 다음 내용 추가한다. alias conrm='docker container rm -f $(docker container ps -aq)' . 이후 ctrl+o (저장) &gt; enter &gt; ctrl+x (종료) 를 통해 저장한다. ",
     "url": "/docs/os-systems/linux-command/#alias-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#alias-설정하기"
-  },"229": {
+  },"252": {
     "doc": "Linux",
     "title": "Linuxs",
     "content": " ",
     "url": "/docs/os-systems/linux/#linuxs",
     
     "relUrl": "/docs/os-systems/linux/#linuxs"
-  },"230": {
+  },"253": {
     "doc": "Linux",
     "title": "Linux",
     "content": " ",
     "url": "/docs/os-systems/linux/",
     
     "relUrl": "/docs/os-systems/linux/"
-  },"231": {
+  },"254": {
     "doc": "Lists",
     "title": "Lists",
     "content": " ",
     "url": "/docs/ui-components/lists/",
     
     "relUrl": "/docs/ui-components/lists/"
-  },"232": {
+  },"255": {
     "doc": "Lists",
     "title": "Table of contents",
     "content": ". | Unordered list | Ordered list | Task list | Definition list | . Most lists can be rendered with pure Markdown. ",
     "url": "/docs/ui-components/lists/#table-of-contents",
     
     "relUrl": "/docs/ui-components/lists/#table-of-contents"
-  },"233": {
+  },"256": {
     "doc": "Lists",
     "title": "Unordered list",
     "content": ". | Item 1 | Item 2 | Item 3 | . or . | Item 1 | Item 2 | Item 3 | . - Item 1 - Item 2 - Item 3 _or_ * Item 1 * Item 2 * Item 3 . ",
     "url": "/docs/ui-components/lists/#unordered-list",
     
     "relUrl": "/docs/ui-components/lists/#unordered-list"
-  },"234": {
+  },"257": {
     "doc": "Lists",
     "title": "Ordered list",
     "content": ". | Item 1 | Item 2 | Item 3 | . 1. Item 1 1. Item 2 1. Item 3 . ",
     "url": "/docs/ui-components/lists/#ordered-list",
     
     "relUrl": "/docs/ui-components/lists/#ordered-list"
-  },"235": {
+  },"258": {
     "doc": "Lists",
     "title": "Task list",
     "content": ". | hello, this is a todo item | hello, this is another todo item | goodbye, this item is done | . - [ ] hello, this is a todo item - [ ] hello, this is another todo item - [x] goodbye, this item is done . ",
     "url": "/docs/ui-components/lists/#task-list",
     
     "relUrl": "/docs/ui-components/lists/#task-list"
-  },"236": {
+  },"259": {
     "doc": "Lists",
     "title": "Definition list",
     "content": "Definition lists require HTML syntax and aren’t supported with the GitHub Flavored Markdown compiler. Name Godzilla Born 1952 Birthplace Japan Color Green &lt;dl&gt; &lt;dt&gt;Name&lt;/dt&gt; &lt;dd&gt;Godzilla&lt;/dd&gt; &lt;dt&gt;Born&lt;/dt&gt; &lt;dd&gt;1952&lt;/dd&gt; &lt;dt&gt;Birthplace&lt;/dt&gt; &lt;dd&gt;Japan&lt;/dd&gt; &lt;dt&gt;Color&lt;/dt&gt; &lt;dd&gt;Green&lt;/dd&gt; &lt;/dl&gt; . ",
     "url": "/docs/ui-components/lists/#definition-list",
     
     "relUrl": "/docs/ui-components/lists/#definition-list"
-  },"237": {
+  },"260": {
     "doc": "Minimal layout child page",
     "title": "Minimal layout child page",
     "content": "This is a child page that uses the same minimal layout as its parent page. ",
     "url": "/docs/layout/minimal/minimal-child/",
     
     "relUrl": "/docs/layout/minimal/minimal-child/"
-  },"238": {
+  },"261": {
     "doc": "Minimal layout test",
     "title": "Minimal layout test",
     "content": "Return to main website. This page demonstrates the packaged minimal layout, which does not render the sidebar or header. It can be used for standalone pages. It is also an example of using the new modular site components to define custom layouts; see “Custom layouts and includes” in the customization docs for more information. ",
     "url": "/docs/minimal-test/",
     
     "relUrl": "/docs/minimal-test/"
-  },"239": {
+  },"262": {
     "doc": "A minimal layout page",
     "title": "A minimal layout page",
     "content": "This page illustrates the built-in layout minimal. One of its child pages also uses the minimal layout; the other child pages uses the default layout. ",
     "url": "/docs/layout/minimal/minimal/",
     
     "relUrl": "/docs/layout/minimal/minimal/"
-  },"240": {
+  },"263": {
     "doc": "Navigation Structure",
     "title": "Navigation Structure",
     "content": ". | Main navigation | Ordering pages | Excluding pages | Pages with children . | Child pages | Ordering child pages | Auto-generating Table of Contents | Children with children | . | Auxiliary Links | External Navigation Links . | Opening external links in a new tab | . | In-page navigation with Table of Contents . | Collapsible Table of Contents | . | . ",
     "url": "/docs/navigation-structure/",
     
     "relUrl": "/docs/navigation-structure/"
-  },"241": {
+  },"264": {
     "doc": "Navigation Structure",
     "title": "Main navigation",
     "content": "The main navigation for your Just the Docs site is on the left side of the page on large screens and on the top (behind a tap) on small screens. The main navigation can be structured to accommodate a multi-level menu system (pages with children and grandchildren). By default, all pages will appear as top level pages in the main nav unless a parent page is defined (see Pages with Children). ",
     "url": "/docs/navigation-structure/#main-navigation",
     
     "relUrl": "/docs/navigation-structure/#main-navigation"
-  },"242": {
+  },"265": {
     "doc": "Navigation Structure",
     "title": "Ordering pages",
     "content": "To specify a page order, you can use the nav_order parameter in your pages’ YAML front matter. Example (ordering pages) . --- layout: default title: Customization nav_order: 104 --- . The parameter values determine the order of the top-level pages, and of child pages with the same parent. You can reuse the same parameter values (e.g., integers starting from 1) for the child pages of different parents. The parameter values can be numbers (integers, floats) and/or strings. Pages with numerical nav_order parameters always come before those with string nav_order parameters. When you omit nav_order parameters, they default to the titles of the pages. If you want to make the page order independent of the page titles, you can set explicit nav_order parameters on all pages. All pages with explicit nav_order parameters come before all pages ordered by their title values. By default, all Capital letters come before all lowercase letters; you can add nav_sort: case_insensitive in the configuration file to ignore the case. Enclosing strings in (single or double) quotation marks is optional. Numeric values are not enclosed in quotation marks, e.g., 42, -1.0; numbers in quotation marks are lexicographically ordered, so \"10\" comes before \"2\", for example. ",
     "url": "/docs/navigation-structure/#ordering-pages",
     
     "relUrl": "/docs/navigation-structure/#ordering-pages"
-  },"243": {
+  },"266": {
     "doc": "Navigation Structure",
     "title": "Excluding pages",
     "content": "For specific pages that you do not wish to include in the main navigation, e.g. a 404 page or a landing page, use the nav_exclude: true parameter in the YAML front matter for that page. Example (excluding pages) . --- layout: default title: 404 nav_exclude: true --- . The nav_exclude parameter does not affect the auto-generating list of child pages, which you can use to access pages excluded from the main navigation. Pages with no title are automatically excluded from the main navigation. ",
     "url": "/docs/navigation-structure/#excluding-pages",
     
     "relUrl": "/docs/navigation-structure/#excluding-pages"
-  },"244": {
+  },"267": {
     "doc": "Navigation Structure",
     "title": "Pages with children",
     "content": "Sometimes you will want to create a page with many children (a section). First, it is recommended that you keep pages that are related in a directory together… For example, in these docs, we keep all of the written documentation in the ./docs directory and each of the sections in subdirectories like ./docs/ui-components and ./docs/utilities. This gives us an organization like: . +-- .. |-- (Jekyll files) |-- docs |-- ui-components | |-- index.md (parent page) | |-- buttons.md | |-- code.md | |-- labels.md | |-- tables.md | +-- typography.md | |-- utilities | |-- index.md (parent page) | |-- color.md | |-- layout.md | |-- responsive-modifiers.md | +-- typography.md | |-- (other md files, pages with no children) | +-- .. |-- (Jekyll files) +-- .. On the parent pages, add this YAML front matter parameter: . | has_children: true (tells us that this is a parent page) | . Example (parent pages) . --- layout: default title: UI Components nav_order: 102 has_children: true --- . Here we’re setting up the UI Components landing page that is available at /docs/ui-components, which has children and is ordered second in the main nav. Child pages . On child pages, simply set the parent: YAML front matter to whatever the parent’s page title is and set a nav order (this number is now scoped within the section). Example (child pages) . --- layout: default title: Buttons parent: UI Components nav_order: 102 --- . The Buttons page appears as a child of UI Components and appears second in the UI Components section. Ordering child pages . New (v0.4.0) . You can optionally add the following to the YAML front matter to reverse the default sort order of child pages: . | child_nav_order: reversed | . Example (ordering child pages) . --- layout: default title: Reversed Child Pages child_nav_order: reversed --- . Auto-generating Table of Contents . By default, all pages with children will automatically append a Table of Contents which lists the child pages after the parent page’s content. To disable this auto Table of Contents, set has_toc: false in the parent page’s YAML front matter. Example (auto-generating Table of Contents) . --- layout: default title: UI Components nav_order: 102 has_children: true has_toc: false --- . Children with children . Child pages can also have children (grandchildren). This is achieved by using a similar pattern on the child and grandchild pages. | Add the has_children attribute to the child | Add the parent and grand_parent attribute to the grandchild | . Example (children within children) . --- layout: default title: Buttons parent: UI Components nav_order: 102 has_children: true --- . --- layout: default title: Buttons Child Page parent: Buttons grand_parent: UI Components nav_order: 101 --- . This would create the following navigation structure: . +-- .. |-- UI Components |-- .. | |-- Buttons | |-- Button Child Page | |-- .. | +-- .. Currently, the navigation structure is limited to 3 levels: grandchild pages cannot themselves have child pages. ",
     "url": "/docs/navigation-structure/#pages-with-children",
     
     "relUrl": "/docs/navigation-structure/#pages-with-children"
-  },"245": {
+  },"268": {
     "doc": "Navigation Structure",
     "title": "Auxiliary Links",
     "content": "To add auxiliary links to your site (in the upper right on all pages), add it to the aux_links configuration option in your site’s _config.yml file. Example (auxiliary links) . # Aux links for the upper right navigation aux_links: \"Just the Docs on GitHub\": - \"//github.com/just-the-docs/just-the-docs\" . ",
     "url": "/docs/navigation-structure/#auxiliary-links",
     
     "relUrl": "/docs/navigation-structure/#auxiliary-links"
-  },"246": {
+  },"269": {
     "doc": "Navigation Structure",
     "title": "External Navigation Links",
     "content": "New (v0.4.0) . To add external links to the navigation, add them to the nav_external_links configuration option in your site’s _config.yml file. External links will appear in the navigation after the links to ordinary pages, but before any collections. Example (external navigation links) . # External navigation links nav_external_links: - title: Just the Docs on GitHub url: https://github.com/just-the-docs/just-the-docs hide_icon: false # set to true to hide the external link icon - defaults to false opens_in_new_tab: false # set to true to open this link in a new tab - defaults to false . Opening external links in a new tab . New (unreleased) . The external links are decorated by an icon, which distinguishes them from internal links. You can suppress the icon by setting hide_icon: true. By default, external links are not opened in a new tab. However, this can be enabled by: . | setting opens_in_new_tab: true in the link’s configuration object | setting the configuration option nav_external_links_new_tab: true in _config.yml | . When they conflict, opens_in_new_tab takes precedence. ",
     "url": "/docs/navigation-structure/#external-navigation-links",
     
     "relUrl": "/docs/navigation-structure/#external-navigation-links"
-  },"247": {
+  },"270": {
     "doc": "Navigation Structure",
     "title": "In-page navigation with Table of Contents",
     "content": "To generate a Table of Contents on your docs pages, you can use the {:toc} method from Kramdown, immediately after an &lt;ol&gt; in Markdown. This will automatically generate an ordered list of anchor links to various sections of the page based on headings and heading levels. There may be occasions where you’re using a heading and you don’t want it to show up in the TOC, so to skip a particular heading use the {: .no_toc } CSS class. Example (in-page navigation with Table of Contents) . # Navigation Structure {: .no_toc } ## {: .no_toc .text-delta } 1. TOC {:toc} . This example skips the page name heading (#) from the TOC, as well as the heading for the Table of Contents itself (##) because it is redundant, followed by the table of contents itself. To get an unordered list, replace 1. TOC above by - TOC. Collapsible Table of Contents . The Table of Contents can be made collapsible using the &lt;details&gt; and &lt;summary&gt; elements, as in the following example. The attribute open (expands the Table of Contents by default) and the styling with {: .text-delta } are optional. &lt;details open markdown=\"block\"&gt; &lt;summary&gt; &lt;/summary&gt; {: .text-delta } 1. TOC {:toc} &lt;/details&gt; . The result is shown at the top of this page ({:toc} can be used only once on each page). ",
     "url": "/docs/navigation-structure/#in-page-navigation-with-table-of-contents",
     
     "relUrl": "/docs/navigation-structure/#in-page-navigation-with-table-of-contents"
-  },"248": {
+  },"271": {
     "doc": "Proxy",
     "title": "Proxy",
     "content": " ",
     "url": "/docs/network-security/network-security-proxy/",
     
     "relUrl": "/docs/network-security/network-security-proxy/"
-  },"249": {
+  },"272": {
     "doc": "Proxy",
     "title": "Table of contents",
     "content": ". | 프록시(Proxy) 란? | 포워드 프록시(Forward Proxy) . | 포워드 프록시의 특징/역할 | . | 리버스 프록시(Reverse Proxy) . | 리버스 프록시의 예시 | 리버스 프록시의 특징/역할 | 리버스 프록시의 장점 | . | . 개발을 하지 않더라도 프록시라는 단어는 종종 듣게 되는데 정확히 프록시가 무엇이고, 어떤 역할을 하는지 정리하고자 한다. ",
     "url": "/docs/network-security/network-security-proxy/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-proxy/#table-of-contents"
-  },"250": {
+  },"273": {
     "doc": "Proxy",
     "title": "프록시(Proxy) 란?",
     "content": "프록시의 사전적 의미는 대신, 대리이다. 말 그대로 두 PC가 통신을 할 때 직접 하지 않고 중간에서 대리로 통신을 하는 것을 프록시 라고 하고, 중계 역할을 하는 것을 프록시 서버 라고 부른다. 즉, 클라이언트와 서버 사이의 중계 서버 라고 생각하면 된다. 프록시 서버는 보안 목적이나 캐싱 등의 기능을 제공한다. 프록시 서버가 중간에 위치함으로써 클라이언트는 프록시 서버를 서버라고 인식하고, 서버 입장에서는 프록시 서버를 클라이언트로 인식하게 된다. [프록시 서버의 구조] . ",
     "url": "/docs/network-security/network-security-proxy/#%ED%94%84%EB%A1%9D%EC%8B%9Cproxy-%EB%9E%80",
     
     "relUrl": "/docs/network-security/network-security-proxy/#프록시proxy-란"
-  },"251": {
+  },"274": {
     "doc": "Proxy",
     "title": "포워드 프록시(Forward Proxy)",
     "content": "일반적으로 프록시라고 말하면 포워드 프록시를 말한다. 클라이언트에서 서버로 리소스를 요청할 때 직접 요청하지 않고 프록시 서버를 거쳐서 요청한다. 이 경우 서버에서 받는 IP는 클라이언트의 IP가 아닌 프록시 서브의 IP이기 때문에 서버는 클라이언트가 누군지 알 수 없다. 즉, 서버에게 클라이언트가 누구인지 감춰주는 역할을 한다. 이러한 특징 때문에 기업 사내망에서 주로 사용된다. 포워드 프록시의 특징/역할 . | 캐싱 첫 번째 요청 이후부터는 동일한 요청이 들어올 경우, 프록시 서버에 캐싱된 내용을 전달해줌으로써 성능을 향상시킬 수 있다. | . 웹 서비스에서 요청이 발생할 때마다 1) 요청 → 2) 요청 전송 → 3) 요청 접수 → 4) 응답 생성 → 5) 응답 전송 → 6) 응답 수신 과 같은 과정을 반복해서 거친다. 요청이 한 번 뿐일 때는 괜찮지만, 중복되는 요청을 매번 처리하기에는 심한 자원낭비가 생기고, 웹 서버의 부하가 증가할 것이다. 이를 위해 포워드 프록시는 정적 데이터를 저장해두고 동일한 요청의 경우 웹서버 까지 가지 않고 포워드 프록시에서 처리할 수 있는 캐싱 역할을 수행한다. | IP 우회 | . 위에 언급했듯이 클라이언트 측에서 프록시 서버를 거쳐 웹 서비스를 이용할 경우, 서버 측에서는 요청을 받을 때 클라이언트의 IP가 아닌 프록시 서버의 IP를 전달받게 된다. 즉, 서버 측에 클라이언트의 정보를 숨길 수 있게 되는 것이다. | 제한 보안이 중요한 사내망에서 정해진 사이트에만 연결 할 수 있도록 설정하는 등 웹 사용 환경을 제한할 수 있다. | . [Forward Proxy] . ",
     "url": "/docs/network-security/network-security-proxy/#%ED%8F%AC%EC%9B%8C%EB%93%9C-%ED%94%84%EB%A1%9D%EC%8B%9Cforward-proxy",
     
     "relUrl": "/docs/network-security/network-security-proxy/#포워드-프록시forward-proxy"
-  },"252": {
+  },"275": {
     "doc": "Proxy",
     "title": "리버스 프록시(Reverse Proxy)",
     "content": "리버스 프록시는 포워드 프록시와 반대 개념이다. 애플리케이션 서버의 앞에 위치하여 클라이언트가 서버를 요청할 때 리버스 프록시를 호출하고, 리버스 프록시가 서버로부터 응답을 전달받아 다시 클라이언트에게 전송하는 역할을 한다. 이 경우, 클라이언트는 애플리케이션 서버를 직접 호출하는 것이 아니라 프록시 서버를 통해 호출하기 때문에 리버스 프록시는 애플리케이션 서버를 감추는 역할을 하게 된다. 리버스 프록시의 예시 . NginX, Apache Web Server . 리버스 프록시의 특징/역할 . | 로드밸런싱 리버스 프록시 뒤에 여러 개의 WAS를 둠으로써, 사용자 요청을 분산할 수 있다. End-point 마다 호출 서버를 설정할 수 있어 역할에 따라 서버의 트래픽을 분산할 수도 있다. | 보안 보안 상의 이유로 서버에 직접 접근하는 것을 막기 위해 DMZ같은 네트워크에 리버스 프록시를 구성하여 접근하도록 한다. | . [Reverse Proxy] . 리버스 프록시의 장점 . 보통 기업의 네트워크 환경은 비무장 지대(DMZ; Demilitarized Zone) 라고 하는 내부 네트워크와 외부 네트워크 사이에 위치하는 구간이 존재합니다. [리버스 프록시 구성의 예] . | DMZ 내에 외부에 서비스를 제공하는 서버(메일 서버, 웹 서버, DNS 서버)를 배치하고 네트워크는 1, 2차 방화벽으로 보호 | 서비스를 제공하려면 WAS 를 DMZ 에 놓고 서비스해도 되지만 이런 서비스는 보통 내부의 DBMS 서버와 연결 | 만약 WAS 가 최전방에 있으면 WAS 가 털릴 경우 DBMS 와 관련 서버까지 모두 같이 털리는 심각한 보안 문제가 발생 | 이때문에 DMZ 존에 웹 서버를 두고 리버스 프락시로 설정하고 WAS 는 내부망에 위치시키게 설정 | 리버스 프락시로 동작하는 웹 서버만 내부 WAS 와 연결하도록 설정하므로 웹 서버가 해킹당해도 2차 방화벽을 다시 뚫어야 하므로 더 보안에 강함 | . ",
     "url": "/docs/network-security/network-security-proxy/#%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9Creverse-proxy",
     
     "relUrl": "/docs/network-security/network-security-proxy/#리버스-프록시reverse-proxy"
-  },"253": {
+  },"276": {
     "doc": "Web Server & WAS",
     "title": "Web Server &amp; WAS",
     "content": " ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server--was",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server--was"
-  },"254": {
+  },"277": {
     "doc": "Web Server & WAS",
     "title": "Table of contents",
     "content": ". | Static Pages | Dynamic Pages | Web Server와 WAS의 차이 . | Web Server | Web Application Server, WAS | . | Web Server 와 WAS 를 분리하는 이유 | . ",
     "url": "/docs/network-security/network-security-webserver-was/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#table-of-contents"
-  },"255": {
+  },"278": {
     "doc": "Web Server & WAS",
     "title": "Static Pages",
     "content": ". | Web Server는 파일 경로 이름을 받아 경로와 일치하는 file contents를 반환합니다. | 항상 동일한 페이지를 반환합니다. | html, css, js, image 파일과 같이 컴퓨터에 저장되어 있는 파일들입니다. | . [정적 페이지 ] . ",
     "url": "/docs/network-security/network-security-webserver-was/#static-pages",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#static-pages"
-  },"256": {
+  },"279": {
     "doc": "Web Server & WAS",
     "title": "Dynamic Pages",
     "content": ". | 인자의 내용에 맞게 동적인 Contents를 반환합니다. | 즉, 웹 서버에 의해서 실행되는 프로그램을 통해서 만들어진 결과물입니다. | 아래 이미지에서 개발자는 Servlet에 doGet()을 구현합니다. | . [동적 페이지 ] . ",
     "url": "/docs/network-security/network-security-webserver-was/#dynamic-pages",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#dynamic-pages"
-  },"257": {
+  },"280": {
     "doc": "Web Server & WAS",
     "title": "Web Server와 WAS의 차이",
     "content": "Web Server . 웹 서버는 클라이언트로부터 HTTP 요청을 받아 HTML 문서나 각종 리소스(Resource)를 전달하는 컴퓨터입니다. 따라서 요청에 따라 아래의 두 가지 기능 중 적절하게 선택하여 수행합니다. | 정적인 컨텐츠를 제공한다. | 동적인 컨텐츠 제공을 위한 요청을 전달한다. | . Web Server에는 Apache Server와 NginX가 있는데 각각의 특성은 아래와 같습니다. | Apache Server: BSD, Linux 등 Unix계열뿐 아니라 Windows와 같은 기종에서도 운용 가능. | NginX: 가벼움과 높은 성능을 목표로 함, 웹 서버, 리퍼스 프록시 및 메일 프록시 기능을 가짐. | . Apache Tomcat이라고 하는 이유 . 웹서버는 Apache, WAS는 Tomcat 2008년에 릴리즈된 Tomcat 5.5 부터 정적 컨텐츠 처리기능 추가 -&gt; 순수 Apache를 사용하는것에 비해 성능 차이 없음 -&gt; Tomcat이 Apache의 기능을 포함하므로 Apache Tomcat이라고함 . Web Application Server, WAS . WAS는 웹 애플리케이션과 서버 환경을 만들어 동작시키는 기능을 제공하는 소프트웨어 미들웨어 프레임워크 입니다. [Web Application Server, WAS] . 위 이미지와 같이 WAS는 Web Server와 Web Container(JSP, Servlet)으로 이루어져 있습니다. Web Server와의 차이점은 Web Container를 가진다는 점이며 WAS는 HTML 같은 정적인 페이지에서 처리할 수 없는 비즈니스 로직이나 DB 조회 같은 동적인 콘텐츠를 제공합니다. ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server%EC%99%80-was%EC%9D%98-%EC%B0%A8%EC%9D%B4",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server와-was의-차이"
-  },"258": {
+  },"281": {
     "doc": "Web Server & WAS",
     "title": "Web Server 와 WAS 를 분리하는 이유",
     "content": "그런데 대규모 프로젝트를 보면 아래와 같이 WAS와 Web Server를 분리한 형태를 볼 수 있습니다. 분리를 하면 생기는 장점이 무엇일까요? . [Web Server와 WAS 분리] . 1. 기능을 분리하여 서버 부하 방지 가능 . WAS는 DB 조회 등 페이지를 만들기 위한 다양한 로직을 처리하는데, 단순한 정적 콘텐츠를 WAS에서 제공한다면 다른 작업에 사용하는 리소스들로 인해 지연이 생겨날 수 있다. tomcat 5.5 이상부터는 성능이 크게 떨어지지 않는다고 한다. 2. 물리적으로 분리하여 보안 강화 . SSL에 대한 암복호화 처리에 Web Server를 사용한다. 공격에 대해 Web Server를 앞단에 두어 중요한 정보가 담긴 DB나 로직까지(WAS까지) 전파되지 못하게 한다. 3. 여러 대의 WAS를 연결이 가능하다. Load Balancing(부하의 균등화) 가능 -&gt; 한 서버가 다운되더라도 서비스를 이어갈 수 있다는 장점이 있다. fail over(장애 극복), fail back 가능 대용량 웹 애플리케이션의 경우(여러 개의 서버 사용) Wev Server와 WAS를 분리하여 무중단 운영을 위한 장애 극복에 쉽게 대응할 수 있다. [여러대의 WAS 운용] . 4. 다른 종류의 WAS로 서비스 가능 . ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server-%EC%99%80-was-%EB%A5%BC-%EB%B6%84%EB%A6%AC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server-와-was-를-분리하는-이유"
-  },"259": {
+  },"282": {
     "doc": "Web Server & WAS",
     "title": "Web Server & WAS",
     "content": " ",
     "url": "/docs/network-security/network-security-webserver-was/",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/"
-  },"260": {
+  },"283": {
     "doc": "Network & Security",
     "title": "Network &amp; Security",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/network-security#network--security",
     
     "relUrl": "/docs/network-security#network--security"
-  },"261": {
+  },"284": {
     "doc": "Network & Security",
     "title": "Network & Security",
     "content": " ",
     "url": "/docs/network-security",
     
     "relUrl": "/docs/network-security"
-  },"262": {
+  },"285": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/nodejs-basic/",
     
     "relUrl": "/docs/programming-language/nodejs-basic/"
-  },"263": {
+  },"286": {
     "doc": "Node.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Node.js 의 특징 | 모듈 설치 및 실행 | 실습 예제 . | 이메일 전송하기 | 웹서버 만들기 | MySQL 사용하기 | . | . ​node.js 의 종류와 사용방법에 대해 정리한다. 참고 자료 . 한시간만에 끝내는 Node.js 입문 . ",
     "url": "/docs/programming-language/nodejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#table-of-contents"
-  },"264": {
+  },"287": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 의 특징",
     "content": ". | javaScript 를 이용한다. | 엄청나게 많은 패키지를 이용할 수 있다. | . ",
     "url": "/docs/programming-language/nodejs-basic/#nodejs-%EC%9D%98-%ED%8A%B9%EC%A7%95",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#nodejs-의-특징"
-  },"265": {
+  },"288": {
     "doc": "Node.js 기본 개념",
     "title": "모듈 설치 및 실행",
     "content": "https://www.npmjs.com/ 에서 원하는 모듈을 찾는다. npm install [모듈명] 으로 아래와 같이 설치한다. nodemailer 라는 모듈을 예시로 든다. D:\\99_nodeJs&gt;npm install nodemailer added 1 package, and audited 2 packages in 1s found 0 vulnerabilitie . 아래 그림과 같이 node_modules, package json 파일 등이 생성된다. require 를 이용해서 패키지를 불러온다. const nodemailer = require('nodemailer'); . ",
     "url": "/docs/programming-language/nodejs-basic/#%EB%AA%A8%EB%93%88-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%8B%A4%ED%96%89",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#모듈-설치-및-실행"
-  },"266": {
+  },"289": {
     "doc": "Node.js 기본 개념",
     "title": "실습 예제",
     "content": "이메일 전송하기 . nodemailer 모듈을 사용한다. const nodemailer = require('nodemailer'); const email= { host: \"smtp.mailtrap.io\", port: 2525, auth: { user: \"80e8c610c6dace\", pass: \"aad60e1f687512\" } }; const send = async (option) =&gt; { nodemailer.createTransport( email ).sendMail(option, (error, info) =&gt; { if(error){ console.log(error) } else { console.log(info); return info.response; } }); }; let email_data = { from: \"dmjgr5@gmail.com\", to: \"dmjgr5@gmail.com\", subject: \"테스트 메일입니다.\", text: \"node.js 테스트입니다. \" } send(email_data); . 웹서버 만들기 . express 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); app.set('views', __dirname + '/views'); app.set('view engine', 'ejs'); app.engine('html', require('ejs').renderFile); app.get('/', function (req, res) { res.render('index.html'); }) app.get('/about', function (req, res) { res.render('about.html'); }) . `node test.js’ . MySQL 사용하기 . npm install mysql --save 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); var mysql = require('mysql'); var pool = mysql.createPool({ host : '127.0.0.1', user : 'root', password : '', database : 'yse_spring_mvc' }); app.get('/db', function (req, res) { pool.getConnection(function(err, connection) { if (err) throw err; // not connected! // Use the connection connection.query('select 1+1 sum from dual', function (error, results, fields) { res.send(JSON.stringify(results)); console.log('results', results); // When done with the connection, release it. connection.release(); // Handle error after the release. if (error) throw error; // Don't use the connection here, it has been returned to the pool. }); }); }) . ",
     "url": "/docs/programming-language/nodejs-basic/#%EC%8B%A4%EC%8A%B5-%EC%98%88%EC%A0%9C",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#실습-예제"
-  },"267": {
+  },"290": {
     "doc": "Node.js",
     "title": "Node.js",
     "content": " ",
     "url": "/docs/programming-language/nodejs/",
     
     "relUrl": "/docs/programming-language/nodejs/"
-  },"268": {
+  },"291": {
     "doc": "OS Systems",
     "title": "OS Systems",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/os-systems",
     
     "relUrl": "/docs/os-systems"
-  },"269": {
+  },"292": {
     "doc": "Programming Language",
     "title": "Programming Language",
     "content": "프로그래밍 언어에 대해 정리해 보고, 언어별 특징 및 기본 개념에 대해 정리해 보고자 한다. ",
     "url": "/docs/programming-language",
     
     "relUrl": "/docs/programming-language"
-  },"270": {
+  },"293": {
     "doc": "Responsive Modifiers",
     "title": "Responsive modifiers",
     "content": "Just the Docs spacing works in conjunction with a variety of modifiers that allow you to target specific screen sizes responsively. Use these in conjunction with spacing and display prefix and suffix classes. | Modifier | Screen size | . | (none) | All screens until the next modifier | . | xs | 320px (20rem) and up | . | sm | 500px (31.25rem) and up | . | md | 740px (46.25rem) and up | . | lg | 1120px (70rem) and up | . | xl | 1400px (87.5rem) and up | . ",
     "url": "/docs/utilities/responsive-modifiers/#responsive-modifiers",
     
     "relUrl": "/docs/utilities/responsive-modifiers/#responsive-modifiers"
-  },"271": {
+  },"294": {
     "doc": "Responsive Modifiers",
     "title": "Responsive Modifiers",
     "content": " ",
     "url": "/docs/utilities/responsive-modifiers/",
     
     "relUrl": "/docs/utilities/responsive-modifiers/"
-  },"272": {
+  },"295": {
     "doc": "Search",
     "title": "Search",
     "content": " ",
     "url": "/docs/search/",
     
     "relUrl": "/docs/search/"
-  },"273": {
+  },"296": {
     "doc": "Search",
     "title": "Table of contents",
     "content": ". | Enable search in configuration . | Search granularity | Search previews | Search tokenizer | Display URL in search results | Display search button | . | Hiding pages from search . | Example | . | Generate search index when used as a gem | Custom content for search index . | Example | . | . Just the Docs uses lunr.js to add a client-side search interface powered by a JSON index that Jekyll generates. All search results are shown in an auto-complete style interface (there is no search results page). By default, all generated HTML pages are indexed using the following data points: . | Page title | Page content | Page URL | . ",
     "url": "/docs/search/#table-of-contents",
     
     "relUrl": "/docs/search/#table-of-contents"
-  },"274": {
+  },"297": {
     "doc": "Search",
     "title": "Enable search in configuration",
     "content": "In your site’s _config.yml, enable search: . # Enable or disable the site search # Supports true (default) or false search_enabled: true . Search granularity . Pages are split into sections that can be searched individually. The sections are defined by the headings on the page. Each section is displayed in a separate search result. # Split pages into sections that can be searched individually # Supports 1 - 6, default: 2 search.heading_level: 2 . Search previews . A search result can contain previews that show where the search words are found in the specific section. # Maximum amount of previews per search result # Default: 3 search.previews: 3 # Maximum amount of words to display before a matched word in the preview # Default: 5 search.preview_words_before: 5 # Maximum amount of words to display after a matched word in the preview # Default: 10 search.preview_words_after: 10 . Search tokenizer . The default is for hyphens to separate tokens in search terms: gem-based is equivalent to gem based, matching either word. To allow search for hyphenated words: . # Set the search token separator # Default: /[\\s\\-/]+/ # Example: enable support for hyphenated search words search.tokenizer_separator: /[\\s/]+/ . Display URL in search results . # Display the relative url in search results # Supports true (default) or false search.rel_url: false . Display search button . The search button displays in the bottom right corner of the screen and triggers the search input when clicked. # Enable or disable the search button that appears in the bottom right corner of every page # Supports true or false (default) search.button: true . ",
     "url": "/docs/search/#enable-search-in-configuration",
     
     "relUrl": "/docs/search/#enable-search-in-configuration"
-  },"275": {
+  },"298": {
     "doc": "Search",
     "title": "Hiding pages from search",
     "content": "Sometimes you might have a page that you don’t want to be indexed for the search nor to show up in search results, e.g., a 404 page. To exclude a page from search, add the search_exclude: true parameter to the page’s YAML front matter: . Example . --- layout: default title: Page not found nav_exclude: true search_exclude: true --- . ",
     "url": "/docs/search/#hiding-pages-from-search",
     
     "relUrl": "/docs/search/#hiding-pages-from-search"
-  },"276": {
+  },"299": {
     "doc": "Search",
     "title": "Generate search index when used as a gem",
     "content": "If you use Just the Docs as a remote theme, you do not need the following steps. If you use the theme as a gem, you must initialize the search by running this rake command that comes with just-the-docs: . $ bundle exec just-the-docs rake search:init . This command creates the assets/js/zzzz-search-data.json file that Jekyll uses to create your search index. Alternatively, you can create the file manually with this content. ",
     "url": "/docs/search/#generate-search-index-when-used-as-a-gem",
     
     "relUrl": "/docs/search/#generate-search-index-when-used-as-a-gem"
-  },"277": {
+  },"300": {
     "doc": "Search",
     "title": "Custom content for search index",
     "content": "New (v0.4.0) . Advanced . By default, the search feature indexes a page’s .content, .title, and some headers within the .content. Other data (e.g. front matter, files in _data and assets) is not indexed. Users can customize what is indexed. Customizing search indices is an advanced feature that requires Javascript and Liquid knowledge. | When Just the Docs is a local or gem theme, ensure assets/js/zzzz-search-data.json is up-to-date with Generate search index when used as a gem. | Add a new file named _includes/lunr/custom-data.json. Insert custom Liquid code that reads your data (e.g. the page object at include.page) then generates custom Javascript fields that hold the custom data you want to index. Verify these fields in the generated assets/js/search-data.json. | Add a new file named _includes/lunr/custom-index.js. Insert custom Javascript code that reads your custom Javascript fields and inserts them into the search index. You may want to inspect assets/js/just-the-docs.js to better understand the code. | . Example . This example adds front matter usage and examples fields to the search index. _includes/lunr/custom-data.json custom code reads the page usage and examples fields, normalizes the text, and writes the text to custom Javascript myusage and myexamples fields. Javascript fields are similar yet not the same as JSON. jsonify will probably work for most scenarios. {%- capture newline %} {% endcapture -%} \"myusage\": {{ include.page.usage | markdownify | replace:newline,' ' | strip_html | normalize_whitespace | strip | jsonify }}, \"myexamples\": {{ include.page.examples | markdownify | replace:newline,' ' | strip_html | normalize_whitespace | strip | jsonify }}, . _includes/lunr/custom-index.js custom code is inserted into the Javascript loop of assets/js/just-the-docs.js. All custom Javascript fields are accessed as fields of docs[i] such as docs[i].myusage. Finally, append your custom fields on to the already existing docs[i].content. const content_to_merge = [docs[i].content, docs[i].myusage, docs[i].myexamples]; docs[i].content = content_to_merge.join(' '); . ",
     "url": "/docs/search/#custom-content-for-search-index",
     
     "relUrl": "/docs/search/#custom-content-for-search-index"
-  },"278": {
+  },"301": {
     "doc": "Spring 기본 개념",
     "title": "Spring 기본 개념",
     "content": " ",
     "url": "/docs/framework/spring-basic/",
     
     "relUrl": "/docs/framework/spring-basic/"
-  },"279": {
+  },"302": {
     "doc": "Spring 기본 개념",
     "title": "Table of contents",
     "content": ". | Tomcat | HTTP 요청과 응답 | WAS | 설정파일 . | server.xml | web.xml | . | Tabbed Postman | 저장소 . | pageContext : page 별 | request : request 별 | session : 사용자별 | application : context 전체 | . | 서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트 | @RequestParam 과 @ModelAttribute | @GetMapping , @PostMapping | redirect 와 forward | 쿠키 : 브라우저에 저장 | 세션 : 서버에 저장 | 예외처리 | Spring DI | Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean | SQL &amp; SQL Workbench | Spring DB 다루기 &amp; Junit Test | DAO | AOP 개념과 용어 : 중복코드 분리위함 | Controller &gt; Service &gt; Repository(Dao) &gt; DB | @Transactional : 롤백 가능 | Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청 | Forward : 다른 곳으로 요청 | . 남궁성의 Spring framework 강좌 가 개인적으로 가장 잘 설명해주시고 이해하기 쉬웠던 강의라 생각한다. 잊지 않기 위해 정리한다. 참조자료 : https://github.com/castello/spring_basic . ",
     "url": "/docs/framework/spring-basic/#table-of-contents",
     
     "relUrl": "/docs/framework/spring-basic/#table-of-contents"
-  },"280": {
+  },"303": {
     "doc": "Spring 기본 개념",
     "title": "Tomcat",
     "content": ". | webapps 폴더에 war 파일을 넣어주면 해당 파일 압축 후에 서비스 된다. | . ",
     "url": "/docs/framework/spring-basic/#tomcat",
     
     "relUrl": "/docs/framework/spring-basic/#tomcat"
-  },"281": {
+  },"304": {
     "doc": "Spring 기본 개념",
     "title": "HTTP 요청과 응답",
     "content": ". | QueryString 을 처리하는 방법 . | @Controller -&gt; @RequestMapping -&gt; request.getParameter(\"aaa\") | . | HTTP 요청 -&gt; HttpServeltRequest request 매개변수 를 받아서 톰캣에서 처리한다. | . [실행결과] http://localhost:8080/ch2/requestInfo?year=2021&amp;month=10&amp;day=1 request.getCharacterEncoding()=UTF-8 request.getContentLength()=-1 request.getContentType()=null request.getMethod()=GET request.getProtocol()=HTTP/1.1 request.getScheme()=http request.getServerName()=localhost request.getServerPort()=8080 request.getRequestURI()=http://localhost:8080/ch2/requestInfo request.getRequestURI()=/ch2/requestInfo request.getContextPath()=/ch2 request.getServletPath()=/requestInfo request.getQueryString()=year=2021&amp;month=10&amp;day=1 request.getLocalName()=localhost request.getLocalPort()=8080 request.getRemoteAddr()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemoteHost()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemotePort()=54855 . | HttpServeltResponse 를 매개변수에 넣어 response 객체를 얻는다. | . ",
     "url": "/docs/framework/spring-basic/#http-%EC%9A%94%EC%B2%AD%EA%B3%BC-%EC%9D%91%EB%8B%B5",
     
     "relUrl": "/docs/framework/spring-basic/#http-요청과-응답"
-  },"282": {
+  },"305": {
     "doc": "Spring 기본 개념",
     "title": "WAS",
     "content": "Web Application Server : 서버에 프로그램을 설치한다. 예) 프로그램 업데이트를 서버에서만 하면 된다. ",
     "url": "/docs/framework/spring-basic/#was",
     
     "relUrl": "/docs/framework/spring-basic/#was"
-  },"283": {
+  },"306": {
     "doc": "Spring 기본 개념",
     "title": "설정파일",
     "content": "server.xml . | 톰캣 설치경로/conf/server.xml : 톰갯 서버 설정파일 | . web.xml . | 톰갯 설치경로/conf/web.xml : Tomcat 의 모든 web app 의 공통설정 | 웹앱이름/WEB-INF/web.xml : wep app 의 개별 설정 | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC",
     
     "relUrl": "/docs/framework/spring-basic/#설정파일"
-  },"284": {
+  },"307": {
     "doc": "Spring 기본 개념",
     "title": "Tabbed Postman",
     "content": ". | 크롬 확장프로그램에서 제공되는 Rest Client 로 포스트맨 설치 대신 사용이 가능하다. | . ",
     "url": "/docs/framework/spring-basic/#tabbed-postman",
     
     "relUrl": "/docs/framework/spring-basic/#tabbed-postman"
-  },"285": {
+  },"308": {
     "doc": "Spring 기본 개념",
     "title": "저장소",
     "content": "pageContext : page 별 . request : request 별 . session : 사용자별 . application : context 전체 . ",
     "url": "/docs/framework/spring-basic/#%EC%A0%80%EC%9E%A5%EC%86%8C",
     
     "relUrl": "/docs/framework/spring-basic/#저장소"
-  },"286": {
+  },"309": {
     "doc": "Spring 기본 개념",
     "title": "서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%84%9C%EB%B8%94%EB%A6%BF--jsp--%EC%8A%A4%ED%94%84%EB%A7%81--%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
     
     "relUrl": "/docs/framework/spring-basic/#서블릿--jsp--스프링--스프링부트"
-  },"287": {
+  },"310": {
     "doc": "Spring 기본 개념",
     "title": "@RequestParam 과 @ModelAttribute",
     "content": " ",
     "url": "/docs/framework/spring-basic/#requestparam-%EA%B3%BC-modelattribute",
     
     "relUrl": "/docs/framework/spring-basic/#requestparam-과-modelattribute"
-  },"288": {
+  },"311": {
     "doc": "Spring 기본 개념",
     "title": "@GetMapping , @PostMapping",
     "content": " ",
     "url": "/docs/framework/spring-basic/#getmapping--postmapping",
     
     "relUrl": "/docs/framework/spring-basic/#getmapping--postmapping"
-  },"289": {
+  },"312": {
     "doc": "Spring 기본 개념",
     "title": "redirect 와 forward",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect-%EC%99%80-forward",
     
     "relUrl": "/docs/framework/spring-basic/#redirect-와-forward"
-  },"290": {
+  },"313": {
     "doc": "Spring 기본 개념",
     "title": "쿠키 : 브라우저에 저장",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%BF%A0%ED%82%A4--%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#쿠키--브라우저에-저장"
-  },"291": {
+  },"314": {
     "doc": "Spring 기본 개념",
     "title": "세션 : 서버에 저장",
     "content": ". | 무조건 서버에서 생성하여 response 헤더에 세션정보를 넣어준다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%B8%EC%85%98--%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#세션--서버에-저장"
-  },"292": {
+  },"315": {
     "doc": "Spring 기본 개념",
     "title": "예외처리",
     "content": ". | try-catch 를 사용한다. | @ContrlloerAdvice 내 @ExceptionHandler 에서 처리하도록 한다. | @ResponseStatus : 응답메시지의 상태코드를 변경할 때 사용한다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC",
     
     "relUrl": "/docs/framework/spring-basic/#예외처리"
-  },"293": {
+  },"316": {
     "doc": "Spring 기본 개념",
     "title": "Spring DI",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-di",
     
     "relUrl": "/docs/framework/spring-basic/#spring-di"
-  },"294": {
+  },"317": {
     "doc": "Spring 기본 개념",
     "title": "Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean",
     "content": " ",
     "url": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb%EB%B3%B5%EC%9E%A1--spring-bean",
     
     "relUrl": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb복잡--spring-bean"
-  },"295": {
+  },"318": {
     "doc": "Spring 기본 개념",
     "title": "SQL &amp; SQL Workbench",
     "content": " ",
     "url": "/docs/framework/spring-basic/#sql--sql-workbench",
     
     "relUrl": "/docs/framework/spring-basic/#sql--sql-workbench"
-  },"296": {
+  },"319": {
     "doc": "Spring 기본 개념",
     "title": "Spring DB 다루기 &amp; Junit Test",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-db-%EB%8B%A4%EB%A3%A8%EA%B8%B0--junit-test",
     
     "relUrl": "/docs/framework/spring-basic/#spring-db-다루기--junit-test"
-  },"297": {
+  },"320": {
     "doc": "Spring 기본 개념",
     "title": "DAO",
     "content": " ",
     "url": "/docs/framework/spring-basic/#dao",
     
     "relUrl": "/docs/framework/spring-basic/#dao"
-  },"298": {
+  },"321": {
     "doc": "Spring 기본 개념",
     "title": "AOP 개념과 용어 : 중복코드 분리위함",
     "content": ". | 메서드의 시작 또는 끝에 자동으로 코드(advice) 를 실행 중에 추가 | 횡단관심사 : 예) logging | @Before, @After, @Around | . ",
     "url": "/docs/framework/spring-basic/#aop-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%9A%A9%EC%96%B4--%EC%A4%91%EB%B3%B5%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9C%84%ED%95%A8",
     
     "relUrl": "/docs/framework/spring-basic/#aop-개념과-용어--중복코드-분리위함"
-  },"299": {
+  },"322": {
     "doc": "Spring 기본 개념",
     "title": "Controller &gt; Service &gt; Repository(Dao) &gt; DB",
     "content": ". | 위 3개 모두 Component 스캔이 된다. | . ",
     "url": "/docs/framework/spring-basic/#controller--service--repositorydao--db",
     
     "relUrl": "/docs/framework/spring-basic/#controller--service--repositorydao--db"
-  },"300": {
+  },"323": {
     "doc": "Spring 기본 개념",
     "title": "@Transactional : 롤백 가능",
     "content": ". | REQUIRES_NEW : 현재와 다른 새로운 transaction 생성한다. (default : REQUIRED) | . ",
     "url": "/docs/framework/spring-basic/#transactional--%EB%A1%A4%EB%B0%B1-%EA%B0%80%EB%8A%A5",
     
     "relUrl": "/docs/framework/spring-basic/#transactional--롤백-가능"
-  },"301": {
+  },"324": {
     "doc": "Spring 기본 개념",
     "title": "Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect--300%EB%B2%88-%EC%9D%91%EB%8B%B5-2%EB%B2%88-%EC%9A%94%EC%B2%AD-2%EB%B2%88-%EC%9D%91%EB%8B%B5-%EB%91%90%EB%B2%88%EC%A8%B0%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EA%B0%80-%EC%9E%90%EB%8F%99-get-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#redirect--300번-응답-2번-요청-2번-응답-두번쨰는-브라우저가-자동-get-요청"
-  },"302": {
+  },"325": {
     "doc": "Spring 기본 개념",
     "title": "Forward : 다른 곳으로 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#forward--%EB%8B%A4%EB%A5%B8-%EA%B3%B3%EC%9C%BC%EB%A1%9C-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#forward--다른-곳으로-요청"
-  },"303": {
+  },"326": {
     "doc": "Spring",
     "title": "Spring",
     "content": " ",
     "url": "/docs/framework/spring/",
     
     "relUrl": "/docs/framework/spring/"
-  },"304": {
+  },"327": {
     "doc": "Spring Boot 참조 자료",
     "title": "Spring Boot 참조 자료",
     "content": ". Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다. 추천 자료 . | 점프 투 스프링부트 . | 남궁성의 Spring Boot 강좌 - 기본편 . | . ",
     "url": "/docs/framework/spring-reference/",
     
     "relUrl": "/docs/framework/spring-reference/"
-  },"305": {
+  },"328": {
     "doc": "Spring Boot",
     "title": "Spring Boot",
     "content": " ",
     "url": "/docs/framework/springboot/",
     
     "relUrl": "/docs/framework/springboot/"
-  },"306": {
+  },"329": {
     "doc": "Tables",
     "title": "Tables",
     "content": "Tables are responsive by default, allowing wide tables to have a horizontal scroll to access columns outside of the normal viewport. | head1 | head two | three | . | ok | good swedish fish | nice | . | out of stock | good and plenty | nice | . | ok | good oreos | hmm | . | ok | good zoute drop | yumm | . | head1 | head two | three |:-------------|:------------------|:------| ok | good swedish fish | nice | out of stock | good and plenty | nice | ok | good `oreos` | hmm | ok | good `zoute` drop | yumm | . ",
     "url": "/docs/ui-components/tables/",
     
     "relUrl": "/docs/ui-components/tables/"
-  },"307": {
+  },"330": {
     "doc": "Typography",
     "title": "Typography Utilities",
     "content": " ",
     "url": "/docs/utilities/typography/#typography-utilities",
     
     "relUrl": "/docs/utilities/typography/#typography-utilities"
-  },"308": {
+  },"331": {
     "doc": "Typography",
     "title": "Table of contents",
     "content": ". | Font size | Font weight | Line height | Text justification | . ",
     "url": "/docs/utilities/typography/#table-of-contents",
     
     "relUrl": "/docs/utilities/typography/#table-of-contents"
-  },"309": {
+  },"332": {
     "doc": "Typography",
     "title": "Font size",
     "content": "Use the .fs-1 - .fs-10 to set an explicit font-size. | Class | Small screen size font-size | Large screen size font-size | . | .fs-1 | 9px | 10px | . | .fs-2 | 11px | 12px | . | .fs-3 | 12px | 14px | . | .fs-4 | 14px | 16px | . | .fs-5 | 16px | 18px | . | .fs-6 | 18px | 24px | . | .fs-7 | 24px | 32px | . | .fs-8 | 32px | 38px | . | .fs-9 | 38px | 42px | . | .fs-10 | 42px | 48px | . Font size 1 . Font size 2 . Font size 3 . Font size 4 . Font size 5 . Font size 6 . Font size 7 . Font size 8 . Font size 9 . Font size 10 . In Markdown, use the `{: }` wrapper to apply custom classes: Font size 1 {: .fs-1 } Font size 2 {: .fs-2 } Font size 3 {: .fs-3 } Font size 4 {: .fs-4 } Font size 5 {: .fs-5 } Font size 6 {: .fs-6 } Font size 7 {: .fs-7 } Font size 8 {: .fs-8 } Font size 9 {: .fs-9 } Font size 10 {: .fs-10 } . ",
     "url": "/docs/utilities/typography/#font-size",
     
     "relUrl": "/docs/utilities/typography/#font-size"
-  },"310": {
+  },"333": {
     "doc": "Typography",
     "title": "Font weight",
     "content": "Use the .fw-300 - .fw-700 to set an explicit font-weight. Font weight 300 . Font weight 400 . Font weight 500 . Font weight 700 . In Markdown, use the `{: }` wrapper to apply custom classes: Font weight 300 {: .fw-300 } Font weight 400 {: .fw-400 } Font weight 500 {: .fw-500 } Font weight 700 {: .fw-700 } . ",
     "url": "/docs/utilities/typography/#font-weight",
     
     "relUrl": "/docs/utilities/typography/#font-weight"
-  },"311": {
+  },"334": {
     "doc": "Typography",
     "title": "Line height",
     "content": "Use the lh- classes to explicitly apply line height to text. | Class | line-height value | Notes | . | .lh-0 | 0 |   | . | .lh-tight | 1.1 | Default for headings | . | .lh-default | 1.4 | Default for body (paragraphs) | . No Line height No Line height . Tight line height Tight line height . Default line height Default line height . In Markdown, use the `{: }` wrapper to apply custom classes: No Line height No Line height {: .lh-0 } Tight line height Tight line height {: .lh-tight } Default line height Default line height {: .fh-default } . ",
     "url": "/docs/utilities/typography/#line-height",
     
     "relUrl": "/docs/utilities/typography/#line-height"
-  },"312": {
+  },"335": {
     "doc": "Typography",
     "title": "Text justification",
     "content": "By default text is justified left. Use these text- classes to override settings: . | Class | What it does | . | .text-left | text-align: left | . | .text-right | text-align: right | . | .text-center | text-align: center | . ",
     "url": "/docs/utilities/typography/#text-justification",
     
     "relUrl": "/docs/utilities/typography/#text-justification"
-  },"313": {
+  },"336": {
     "doc": "Typography",
     "title": "Typography",
     "content": " ",
     "url": "/docs/utilities/typography/",
     
     "relUrl": "/docs/utilities/typography/"
-  },"314": {
+  },"337": {
     "doc": "Typography",
     "title": "Typography",
     "content": " ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"315": {
+  },"338": {
     "doc": "Typography",
     "title": "Table of contents",
     "content": ". | Font stack | Responsive type scale | Headings | Body text | Inline elements | Typographic Utilities | . ",
     "url": "/docs/ui-components/typography/#table-of-contents",
     
     "relUrl": "/docs/ui-components/typography/#table-of-contents"
-  },"316": {
+  },"339": {
     "doc": "Typography",
     "title": "Font stack",
     "content": "By default, Just the Docs uses a native system font stack for sans-serif fonts: . system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Segoe UI Emoji\" . ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz . For monospace type, like code snippets or the &lt;pre&gt; element, Just the Docs uses a native system font stack for monospace fonts: . \"SFMono-Regular\", Menlo, Consolas, Monospace . ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz . ",
     "url": "/docs/ui-components/typography/#font-stack",
     
     "relUrl": "/docs/ui-components/typography/#font-stack"
-  },"317": {
+  },"340": {
     "doc": "Typography",
     "title": "Responsive type scale",
     "content": "Just the Docs uses a responsive type scale that shifts depending on the viewport size. | Selector | Small screen size font-size | Large screen size font-size | . | h1, .text-alpha | 32px | 36px | . | h2, .text-beta | 18px | 24px | . | h3, .text-gamma | 16px | 18px | . | h4, .text-delta | 14px | 16px | . | h5, .text-epsilon | 16px | 18px | . | h6, .text-zeta | 18px | 24px | . | body | 14px | 16px | . ",
     "url": "/docs/ui-components/typography/#responsive-type-scale",
     
     "relUrl": "/docs/ui-components/typography/#responsive-type-scale"
-  },"318": {
+  },"341": {
     "doc": "Typography",
     "title": "Headings",
     "content": "Headings are rendered like this: . ",
     "url": "/docs/ui-components/typography/#headings",
     
     "relUrl": "/docs/ui-components/typography/#headings"
-  },"319": {
+  },"342": {
     "doc": "Typography",
     "title": "Heading 1",
     "content": " ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"320": {
+  },"343": {
     "doc": "Typography",
     "title": "Heading 2",
     "content": "Heading 3 . Heading 4 . Heading 5 . Heading 6 . # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6 . ",
     "url": "/docs/ui-components/typography/",
     
     "relUrl": "/docs/ui-components/typography/"
-  },"321": {
+  },"344": {
     "doc": "Typography",
     "title": "Body text",
     "content": "Default body text is rendered like this: . Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ",
     "url": "/docs/ui-components/typography/#body-text",
     
     "relUrl": "/docs/ui-components/typography/#body-text"
-  },"322": {
+  },"345": {
     "doc": "Typography",
     "title": "Inline elements",
     "content": "Text can be bold, italic, or strikethrough. Link to another page. Text can be **bold**, _italic_, or ~~strikethrough~~. [Link to another page](/). ",
     "url": "/docs/ui-components/typography/#inline-elements",
     
     "relUrl": "/docs/ui-components/typography/#inline-elements"
-  },"323": {
+  },"346": {
     "doc": "Typography",
     "title": "Typographic Utilities",
     "content": "There are a number of specific typographic CSS classes that allow you to override default styling for font size, font weight, line height, and capitalization. View typography utilities . ",
     "url": "/docs/ui-components/typography/#typographic-utilities",
     
     "relUrl": "/docs/ui-components/typography/#typographic-utilities"
-  },"324": {
+  },"347": {
     "doc": "UI Components",
     "title": "UI Components",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/ui-components",
     
     "relUrl": "/docs/ui-components"
-  },"325": {
+  },"348": {
     "doc": "Utilities",
     "title": "Utilities",
     "content": "CSS utility classes come in handy when you want to override default styles to create additional whitespace (margins/padding), correct unexpected shifts in font size or weight, add color, or hide (or show) something at a specific screen size. ",
     "url": "/docs/utilities",
     
     "relUrl": "/docs/utilities"
-  },"326": {
+  },"349": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/",
     
     "relUrl": "/docs/programming-language/vuejs-basic/"
-  },"327": {
+  },"350": {
     "doc": "Vue.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Vue 설치 | 데이터 바인딩 | 반복문 | 이벤트 핸들러 | 모달창 만들기 | export defalut . | 데이터 부분 | 가져오는 부분 | . | . 참조 자료 : [인스타그램을 만들며 배워보는 Vue.js 3 완벽 가이드] (https://codingapple.com/course/vue-js/) . ",
     "url": "/docs/programming-language/vuejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#table-of-contents"
-  },"328": {
+  },"351": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue 설치",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#vue-%EC%84%A4%EC%B9%98",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#vue-설치"
-  },"329": {
+  },"352": {
     "doc": "Vue.js 기본 개념",
     "title": "데이터 바인딩",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#데이터-바인딩"
-  },"330": {
+  },"353": {
     "doc": "Vue.js 기본 개념",
     "title": "반복문",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%B0%98%EB%B3%B5%EB%AC%B8",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#반복문"
-  },"331": {
+  },"354": {
     "doc": "Vue.js 기본 개념",
     "title": "이벤트 핸들러",
     "content": "&lt;button @mouseover =\"신고수--\" @click=\"신고수++\"&gt;허위매물신고&lt;/button&gt; &lt;span&gt;신고수 : &lt;/span&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%9F%AC",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#이벤트-핸들러"
-  },"332": {
+  },"355": {
     "doc": "Vue.js 기본 개념",
     "title": "모달창 만들기",
     "content": "모달창을 미리 만들어 클릭 시 상태조건을 변경한다. &lt;div class=\"black-bg\" v-if=\"모달창열렸니 == true\"&gt; &lt;div class=\"white-bg\"&gt; &lt;h4&gt;상세페이지임&lt;/h4&gt; &lt;p&gt;상세페이지 내용임&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#모달창-만들기"
-  },"333": {
+  },"356": {
     "doc": "Vue.js 기본 개념",
     "title": "export defalut",
     "content": "데이터 부분 . export default [{ id : 0, title: \"Sinrim station 30 meters away\", image: \"https://codingapple1.github.io/vue/room0.jpg\", content: \"18년 신축공사한 남향 원룸 ☀️, 공기청정기 제공\", price: 340000 }, { . 가져오는 부분 . import data from './assets/oneroom.js'; export default { name: 'App', data() { return { 원룸들 : data, . &lt;img :src=\"원룸들[2].image\" class=\"room-img\"&gt; &lt;h4 @click=\"모달창열렸니 = true\"&gt; &lt;/h4&gt; &lt;p&gt; 원 &lt;/p&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#export-defalut",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#export-defalut"
-  },"334": {
+  },"357": {
     "doc": "Vue.js",
     "title": "Vue.js",
     "content": " ",
