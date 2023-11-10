@@ -19,6 +19,11 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 [Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View it on GitHub][Just the Docs repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
 
+
+- dmjgr.tistory.com : done
+- prev. github page
+- google blog
+
 ---
 
 {: .warning }
