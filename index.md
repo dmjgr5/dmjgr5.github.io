@@ -21,8 +21,8 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 
 
 - dmjgr.tistory.com : done
-- prev. github page
-- google blog
+- prev. github page : 2021-12-01-markdownbasic.md 이거부터 진행
+- google blog 
 
 ---
 
