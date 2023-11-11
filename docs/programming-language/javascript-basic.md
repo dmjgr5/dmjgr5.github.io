@@ -19,8 +19,13 @@ nav_order: 10
 
 ---
 
+{: .note}
+> 1. JavaScript is the Programming Language for the Web
+> 1. JavaScript can calculate, manipulate and validate data
+> 1. JavaScript can update and change both HTML and CSS
 
- ​
+
+
 ## 자바스크립트 목적 및 주요 기능
 ​
 -   input 창에 특정 값을 넣어주는 용도(input 태그)
@@ -455,9 +460,10 @@ $('#city').append('' + city\[i\].name + '');
         name:"",
         city:""
     };  
-​
-​
-​
-​
+
 </script>
 ```
+
+## Related Source & Trial
+
+[https://www.w3schools.com/whatis/whatis_js.asp](https://www.w3schools.com/whatis/whatis_js.asp)
