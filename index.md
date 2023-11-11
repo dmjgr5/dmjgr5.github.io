@@ -10,6 +10,18 @@ permalink: /
 
  [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdmjgr5)](https://hits.seeyoufarm.com)
 
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=dmjgr5&show_icons=true&theme=transparent)
+
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=dmjgr5&layout=compact)
+
+![](https://github-readme-stats.vercel.app/api?username=dmjgr5&show_icons=true&theme=radical)
+
+
+
+![](https://img.shields.io/github/commit-activity/m/dmjgr5?color=green&style=for-the-badge)
+
+<img src="https://github.com/dmjgr5" alt="GitHub Contributions">
+
 
 # Welcome to [Your Name]'s Developer Hub!
 
