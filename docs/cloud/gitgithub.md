@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Git
+title: Git & Github
 parent: Cloud
 has_children: true
 nav_order: 20

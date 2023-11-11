@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Git Command
-parent: Git
+parent: Git & Github
 grand_parent: Cloud
-permalink: /docs/cloud/git-command/
+permalink: /docs/cloud/gitgithub-command/
 nav_order: 10
 ---
 
