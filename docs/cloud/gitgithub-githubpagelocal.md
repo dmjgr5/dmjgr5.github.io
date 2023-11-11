@@ -32,7 +32,11 @@ nav_order: 81
     - Ruby+Devkit 2.7.4-1 (x64) : 3.0 지원안하므로 2.X 로 설치한다.
     
 - 버전 확인 : ruby -v
-    
+
+```bash
+user@user:~/dmjgr5.github.io$ ruby -v
+ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) 
+```
 
 ------
 
@@ -42,6 +46,22 @@ nav_order: 81
     - gem install jekyll
     - gem install bundler
 
+- version 확인
+
+```bash
+user@user-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ jekyll --version
+Warning: the running version of Bundler (2.1.2) is older than the version that created the lockfile (2.4.21). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.4.21`.
+jekyll 4.3.2
+
+user@user-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ gem -v
+3.1.2
+
+user@user-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ bundler --version
+Bundler version 2.4.21
+
+
+
+```
 
 - 샘플블로그 체크
     - jekyll new HelloBlog
@@ -59,10 +79,9 @@ nav_order: 81
 - 인코딩 에러 발생시 다음의 코드를 실행한다.
     - chcp 65001
 - 지킬을 실행한다.
-    - jekyll serve
+    - `jekyll serve` or `sudo bundle exec jekyll serve`
     - 브라우저를 열어 http://127.0.0.1:4000/로 접속하면 로컬 상에서 블로그가 구현된 결과를 살펴 볼 수 있다.
 	
-
 
 ------
 
@@ -97,4 +116,27 @@ nav_order: 81
     C:\park.github.io>git push -u origin master
     ```
 
+## 5. dmjgr5.github.io 기준 설정
 
+```bash
+- dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ ruby -v
+ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-
+
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ jekyll --version
+Warning: the running version of Bundler (2.1.2) is older than the version that created the lockfile (2.4.21). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.4.21`.
+jekyll 4.3.2
+
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ gem -v
+3.1.2
+
+
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ bundler --version
+Bundler version 2.4.21
+
+
+
+– 실행
+
+sudo jekyll serve
+sudo bundle exec jekyll serve
+```
