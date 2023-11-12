@@ -11,7 +11,7 @@ permalink: /
 
 
 
-# Welcome to dmjgr5's Developer Hub! 👋 
+# Welcome to dmjgr5's Developer Hub!
 
 <p >
    <a href="mailto:dmjgr5@gmail.com"><img alt="Gmail" src="https://img.shields.io/badge/-dmjgr5@gmail.com-black?style=flat-square&logo=Gmail&logoColor=white&link=mailto:dmjgr5@gmail.com"></a>
@@ -22,19 +22,22 @@ Hello, I’m a passionate developer with expertise in network engineering, progr
 
 ---
 
-## 🌱 Purpose of This Repository
+## Purpose of This Repository
 
 This repository serves multiple purposes:
 
-1. **Knowledge Sharing:** I aim to share my experiences and knowledge with the developer community. You'll find articles, tutorials, and code snippets covering a range of topics.
+1. 💡 **Knowledge Sharing:** I aim to share my experiences and knowledge with the developer community. You'll find articles, tutorials, and code snippets covering a range of topics.
 
-2. **Technique Repository:** A collection of techniques and best practices that I've found useful in my work. Feel free to explore and adapt them to your projects.
+2. 📂 **Technique Repository:** A collection of techniques and best practices that I've found useful in my work. Feel free to explore and adapt them to your projects.
 
-3. **Experience Documentation:** I use this space to document my journey, challenges, and successes. It's a log of my growth as a developer and a resource for others facing similar situations.
+3. 📄 **Experience Documentation:** I use this space to document my journey, challenges, and successes. It's a log of my growth as a developer and a resource for others facing similar situations.
 
-## 🔭 My Expertise
 
-### Network
+
+
+## My Expertise
+
+### 🔭 Network
 
 I have a strong background in network engineering, including:
 
@@ -42,7 +45,7 @@ I have a strong background in network engineering, including:
 - Routing and switching
 - Network security
 
-### Programming
+### 💻 Programming
 
 I'm proficient in various programming languages, such as:
 
@@ -52,7 +55,7 @@ I'm proficient in various programming languages, such as:
 - Shell scripting and so on
 
 
-### DevOps
+### 🌱 DevOps
 
 As a DevOps enthusiast, I specialize in:
 
@@ -61,7 +64,7 @@ As a DevOps enthusiast, I specialize in:
 - Containerization with Docker and Kubernetes
 
 
-## 😄 My Github Status
+## My Github Status
  
 ![Get started now](https://github-readme-stats.vercel.app/api?username=dmjgr5&show_icons=true&theme=transparent)
 ![View it on GitHub](https://github-readme-stats.vercel.app/api/top-langs/?username=dmjgr5&layout=compact)
@@ -82,7 +85,7 @@ As a DevOps enthusiast, I specialize in:
 Feel free to explore, learn, and contribute! Happy coding! 🚀
 
 
-
+<!-- 
 --- 
 
 # Focus on writing good documentation
@@ -180,4 +183,4 @@ Just the Docs is committed to fostering a welcoming community.
 [Template README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
 [GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
 [customize]: {% link docs/customization.md %}
-[use the template]: https://github.com/just-the-docs/just-the-docs-template/generate
+[use the template]: https://github.com/just-the-docs/just-the-docs-template/generate -->
