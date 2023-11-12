@@ -3,7 +3,7 @@ layout: default
 title: Theoretical
 nav_order: 90
 has_children: true
-permalink: /docs/book-review
+permalink: /docs/theoretical
 ---
 
 # Theoretical
