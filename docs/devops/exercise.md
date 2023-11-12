@@ -3,6 +3,7 @@ layout: default
 title: DevOps Exercise 
 parent: Devops
 nav_order: 5
+last_modified_date: 2023-11-01 16:43:00
 ---
 
 
@@ -10,6 +11,7 @@ nav_order: 5
 
 # Devops Exercise
 {: .no_toc }
+
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -29,3 +31,5 @@ nav_order: 5
 ![](/assets/images/mydevopsarch.png)
 
 [DevOps Architecture On Local environment](https://docs.google.com/presentation/d/1WTRT2jTE8wY92JFQjKV0aHk6835C_8lfZ8vID4O33PQ/edit#slide=id.p)
+
+
