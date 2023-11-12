@@ -29,7 +29,7 @@ nav_order: 10
 
 ## 이벤트 핸들러
 
-```
+```javascript
 <button @mouseover ="신고수--" @click="신고수++">허위매물신고</button> <span>신고수 : {{신고수}}</span>
 ```
 
@@ -37,7 +37,7 @@ nav_order: 10
 
 모달창을 미리 만들어 클릭 시 상태조건을 변경한다.
 
-```
+```javascript
 <div class="black-bg" v-if="모달창열렸니 == true">
 <div class="white-bg">
   <h4>상세페이지임</h4>
