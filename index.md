@@ -8,28 +8,31 @@ permalink: /
 
 
 
- [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdmjgr5)](https://hits.seeyoufarm.com)
-
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=dmjgr5&show_icons=true&theme=transparent)
-
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=dmjgr5&layout=compact)
-
-![](https://github-readme-stats.vercel.app/api?username=dmjgr5&show_icons=true&theme=radical)
 
 
 
-![](https://img.shields.io/github/commit-activity/m/dmjgr5?color=green&style=for-the-badge)
+# Welcome to dmjgr5's Developer Hub! 👋 
 
-<img src="https://github.com/dmjgr5" alt="GitHub Contributions">
+<p >
+   <a href="mailto:dmjgr5@gmail.com"><img alt="Gmail" src="https://img.shields.io/badge/-dmjgr5@gmail.com-black?style=flat-square&logo=Gmail&logoColor=white&link=mailto:dmjgr5@gmail.com"></a>
+    <image src ="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdmjgr5"></image>
+</p>
 
+Hello, I’m a passionate developer with expertise in network engineering, programming, and DevOps. This repository serves as my knowledge hub, where I share insights, techniques, and experiences gained throughout my journey in the tech world.
 
-# Welcome to [Your Name]'s Developer Hub!
+---
 
-## About Me
+## 🌱 Purpose of This Repository
 
-Hello, I'm a passionate developer with expertise in network engineering, programming, and DevOps. This repository serves as my knowledge hub, where I share insights, techniques, and experiences gained throughout my journey in the tech world.
+This repository serves multiple purposes:
 
-## My Expertise
+1. **Knowledge Sharing:** I aim to share my experiences and knowledge with the developer community. You'll find articles, tutorials, and code snippets covering a range of topics.
+
+2. **Technique Repository:** A collection of techniques and best practices that I've found useful in my work. Feel free to explore and adapt them to your projects.
+
+3. **Experience Documentation:** I use this space to document my journey, challenges, and successes. It's a log of my growth as a developer and a resource for others facing similar situations.
+
+## 🔭 My Expertise
 
 ### Network
 
@@ -57,27 +60,24 @@ As a DevOps enthusiast, I specialize in:
 - Infrastructure as Code (IaC)
 - Containerization with Docker and Kubernetes
 
-## Purpose of This Repository
 
-This repository serves multiple purposes:
-
-1. **Knowledge Sharing:** I aim to share my experiences and knowledge with the developer community. You'll find articles, tutorials, and code snippets covering a range of topics.
-
-2. **Technique Repository:** A collection of techniques and best practices that I've found useful in my work. Feel free to explore and adapt them to your projects.
-
-3. **Experience Documentation:** I use this space to document my journey, challenges, and successes. It's a log of my growth as a developer and a resource for others facing similar situations.
-
-## How to Navigate
-
-- 📚 **[Blog](blog/):** Explore my articles and tutorials.
-- 💻 **[Code Snippets](code/):** Find helpful code snippets and scripts.
-- 📖 **[Experience Log](experiences/):** Dive into my development journey.
+## 😄 My Github Status
+ 
+![Get started now](https://github-readme-stats.vercel.app/api?username=dmjgr5&show_icons=true&theme=transparent)
+![View it on GitHub](https://github-readme-stats.vercel.app/api/top-langs/?username=dmjgr5&layout=compact)
 
 
-## Connect With Me
+<!-- credits for gif https://gph.is/g/ZWg5jr7 -->
+<!-- <img align="right" height="150" width="210" src="data.gif">
 
-- Github: [https://github.com/dmjgr5](https://github.com/dmjgr5)
-- Email: [dmjgr5@gmail.com](mailto:dmjgr5@gmail.com)
+- 🔭 **I’m currently working on:** ML models
+- 🌱 **I’m currently learning:** data engineering
+- 👯 **I’m looking to collaborate on:** data science projects/competitions
+- 💬 **Ask me about:** data science, memes, kdramas, Bad Bunny
+- ⚡ **Hobbies:** books, internet, music, series, pet my cat
+- 😄 **Pronouns:** he/him -->
+
+
 
 Feel free to explore, learn, and contribute! Happy coding! 🚀
 
