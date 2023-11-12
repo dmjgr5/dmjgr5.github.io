@@ -11,7 +11,7 @@ permalink: /
 
 
 
-# Welcome to dmjgr5's Developer Hub!
+# Welcome to dmjgr5's Page!
 
 <p >
    <a href="mailto:dmjgr5@gmail.com"><img alt="Gmail" src="https://img.shields.io/badge/-dmjgr5@gmail.com-black?style=flat-square&logo=Gmail&logoColor=white&link=mailto:dmjgr5@gmail.com"></a>
