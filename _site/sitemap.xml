@@ -184,6 +184,9 @@
 <loc>http://localhost:4000/docs/devops/jfrog/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/docs/cloud/k8s-archi/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/docs/cloud/k8s-install-lab/</loc>
 </url>
 <url>
