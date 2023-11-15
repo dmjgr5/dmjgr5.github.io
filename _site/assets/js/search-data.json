@@ -470,7 +470,7 @@
   },"67": {
     "doc": "Docker Command",
     "title": "docker login",
-    "content": "도커 레지스트리에 업로드를 하려면 docker login 명령을 통해 로그인해야 한다. // 로그인 root@docker1:~# docker login Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one. Username: dcpark Password: WARNING! Your password will be stored unencrypted in /root/.docker/config.json. Configure a credential helper to remove this warning. See https://docs.docker.com/engine/reference/commandline/login/#credentials-store Login Succeeded root@docker1:~# root@docker1:~# cat /root/.docker/config.json { \"auths\": { \"https://index.docker.io/v1/\": { \"auth\": \"ABCDEFJXXXXXXjg1M0Bzag==\" } } }root@docker1:~# root@docker1:~# // 로그 아웃 root@docker1:~# docker logout Removing login credentials for https://index.docker.io/v1/ . ",
+    "content": "도커 레지스트리에 업로드를 하려면 docker login 명령을 통해 로그인해야 한다. // 로그인 root@docker1:~# docker login Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one. Username: testuser Password: WARNING! Your password will be stored unencrypted in /root/.docker/config.json. Configure a credential helper to remove this warning. See https://docs.docker.com/engine/reference/commandline/login/#credentials-store Login Succeeded root@docker1:~# root@docker1:~# cat /root/.docker/config.json { \"auths\": { \"https://index.docker.io/v1/\": { \"auth\": \"ABCDEFJXXXXXXjg1M0Bzag==\" } } }root@docker1:~# root@docker1:~# // 로그 아웃 root@docker1:~# docker logout Removing login credentials for https://index.docker.io/v1/ . ",
     "url": "/docs/cloud/docker-command/#docker-login",
     
     "relUrl": "/docs/cloud/docker-command/#docker-login"
@@ -484,7 +484,7 @@
   },"69": {
     "doc": "Docker Command",
     "title": "docker image tag",
-    "content": "이미지를 구분하기 위한 tag 를 새롭게 붙일 때 사용한다. root@docker1:~# docker image ls -a REPOSITORY TAG IMAGE ID CREATED SIZE busybox latest 66ba00ad3de8 5 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB root@docker1:~# // busybox 다운로드 root@docker1:~# docker image pull busybox Using default tag: latest latest: Pulling from library/busybox Digest: sha256:7b3ccabffc97de872a30dfd234fd972a66d247c8cfc69b0550f276481852627c Status: Image is up to date for busybox:latest docker.io/library/busybox:latest root@docker1:~# // dcpark/box 의 1.0 으로 생성 root@docker1:~# docker image tag busybox dcpark/box:1.0 root@docker1:~# // nginx 다운로드 root@docker1:~# docker image pull nginx Using default tag: latest latest: Pulling from library/nginx Digest: sha256:0047b729188a15da49380d9506d65959cce6d40291ccfb4e039f5dc7efd33286 Status: Image is up to date for nginx:latest docker.io/library/nginx:latest root@docker1:~# // dcpark/web-server 1.0 태그로 생성 root@docker1:~# docker image tag nginx dcpark/web-server:1.0 root@docker1:~# // 생성됐는지 조회 // 원래 이미지와 생성한 이미지의 IMAGE ID 가 동일하다. root@docker1:~# docker image ls -a REPOSITORY TAG IMAGE ID CREATED SIZE dcpark/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB dcpark/web-server 1.0 1403e55ab369 2 weeks ago 142MB root@docker1:~# . Docker 레지스트리로부터 pull 할 때는 로그인이 필요없으나 push 할 때는 로그인이 필요하다. root@docker1:~# docker image push dcpark/web-server:1.0 The push refers to repository [docker.io/dcpark/web-server] c72d75f45e5b: Mounted from library/nginx 9a0ef04f57f5: Mounted from library/nginx d13aea24d2cb: Mounted from library/nginx 2b3eec357807: Mounted from library/nginx 2dadbc36c170: Mounted from library/nginx 8a70d251b653: Mounted from library/nginx 1.0: digest: sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c size: 1570 root@docker1:~# . 도커 이미지가 아래와 같이 PUSH 된 것을 확인할 수 있다. 호스트에서 지운 후 Pull 하면 이미지가 다운로드 된 것을 확인할 수 있다. root@docker1:~# docker image rm dcpark/web-server:1.0 Untagged: dcpark/web-server:1.0 Untagged: dcpark/web-server@sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c root@docker1:~# root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE dcpark/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB root@docker1:~# root@docker1:~# docker image pull dcpark/web-server:1.0 1.0: Pulling from dcpark/web-server Digest: sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c Status: Downloaded newer image for dcpark/web-server:1.0 docker.io/dcpark/web-server:1.0 root@docker1:~# root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE dcpark/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB dcpark/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB root@docker1:~# . ",
+    "content": "이미지를 구분하기 위한 tag 를 새롭게 붙일 때 사용한다. root@docker1:~# docker image ls -a REPOSITORY TAG IMAGE ID CREATED SIZE busybox latest 66ba00ad3de8 5 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB root@docker1:~# // busybox 다운로드 root@docker1:~# docker image pull busybox Using default tag: latest latest: Pulling from library/busybox Digest: sha256:7b3ccabffc97de872a30dfd234fd972a66d247c8cfc69b0550f276481852627c Status: Image is up to date for busybox:latest docker.io/library/busybox:latest root@docker1:~# // testuser/box 의 1.0 으로 생성 root@docker1:~# docker image tag busybox testuser/box:1.0 root@docker1:~# // nginx 다운로드 root@docker1:~# docker image pull nginx Using default tag: latest latest: Pulling from library/nginx Digest: sha256:0047b729188a15da49380d9506d65959cce6d40291ccfb4e039f5dc7efd33286 Status: Image is up to date for nginx:latest docker.io/library/nginx:latest root@docker1:~# // testuser/web-server 1.0 태그로 생성 root@docker1:~# docker image tag nginx testuser/web-server:1.0 root@docker1:~# // 생성됐는지 조회 // 원래 이미지와 생성한 이미지의 IMAGE ID 가 동일하다. root@docker1:~# docker image ls -a REPOSITORY TAG IMAGE ID CREATED SIZE testuser/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB testuser/web-server 1.0 1403e55ab369 2 weeks ago 142MB root@docker1:~# . Docker 레지스트리로부터 pull 할 때는 로그인이 필요없으나 push 할 때는 로그인이 필요하다. root@docker1:~# docker image push testuser/web-server:1.0 The push refers to repository [docker.io/testuser/web-server] c72d75f45e5b: Mounted from library/nginx 9a0ef04f57f5: Mounted from library/nginx d13aea24d2cb: Mounted from library/nginx 2b3eec357807: Mounted from library/nginx 2dadbc36c170: Mounted from library/nginx 8a70d251b653: Mounted from library/nginx 1.0: digest: sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c size: 1570 root@docker1:~# . 도커 이미지가 아래와 같이 PUSH 된 것을 확인할 수 있다. 호스트에서 지운 후 Pull 하면 이미지가 다운로드 된 것을 확인할 수 있다. root@docker1:~# docker image rm testuser/web-server:1.0 Untagged: testuser/web-server:1.0 Untagged: testuser/web-server@sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c root@docker1:~# root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE testuser/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB root@docker1:~# root@docker1:~# docker image pull testuser/web-server:1.0 1.0: Pulling from testuser/web-server Digest: sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c Status: Downloaded newer image for testuser/web-server:1.0 docker.io/testuser/web-server:1.0 root@docker1:~# root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE testuser/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB testuser/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB root@docker1:~# . ",
     "url": "/docs/cloud/docker-command/#docker-image-tag",
     
     "relUrl": "/docs/cloud/docker-command/#docker-image-tag"
@@ -498,7 +498,7 @@
   },"71": {
     "doc": "Docker Command",
     "title": "docker container commit",
-    "content": "이미지 생성에는 두가지 방법이 있다. | docker container commit 와 같이 컨테이너 상태를 기반으로 이미지를 생성하는 방법 | Dockerfile 을 빌드(Build) 해서 생성하는 방법이 있다. 후자가 많이 쓰이는 방법이다. | . [도커 이미지 생성의 2가지 방법 ] . // ubuntu 를 sample 컨테이너로 만든다. root@docker1:~# docker run -it --name sample ubuntu Unable to find image 'ubuntu:latest' locally latest: Pulling from library/ubuntu 6e3729cf69e0: Pull complete Digest: sha256:27cb6e6ccef575a4698b66f5de06c7ecd61589132d5a91d098f7f3f9285415a9 Status: Downloaded newer image for ubuntu:latest root@8a80c4cde61e:/# apt-get update Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB] ... Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3520 B] Fetched 25.1 MB in 1min 38s (257 kB/s) Reading package lists... Done root@8a80c4cde61e:/# // 컨테이너에서 nginx 를 설치한다. root@8a80c4cde61e:/# apt-get install -y nginx Reading package lists... Done Building dependency tree... Done Reading state information... Done The following additional packages will be installed: fontconfig-config fonts-dejavu-core iproute2 libatm1 libbpf0 libbrotli1 libbsd0 libcap2-bin libdeflate0 libelf1 libexpat1 libfontconfig1 libfreetype6 libgd3 libicu70 libjbig0 libjpeg-turbo8 libjpeg8 libmaxminddb0 libmd0 libmnl0 libnginx-mod-http-geoip2 libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libpam-cap libpng16-16 libtiff5 libwebp7 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxml2 libxpm4 libxslt1.1 libxtables12 nginx-common nginx-core ucf Suggested packages: Setting up nginx (1.18.0-6ubuntu14.3) ... Processing triggers for libc-bin (2.35-0ubuntu3.1) ... root@8a80c4cde61e:/# CTRL+PQ // detach 모드로 전환 root@docker1:~# root@docker1:~# echo Hello world &gt; index.html root@docker1:~# docker container cp index.html sample:/var/www/html/index.html // index.html 수정 후 sample 컨테이너를 dcpark/web-nginx:1.0 이미지 생성 root@docker1:~# docker container commit -a \"DCPARK\" -m \"Customized image\" sample dcpark/web-nginx:1.0 sha256:6f10cf278ad2f4ba4017850c0ced7b77230671e613773bc46dd7822cbcccaba1 root@docker1:~# // dcpark/web-nginx 1.0 이미지 생성 확인 root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE dcpark/web-nginx 1.0 6f10cf278ad2 8 seconds ago 174MB busybox latest 66ba00ad3de8 5 days ago 4.87MB dcpark/box 1.0 66ba00ad3de8 5 days ago 4.87MB dcpark/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB root@docker1:~# // 이미지 상세 확인 (Comment, Author) root@docker1:~# docker image inspect dcpark/web-nginx:1.0 [ { \"Id\": \"sha256:6f10cf278ad2f4ba4017850c0ced7b77230671e613773bc46dd7822cbcccaba1\", \"RepoTags\": [ \"dcpark/web-nginx:1.0\" \"Comment\": \"Customized image\", \"Created\": \"2023-01-09T14:06:44.617231726Z\", \"DockerVersion\": \"20.10.22\", \"Author\": \"DCPARK\", . | [##_Image | kage@da6tcx/btsjkiihTDb/zgfvyFqTXkcOQVUDunVck0/img.png | CDM | 1.3 | {“originWidth”:881,”originHeight”:130,”style”:”alignCenter”,”caption”:”도커 이미지 Push 상태 확인”,”filename”:”edited_blob”}_##] | . // 도커이미지에서 dcpark/web-nginx:1.0 를 가져와 컨테이너를 생성한다. root@docker1:~# docker container run -d --name web -p 8080:80 dcpark/web-nginx:1.0 nginx -g 'daemon off; ' Unable to find image 'dcpark/web-nginx:1.0' locally 1.0: Pulling from dcpark/web-nginx 6e3729cf69e0: Already exists 7c9aaa2fac99: Pull complete Digest: sha256:4150994823e51b64caa7b5ccdbb543703e776d519596562b02a9a127ffe770c0 Status: Downloaded newer image for dcpark/web-nginx:1.0 dd4e6613c4cf4ada677b19c67cfb2656d2849d72410850a80a0d6c76cc4f35bb // 가져온 이미지가 있다!! root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE dcpark/web-nginx 1.0 6f10cf278ad2 23 minutes ago 174MB dcpark/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB dcpark/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB . web 이란 이름의 컨테이너 생성확인 . Every 1.0s: docker container ps -a docker1: Mon Jan 9 14:23:23 2023 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES dd4e6613c4cf dcpark/web-nginx:1.0 \"nginx -g 'daemon of…\" 36 seconds ago Up 35 seconds 0.0.0.0:8080-&gt;80/tcp, :::8080-&gt;80/tcp web 8a80c4cde61e ubuntu \"bash\" 20 minutes ago Up 20 minutes sample . localhost:8080 접속 확인 . | [##_Image | kage@bzUgM6/btsjkFYTbkU/8AzXGVzjQqZ50V21OfSdKK/img.png | CDM | 1.3 | {“originWidth”:675,”originHeight”:181,”style”:”alignLeft”}_##] | . ",
+    "content": "이미지 생성에는 두가지 방법이 있다. | docker container commit 와 같이 컨테이너 상태를 기반으로 이미지를 생성하는 방법 | Dockerfile 을 빌드(Build) 해서 생성하는 방법이 있다. 후자가 많이 쓰이는 방법이다. | . [도커 이미지 생성의 2가지 방법 ] . // ubuntu 를 sample 컨테이너로 만든다. root@docker1:~# docker run -it --name sample ubuntu Unable to find image 'ubuntu:latest' locally latest: Pulling from library/ubuntu 6e3729cf69e0: Pull complete Digest: sha256:27cb6e6ccef575a4698b66f5de06c7ecd61589132d5a91d098f7f3f9285415a9 Status: Downloaded newer image for ubuntu:latest root@8a80c4cde61e:/# apt-get update Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB] ... Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3520 B] Fetched 25.1 MB in 1min 38s (257 kB/s) Reading package lists... Done root@8a80c4cde61e:/# // 컨테이너에서 nginx 를 설치한다. root@8a80c4cde61e:/# apt-get install -y nginx Reading package lists... Done Building dependency tree... Done Reading state information... Done The following additional packages will be installed: fontconfig-config fonts-dejavu-core iproute2 libatm1 libbpf0 libbrotli1 libbsd0 libcap2-bin libdeflate0 libelf1 libexpat1 libfontconfig1 libfreetype6 libgd3 libicu70 libjbig0 libjpeg-turbo8 libjpeg8 libmaxminddb0 libmd0 libmnl0 libnginx-mod-http-geoip2 libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libpam-cap libpng16-16 libtiff5 libwebp7 libx11-6 libx11-data libxau6 libxcb1 libxdmcp6 libxml2 libxpm4 libxslt1.1 libxtables12 nginx-common nginx-core ucf Suggested packages: Setting up nginx (1.18.0-6ubuntu14.3) ... Processing triggers for libc-bin (2.35-0ubuntu3.1) ... root@8a80c4cde61e:/# CTRL+PQ // detach 모드로 전환 root@docker1:~# root@docker1:~# echo Hello world &gt; index.html root@docker1:~# docker container cp index.html sample:/var/www/html/index.html // index.html 수정 후 sample 컨테이너를 testuser/web-nginx:1.0 이미지 생성 root@docker1:~# docker container commit -a \"TESTUSER\" -m \"Customized image\" sample testuser/web-nginx:1.0 sha256:6f10cf278ad2f4ba4017850c0ced7b77230671e613773bc46dd7822cbcccaba1 root@docker1:~# // testuser/web-nginx 1.0 이미지 생성 확인 root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE testuser/web-nginx 1.0 6f10cf278ad2 8 seconds ago 174MB busybox latest 66ba00ad3de8 5 days ago 4.87MB testuser/box 1.0 66ba00ad3de8 5 days ago 4.87MB testuser/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB root@docker1:~# // 이미지 상세 확인 (Comment, Author) root@docker1:~# docker image inspect testuser/web-nginx:1.0 [ { \"Id\": \"sha256:6f10cf278ad2f4ba4017850c0ced7b77230671e613773bc46dd7822cbcccaba1\", \"RepoTags\": [ \"testuser/web-nginx:1.0\" \"Comment\": \"Customized image\", \"Created\": \"2023-01-09T14:06:44.617231726Z\", \"DockerVersion\": \"20.10.22\", \"Author\": \"TESTUSER\", . | [##_Image | kage@da6tcx/btsjkiihTDb/zgfvyFqTXkcOQVUDunVck0/img.png | CDM | 1.3 | {“originWidth”:881,”originHeight”:130,”style”:”alignCenter”,”caption”:”도커 이미지 Push 상태 확인”,”filename”:”edited_blob”}_##] | . // 도커이미지에서 testuser/web-nginx:1.0 를 가져와 컨테이너를 생성한다. root@docker1:~# docker container run -d --name web -p 8080:80 testuser/web-nginx:1.0 nginx -g 'daemon off; ' Unable to find image 'testuser/web-nginx:1.0' locally 1.0: Pulling from testuser/web-nginx 6e3729cf69e0: Already exists 7c9aaa2fac99: Pull complete Digest: sha256:4150994823e51b64caa7b5ccdbb543703e776d519596562b02a9a127ffe770c0 Status: Downloaded newer image for testuser/web-nginx:1.0 dd4e6613c4cf4ada677b19c67cfb2656d2849d72410850a80a0d6c76cc4f35bb // 가져온 이미지가 있다!! root@docker1:~# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE testuser/web-nginx 1.0 6f10cf278ad2 23 minutes ago 174MB testuser/box 1.0 66ba00ad3de8 5 days ago 4.87MB busybox latest 66ba00ad3de8 5 days ago 4.87MB testuser/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB . web 이란 이름의 컨테이너 생성확인 . Every 1.0s: docker container ps -a docker1: Mon Jan 9 14:23:23 2023 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES dd4e6613c4cf testuser/web-nginx:1.0 \"nginx -g 'daemon of…\" 36 seconds ago Up 35 seconds 0.0.0.0:8080-&gt;80/tcp, :::8080-&gt;80/tcp web 8a80c4cde61e ubuntu \"bash\" 20 minutes ago Up 20 minutes sample . localhost:8080 접속 확인 . | [##_Image | kage@bzUgM6/btsjkFYTbkU/8AzXGVzjQqZ50V21OfSdKK/img.png | CDM | 1.3 | {“originWidth”:675,”originHeight”:181,”style”:”alignLeft”}_##] | . ",
     "url": "/docs/cloud/docker-command/#docker-container-commit",
     
     "relUrl": "/docs/cloud/docker-command/#docker-container-commit"
@@ -624,7 +624,7 @@
   },"89": {
     "doc": "Dockerfile",
     "title": "Dockerfile 주요 개념과 생성",
-    "content": ". [Dockerfile 개념(https://www.researchgate.net/figure/Example-of-a-fictitious-Dockerfile-illustrating-common-instructions-and-quality-issues_fig1_345667168)] . Dockerfile 을 통한 build 방법 . docker build 명령어를 사용한다. root@master:~/labfile/dockerfile_dir# cat Dockerfile FROM centos . // FROM 센토스를 베이스 이미지로 지정한다. root@docker1:~/labfile/dockerfile_dir# cat Dockerfile FROM centos root@docker1:~/labfile/dockerfile_dir# // docker build 실행 root@docker1:~/labfile/dockerfile_dir# docker build -t testimage -f Dockerfile . Sending build context to Docker daemon 176.1kB Step 1/1 : FROM centos latest: Pulling from library/centos a1d0c7532777: Pull complete Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177 Status: Downloaded newer image for centos:latest ---&gt; 5d0da3dc9764 Successfully built 5d0da3dc9764 Successfully tagged testimage:latest root@docker1:~/labfile/dockerfile_dir# // testimage 이미지 생성 확인 root@docker1:~/labfile/dockerfile_dir# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE dcpark/web-nginx 1.0 6f10cf278ad2 24 hours ago 174MB dcpark/box 1.0 66ba00ad3de8 6 days ago 4.87MB busybox latest 66ba00ad3de8 6 days ago 4.87MB dcpark/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB centos latest 5d0da3dc9764 16 months ago 231MB testimage latest 5d0da3dc9764 16 months ago 231MB root@docker1:~/labfile/dockerfile_dir# . -t (tag) : 이미지 이름 -f (file) : Dockerfile 이름 . : Dockerfile 위치하는 디렉토리 . Dockerfile 과 Image layer . Dockerfile 의 명령별로 이미지 레이어가 생성된다 ** 예) 베이스 이미지는 ubuntu, 그 위에 nginx 레이어로 두번째 이미지, 그 위에 index.html 이 올라가 세번째 이미지가 생성된다. ** . root@master:~/labfile/dockerfile_dir# cat Dockerfile.1 FROM ubuntu RUN apt-get update &amp;&amp; apt-get install -y -q nginx &amp;&amp; rm -rf /var/lib/apt/lists/* COPY index.html /var/www/html/ CMD [\"nginx\", \"-g\", \"daemon off;\"] root@master:~/labfile/dockerfile_dir# . // index.html 파일 생성 root@docker1:~/labfile/dockerfile_dir# echo Hello World &gt; index.html // Dockerfile.1 소스 확인 root@docker1:~/labfile/dockerfile_dir# cat Dockerfile.1 FROM ubuntu RUN apt-get update &amp;&amp; apt-get install -y -q nginx COPY index.html /var/www/html/ CMD [\"nginx\", \"-g\", \"daemon off;\"] root@docker1:~/labfile/dockerfile_dir# // docker build root@docker1:~/labfile/dockerfile_dir# docker build -t web-nginx:v1 -f Dockerfile.1 . Sending build context to Docker daemon 176.1kB Step 1/4 : FROM ubuntu ---&gt; 6b7dfa7e8fdb Step 2/4 : RUN apt-get update &amp;&amp; apt-get install -y -q nginx ---&gt; Running in 7e6fe0ef8c1b Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB] Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB] Get:3 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [786 kB] Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB] Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB] Get:6 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB] Get:7 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB] Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB] ... 중략 Setting up nginx (1.18.0-6ubuntu14.3) ... Processing triggers for libc-bin (2.35-0ubuntu3.1) ... Removing intermediate container 7e6fe0ef8c1b ---&gt; 1edf77c6398f Step 3/4 : COPY index.html /var/www/html/ ---&gt; eeb5a81c7c8c Step 4/4 : CMD [\"nginx\", \"-g\", \"daemon off;\"] ---&gt; Running in 3dda10f8fb0a Removing intermediate container 3dda10f8fb0a ---&gt; 63123ab8639e Successfully built 63123ab8639e Successfully tagged web-nginx:v1 // 이미지 생성 확인 (web-nginx:v1) root@docker1:~/labfile/dockerfile_dir# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE web-nginx v1 63123ab8639e About a minute ago 174MB dcpark/web-nginx 1.0 6f10cf278ad2 24 hours ago 174MB dcpark/box 1.0 66ba00ad3de8 6 days ago 4.87MB busybox latest 66ba00ad3de8 6 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB dcpark/web-server 1.0 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB centos latest 5d0da3dc9764 16 months ago 231MB testimage latest 5d0da3dc9764 16 months ago 231MB . FROM : 기본 이미지 RUN : 내부에서 수행할 작업 COPY : 호스트에서 파일 CMD : 1번 프로세스에 대한 command 의 약자 . 이미지 생성 시 용량 관련 고려사항 . 용량이 작은 베이스 이미지 선택하거나 불필요한 파일들 삭제한다. | alpine , ###-slim, busybox | rm -rf /var/lib/apt/lists/* | . root@docker1:~/labfile/dockerfile_dir# nano Dockerfile.1 root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# cat Dockerfile.1 FROM ubuntu RUN apt-get update &amp;&amp; apt-get install -y -q nginx &amp;&amp; rm -rf /var/lib/apt/lists/* COPY index.html /var/www/html/ CMD [\"nginx\", \"-g\", \"daemon off;\"] root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# docker build -t web-nginx:v2 -f Dockerfile.1 . Sending build context to Docker daemon 176.1kB Step 1/4 : FROM ubuntu ---&gt; 6b7dfa7e8fdb Step 2/4 : RUN apt-get update &amp;&amp; apt-get install -y -q nginx &amp;&amp; rm -rf /var/lib/apt/lists/* ---&gt; Running in 72c6c189dc81 Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB] Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB] ... 중략 Processing triggers for libc-bin (2.35-0ubuntu3.1) ... Removing intermediate container 72c6c189dc81 ---&gt; 24be474303f8 Step 3/4 : COPY index.html /var/www/html/ ---&gt; 9622834c67c5 Step 4/4 : CMD [\"nginx\", \"-g\", \"daemon off;\"] ---&gt; Running in c75a2a490216 Removing intermediate container c75a2a490216 ---&gt; 5e2b37603055 Successfully built 5e2b37603055 Successfully tagged web-nginx:v2 root@docker1:~/labfile/dockerfile_dir# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE web-nginx v2 5e2b37603055 18 seconds ago 133MB web-nginx v1 63123ab8639e 15 minutes ago 174MB . /var/lib/apt/lists/*` 를 삭제하고 진행했을 때 v1 보다 사이즈가 작음을 확인할 수 있다. ",
+    "content": ". [Dockerfile 개념(https://www.researchgate.net/figure/Example-of-a-fictitious-Dockerfile-illustrating-common-instructions-and-quality-issues_fig1_345667168)] . Dockerfile 을 통한 build 방법 . docker build 명령어를 사용한다. root@master:~/labfile/dockerfile_dir# cat Dockerfile FROM centos . // FROM 센토스를 베이스 이미지로 지정한다. root@docker1:~/labfile/dockerfile_dir# cat Dockerfile FROM centos root@docker1:~/labfile/dockerfile_dir# // docker build 실행 root@docker1:~/labfile/dockerfile_dir# docker build -t testimage -f Dockerfile . Sending build context to Docker daemon 176.1kB Step 1/1 : FROM centos latest: Pulling from library/centos a1d0c7532777: Pull complete Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177 Status: Downloaded newer image for centos:latest ---&gt; 5d0da3dc9764 Successfully built 5d0da3dc9764 Successfully tagged testimage:latest root@docker1:~/labfile/dockerfile_dir# // testimage 이미지 생성 확인 root@docker1:~/labfile/dockerfile_dir# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE testuser/web-nginx 1.0 6f10cf278ad2 24 hours ago 174MB testuser/box 1.0 66ba00ad3de8 6 days ago 4.87MB busybox latest 66ba00ad3de8 6 days ago 4.87MB testuser/web-server 1.0 1403e55ab369 2 weeks ago 142MB nginx latest 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB centos latest 5d0da3dc9764 16 months ago 231MB testimage latest 5d0da3dc9764 16 months ago 231MB root@docker1:~/labfile/dockerfile_dir# . -t (tag) : 이미지 이름 -f (file) : Dockerfile 이름 . : Dockerfile 위치하는 디렉토리 . Dockerfile 과 Image layer . Dockerfile 의 명령별로 이미지 레이어가 생성된다 ** 예) 베이스 이미지는 ubuntu, 그 위에 nginx 레이어로 두번째 이미지, 그 위에 index.html 이 올라가 세번째 이미지가 생성된다. ** . root@master:~/labfile/dockerfile_dir# cat Dockerfile.1 FROM ubuntu RUN apt-get update &amp;&amp; apt-get install -y -q nginx &amp;&amp; rm -rf /var/lib/apt/lists/* COPY index.html /var/www/html/ CMD [\"nginx\", \"-g\", \"daemon off;\"] root@master:~/labfile/dockerfile_dir# . // index.html 파일 생성 root@docker1:~/labfile/dockerfile_dir# echo Hello World &gt; index.html // Dockerfile.1 소스 확인 root@docker1:~/labfile/dockerfile_dir# cat Dockerfile.1 FROM ubuntu RUN apt-get update &amp;&amp; apt-get install -y -q nginx COPY index.html /var/www/html/ CMD [\"nginx\", \"-g\", \"daemon off;\"] root@docker1:~/labfile/dockerfile_dir# // docker build root@docker1:~/labfile/dockerfile_dir# docker build -t web-nginx:v1 -f Dockerfile.1 . Sending build context to Docker daemon 176.1kB Step 1/4 : FROM ubuntu ---&gt; 6b7dfa7e8fdb Step 2/4 : RUN apt-get update &amp;&amp; apt-get install -y -q nginx ---&gt; Running in 7e6fe0ef8c1b Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB] Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB] Get:3 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [786 kB] Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB] Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB] Get:6 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB] Get:7 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB] Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB] ... 중략 Setting up nginx (1.18.0-6ubuntu14.3) ... Processing triggers for libc-bin (2.35-0ubuntu3.1) ... Removing intermediate container 7e6fe0ef8c1b ---&gt; 1edf77c6398f Step 3/4 : COPY index.html /var/www/html/ ---&gt; eeb5a81c7c8c Step 4/4 : CMD [\"nginx\", \"-g\", \"daemon off;\"] ---&gt; Running in 3dda10f8fb0a Removing intermediate container 3dda10f8fb0a ---&gt; 63123ab8639e Successfully built 63123ab8639e Successfully tagged web-nginx:v1 // 이미지 생성 확인 (web-nginx:v1) root@docker1:~/labfile/dockerfile_dir# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE web-nginx v1 63123ab8639e About a minute ago 174MB testuser/web-nginx 1.0 6f10cf278ad2 24 hours ago 174MB testuser/box 1.0 66ba00ad3de8 6 days ago 4.87MB busybox latest 66ba00ad3de8 6 days ago 4.87MB nginx latest 1403e55ab369 2 weeks ago 142MB testuser/web-server 1.0 1403e55ab369 2 weeks ago 142MB ubuntu latest 6b7dfa7e8fdb 4 weeks ago 77.8MB centos latest 5d0da3dc9764 16 months ago 231MB testimage latest 5d0da3dc9764 16 months ago 231MB . FROM : 기본 이미지 RUN : 내부에서 수행할 작업 COPY : 호스트에서 파일 CMD : 1번 프로세스에 대한 command 의 약자 . 이미지 생성 시 용량 관련 고려사항 . 용량이 작은 베이스 이미지 선택하거나 불필요한 파일들 삭제한다. | alpine , ###-slim, busybox | rm -rf /var/lib/apt/lists/* | . root@docker1:~/labfile/dockerfile_dir# nano Dockerfile.1 root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# cat Dockerfile.1 FROM ubuntu RUN apt-get update &amp;&amp; apt-get install -y -q nginx &amp;&amp; rm -rf /var/lib/apt/lists/* COPY index.html /var/www/html/ CMD [\"nginx\", \"-g\", \"daemon off;\"] root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# docker build -t web-nginx:v2 -f Dockerfile.1 . Sending build context to Docker daemon 176.1kB Step 1/4 : FROM ubuntu ---&gt; 6b7dfa7e8fdb Step 2/4 : RUN apt-get update &amp;&amp; apt-get install -y -q nginx &amp;&amp; rm -rf /var/lib/apt/lists/* ---&gt; Running in 72c6c189dc81 Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB] Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB] ... 중략 Processing triggers for libc-bin (2.35-0ubuntu3.1) ... Removing intermediate container 72c6c189dc81 ---&gt; 24be474303f8 Step 3/4 : COPY index.html /var/www/html/ ---&gt; 9622834c67c5 Step 4/4 : CMD [\"nginx\", \"-g\", \"daemon off;\"] ---&gt; Running in c75a2a490216 Removing intermediate container c75a2a490216 ---&gt; 5e2b37603055 Successfully built 5e2b37603055 Successfully tagged web-nginx:v2 root@docker1:~/labfile/dockerfile_dir# docker image ls REPOSITORY TAG IMAGE ID CREATED SIZE web-nginx v2 5e2b37603055 18 seconds ago 133MB web-nginx v1 63123ab8639e 15 minutes ago 174MB . /var/lib/apt/lists/*` 를 삭제하고 진행했을 때 v1 보다 사이즈가 작음을 확인할 수 있다. ",
     "url": "/docs/cloud/docker-dockerfile/#dockerfile-%EC%A3%BC%EC%9A%94-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%83%9D%EC%84%B1",
     
     "relUrl": "/docs/cloud/docker-dockerfile/#dockerfile-주요-개념과-생성"
@@ -1149,7 +1149,7 @@
   },"164": {
     "doc": "Github Page On Local",
     "title": "5. dmjgr5.github.io 기준 설정",
-    "content": "- dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ ruby -v ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux- dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ jekyll --version Warning: the running version of Bundler (2.1.2) is older than the version that created the lockfile (2.4.21). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.4.21`. jekyll 4.3.2 dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ gem -v 3.1.2 dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ bundler --version Bundler version 2.4.21 – 실행 sudo jekyll serve sudo bundle exec jekyll serve . ",
+    "content": "- testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ ruby -v ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux- testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ jekyll --version Warning: the running version of Bundler (2.1.2) is older than the version that created the lockfile (2.4.21). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.4.21`. jekyll 4.3.2 testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ gem -v 3.1.2 testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ bundler --version Bundler version 2.4.21 – 실행 sudo jekyll serve sudo bundle exec jekyll serve . ",
     "url": "/docs/cloud/gitgithub-githubpagelocal/#5-dmjgr5githubio-%EA%B8%B0%EC%A4%80-%EC%84%A4%EC%A0%95",
     
     "relUrl": "/docs/cloud/gitgithub-githubpagelocal/#5-dmjgr5githubio-기준-설정"
@@ -1884,7 +1884,7 @@
   },"269": {
     "doc": "Linux Command",
     "title": "Listen Port 확인하기",
-    "content": "Netstat 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다. | -l 옵션 : netstat에 모든 수신 소켓을 표시한다. | -t 옵션 : 모든 TCP 연결을 표시한다. | -u 옵션 : 모든 UDP 연결을 표시한다. | -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다. | -n 옵션 : 서비스 이름 대신 port 번호를 표시한다. | . user@user:~$ sudo netstat -ltup Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program name tcp 0 0 localhost:ipp 0.0.0.0:* LISTEN 899/cupsd tcp 0 0 localhost:37485 0.0.0.0:* LISTEN 1034/containerd tcp 0 0 localhost:postgresql 0.0.0.0:* LISTEN 1129/postgres tcp 0 0 localhost:domain 0.0.0.0:* LISTEN 796/systemd-resolve tcp 0 0 localhost:4000 0.0.0.0:* LISTEN 35497/ruby2.7 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 899/cupsd tcp6 0 0 [::]:9090 [::]:* LISTEN 982/java udp 0 0 0.0.0.0:58210 0.0.0.0:* 894/avahi-daemon: r udp 0 0 mdns.mcast.net:mdns 0.0.0.0:* 2999/chrome udp 0 0 0.0.0.0:mdns 0.0.0.0:* 894/avahi-daemon: r udp 0 0 dcpark-500R5K-501:34197 0.0.0.0:* 2999/chrome udp 0 0 localhost:domain 0.0.0.0:* 796/systemd-resolve udp 0 0 0.0.0.0:631 0.0.0.0:* 975/cups-browsed udp6 0 0 [::]:mdns [::]:* 894/avahi-daemon: r udp6 0 0 [::]:44146 [::]:* 894/avahi-daemon: r . ",
+    "content": "Netstat 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다. | -l 옵션 : netstat에 모든 수신 소켓을 표시한다. | -t 옵션 : 모든 TCP 연결을 표시한다. | -u 옵션 : 모든 UDP 연결을 표시한다. | -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다. | -n 옵션 : 서비스 이름 대신 port 번호를 표시한다. | . user@user:~$ sudo netstat -ltup Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program name tcp 0 0 localhost:ipp 0.0.0.0:* LISTEN 899/cupsd tcp 0 0 localhost:37485 0.0.0.0:* LISTEN 1034/containerd tcp 0 0 localhost:postgresql 0.0.0.0:* LISTEN 1129/postgres tcp 0 0 localhost:domain 0.0.0.0:* LISTEN 796/systemd-resolve tcp 0 0 localhost:4000 0.0.0.0:* LISTEN 35497/ruby2.7 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 899/cupsd tcp6 0 0 [::]:9090 [::]:* LISTEN 982/java udp 0 0 0.0.0.0:58210 0.0.0.0:* 894/avahi-daemon: r udp 0 0 mdns.mcast.net:mdns 0.0.0.0:* 2999/chrome udp 0 0 0.0.0.0:mdns 0.0.0.0:* 894/avahi-daemon: r udp 0 0 testuser-500R5K-501:34197 0.0.0.0:* 2999/chrome udp 0 0 localhost:domain 0.0.0.0:* 796/systemd-resolve udp 0 0 0.0.0.0:631 0.0.0.0:* 975/cups-browsed udp6 0 0 [::]:mdns [::]:* 894/avahi-daemon: r udp6 0 0 [::]:44146 [::]:* 894/avahi-daemon: r . ",
     "url": "/docs/os-systems/linux-command/#listen-port-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#listen-port-확인하기"
@@ -1896,552 +1896,594 @@
     
     "relUrl": "/docs/os-systems/linux-command/#alias-설정하기"
   },"271": {
+    "doc": "리눅스 그룹 관리",
+    "title": "리눅스 그룹 관리",
+    "content": " ",
+    "url": "/docs/os-systems/linux-group/",
+    
+    "relUrl": "/docs/os-systems/linux-group/"
+  },"272": {
+    "doc": "리눅스 그룹 관리",
+    "title": "Table of contents",
+    "content": ". | 그룹 추가 . | groupadd | groupadd -g | 이후의 groupadd | /etc/group | groupadd -r | . | 그룹 삭제 . | groupdel | . | 그룹 확인 . | groups | . | 그룹에 사용자 추가 . | gpasswd -a | gpasswd -d | . | . 리눅스 시스템은 사용자를 생성하면 사용자명과 동일한 그룹이 생성된다. 또한 특정 그룹을 만들어 기존 사용자를 그룹에 추가할 수 있다. ",
+    "url": "/docs/os-systems/linux-group/#table-of-contents",
+    
+    "relUrl": "/docs/os-systems/linux-group/#table-of-contents"
+  },"273": {
+    "doc": "리눅스 그룹 관리",
+    "title": "그룹 추가",
+    "content": "groupadd . root@user1-500R5K-501R5K-500R5Q:~# groupadd testgroup1 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup1 /etc/group testgroup1:x:1002: . groupadd -g . -g 옵션을 사용하면 특정 GID 를 부여할 수 있다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groupadd -g 1004 testgroup1004 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup1004 /etc/group testgroup1004:x:1004: . 이후의 groupadd . 이후부터 생성되는 GID 는 가장 마지막 GID 다음 번호로 할당된다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groupadd testgroup2 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup2 /etc/group testgroup2:x:1005: . /etc/group . 각 그룹의 GID를 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# tail -f /etc/group snapd-range-524288-root:x:524288: snap_daemon:x:584788: _cvsadmin:x:136: jenkins:x:137: docker:x:138:user1 postgres:x:139: tg100:x:1001: testgroup1:x:1002: testgroup1004:x:1004: testgroup2:x:1005: . groupadd -r . -r 옵션을 사용하면 0 번 부터 499 까지의 할당되어 있지 않은 GID 중 가장 높은 번호를 할당해 준다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groupadd -r testgroup3 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup3 /etc/group testgroup3:x:998: . ",
+    "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9-%EC%B6%94%EA%B0%80",
+    
+    "relUrl": "/docs/os-systems/linux-group/#그룹-추가"
+  },"274": {
+    "doc": "리눅스 그룹 관리",
+    "title": "그룹 삭제",
+    "content": "groupdel . root@user1-500R5K-501R5K-500R5Q:~# groupdel testgroup3 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup3 /etc/group root@user1-500R5K-501R5K-500R5Q:~# . ",
+    "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9-%EC%82%AD%EC%A0%9C",
+    
+    "relUrl": "/docs/os-systems/linux-group/#그룹-삭제"
+  },"275": {
+    "doc": "리눅스 그룹 관리",
+    "title": "그룹 확인",
+    "content": "groups . 현재 사용자가 속한 그룹을 확인한다. user1@user1-500R5K-501R5K-500R5Q:~$ groups user1 adm cdrom sudo dip plugdev lpadmin lxd sambashare docker . ",
+    "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9-%ED%99%95%EC%9D%B8",
+    
+    "relUrl": "/docs/os-systems/linux-group/#그룹-확인"
+  },"276": {
+    "doc": "리눅스 그룹 관리",
+    "title": "그룹에 사용자 추가",
+    "content": "특정 그룹에 사용자를 추가하거나 제거하고 특정 그룹에 패스워드를 설정하는 작업은 gpasswd를 이용한다. -a user : 특정 그룹에 새로운 그룹멤버를 추가함. -d user : 특정 그룹에서 지정한 그룹멤버를 제거함. -r : 특정 그룹의 패스워드를 제거함 . -R : 특정 그룹에 접근을 제한함 . -A user, … : 특정 그룹의 그룹관리자를 설정함 . -M user, … : 특정 그룹의 그룹멤버를 새로 설정함. gpasswd -a . user1 사용자를 testgroup2 에 추가 . root@user1-500R5K-501R5K-500R5Q:~# gpasswd -a user1 testgroup2 Adding user user1 to group testgroup2 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groups user1 user1 : user1 adm cdrom sudo dip plugdev lpadmin lxd sambashare docker testgroup2 . gpasswd -d . user1 사용자를 testgroup2 에서 삭제 . root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# gpasswd -d user1 testgroup2 Removing user user1 from group testgroup2 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groups user1 user1 : user1 adm cdrom sudo dip plugdev lpadmin lxd sambashare docker . ",
+    "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9%EC%97%90-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%B6%94%EA%B0%80",
+    
+    "relUrl": "/docs/os-systems/linux-group/#그룹에-사용자-추가"
+  },"277": {
     "doc": "Linux",
     "title": "Linuxs",
     "content": " ",
     "url": "/docs/os-systems/linux/#linuxs",
     
     "relUrl": "/docs/os-systems/linux/#linuxs"
-  },"272": {
+  },"278": {
     "doc": "Linux",
     "title": "Linux",
     "content": " ",
     "url": "/docs/os-systems/linux/",
     
     "relUrl": "/docs/os-systems/linux/"
-  },"273": {
+  },"279": {
     "doc": "Markdown",
     "title": "Markdown",
     "content": " ",
     "url": "/docs/programming-language/markdown/",
     
     "relUrl": "/docs/programming-language/markdown/"
-  },"274": {
+  },"280": {
     "doc": "Markdown",
     "title": "Table of contents",
     "content": ". | 코드블럭 | 글씨 포맷 | . 일정한 형식을 갖춘 문서를 작성하거나 체계적인 메모 시 손쉽게 작성할 수 있는 마크다운 문법에 대해 정리하고자 합니다. ",
     "url": "/docs/programming-language/markdown/#table-of-contents",
     
     "relUrl": "/docs/programming-language/markdown/#table-of-contents"
-  },"275": {
+  },"281": {
     "doc": "Markdown",
     "title": "코드블럭",
     "content": "``` 로 시작과 종료 부분에 삽입하며, 동일한 구분으로 종료되는 블럭 내의 코드들을 블록으로 표현하여 코드별 색깔 지정은 옆에 아래와 같은 키워드를 추가하여 지정할 수 있다. | 언어 | Markdown | 언어 | Markdown | . | Bash | bash | JSON | json | . | C# | cs | Java | java | . | C++ | cpp | JavaScript | javascript | . | CSS | css | PHP | php | . | Diff | diff | Perl | perl | . | HTML, XML | html | Python | python | . | HTTP | http | Ruby | ruby | . | Ini | ini | SQL | sql | . ",
     "url": "/docs/programming-language/markdown/#%EC%BD%94%EB%93%9C%EB%B8%94%EB%9F%AD",
     
     "relUrl": "/docs/programming-language/markdown/#코드블럭"
-  },"276": {
+  },"282": {
     "doc": "Markdown",
     "title": "글씨 포맷",
     "content": ". | **굵게**라 적으면 굵게 처럼 글자를 굵게 표시할 수 있습니다. | ***굵게 기울기***라 적으면 굵게 기울기 처럼 글자를 굵으면서도 기울게 표시할 수 있습니다. | &lt;U&gt;밑줄&lt;/U&gt; 라 적으면 밑줄 처럼 밑줄을 그을 수 있습니다. | . ",
     "url": "/docs/programming-language/markdown/#%EA%B8%80%EC%94%A8-%ED%8F%AC%EB%A7%B7",
     
     "relUrl": "/docs/programming-language/markdown/#글씨-포맷"
-  },"277": {
+  },"283": {
     "doc": "Proxy",
     "title": "Proxy",
     "content": " ",
     "url": "/docs/network-security/network-security-proxy/",
     
     "relUrl": "/docs/network-security/network-security-proxy/"
-  },"278": {
+  },"284": {
     "doc": "Proxy",
     "title": "Table of contents",
     "content": ". | 프록시(Proxy) 란? | 포워드 프록시(Forward Proxy) . | 포워드 프록시의 특징/역할 | . | 리버스 프록시(Reverse Proxy) . | 리버스 프록시의 예시 | 리버스 프록시의 특징/역할 | 리버스 프록시의 장점 | . | . 개발을 하지 않더라도 프록시라는 단어는 종종 듣게 되는데 정확히 프록시가 무엇이고, 어떤 역할을 하는지 정리하고자 한다. ",
     "url": "/docs/network-security/network-security-proxy/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-proxy/#table-of-contents"
-  },"279": {
+  },"285": {
     "doc": "Proxy",
     "title": "프록시(Proxy) 란?",
     "content": "프록시의 사전적 의미는 대신, 대리이다. 말 그대로 두 PC가 통신을 할 때 직접 하지 않고 중간에서 대리로 통신을 하는 것을 프록시 라고 하고, 중계 역할을 하는 것을 프록시 서버 라고 부른다. 즉, 클라이언트와 서버 사이의 중계 서버 라고 생각하면 된다. 프록시 서버는 보안 목적이나 캐싱 등의 기능을 제공한다. 프록시 서버가 중간에 위치함으로써 클라이언트는 프록시 서버를 서버라고 인식하고, 서버 입장에서는 프록시 서버를 클라이언트로 인식하게 된다. [프록시 서버의 구조] . ",
     "url": "/docs/network-security/network-security-proxy/#%ED%94%84%EB%A1%9D%EC%8B%9Cproxy-%EB%9E%80",
     
     "relUrl": "/docs/network-security/network-security-proxy/#프록시proxy-란"
-  },"280": {
+  },"286": {
     "doc": "Proxy",
     "title": "포워드 프록시(Forward Proxy)",
     "content": "일반적으로 프록시라고 말하면 포워드 프록시를 말한다. 클라이언트에서 서버로 리소스를 요청할 때 직접 요청하지 않고 프록시 서버를 거쳐서 요청한다. 이 경우 서버에서 받는 IP는 클라이언트의 IP가 아닌 프록시 서브의 IP이기 때문에 서버는 클라이언트가 누군지 알 수 없다. 즉, 서버에게 클라이언트가 누구인지 감춰주는 역할을 한다. 이러한 특징 때문에 기업 사내망에서 주로 사용된다. 포워드 프록시의 특징/역할 . | 캐싱 첫 번째 요청 이후부터는 동일한 요청이 들어올 경우, 프록시 서버에 캐싱된 내용을 전달해줌으로써 성능을 향상시킬 수 있다. | . 웹 서비스에서 요청이 발생할 때마다 1) 요청 → 2) 요청 전송 → 3) 요청 접수 → 4) 응답 생성 → 5) 응답 전송 → 6) 응답 수신 과 같은 과정을 반복해서 거친다. 요청이 한 번 뿐일 때는 괜찮지만, 중복되는 요청을 매번 처리하기에는 심한 자원낭비가 생기고, 웹 서버의 부하가 증가할 것이다. 이를 위해 포워드 프록시는 정적 데이터를 저장해두고 동일한 요청의 경우 웹서버 까지 가지 않고 포워드 프록시에서 처리할 수 있는 캐싱 역할을 수행한다. | IP 우회 | . 위에 언급했듯이 클라이언트 측에서 프록시 서버를 거쳐 웹 서비스를 이용할 경우, 서버 측에서는 요청을 받을 때 클라이언트의 IP가 아닌 프록시 서버의 IP를 전달받게 된다. 즉, 서버 측에 클라이언트의 정보를 숨길 수 있게 되는 것이다. | 제한 보안이 중요한 사내망에서 정해진 사이트에만 연결 할 수 있도록 설정하는 등 웹 사용 환경을 제한할 수 있다. | . [Forward Proxy] . ",
     "url": "/docs/network-security/network-security-proxy/#%ED%8F%AC%EC%9B%8C%EB%93%9C-%ED%94%84%EB%A1%9D%EC%8B%9Cforward-proxy",
     
     "relUrl": "/docs/network-security/network-security-proxy/#포워드-프록시forward-proxy"
-  },"281": {
+  },"287": {
     "doc": "Proxy",
     "title": "리버스 프록시(Reverse Proxy)",
     "content": "리버스 프록시는 포워드 프록시와 반대 개념이다. 애플리케이션 서버의 앞에 위치하여 클라이언트가 서버를 요청할 때 리버스 프록시를 호출하고, 리버스 프록시가 서버로부터 응답을 전달받아 다시 클라이언트에게 전송하는 역할을 한다. 이 경우, 클라이언트는 애플리케이션 서버를 직접 호출하는 것이 아니라 프록시 서버를 통해 호출하기 때문에 리버스 프록시는 애플리케이션 서버를 감추는 역할을 하게 된다. 리버스 프록시의 예시 . NginX, Apache Web Server . 리버스 프록시의 특징/역할 . | 로드밸런싱 리버스 프록시 뒤에 여러 개의 WAS를 둠으로써, 사용자 요청을 분산할 수 있다. End-point 마다 호출 서버를 설정할 수 있어 역할에 따라 서버의 트래픽을 분산할 수도 있다. | 보안 보안 상의 이유로 서버에 직접 접근하는 것을 막기 위해 DMZ같은 네트워크에 리버스 프록시를 구성하여 접근하도록 한다. | . [Reverse Proxy] . 리버스 프록시의 장점 . 보통 기업의 네트워크 환경은 비무장 지대(DMZ; Demilitarized Zone) 라고 하는 내부 네트워크와 외부 네트워크 사이에 위치하는 구간이 존재합니다. [리버스 프록시 구성의 예] . | DMZ 내에 외부에 서비스를 제공하는 서버(메일 서버, 웹 서버, DNS 서버)를 배치하고 네트워크는 1, 2차 방화벽으로 보호 | 서비스를 제공하려면 WAS 를 DMZ 에 놓고 서비스해도 되지만 이런 서비스는 보통 내부의 DBMS 서버와 연결 | 만약 WAS 가 최전방에 있으면 WAS 가 털릴 경우 DBMS 와 관련 서버까지 모두 같이 털리는 심각한 보안 문제가 발생 | 이때문에 DMZ 존에 웹 서버를 두고 리버스 프락시로 설정하고 WAS 는 내부망에 위치시키게 설정 | 리버스 프락시로 동작하는 웹 서버만 내부 WAS 와 연결하도록 설정하므로 웹 서버가 해킹당해도 2차 방화벽을 다시 뚫어야 하므로 더 보안에 강함 | . ",
     "url": "/docs/network-security/network-security-proxy/#%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9Creverse-proxy",
     
     "relUrl": "/docs/network-security/network-security-proxy/#리버스-프록시reverse-proxy"
-  },"282": {
+  },"288": {
     "doc": "Web Server & WAS",
     "title": "Web Server &amp; WAS",
     "content": " ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server--was",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server--was"
-  },"283": {
+  },"289": {
     "doc": "Web Server & WAS",
     "title": "Table of contents",
     "content": ". | Static Pages | Dynamic Pages | Web Server와 WAS의 차이 . | Web Server | Web Application Server, WAS | . | Web Server 와 WAS 를 분리하는 이유 | . ",
     "url": "/docs/network-security/network-security-webserver-was/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#table-of-contents"
-  },"284": {
+  },"290": {
     "doc": "Web Server & WAS",
     "title": "Static Pages",
     "content": ". | Web Server는 파일 경로 이름을 받아 경로와 일치하는 file contents를 반환합니다. | 항상 동일한 페이지를 반환합니다. | html, css, js, image 파일과 같이 컴퓨터에 저장되어 있는 파일들입니다. | . [정적 페이지 ] . ",
     "url": "/docs/network-security/network-security-webserver-was/#static-pages",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#static-pages"
-  },"285": {
+  },"291": {
     "doc": "Web Server & WAS",
     "title": "Dynamic Pages",
     "content": ". | 인자의 내용에 맞게 동적인 Contents를 반환합니다. | 즉, 웹 서버에 의해서 실행되는 프로그램을 통해서 만들어진 결과물입니다. | 아래 이미지에서 개발자는 Servlet에 doGet()을 구현합니다. | . [동적 페이지 ] . ",
     "url": "/docs/network-security/network-security-webserver-was/#dynamic-pages",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#dynamic-pages"
-  },"286": {
+  },"292": {
     "doc": "Web Server & WAS",
     "title": "Web Server와 WAS의 차이",
     "content": "Web Server . 웹 서버는 클라이언트로부터 HTTP 요청을 받아 HTML 문서나 각종 리소스(Resource)를 전달하는 컴퓨터입니다. 따라서 요청에 따라 아래의 두 가지 기능 중 적절하게 선택하여 수행합니다. | 정적인 컨텐츠를 제공한다. | 동적인 컨텐츠 제공을 위한 요청을 전달한다. | . Web Server에는 Apache Server와 NginX가 있는데 각각의 특성은 아래와 같습니다. | Apache Server: BSD, Linux 등 Unix계열뿐 아니라 Windows와 같은 기종에서도 운용 가능. | NginX: 가벼움과 높은 성능을 목표로 함, 웹 서버, 리퍼스 프록시 및 메일 프록시 기능을 가짐. | . Apache Tomcat이라고 하는 이유 . 웹서버는 Apache, WAS는 Tomcat 2008년에 릴리즈된 Tomcat 5.5 부터 정적 컨텐츠 처리기능 추가 -&gt; 순수 Apache를 사용하는것에 비해 성능 차이 없음 -&gt; Tomcat이 Apache의 기능을 포함하므로 Apache Tomcat이라고함 . Web Application Server, WAS . WAS는 웹 애플리케이션과 서버 환경을 만들어 동작시키는 기능을 제공하는 소프트웨어 미들웨어 프레임워크 입니다. [Web Application Server, WAS] . 위 이미지와 같이 WAS는 Web Server와 Web Container(JSP, Servlet)으로 이루어져 있습니다. Web Server와의 차이점은 Web Container를 가진다는 점이며 WAS는 HTML 같은 정적인 페이지에서 처리할 수 없는 비즈니스 로직이나 DB 조회 같은 동적인 콘텐츠를 제공합니다. ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server%EC%99%80-was%EC%9D%98-%EC%B0%A8%EC%9D%B4",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server와-was의-차이"
-  },"287": {
+  },"293": {
     "doc": "Web Server & WAS",
     "title": "Web Server 와 WAS 를 분리하는 이유",
     "content": "그런데 대규모 프로젝트를 보면 아래와 같이 WAS와 Web Server를 분리한 형태를 볼 수 있습니다. 분리를 하면 생기는 장점이 무엇일까요? . [Web Server와 WAS 분리] . 1. 기능을 분리하여 서버 부하 방지 가능 . WAS는 DB 조회 등 페이지를 만들기 위한 다양한 로직을 처리하는데, 단순한 정적 콘텐츠를 WAS에서 제공한다면 다른 작업에 사용하는 리소스들로 인해 지연이 생겨날 수 있다. tomcat 5.5 이상부터는 성능이 크게 떨어지지 않는다고 한다. 2. 물리적으로 분리하여 보안 강화 . SSL에 대한 암복호화 처리에 Web Server를 사용한다. 공격에 대해 Web Server를 앞단에 두어 중요한 정보가 담긴 DB나 로직까지(WAS까지) 전파되지 못하게 한다. 3. 여러 대의 WAS를 연결이 가능하다. Load Balancing(부하의 균등화) 가능 -&gt; 한 서버가 다운되더라도 서비스를 이어갈 수 있다는 장점이 있다. fail over(장애 극복), fail back 가능 대용량 웹 애플리케이션의 경우(여러 개의 서버 사용) Wev Server와 WAS를 분리하여 무중단 운영을 위한 장애 극복에 쉽게 대응할 수 있다. [여러대의 WAS 운용] . 4. 다른 종류의 WAS로 서비스 가능 . ",
     "url": "/docs/network-security/network-security-webserver-was/#web-server-%EC%99%80-was-%EB%A5%BC-%EB%B6%84%EB%A6%AC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/#web-server-와-was-를-분리하는-이유"
-  },"288": {
+  },"294": {
     "doc": "Web Server & WAS",
     "title": "Web Server & WAS",
     "content": " ",
     "url": "/docs/network-security/network-security-webserver-was/",
     
     "relUrl": "/docs/network-security/network-security-webserver-was/"
-  },"289": {
+  },"295": {
     "doc": "Network & Security",
     "title": "Network &amp; Security",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/network-security#network--security",
     
     "relUrl": "/docs/network-security#network--security"
-  },"290": {
+  },"296": {
     "doc": "Network & Security",
     "title": "Network & Security",
     "content": " ",
     "url": "/docs/network-security",
     
     "relUrl": "/docs/network-security"
-  },"291": {
+  },"297": {
     "doc": "SSH 기본 개념",
     "title": "SSH 기본 개념",
     "content": " ",
     "url": "/docs/network-security/network-ssh/",
     
     "relUrl": "/docs/network-security/network-ssh/"
-  },"292": {
+  },"298": {
     "doc": "SSH 기본 개념",
     "title": "Table of contents",
     "content": ". | SSH 저장 위치 | 원격 제어 | 인증서 생성 예제 | . 시큐어 셀(Secure SHell, SSH)은 네트워크 상의 다른 컴퓨터에 로그인하거나 원격 시스템에서 명령을 실행하고 다른 시스템으로 파일을 복사할 수 있도록 해주는 응용 프로그램 또는 그 프로토콜이다. 많은 Git 서버들은 SSH 공개키로 인증한다. 공개키를 사용하려면 일단 공개키를 만들어야 한다. 공개키를 만드는 방법은 모든 운영체제가 비슷하다. ",
     "url": "/docs/network-security/network-ssh/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-ssh/#table-of-contents"
-  },"293": {
+  },"299": {
     "doc": "SSH 기본 개념",
     "title": "SSH 저장 위치",
     "content": "사용자의 SSH 키들은 기본적으로 사용자의 ~/.ssh 디렉토리에 저장한다. 그래서 만약 디렉토리의 파일을 살펴보면 이미 공개키가 있는지 확인할 수 있다. 대표적인 사용 목적으로는 데이터 전송 과 원격제어 가 있으며, 데이터 전송의 주요 저장소는 깃허브, 원격 저장소 등을 들 수 있다. 소스 코드를 원격 저장소인 깃헙에 푸쉬할 때 SSH를 활용해 파일을 전송하게 된다. ",
     "url": "/docs/network-security/network-ssh/#ssh-%EC%A0%80%EC%9E%A5-%EC%9C%84%EC%B9%98",
     
     "relUrl": "/docs/network-security/network-ssh/#ssh-저장-위치"
-  },"294": {
+  },"300": {
     "doc": "SSH 기본 개념",
     "title": "원격 제어",
     "content": ". | AWS와 같은 클라우드 서비스는 인스턴스 서버에 접속하여 해당 머신에 명령을 내리기 위해서 SSH을 통한 접속을 해야한다.사용이유 : | 보안때문에 FTP나 Telnet과 같은 다른 컴퓨터 통신을 사용하지 않는다. | SSH는 보안적으로 훨씬 안전한 채널을 구성한 뒤 정보를 교환하기 때문에 보다 보안적인 면에서 뛰어나다.어떤 방식으로 서로 다른 컴퓨터가 안전하게 통신하게 하는가?SSH는 다른 컴퓨터와 통신할 때 일반적으로 사용하는 비밀번호 입력을 통한 접속을 하지 않는다. | 기본적으로 SSH는 한 쌍의 Key를 통해 접속하려는 컴퓨터와 인증 과정을 거친다. 이 한 쌍의 Key는 다음과 같다. | Public Key . | 단어 뜻 그대로 공개되어도 비교적 안전한 Key. | 이 키를 통해 메세지를 전송하기 전 암호화를 한다. | 암호화는 가능하지만 복호화는 불가능하다. | . | Private Key . | 절대로 외부에 노출되어서는 안되는 Key. | 본인의 컴퓨터 내부에 저장하게 되어있다. | 암호화된 메세지를 복호화 할 수 있다. | . | . | . | . ",
     "url": "/docs/network-security/network-ssh/#%EC%9B%90%EA%B2%A9-%EC%A0%9C%EC%96%B4",
     
     "relUrl": "/docs/network-security/network-ssh/#원격-제어"
-  },"295": {
+  },"301": {
     "doc": "SSH 기본 개념",
     "title": "인증서 생성 예제",
-    "content": "root@master:~# ssh-keygen -t rsa Generating public/private rsa key pair. Enter file in which to save the key (/root/.ssh/id_rsa): testkey &lt;-- 공개키 이름 설정 Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in testkey. Your public key has been saved in testkey.pub. The key fingerprint is: SHA256:tN/FZ3XZoZWE0qubqgAUXo1wxRbKEtaQ0ScCRgdrN64 root@master The key's randomart image is: +---[RSA 2048]----+ |.=oOBo=o. o+.|. =o*=.= . oo.+| o *.o+ ....+|. + o . o o| o S . o o| . o . o | E . + | . o | .... | +----[SHA256]-----+ root@master:~# // SSL 인증서 확인 root@master:~# root@master:~# ls -al | grep test -rw------- 1 root root 1766 Jan 15 03:56 testkey -rw-r--r-- 1 root root 393 Jan 15 03:56 testkey.pub root@master:~# root@master:~# cat testkey -----BEGIN OPENSSH PRIVATE KEY----- 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 -----END OPENSSH PRIVATE KEY----- root@master:~# cat testkey.pub ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEmxKWFgQoc3c7vyALV22I+QLSuDxbbEcxuFI/Qz3E0i1yhK23QzXPd8v+Nx7IAbMDVSB3r+OHkEx964jxvptXHFckrFjpYD7QZPiXjTfCEa1CViKmE7CRYBT6qTzZjT368b9JZSOTkr/SOYjin/UBame74wMXTlWeUHTTBf4enVPpLOtOS24wZsmmXGwpNYmhrAnM8PQfoza1WpWnkZN3z7AgpyyYv1eSWk6JGhpsb0b9OsI030TkteFB4H67B0SmH4nZ/60mA3jhehTbPLlD9lHG5nCA+kCbr51YgAXaH4zmwoxi4RBWTcw5WltvSkLk/qxjYoyFUgZA3xOm9AruTNTI191v4NxrHAnN0bJUvi/QdbZBK5ao3FWV2Cgp46KRwCyFR+k4UV1Y7GspTbwruTMOAw42azIpPk4UbbXog6mF7W+/8bqJeHPjYwFtnosk0LZlTGUqhgvB9jT0MYbwRFWUbjByz7pmv7QLhSFHS77/wHGNc3lTWTykxKGeyIE= dcpark@dcpark-500R5K-501R5K-500R5Q root@master:~# . ",
+    "content": "root@master:~# ssh-keygen -t rsa Generating public/private rsa key pair. Enter file in which to save the key (/root/.ssh/id_rsa): testkey &lt;-- 공개키 이름 설정 Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in testkey. Your public key has been saved in testkey.pub. The key fingerprint is: SHA256:tN/FZ3XZoZWE0qubqgAUXo1wxRbKEtaQ0ScCRgdrN64 root@master The key's randomart image is: +---[RSA 2048]----+ |.=oOBo=o. o+.|. =o*=.= . oo.+| o *.o+ ....+|. + o . o o| o S . o o| . o . o | E . + | . o | .... | +----[SHA256]-----+ root@master:~# // SSL 인증서 확인 root@master:~# root@master:~# ls -al | grep test -rw------- 1 root root 1766 Jan 15 03:56 testkey -rw-r--r-- 1 root root 393 Jan 15 03:56 testkey.pub root@master:~# root@master:~# cat testkey -----BEGIN OPENSSH PRIVATE KEY----- b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABAIp9dMlA gazrBQ7+NbL2aOAAAAEAAAAAEAAAGXAAAAB3NzaC1yc2EAAAADAQABAAABgQDEmxKWFgQo c3c7vyALV22I+QLSuDxbbEcxuFI/Qz3E0i1yhK23QzXPd8v+Nx7IAbMDVSB3r+OHkEx964 jxvptXHFckrFjpYD7QZPiXjTfCEa1CViKmE7CRYBT6qTzZjT368b9JZSOTkr/SOYjin/UB ame74wMXTlWeUHTTBf4enVPpLOtOS24wZsmmXGwpNYmhrAnM8PQfoza1WpWnkZN3z7Agpy yYv1eSWk6JGhpsb0b9OsI030TkteFB4H67B0SmH4nZ/60mA3jhehTbPLlD9lHG5nCA+kCb r51YgAXaH4zmwoxi4RBWTcw5WltvSkLk/qxjYoyFUgZA3xOm9AruTNTI191v4NxrHAnN0b JUvi/QdbZBK5ao3FWV2Cgp46KRwCyFR+k4UV1Y7GspTbwruTMOAw42azIpPk4UbbXog6mF 7W+/8bqJeHPjYwFtnosk0LZlTGUqhgvB9jT0MYbwRFWUbjByz7pmv7QLhSFHS77/wHGNc3 lTWTykxKGeyIEAAAWg5cXuhFmDEzRy6NUrRdVRpn3Bx1nl/v1TVatHdsnnaLqldgRG4NO5 /ivtLyyn4xGNA5KnNe41U4eb1u1HLS/h43WoTj/s+EdIJb84w5uDgpysNPyWLfL75vY7Hp RHpIXf0rL/x7IuOsOrkZ/Ndac9PuGSOc4UZgKBbf9MuRaHSj5rBKYTmkpC0cx4IeB8Lx/3 MIW5Kub9h3QZKyWmUC19TmKCavsiYDFE5Rha1mNcuW7punjG3fdObOuXmkzPhEpPQfUfRP 1+gFOPzwdBoTP/CxoRx2u1hqs9PcmDRPQ5nu8DPEwXYg3+rdgF79ryIOgpov/WNKUG95WL rAoFjL+Vax5hrhyVIuioulkZFkay6mGfN0bSL6aE911vfqm8nfGqT7nO/4rlsFmsenBljd MnnfLpWl81BvWfPZrC0lL28EuiD/WIUIn82dZ+XU18EhXRL4dskoOhIT+9DuQtdk4MHoT4 QoUx6objL6fL3Fezh1rtDz3B63RGuuX+i07xsaGOsY/XVdh2artNO78CeL77lv2qVD/SKa 8RI0bkqUUzKI4J++HIa+f4uw7alOdZD8Angm3yACLNaSx0zCF1XwwTr/uVVKPiCjuQWXt0 CX1Z/BMAJbjJFP3CEJLldhp/Sp3d9GzETw2+sNoRH5nXTRxFmuIL94Mup16cbLDc1uj0ir zqOxL+8gHU4BpgU8hwmtloAEn7+PvXUV2PYSLdHL9OCM6wl5l7yp1XQeIkG/W++rhpRuth /P+EaJ/RWwJxwT391mjuFNwbUNjr+8IkmLguambo/i9/xro1NQ6DPAn5eKajzMTDVtDgap 03+ZGpd1Bpol4zqYfE0CFAVqRn9hV3tGCFblM+GpqbefLQLpY27nkzFigF7usssjnZvLun eYViSmQdHSSWOYCGvD8mZKvMyw3ZKGD1w8h4PziscplgvMIcBcYq/wTWSa9vNP6uXG/Wvf LEYTREjPB3XEw34EW46n/ogMURuCNje22izwBsb1e0m9cCa1HTa+LLCvb30Ue0+BiBWRvz 1iSNjW4BaBDlXuWQygpDzR+o5b18FPNDpvzlVBiBml9gy0JWWlZ9ucNoDVuxhpKNh5MM5K uWEK3+F9Ae16nMJggW0Opwga3GY2i2bwvoGM5RVgbuKP6lV6WRSA97TROybSjYH+5BIF8I /zxSJZ51tsjn4LKxhRw1yYRd7Q+BzMk+ZluxA143elu0rvcODVC5kUnfE92gPardPNQ6rn hy98TWgI4nxdeOBcXu3XsUdCh7RPVaRdMwrHdzZM8OlP2rjpgEtrZpjl6sSCK8CYDj37Ix BLxE4HAjJrMS80xsg5owhTAFhFuT7V9nKq6mBv9lu4Pt8A4P0JYg/DEdeiEBM2qKuD6HEM hOTjifVvqe6b6dAVaardHPrNM+B291smzqgaKgBYFEunIz7pZGO+Hz0UgjYv1csbITGdE5 VmC8xNh9PAuJKPg93L+VLTKaKZqr4QYNh8Cmd30gvDTMKtC63z7oPU4tEo684/2crm51Jg phYZf6xNvwoq+BJip7OJM+YU99+NPDPdYrKeLXNzVXBAQAh4rVqJsRlArzTtRwNSLjQ3eT iqZkdmWP2Y3aD6E71TheJEp1GlDds0SJnVhXo9810McbAm7rw3SbuOwjdA/AKdgQXmYeZ6 R+iy9r7FUTjmviz+tuB2LOr2nJmTSZgZiAL0mMnjjSkQCP/Lnr0MIatbxNa4Kv1r+of9iB JzK8ku3m66jCvLG/InElk+m3F2FUG+xcSYEqtpTtkdCkbkLjj9+NmL8iiuGA1mZqQYaA1x WshOlGb1/rN120ly+NcrMu7nYeNUYyTK7dXwpOhes1NK2i1KXkPzfdwF2K91oWa81cAAvE Yp2i3HnXd5jhHBBBwUA5lSQaEdX5KRTpsSRVOf7WZRFdF7ot -----END OPENSSH PRIVATE KEY----- root@master:~# cat testkey.pub ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEmxKWFgQoc3c7vyALV22I+QLSuDxbbEcxuFI/Qz3E0i1yhK23QzXPd8v+Nx7IAbMDVSB3r+OHkEx964jxvptXHFckrFjpYD7QZPiXjTfCEa1CViKmE7CRYBT6qTzZjT368b9JZSOTkr/SOYjin/UBame74wMXTlWeUHTTBf4enVPpLOtOS24wZsmmXGwpNYmhrAnM8PQfoza1WpWnkZN3z7AgpyyYv1eSWk6JGhpsb0b9OsI030TkteFB4H67B0SmH4nZ/60mA3jhehTbPLlD9lHG5nCA+kCbr51YgAXaH4zmwoxi4RBWTcw5WltvSkLk/qxjYoyFUgZA3xOm9AruTNTI191v4NxrHAnN0bJUvi/QdbZBK5ao3FWV2Cgp46KRwCyFR+k4UV1Y7GspTbwruTMOAw42azIpPk4UbbXog6mF7W+/8bqJeHPjYwFtnosk0LZlTGUqhgvB9jT0MYbwRFWUbjByz7pmv7QLhSFHS77/wHGNc3lTWTykxKGeyIE= testuser@testuser-500R5K-501R5K-500R5Q root@master:~# . ",
     "url": "/docs/network-security/network-ssh/#%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1-%EC%98%88%EC%A0%9C",
     
     "relUrl": "/docs/network-security/network-ssh/#인증서-생성-예제"
-  },"296": {
+  },"302": {
     "doc": "New Technology",
     "title": "New Technology",
     "content": "New Technology 관련 기술 개요 및 현황에 대해 정리한다. ",
     "url": "/docs/newtech",
     
     "relUrl": "/docs/newtech"
-  },"297": {
+  },"303": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/nodejs-basic/",
     
     "relUrl": "/docs/programming-language/nodejs-basic/"
-  },"298": {
+  },"304": {
     "doc": "Node.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Node.js 의 특징 | 모듈 설치 및 실행 | 실습 예제 . | 이메일 전송하기 | 웹서버 만들기 | MySQL 사용하기 | . | . ​node.js 의 종류와 사용방법에 대해 정리한다. 참고 자료 . 한시간만에 끝내는 Node.js 입문 . ",
     "url": "/docs/programming-language/nodejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#table-of-contents"
-  },"299": {
+  },"305": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 의 특징",
     "content": ". | javaScript 를 이용한다. | 엄청나게 많은 패키지를 이용할 수 있다. | . ",
     "url": "/docs/programming-language/nodejs-basic/#nodejs-%EC%9D%98-%ED%8A%B9%EC%A7%95",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#nodejs-의-특징"
-  },"300": {
+  },"306": {
     "doc": "Node.js 기본 개념",
     "title": "모듈 설치 및 실행",
     "content": "https://www.npmjs.com/ 에서 원하는 모듈을 찾는다. npm install [모듈명] 으로 아래와 같이 설치한다. nodemailer 라는 모듈을 예시로 든다. D:\\99_nodeJs&gt;npm install nodemailer added 1 package, and audited 2 packages in 1s found 0 vulnerabilitie . 아래 그림과 같이 node_modules, package json 파일 등이 생성된다. require 를 이용해서 패키지를 불러온다. const nodemailer = require('nodemailer'); . ",
     "url": "/docs/programming-language/nodejs-basic/#%EB%AA%A8%EB%93%88-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%8B%A4%ED%96%89",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#모듈-설치-및-실행"
-  },"301": {
+  },"307": {
     "doc": "Node.js 기본 개념",
     "title": "실습 예제",
     "content": "이메일 전송하기 . nodemailer 모듈을 사용한다. const nodemailer = require('nodemailer'); const email= { host: \"smtp.mailtrap.io\", port: 2525, auth: { user: \"80e8c610c6dace\", pass: \"aad60e1f687512\" } }; const send = async (option) =&gt; { nodemailer.createTransport( email ).sendMail(option, (error, info) =&gt; { if(error){ console.log(error) } else { console.log(info); return info.response; } }); }; let email_data = { from: \"dmjgr5@gmail.com\", to: \"dmjgr5@gmail.com\", subject: \"테스트 메일입니다.\", text: \"node.js 테스트입니다. \" } send(email_data); . 웹서버 만들기 . express 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); app.set('views', __dirname + '/views'); app.set('view engine', 'ejs'); app.engine('html', require('ejs').renderFile); app.get('/', function (req, res) { res.render('index.html'); }) app.get('/about', function (req, res) { res.render('about.html'); }) . `node test.js’ . MySQL 사용하기 . npm install mysql --save 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); var mysql = require('mysql'); var pool = mysql.createPool({ host : '127.0.0.1', user : 'root', password : '', database : 'yse_spring_mvc' }); app.get('/db', function (req, res) { pool.getConnection(function(err, connection) { if (err) throw err; // not connected! // Use the connection connection.query('select 1+1 sum from dual', function (error, results, fields) { res.send(JSON.stringify(results)); console.log('results', results); // When done with the connection, release it. connection.release(); // Handle error after the release. if (error) throw error; // Don't use the connection here, it has been returned to the pool. }); }); }) . ",
     "url": "/docs/programming-language/nodejs-basic/#%EC%8B%A4%EC%8A%B5-%EC%98%88%EC%A0%9C",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#실습-예제"
-  },"302": {
+  },"308": {
     "doc": "Node.js",
     "title": "Node.js",
     "content": " ",
     "url": "/docs/programming-language/nodejs/",
     
     "relUrl": "/docs/programming-language/nodejs/"
-  },"303": {
+  },"309": {
     "doc": "OS Systems",
     "title": "OS Systems",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/os-systems",
     
     "relUrl": "/docs/os-systems"
-  },"304": {
+  },"310": {
     "doc": "Proc*C",
     "title": "Proc*C",
     "content": " ",
     "url": "/docs/programming-language/proc/",
     
     "relUrl": "/docs/programming-language/proc/"
-  },"305": {
+  },"311": {
     "doc": "Proc*C",
     "title": "Table of contents",
     "content": ". | DECLARE | SELECT | DML - INSERT, UPDATE, DELETE | CURSOR - DECLARE, OPEN, FETCH, CLOSE | . ProC is a uncommon programming language. I have known the language only with C and C# related to series of C world. ProC could be available to use with SQL in application sources, let me summarize the basic commands and a few samples. DECLARE . DECLARE section be used between BEGIN and END. EXEC SQL BEGIN DECLARE SECTION /*********************** declare host variables ***********************/ EXEC SQL END DECLARE SECTION; . SELECT . The variable number of SELECT and INTO section should be identical. EXEC SQL SELECT name, age, addr INTO :names, :ages, :addrs //requries : in case of using SELECT FROM ex where key = :key; . DML - INSERT, UPDATE, DELETE . DML types are easy to use by adding EXEC SQL before normal SQL queries. EXEC SQL INSERT INTO ex (name, age) VALUES (:names, :ages); EXEC SQL UPDATE ex SET name = :names WHERE key = :key; EXEC SQL DELETE FROM ex WHERE key = :key; . CURSOR - DECLARE, OPEN, FETCH, CLOSE . It is mandatory not to use INTO phrase in SELECT section. FETCH is used with FOR section normally, therefore we can use a condition like WHENEVER to escape FOR section. In order to do release the resource after FETCH, CLOSE should be used. EXEC SQL DECLARE ex_s CURSOR FOR // declare a cursor SELECT name, age FROM ex WHERE key = :key ORDER BY key; EXEC SQL OPEN ex_s; // open with cursor name EXEC SQL FETCH ex_s // fetch data, same the number of SELECT and FETCH INTO phrase INTO :name, :age; EXEC SQL CLOSE ex_s; // . ",
     "url": "/docs/programming-language/proc/#table-of-contents",
     
     "relUrl": "/docs/programming-language/proc/#table-of-contents"
-  },"306": {
+  },"312": {
     "doc": "Programming Language",
     "title": "Programming Language",
     "content": "프로그래밍 언어에 대해 정리해 보고, 언어별 특징 및 기본 개념에 대해 정리해 보고자 한다. ",
     "url": "/docs/programming-language",
     
     "relUrl": "/docs/programming-language"
-  },"307": {
+  },"313": {
     "doc": "Understanding of Python",
     "title": "Understanding of Python",
     "content": " ",
     "url": "/docs/programming-language/flutter-panabara/",
     
     "relUrl": "/docs/programming-language/flutter-panabara/"
-  },"308": {
+  },"314": {
     "doc": "Understanding of Python",
     "title": "Table of contents",
     "content": ". | Python Installation | Python Type | Shallow Copy and Deep Copy | Garbage Collection | Variable Parameter | Lambda Function | yield | Private Member | Inheritance | PYTHONPATH in System Variables | __pycache__ folder | Exception | Input and Output | Pickle | Regular Expression | Time, Math and Random | OS | Database with SQLite3 | Web Crawling with BeautifulSoup | PyQt5 GUI | Pandas | . This is the document for Python, which is basic instruction like Python Installation, Data Types and so on. Let me explain briefly about Python language. Python Installation . | Using python IDLE https://www.python.org | Using Visual Studio Code after extension installation [https://code.visualstudio.com] (https://code.visualstudio.com/) | . Python Type . | List [ ] . | Ordered List | . | Tuple ( ) . | Ordered List, not changed | . | Set { } . | Type with Set (used with Union, Intersection, Difference) | . | Dictionary {“key”:”value”} . | Paired with Key and Value, No ordered list | . | . Shallow Copy and Deep Copy . | Shallow Copy | . a = [1,2,3] b =a import copy a = [1,2,3] b = copy.copy(a) . | Deep Copy | . a = [1,2,3] b = a[:] import copy a = [1,2,3] b = copy.deepcopy(a) . Garbage Collection . | The data type of int, float, complex, String and tuple are immutable, therefore if the variable is updated, it make another new object, so old object which is not used, garbage collection executed. Mostly list and dictionary used because it is mutable type. The immutable type and global variable should be used with ‘global’ to update its value. | Test | . &gt;&gt;&gt; g = 1 &gt;&gt;&gt; def testScope(a): global g g = 2 return g + a print(\"testScoope(1) : \", testScoope(1)) print(\"g : \",g) . | Output | . testScoope(1) : 3 g : 1 . Variable Parameter . | Any number of parameters can be used by adding * (different a pointer from C)in front of parameters | . &gt;&gt;&gt; def test(*args): print(type(args)) &gt;&gt;&gt; test(1, 2) &lt;type 'tuple'&gt; # tuple type &gt;&gt;&gt; def union(*ar): res = [] for item in ar: for x in item: if not x in res: res.append(x) return res &gt;&gt;&gt; union(\"HAM\", \"EGG\", \"SPAM\") ['H', 'A', 'M', 'E', 'G', 'S', 'P'] &gt;&gt;&gt; union(\"gir\", \"generation\", \"gee\") ['g', 'i', 'r', 'e', 'n', 'a', 't', 'o'] . | Any number of parameters (key-value type) can be used by adding ** in front of parameters. It is option where it requires or not. Option parameter is handled as a dictionary type. | . &gt;&gt;&gt; def userURIBuilder(server, port, **user): str = \"http://\" + server + \":\" + port + \"/?\" for key in user.keys(): str += key + \"=\" + user[key] + \"&amp;\" return str &gt;&gt;&gt; userURIBuilder(\"test.com\", \"8080\", id='userid', passwd='1234') 'http://test.com:8080/?passwd=1234&amp;id=userid&amp;' &gt;&gt;&gt; userURIBuilder(\"test.com\", \"8080\", id='userid', passwd='1234', name='mike', age='20') 'http://test.com:8080/?passwd=1234&amp;age=20&amp;id=userid&amp;name=mike&amp;' . Lambda Function . | There is no name, anonymous function. In case of sample function, it is better to use lambda function. | Example : lambda : . | . &gt;&gt;&gt; g = lambda x, y : x * y &gt;&gt;&gt; g(2,3) 6 &gt;&gt;&gt; (lambda x: x * x)(3) 9 . yield . | returns value in real time, used in RANGE phrase. | . &gt;&gt;&gt; def reverse(data): for index in range(len(data) - 1, -1, -1): yield data[index] &gt;&gt;&gt; for char in reverse('gold'): print(char) d l o g . Private Member . | Add __&lt;member variable&gt;, changed _&lt;className&gt;__&lt;memberName&gt; | . class BankAccount: def __init__(self, id, name, balance): self. __ id = id self. __ name = name self. __ balance = balance def deposit(self, amount): self. __ balance += amount def withdraw(self, amount): self. __ balance -= amount def __str__(self): return \"{0}, {1}, {2}\".format(self.__id, self.__name, \\ self.__balance) . Inheritance . | Example : Class Student(Person): | . class Person: … class Student(Person): \"\"\"sub class\"\"\" def __init__(self, name, phoneNumber, subject, studentID): Person.__init__(self, name, phoneNumber) # Call Person Init self.subject = subject self.studentID = studentID . PYTHONPATH in System Variables . | When creating module, we can allocate the module location in specific folder using system properties path named as PYTHONPATH and the absolute path. Classes and Functions can be defined in Module. | Module example . | . from functools import * def intersect(*ar): return reduce(__intersectSC,ar) def __intersectSC(listX, listY): setList = [] for x in listX: if x in listY: setList.append(x) return setList def difference(*ar): setList = [] intersectSet = intersect(*ar) unionSet = union(*ar) for x in unionSet: if not x in intersectSet: setList.append(x) return setList def union(*ar): setList = [] for item in ar: for x in item: if not x in setList: setList.append(x) return setList . | Module Importing Style . | import simpleset . | get from global namespace, get all functions | check with command like dir() | . | from simpleset import union . | specific functions, ex) union function Only | check with command like dir(union) | . | from simpleset import * . | all functions, except the function start with __(double-underlined) | check with command like dir() | . | import simpleset as test1 . | make alias named as test1 | . | . | . __pycache__ folder . | After compile a pyc file, it is generated in __pycache__, as well we can share this file to others as a module, not to show the source code. Pyinstaller is useful for this case : . | pip3 install pyinstaller | python BankAccout.py | BankAccount in ‘dist’ folder | . | . Exception . def divide(a,b): return a/b try: c = divide(5, 2) except ZeroDivisionError: print('0 is not allowed') except TypeError: print(\"All parameters must be numbers\") except: print(\"Not defined\") else: print(\"Result : {0}\", c) finally: print(\"do anything\") . Input and Output . | Output | . import sys f = open(\"C:\\\\work\\\\test.txt\", \"wt\") print(\"file write\", file=f) f.close() . | read() : returns string all from a file | readline() : returns string line by line | readlines() : returns a list with line by line at once | . &gt;&gt;&gt; f = open(\"c:\\\\work\\\\demo.txt\") &gt;&gt;&gt; result = f.read() &gt;&gt;&gt; result 'qqqq\\nabcd\\n1234\\n' &gt;&gt;&gt; print(result) qqqq abcd 1234 &gt;&gt;&gt; f.tell() 25 &gt;&gt;&gt; f.seek(0) 0 &gt;&gt;&gt; f.tell() 0 &gt;&gt;&gt; f.readline() 'qqqq\\n' &gt;&gt;&gt; f.readline() 'abcd\\n' &gt;&gt;&gt; f.readline() '1234\\n' &gt;&gt;&gt; f.seek(0) 0 &gt;&gt;&gt; lst = f.readlines() &gt;&gt;&gt; lst ['qqqq\\n', 'abcd\\n', '1234\\n'] . | Input f = open(\"c:\\\\work\\\\demo1.txt\", \"wt\") f.write(\"qqqq\\nabcd\\n1234\\n\") f.close() . | . Pickle . | Save information temporarily | . import pickle colors = [\"red\", \"blue\", \"gree\"] # Write f = open(\"c:\\\\work\\\\colors\",\"wb\") # write binary pickle.dump(colors,f) # back up with .dump function f.close() # Read f = open(\"c:\\\\work\\\\colors\",\"rb\") # read binary colors = pickle.load(f) # open with .load function print(colors) f.close() del colors # delete list import os os.remove(\"c:\\\\work\\\\colors\") # delete file . Regular Expression . import re f=open('c:\\\\work\\\\PV3.txt','rt') g=open('c:\\\\work\\\\PV3_copy.txt','wt') line = f.readline() while (line != ''): if (re.search(\"\\d{4}\", line)): g.write(line + \"\\n\") line = f.readline() f.close() g.close() . Time, Math and Random . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . OS . &gt;&gt;&gt; from os.path import * &gt;&gt;&gt; abspath('tmp') 'C:\\\\Python35\\\\tmp' &gt;&gt;&gt; basename('c:\\\\python35\\\\tmp') 'tmp' &gt;&gt;&gt; basename('c:\\\\python35\\\\tmp\\\\test.txt') 'test.txt' &gt;&gt;&gt; commonprefix(['c:\\\\python35\\\\lib', 'c:\\\\python35\\tools', 'c:\\\\python35']) 'c:\\\\python35' &gt;&gt;&gt; exists('c:\\\\python35\\\\tmp') False &gt;&gt;&gt; exists('c:\\\\python35') True &gt;&gt;&gt; getsize('c:\\\\python35\\\\python.exe') 26624 &gt;&gt;&gt; isfile('c:\\\\python35\\\\python.exe') True . Database with SQLite3 . SQLite3 is an opensource, which is embedded in Python library. | sqlite3.connect(database[, timeout, isolation_level, detect_types, factory]) | sqlite3.complete_statement(sql) | sqlite3.register_adapter(type, callable) | sqlite3.register_converter(typename, callable) . | Connection Class | Connection.cursor() | Connection.rollback() | Connection.close() | Connection.isolation_level | Connection.execute(sql[, parameters]) | . | Cursor Class . | Cursor.execute(sql[, parameters]) | Cursor.executemany(sql, seq_of_parameters) | Cursor.executescript(sql_script) | Cursor.fetchone() | Cursor.fetchmany([size=cursor.arraysize]) | Cursor.fetchall() | . | Connection.iterdump() . | CRUD example | . import sqlite3 #generate connection object con = sqlite3.connect(\":memory:\") # in memory # con = sqlite3.connect(\"test.db\") # in file #generate cursor cur = con.cursor() # create ( use text intead of varchar2 in SQLite3) cur.execute(\"create table PhoneBook (Name text, PhoneNum text);\") # insert cur.execute(\"insert into PhoneBook values ('derick', '010-111');\") # insert using variables name = \"gil dong\" phoneNumber = \"010-222\" cur.execute(\"insert into PhoneBook values ( ?, ?);\", (name, phoneNumber)) # input using Tuple type # multiple record datalist = ((\"tom\",\"010-123\"),(\"dsp\",\"010-567\")) # tuple in tuple cur.executemany(\"insert into PhoneBook values ( ?, ?);\", datalist) # input using Tuple type, with executemany function # search cur.execute(\"select * from PhoneBook;\") print(cur.fetchone()) print(cur.fetchmany(2)) cur.execute(\"select * from PhoneBook;\") print(cur.fetchall()) # dump print(\"--------- db dump ---------\") for i in con.iterdump(): print(i) # *** Result =&gt; results out as tuple type # ('derick', '010-111') # [('gil dong', '010-222'), ('tom', '010-123')] # [('derick', '010-111'), ('gil dong', '010-222'), ('tom', '010-123'), ('dsp', '010-567')] # --------- db dump --------- # BEGIN TRANSACTION; # CREATE TABLE PhoneBook (Name text, PhoneNum text); # INSERT INTO \"PhoneBook\" VALUES('derick','010-111'); # INSERT INTO \"PhoneBook\" VALUES('gil dong','010-222'); # INSERT INTO \"PhoneBook\" VALUES('tom','010-123'); # INSERT INTO \"PhoneBook\" VALUES('dsp','010-567'); # COMMIT; . | executemany example with tuple data | . import sqlite3 #generate connection object # con = sqlite3.connect(\":memory:\") # in memory con = sqlite3.connect(\"c:\\\\work\\\\sample.db\") # in file #generate cursor cur = con.cursor() # create ( use text intead of varchar2 in SQLite3) cur.execute(\"create table PhoneBook (Name text, PhoneNum text);\") # insert cur.execute(\"insert into PhoneBook values ('derick', '010-111');\") # insert using variables name = \"gil dong\" phoneNumber = \"010-222\" cur.execute(\"insert into PhoneBook values ( ?, ?);\", (name, phoneNumber)) # input using Tuple type # multiple record datalist = ((\"tom\",\"010-123\"),(\"dsp\",\"010-567\")) # tuple in tuple cur.executemany(\"insert into PhoneBook values ( ?, ?);\", datalist) # input using Tuple type, with executemany function # search cur.execute(\"select * from PhoneBook;\") for row in cur: print(row) # commit con.commit() # *** Result =&gt; results out as tuple type # ('derick', '010-111') # ('gil dong', '010-222') # ('tom', '010-123') # ('dsp', '010-567') . | Backup example | . import sqlite3 #generate connection object con = sqlite3.connect(\":memory:\") # in memory # con = sqlite3.connect(\"test.db\") # in file #generate cursor cur = con.cursor() # create ( use text intead of varchar2 in SQLite3) cur.execute(\"create table PhoneBook (Name text, PhoneNum text);\") # insert cur.execute(\"insert into PhoneBook values ('derick', '010-111');\") # insert using variables name = \"gil dong\" phoneNumber = \"010-222\" cur.execute(\"insert into PhoneBook values ( ?, ?);\", (name, phoneNumber)) # input using Tuple type # multiple record datalist = ((\"tom\",\"010-123\"),(\"dsp\",\"010-567\")) # tuple in tuple cur.executemany(\"insert into PhoneBook values ( ?, ?);\", datalist) # input using Tuple type, with executemany function # database dump with open(\"c:\\\\work\\\\dump.sql\",\"wt\") as f: for item in con.iterdump(): print(item) f.write(\"{0}\\n\".format(item)) print(\"backup completed\") # *** Result =&gt; results out as tuple type # BEGIN TRANSACTION; # CREATE TABLE PhoneBook (Name text, PhoneNum text); # INSERT INTO \"PhoneBook\" VALUES('derick','010-111'); # INSERT INTO \"PhoneBook\" VALUES('gil dong','010-222'); # INSERT INTO \"PhoneBook\" VALUES('tom','010-123'); # INSERT INTO \"PhoneBook\" VALUES('dsp','010-567'); # COMMIT; # backup completed . | Restore example | . # open new dump &gt;&gt;&gt; con = sqlite3.connect(\"c:\\\\work\\\\demo.db\") # read old dump &gt;&gt;&gt; with open(\"c:\\\\work\\\\dump.sql\") as f: SQLScript = f.read() # check dump script &gt;&gt;&gt; SQLScript 'BEGIN TRANSACTION;\\nCREATE TABLE PhoneBook (Name text, PhoneNum text);\\nINSERT INTO \"PhoneBook\" VALUES(\\'derick\\',\\'010-111\\');\\nINSERT INTO \"PhoneBook\" VALUES(\\'gil dong\\',\\'010-222\\');\\nINSERT INTO \"PhoneBook\" VALUES(\\'tom\\',\\'010-123\\');\\nINSERT INTO \"PhoneBook\" VALUES(\\'dsp\\',\\'010-567\\');\\nCOMMIT;\\n' # create cursor &gt;&gt;&gt; cur = con.cursor() # execute script &gt;&gt;&gt; cur.executescript(SQLScript) &lt;sqlite3.Cursor object at 0x03F4B7E0&gt; # select &gt;&gt;&gt; cur.execute(\"select * from PhoneBook;\") &lt;sqlite3.Cursor object at 0x03F4B7E0&gt; # fetch all &gt;&gt;&gt; cur.fetchall() [('derick', '010-111'), ('gil dong', '010-222'), ('tom', '010-123'), ('dsp', '010-567')] . Web Crawling with BeautifulSoup . | pip3 list | pip3 install BeautifulSoup4 | pip install requests | pip list . | Example of Webcrawling | . # request webserver import urllib.request from bs4 import BeautifulSoup data = urllib.request.urlopen(\"http://comic.naver.com/webtoon/list.nhn?titleId=20853&amp;weekday=fri\") soup = BeautifulSoup(data, \"html.parser\") cartoons = soup.find_all(\"td\", class_=\"title\") title = cartoons[0].find('a').text link = cartoons[0].find('a')[\"href\"] # print(title) # print(link) for item in cartoons: title = item.find(\"a\").text print(title.strip()) . | Save file and web crawling for all pages | . # coding:utf-8 from bs4 import BeautifulSoup import urllib.request import re for n in range(0,10): #address of clien data ='https://www.clien.net/service/board/sold?&amp;od=T31&amp;po=' + str(n) req = urllib.request.Request(data) data = urllib.request.urlopen(req).read() page = data.decode('utf-8', 'ignore') soup = BeautifulSoup(page, 'html.parser') list = soup.find_all('span', attrs={'data-role':'list-title-text'}) f = open(\"C:\\\\work\\\\clien.txt\", \"a+\", encoding=\"utf-8\") # incase of new, use wt for item in list: try: title = item.text if (re.search('갤럭시', title)): print(title.strip()) f.write(title.strip() + \"\\n\") except: pass f.close() print(\"end of web crawling\") . | Add user-agent in header | . # coding:utf-8 from bs4 import BeautifulSoup import urllib.request import re #User-Agent add hdr = {'User-agent':'Mozila/5.0 (compatible; MSIE 5.5; Windows NT)'} # make request by adding client info with Internet explorer for n in range(1,11): data ='https://dvdprime.com/g2/bbs/board.php?bo_table=comm&amp;page=' + str(n) req = urllib.request.Request(data, \\ headers = hdr) data = urllib.request.urlopen(req).read() page = data.decode('utf-8', 'ignore') soup = BeautifulSoup(page, 'html.parser') # &lt;span class='list_subject_span_pc'&gt;contents&lt;/span&gt; list = soup.find_all('span', attrs={'class':'list_subject_span_pc'}) for item in list: try: title = item.text if (re.search('회사', title)): print(title.strip()) except: pass . PyQt5 GUI . Install PyQt5-5.6-gpl-Py3.5-Qt5.6.0-x32-2.exe, make sure same version with python . | .ui file . | XML format | Make mapping signal and slot in Signal/Slot Editor on Qt designer | . | .py file . | Add login in py file | . | . # demo.ui (display) + demo.py(logic) import sys from PyQt5.QtWidgets import * from PyQt5 import uic import urllib.request from bs4 import BeautifulSoup form_class = uic.loadUiType(\"demo2.ui\")[0] #parent class((QMainWindow)) class DemoForm(QMainWindow, form_class): def __init__(self): super().__init__() self.setupUi(self) def firstClick(self): data = urllib.request.urlopen(\"http://comic.naver.com/webtoon/list.nhn?titleId=20853&amp;weekday=fri\") soup = BeautifulSoup(data, \"html.parser\") cartoons = soup.find_all(\"td\", class_=\"title\") # title = cartoons[0].find('a').text # link = cartoons[0].find('a')[\"href\"] # print(title) # print(link) for item in cartoons: title = item.find(\"a\").text print(title.strip()) def secondClick(self): self.label.setText(\"clicked second\") def thirdClick(self): self.label.setText(\"clicked third\") if __name__ == \"__main__\": app = QApplication(sys.argv) demoWindow = DemoForm() demoWindow.show() app.exec_() . | Get data and show table and link to browser. | . import sys from PyQt5.QtWidgets import * import urllib.request from bs4 import BeautifulSoup import webbrowser import re class Form(QMainWindow): def __init__(self): super().__init__() self.setupUI() def setupUI(self): # (x,y,width,height) self.setGeometry(200, 200, 800, 800) # INPUT self.lineEdit = QLineEdit(\"\", self) self.lineEdit.move(20, 20) #BUTTON self.btn = QPushButton(\"검색\", self) self.btn.move(120, 20) self.btn.clicked.connect(self.setTableWidgetData) self.tableWidget = QTableWidget(self) self.tableWidget.move(20, 70) self.tableWidget.resize(800, 600) self.tableWidget.setRowCount(50) self.tableWidget.setColumnCount(2) self.tableWidget.setColumnWidth(0, 300) self.tableWidget.setColumnWidth(1, 300) self.tableWidget.doubleClicked.connect(self.doubleClicked) def setTableWidgetData(self): row = 0 for n in range(0,5): data ='https://www.clien.net/service/board/sold?&amp;od=T31&amp;po=' + str(n) req = urllib.request.Request(data) data = urllib.request.urlopen(req).read() page = data.decode('utf-8', 'ignore') soup = BeautifulSoup(page, 'html.parser') list = soup.find_all('a', attrs={'class':'list_subject'}) f = open(\"clien.txt\", \"a+\", encoding=\"utf-8\") for item in list: try: span = item.contents[3] title = item.text.strip() if (re.search(self.lineEdit.text(), title)): title = title.replace(\"\\t\", \"\") title = title.replace(\"\\n\", \"\") print(title) link = 'https://www.clien.net' + item['href'] print(link.strip()) f.write(title+\"\\n\") f.write(link + \"\\n\") self.tableWidget.setItem(row, 0, QTableWidgetItem(title)) self.tableWidget.setItem(row, 1, QTableWidgetItem(link)) row += 1 print(\"row: \", row) except: pass f.close() def doubleClicked(self): url = self.tableWidget.item(self.tableWidget.currentRow(), 1).text() webbrowser.open(url) if __name__ == \"__main__\": app = QApplication(sys.argv) mywindow = Form() mywindow.show() app.exec_() . Pandas . | Import type . | from pandas import Series, DataFrame | import pandas as pd | . | Datatypes . | Series . | It is similar to list | . | Dataframe . | 2 array list | . | . | Read function . | read_csv : based on csv from DB mainly | read_table : based on tab key | read_fwf : based on fixed width | read_excel : based on excel | . | Functions . | plt.plot | plt.scatter | plt.bar | . # make one frame years = range(1880,2011) pieces = [] columns = [\"name\", \"sex\", \"births\"] for year in years: path = \"c:\\\\work\\\\yob%d.txt\" % year frame = pd.read_csv(path, names = columns) frame[\"year\"] = year pieces.append(frame) names = pd.concat(pieces, ignore_index=True) . | Summary . total_births = names.pivot_table(\"births\", index = 'year', columns='sex', aggfunc=sum) . | Plot . total_births.plot(title=\"년도별 성별 출생 숫자\") . | . ",
     "url": "/docs/programming-language/flutter-panabara/#table-of-contents",
     
     "relUrl": "/docs/programming-language/flutter-panabara/#table-of-contents"
-  },"309": {
+  },"315": {
     "doc": "Python",
     "title": "Python",
     "content": " ",
     "url": "/docs/programming-language/python/",
     
     "relUrl": "/docs/programming-language/python/"
-  },"310": {
+  },"316": {
     "doc": "Spring 기본 개념",
     "title": "Spring 기본 개념",
     "content": " ",
     "url": "/docs/framework/spring-basic/",
     
     "relUrl": "/docs/framework/spring-basic/"
-  },"311": {
+  },"317": {
     "doc": "Spring 기본 개념",
     "title": "Table of contents",
     "content": ". | Tomcat | HTTP 요청과 응답 | WAS | 설정파일 . | server.xml | web.xml | . | Tabbed Postman | 저장소 . | pageContext : page 별 | request : request 별 | session : 사용자별 | application : context 전체 | . | 서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트 | @RequestParam 과 @ModelAttribute | @GetMapping , @PostMapping | redirect 와 forward | 쿠키 : 브라우저에 저장 | 세션 : 서버에 저장 | 예외처리 | Spring DI | Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean | SQL &amp; SQL Workbench | Spring DB 다루기 &amp; Junit Test | DAO | AOP 개념과 용어 : 중복코드 분리위함 | Controller &gt; Service &gt; Repository(Dao) &gt; DB | @Transactional : 롤백 가능 | Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청 | Forward : 다른 곳으로 요청 | . 남궁성의 Spring framework 강좌 가 개인적으로 가장 잘 설명해주시고 이해하기 쉬웠던 강의라 생각한다. 잊지 않기 위해 정리한다. 참조자료 : https://github.com/castello/spring_basic . ",
     "url": "/docs/framework/spring-basic/#table-of-contents",
     
     "relUrl": "/docs/framework/spring-basic/#table-of-contents"
-  },"312": {
+  },"318": {
     "doc": "Spring 기본 개념",
     "title": "Tomcat",
     "content": ". | webapps 폴더에 war 파일을 넣어주면 해당 파일 압축 후에 서비스 된다. | . ",
     "url": "/docs/framework/spring-basic/#tomcat",
     
     "relUrl": "/docs/framework/spring-basic/#tomcat"
-  },"313": {
+  },"319": {
     "doc": "Spring 기본 개념",
     "title": "HTTP 요청과 응답",
     "content": ". | QueryString 을 처리하는 방법 . | @Controller -&gt; @RequestMapping -&gt; request.getParameter(\"aaa\") | . | HTTP 요청 -&gt; HttpServeltRequest request 매개변수 를 받아서 톰캣에서 처리한다. | . [실행결과] http://localhost:8080/ch2/requestInfo?year=2021&amp;month=10&amp;day=1 request.getCharacterEncoding()=UTF-8 request.getContentLength()=-1 request.getContentType()=null request.getMethod()=GET request.getProtocol()=HTTP/1.1 request.getScheme()=http request.getServerName()=localhost request.getServerPort()=8080 request.getRequestURI()=http://localhost:8080/ch2/requestInfo request.getRequestURI()=/ch2/requestInfo request.getContextPath()=/ch2 request.getServletPath()=/requestInfo request.getQueryString()=year=2021&amp;month=10&amp;day=1 request.getLocalName()=localhost request.getLocalPort()=8080 request.getRemoteAddr()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemoteHost()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemotePort()=54855 . | HttpServeltResponse 를 매개변수에 넣어 response 객체를 얻는다. | . ",
     "url": "/docs/framework/spring-basic/#http-%EC%9A%94%EC%B2%AD%EA%B3%BC-%EC%9D%91%EB%8B%B5",
     
     "relUrl": "/docs/framework/spring-basic/#http-요청과-응답"
-  },"314": {
+  },"320": {
     "doc": "Spring 기본 개념",
     "title": "WAS",
     "content": "Web Application Server : 서버에 프로그램을 설치한다. 예) 프로그램 업데이트를 서버에서만 하면 된다. ",
     "url": "/docs/framework/spring-basic/#was",
     
     "relUrl": "/docs/framework/spring-basic/#was"
-  },"315": {
+  },"321": {
     "doc": "Spring 기본 개념",
     "title": "설정파일",
     "content": "server.xml . | 톰캣 설치경로/conf/server.xml : 톰갯 서버 설정파일 | . web.xml . | 톰갯 설치경로/conf/web.xml : Tomcat 의 모든 web app 의 공통설정 | 웹앱이름/WEB-INF/web.xml : wep app 의 개별 설정 | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC",
     
     "relUrl": "/docs/framework/spring-basic/#설정파일"
-  },"316": {
+  },"322": {
     "doc": "Spring 기본 개념",
     "title": "Tabbed Postman",
     "content": ". | 크롬 확장프로그램에서 제공되는 Rest Client 로 포스트맨 설치 대신 사용이 가능하다. | . ",
     "url": "/docs/framework/spring-basic/#tabbed-postman",
     
     "relUrl": "/docs/framework/spring-basic/#tabbed-postman"
-  },"317": {
+  },"323": {
     "doc": "Spring 기본 개념",
     "title": "저장소",
     "content": "pageContext : page 별 . request : request 별 . session : 사용자별 . application : context 전체 . ",
     "url": "/docs/framework/spring-basic/#%EC%A0%80%EC%9E%A5%EC%86%8C",
     
     "relUrl": "/docs/framework/spring-basic/#저장소"
-  },"318": {
+  },"324": {
     "doc": "Spring 기본 개념",
     "title": "서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%84%9C%EB%B8%94%EB%A6%BF--jsp--%EC%8A%A4%ED%94%84%EB%A7%81--%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
     
     "relUrl": "/docs/framework/spring-basic/#서블릿--jsp--스프링--스프링부트"
-  },"319": {
+  },"325": {
     "doc": "Spring 기본 개념",
     "title": "@RequestParam 과 @ModelAttribute",
     "content": " ",
     "url": "/docs/framework/spring-basic/#requestparam-%EA%B3%BC-modelattribute",
     
     "relUrl": "/docs/framework/spring-basic/#requestparam-과-modelattribute"
-  },"320": {
+  },"326": {
     "doc": "Spring 기본 개념",
     "title": "@GetMapping , @PostMapping",
     "content": " ",
     "url": "/docs/framework/spring-basic/#getmapping--postmapping",
     
     "relUrl": "/docs/framework/spring-basic/#getmapping--postmapping"
-  },"321": {
+  },"327": {
     "doc": "Spring 기본 개념",
     "title": "redirect 와 forward",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect-%EC%99%80-forward",
     
     "relUrl": "/docs/framework/spring-basic/#redirect-와-forward"
-  },"322": {
+  },"328": {
     "doc": "Spring 기본 개념",
     "title": "쿠키 : 브라우저에 저장",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%BF%A0%ED%82%A4--%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#쿠키--브라우저에-저장"
-  },"323": {
+  },"329": {
     "doc": "Spring 기본 개념",
     "title": "세션 : 서버에 저장",
     "content": ". | 무조건 서버에서 생성하여 response 헤더에 세션정보를 넣어준다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%B8%EC%85%98--%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#세션--서버에-저장"
-  },"324": {
+  },"330": {
     "doc": "Spring 기본 개념",
     "title": "예외처리",
     "content": ". | try-catch 를 사용한다. | @ContrlloerAdvice 내 @ExceptionHandler 에서 처리하도록 한다. | @ResponseStatus : 응답메시지의 상태코드를 변경할 때 사용한다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC",
     
     "relUrl": "/docs/framework/spring-basic/#예외처리"
-  },"325": {
+  },"331": {
     "doc": "Spring 기본 개념",
     "title": "Spring DI",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-di",
     
     "relUrl": "/docs/framework/spring-basic/#spring-di"
-  },"326": {
+  },"332": {
     "doc": "Spring 기본 개념",
     "title": "Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean",
     "content": " ",
     "url": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb%EB%B3%B5%EC%9E%A1--spring-bean",
     
     "relUrl": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb복잡--spring-bean"
-  },"327": {
+  },"333": {
     "doc": "Spring 기본 개념",
     "title": "SQL &amp; SQL Workbench",
     "content": " ",
     "url": "/docs/framework/spring-basic/#sql--sql-workbench",
     
     "relUrl": "/docs/framework/spring-basic/#sql--sql-workbench"
-  },"328": {
+  },"334": {
     "doc": "Spring 기본 개념",
     "title": "Spring DB 다루기 &amp; Junit Test",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-db-%EB%8B%A4%EB%A3%A8%EA%B8%B0--junit-test",
     
     "relUrl": "/docs/framework/spring-basic/#spring-db-다루기--junit-test"
-  },"329": {
+  },"335": {
     "doc": "Spring 기본 개념",
     "title": "DAO",
     "content": " ",
     "url": "/docs/framework/spring-basic/#dao",
     
     "relUrl": "/docs/framework/spring-basic/#dao"
-  },"330": {
+  },"336": {
     "doc": "Spring 기본 개념",
     "title": "AOP 개념과 용어 : 중복코드 분리위함",
     "content": ". | 메서드의 시작 또는 끝에 자동으로 코드(advice) 를 실행 중에 추가 | 횡단관심사 : 예) logging | @Before, @After, @Around | . ",
     "url": "/docs/framework/spring-basic/#aop-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%9A%A9%EC%96%B4--%EC%A4%91%EB%B3%B5%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9C%84%ED%95%A8",
     
     "relUrl": "/docs/framework/spring-basic/#aop-개념과-용어--중복코드-분리위함"
-  },"331": {
+  },"337": {
     "doc": "Spring 기본 개념",
     "title": "Controller &gt; Service &gt; Repository(Dao) &gt; DB",
     "content": ". | 위 3개 모두 Component 스캔이 된다. | . ",
     "url": "/docs/framework/spring-basic/#controller--service--repositorydao--db",
     
     "relUrl": "/docs/framework/spring-basic/#controller--service--repositorydao--db"
-  },"332": {
+  },"338": {
     "doc": "Spring 기본 개념",
     "title": "@Transactional : 롤백 가능",
     "content": ". | REQUIRES_NEW : 현재와 다른 새로운 transaction 생성한다. (default : REQUIRED) | . ",
     "url": "/docs/framework/spring-basic/#transactional--%EB%A1%A4%EB%B0%B1-%EA%B0%80%EB%8A%A5",
     
     "relUrl": "/docs/framework/spring-basic/#transactional--롤백-가능"
-  },"333": {
+  },"339": {
     "doc": "Spring 기본 개념",
     "title": "Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect--300%EB%B2%88-%EC%9D%91%EB%8B%B5-2%EB%B2%88-%EC%9A%94%EC%B2%AD-2%EB%B2%88-%EC%9D%91%EB%8B%B5-%EB%91%90%EB%B2%88%EC%A8%B0%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EA%B0%80-%EC%9E%90%EB%8F%99-get-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#redirect--300번-응답-2번-요청-2번-응답-두번쨰는-브라우저가-자동-get-요청"
-  },"334": {
+  },"340": {
     "doc": "Spring 기본 개념",
     "title": "Forward : 다른 곳으로 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#forward--%EB%8B%A4%EB%A5%B8-%EA%B3%B3%EC%9C%BC%EB%A1%9C-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#forward--다른-곳으로-요청"
-  },"335": {
+  },"341": {
     "doc": "Spring",
     "title": "Spring",
     "content": " ",
     "url": "/docs/framework/spring/",
     
     "relUrl": "/docs/framework/spring/"
-  },"336": {
+  },"342": {
     "doc": "Spring Boot 참조 자료",
     "title": "Spring Boot 참조 자료",
     "content": ". Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다. 추천 자료 . | 점프 투 스프링부트 . | 남궁성의 Spring Boot 강좌 - 기본편 . | . ",
     "url": "/docs/framework/spring-reference/",
     
     "relUrl": "/docs/framework/spring-reference/"
-  },"337": {
+  },"343": {
     "doc": "Spring Boot",
     "title": "Spring Boot",
     "content": " ",
     "url": "/docs/framework/springboot/",
     
     "relUrl": "/docs/framework/springboot/"
-  },"338": {
+  },"344": {
     "doc": "5 Whys 기법",
     "title": "5 Whys 기법",
     "content": ". 한 플랫폼 기업에서는 장애 원인 분석을 찾기 위한 기법으로 5 Whys 기법을 활용한다고 합니다. 5 Whys 기법는 장애 분석 기법이 아닌 어떠한 상황이 발생했을 때 그에 대한 원인을 파악하기 위해 착안한 방법의 일종이라고 합니다. 일상 생활에서도 특정 원인을 분석할 때 좋을 것 같아 아래와 같이 정리하고자 합니다. 배경 . 5 Whys 는 도요타의 Taiichi Ohno 가 체계적인 문제를 위해 개발한 도구로, 어떠한 문제 상황에 대해 그러한 상황이 발생하게 된 원인을 ‘왜 그러한 상황이 발생했는가?’ 라는 질문을 여러 번 반복해 나가면 문제의 근본 원인에 도달할 수 있다는 방법론입니다. 기법 사례 . 미국 제퍼슨 독립기념관의 대리석 기둥이 해마다 지속적으로 부식되자 많은 보수 비용이 발생하게 되고 기념관의 이미지가 훼손되었습니다. 5Whys 를 통해 이러한 문제를 해결한 사례를 들어보겠습니다. | Why 1. 왜 대리석들이 빨리 부식되는가? . | 비누 청소를 자주 하기 떄문이다. | . | Why 2. 왜 비누 청소를 자주 하는가? . | 비둘기 배설물이 많이 묻기 때문이다. | . | Why 3. 왜 비둘기 배설물이 많은가? . | 비둘기의 먹잇감인 거미줄이 많기 때문이다. | . | Why 4. 왜 거미줄이 많은가? . | 거미의 먹잇감인 불나방이 많이 있었기 때문이다. | . | Why 5. 왜 불나방이 많은가? . | 실내 전등을 주변보다 일찍 켜기 때문이다. | . | . 이를 통해 도출된 근본 원인을 해결하기 위해서 제퍼슨 독립 기념관은 주변보다 2시간 늦게 전등을 밝히는 것으로 문제를 해결했다고 합니다. 정리 . 위와 같이 여러 단계를 거쳐 근본 원인을 도출할 수 있는데, 반드시 5개일 필요는 없다고 합니다. 단계를 거쳐가며 합리적인 원인을 찾아 나가며 근본 원인(root cause) 를 찾는 것으로도 충분하다고 생각합니다. 자신의 고민거리나 상대방의 의견을 파악하는 등 평소 생활 속에서도 많은 도움이 될 것 같기도 하네요. ",
     "url": "/docs/theoretical/theoretical-5why/",
     
     "relUrl": "/docs/theoretical/theoretical-5why/"
-  },"339": {
+  },"345": {
     "doc": "통계 분석 기초 용어 정리",
     "title": "통계 분석 기초 용어 정리",
     "content": ". 빅데이터를 학습하기 전에 가장 먼저 맞닥뜨리는 것이 아무래도 통계일 것입니다. 수집된 자료를 정리, 분석하고 일정한 패턴 분석 및 인과관계를 파악하기 위해서는 기본이 되는 통계 개념을 이해하고 넘어가고자 아래와 같이 정리합니다. ■ 평균 . | 자료의 합 / 자료의 개수 | . ■ 중앙값(Median)      . | 자료를 크기순서로 나열했을 때 가장 중앙에 위치한 값이다.      ㄴ = MEDIAN(범위) | . ■ 최빈값(mode)  . | 자료 중에서 가장 출현빈도가 높은 값이다. | = MODE(범위) | . ■ 분산(Variance)      ㄴ평균을 중심으로 관찰값들이 얼마나 떨어져 분포하는가를 나타낸다.      ㄴ편차제곱합 : 편차1^2 + 편차2^2 + …..      ㄴ분산 = 편차제곱합 / 데이터 수 = VAR(범위) . ■ 표준편차(standard deviation) . | 분산의 양의 제곱근으로 원 자료 측정단위와 같은 단위로 퍼짐 정도를 나타낸다. | 표준편차 = 분산^(1/2) = STDEV(범위) | . ■ 변동계수(coefficient of variation, CV) . | 평균이 크게 다른 두 개 이상의 집단을 비교할 때 또는 각 집단의 상대적 동질성을 비교할 때 주로 사용 | CV = 표준편차 / 평균 | . ■ 범위 . | 최대값 - 최소값, 가장 간단하게 퍼짐 정도를 파악할 수 있는 척도이다. | . ■ 사분위수 범위(IQR : Interquartile Range) . | 제 3사분위수와 제 1사분위수의 차를 의미, 자료의 가운데 부분에 위치한 50%의미 | 사분위수 = 3사분위수 - 1사분위수 = QUARTILE(범위, quart) | . ■ 상자그림 . | 최소값, 1사분위, 2사분위, 3사분위, 최대값을 이용하여 그림을 그린다. | . ■ 백분위수 . | 어떤 숫자들의 집합에서 제c백분위수는 수들의 c% 가 그 값보다 작고 나머지는 그 값보다 큰 값을 말한다. | . ■ 데이터의 Z 값 . | 어떤 특정한 자료값이 평균으로부터 표준편차의 몇 배 만큼 떨어져 있는가를 측정한다. | Z = (변량(x) - 평균) / 표준편차 = STANDARIDZE(x, mean, standard_dev) | . ",
     "url": "/docs/theoretical/theoretical-stats/",
     
     "relUrl": "/docs/theoretical/theoretical-stats/"
-  },"340": {
+  },"346": {
     "doc": "Theoretical",
     "title": "Theoretical",
     "content": "이론적인 내용들을 정리하였습니다. ",
     "url": "/docs/theoretical",
     
     "relUrl": "/docs/theoretical"
-  },"341": {
+  },"347": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/",
     
     "relUrl": "/docs/programming-language/vuejs-basic/"
-  },"342": {
+  },"348": {
     "doc": "Vue.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Vue 설치 | 데이터 바인딩 | 반복문 | 이벤트 핸들러 | 모달창 만들기 | export defalut . | 데이터 부분 | 가져오는 부분 | . | . 참조 자료 : [인스타그램을 만들며 배워보는 Vue.js 3 완벽 가이드] (https://codingapple.com/course/vue-js/) . ",
     "url": "/docs/programming-language/vuejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#table-of-contents"
-  },"343": {
+  },"349": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue 설치",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#vue-%EC%84%A4%EC%B9%98",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#vue-설치"
-  },"344": {
+  },"350": {
     "doc": "Vue.js 기본 개념",
     "title": "데이터 바인딩",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#데이터-바인딩"
-  },"345": {
+  },"351": {
     "doc": "Vue.js 기본 개념",
     "title": "반복문",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%B0%98%EB%B3%B5%EB%AC%B8",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#반복문"
-  },"346": {
+  },"352": {
     "doc": "Vue.js 기본 개념",
     "title": "이벤트 핸들러",
     "content": "&lt;button @mouseover =\"신고수--\" @click=\"신고수++\"&gt;허위매물신고&lt;/button&gt; &lt;span&gt;신고수 : &lt;/span&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%9F%AC",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#이벤트-핸들러"
-  },"347": {
+  },"353": {
     "doc": "Vue.js 기본 개념",
     "title": "모달창 만들기",
     "content": "모달창을 미리 만들어 클릭 시 상태조건을 변경한다. &lt;div class=\"black-bg\" v-if=\"모달창열렸니 == true\"&gt; &lt;div class=\"white-bg\"&gt; &lt;h4&gt;상세페이지임&lt;/h4&gt; &lt;p&gt;상세페이지 내용임&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#모달창-만들기"
-  },"348": {
+  },"354": {
     "doc": "Vue.js 기본 개념",
     "title": "export defalut",
     "content": "데이터 부분 . export default [{ id : 0, title: \"Sinrim station 30 meters away\", image: \"https://codingapple1.github.io/vue/room0.jpg\", content: \"18년 신축공사한 남향 원룸 ☀️, 공기청정기 제공\", price: 340000 }, { . 가져오는 부분 . import data from './assets/oneroom.js'; export default { name: 'App', data() { return { 원룸들 : data, . &lt;img :src=\"원룸들[2].image\" class=\"room-img\"&gt; &lt;h4 @click=\"모달창열렸니 = true\"&gt; &lt;/h4&gt; &lt;p&gt; 원 &lt;/p&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#export-defalut",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#export-defalut"
-  },"349": {
+  },"355": {
     "doc": "Vue.js",
     "title": "Vue.js",
     "content": " ",

@@ -105,7 +105,7 @@ Are you sure you want to continue? [y/N] y
 // 로그인
 root@docker1:~# docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-Username: dcpark
+Username: testuser
 Password:
 WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
 Configure a credential helper to remove this warning. See
@@ -167,8 +167,8 @@ Status: Image is up to date for busybox:latest
 docker.io/library/busybox:latest
 root@docker1:~#
 
-// dcpark/box 의 1.0 으로 생성
-root@docker1:~# docker image tag busybox dcpark/box:1.0
+// testuser/box 의 1.0 으로 생성
+root@docker1:~# docker image tag busybox testuser/box:1.0
 root@docker1:~#
 
 // nginx 다운로드
@@ -180,26 +180,26 @@ Status: Image is up to date for nginx:latest
 docker.io/library/nginx:latest
 root@docker1:~#
 
-// dcpark/web-server 1.0 태그로 생성
-root@docker1:~# docker image tag nginx dcpark/web-server:1.0
+// testuser/web-server 1.0 태그로 생성
+root@docker1:~# docker image tag nginx testuser/web-server:1.0
 root@docker1:~#
 
 // 생성됐는지 조회
 // 원래 이미지와 생성한 이미지의 IMAGE ID 가 동일하다.
 root@docker1:~# docker image ls -a
 REPOSITORY          TAG       IMAGE ID       CREATED       SIZE
-dcpark/box          1.0       66ba00ad3de8   5 days ago    4.87MB
+testuser/box          1.0       66ba00ad3de8   5 days ago    4.87MB
 busybox             latest    66ba00ad3de8   5 days ago    4.87MB
 nginx               latest    1403e55ab369   2 weeks ago   142MB
-dcpark/web-server   1.0       1403e55ab369   2 weeks ago   142MB
+testuser/web-server   1.0       1403e55ab369   2 weeks ago   142MB
 root@docker1:~#
 ```
 
 > Docker 레지스트리로부터 `pull` 할 때는 로그인이 필요없으나 `push` 할 때는 로그인이 필요하다.
 
 ```bash
-root@docker1:~# docker image push dcpark/web-server:1.0
-The push refers to repository [docker.io/dcpark/web-server]
+root@docker1:~# docker image push testuser/web-server:1.0
+The push refers to repository [docker.io/testuser/web-server]
 c72d75f45e5b: Mounted from library/nginx
 9a0ef04f57f5: Mounted from library/nginx
 d13aea24d2cb: Mounted from library/nginx
@@ -219,27 +219,27 @@ root@docker1:~#
 호스트에서 지운 후 Pull 하면 이미지가 다운로드 된 것을 확인할 수 있다.
 
 ```bash
-root@docker1:~# docker image rm dcpark/web-server:1.0
-Untagged: dcpark/web-server:1.0
-Untagged: dcpark/web-server@sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c
+root@docker1:~# docker image rm testuser/web-server:1.0
+Untagged: testuser/web-server:1.0
+Untagged: testuser/web-server@sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c
 root@docker1:~#
 root@docker1:~# docker image ls
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
-dcpark/box   1.0       66ba00ad3de8   5 days ago    4.87MB
+testuser/box   1.0       66ba00ad3de8   5 days ago    4.87MB
 busybox      latest    66ba00ad3de8   5 days ago    4.87MB
 nginx        latest    1403e55ab369   2 weeks ago   142MB
 root@docker1:~#
-root@docker1:~# docker image pull dcpark/web-server:1.0
-1.0: Pulling from dcpark/web-server
+root@docker1:~# docker image pull testuser/web-server:1.0
+1.0: Pulling from testuser/web-server
 Digest: sha256:9a821cadb1b13cb782ec66445325045b2213459008a41c72d8d87cde94b33c8c
-Status: Downloaded newer image for dcpark/web-server:1.0
-docker.io/dcpark/web-server:1.0
+Status: Downloaded newer image for testuser/web-server:1.0
+docker.io/testuser/web-server:1.0
 root@docker1:~#
 root@docker1:~# docker image ls
 REPOSITORY          TAG       IMAGE ID       CREATED       SIZE
-dcpark/box          1.0       66ba00ad3de8   5 days ago    4.87MB
+testuser/box          1.0       66ba00ad3de8   5 days ago    4.87MB
 busybox             latest    66ba00ad3de8   5 days ago    4.87MB
-dcpark/web-server   1.0       1403e55ab369   2 weeks ago   142MB
+testuser/web-server   1.0       1403e55ab369   2 weeks ago   142MB
 nginx               latest    1403e55ab369   2 weeks ago   142MB
 root@docker1:~#
 ```
@@ -303,33 +303,33 @@ root@docker1:~#
 root@docker1:~# echo Hello world  > index.html
 root@docker1:~# docker container cp index.html   sample:/var/www/html/index.html
 
-// index.html 수정 후 sample 컨테이너를 dcpark/web-nginx:1.0 이미지 생성
-root@docker1:~# docker container commit -a "DCPARK" -m "Customized image" sample dcpark/web-nginx:1.0
+// index.html 수정 후 sample 컨테이너를 testuser/web-nginx:1.0 이미지 생성
+root@docker1:~# docker container commit -a "TESTUSER" -m "Customized image" sample testuser/web-nginx:1.0
 sha256:6f10cf278ad2f4ba4017850c0ced7b77230671e613773bc46dd7822cbcccaba1
 root@docker1:~#
 
-// dcpark/web-nginx    1.0 이미지 생성 확인
+// testuser/web-nginx    1.0 이미지 생성 확인
 root@docker1:~# docker image ls
 REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
-dcpark/web-nginx    1.0       6f10cf278ad2   8 seconds ago   174MB
+testuser/web-nginx    1.0       6f10cf278ad2   8 seconds ago   174MB
 busybox             latest    66ba00ad3de8   5 days ago      4.87MB
-dcpark/box          1.0       66ba00ad3de8   5 days ago      4.87MB
-dcpark/web-server   1.0       1403e55ab369   2 weeks ago     142MB
+testuser/box          1.0       66ba00ad3de8   5 days ago      4.87MB
+testuser/web-server   1.0       1403e55ab369   2 weeks ago     142MB
 nginx               latest    1403e55ab369   2 weeks ago     142MB
 ubuntu              latest    6b7dfa7e8fdb   4 weeks ago     77.8MB
 root@docker1:~#
 
 // 이미지 상세 확인 (Comment, Author)
-root@docker1:~# docker image inspect dcpark/web-nginx:1.0
+root@docker1:~# docker image inspect testuser/web-nginx:1.0
 [
     {
         "Id": "sha256:6f10cf278ad2f4ba4017850c0ced7b77230671e613773bc46dd7822cbcccaba1",
         "RepoTags": [
-            "dcpark/web-nginx:1.0"
+            "testuser/web-nginx:1.0"
         "Comment": "Customized image",
         "Created": "2023-01-09T14:06:44.617231726Z",
         "DockerVersion": "20.10.22",
-        "Author": "DCPARK",
+        "Author": "TESTUSER",
 
 ```
 
@@ -337,15 +337,15 @@ root@docker1:~# docker image inspect dcpark/web-nginx:1.0
 
 ```bash
 
- // 도커이미지에서 dcpark/web-nginx:1.0 를 가져와 컨테이너를 생성한다.
+ // 도커이미지에서 testuser/web-nginx:1.0 를 가져와 컨테이너를 생성한다.
 
- root@docker1:~# docker container run -d --name web -p 8080:80 dcpark/web-nginx:1.0  nginx -g 'daemon off; '
-Unable to find image 'dcpark/web-nginx:1.0' locally
-1.0: Pulling from dcpark/web-nginx
+ root@docker1:~# docker container run -d --name web -p 8080:80 testuser/web-nginx:1.0  nginx -g 'daemon off; '
+Unable to find image 'testuser/web-nginx:1.0' locally
+1.0: Pulling from testuser/web-nginx
 6e3729cf69e0: Already exists
 7c9aaa2fac99: Pull complete
 Digest: sha256:4150994823e51b64caa7b5ccdbb543703e776d519596562b02a9a127ffe770c0
-Status: Downloaded newer image for dcpark/web-nginx:1.0
+Status: Downloaded newer image for testuser/web-nginx:1.0
 dd4e6613c4cf4ada677b19c67cfb2656d2849d72410850a80a0d6c76cc4f35bb
 
 
@@ -353,10 +353,10 @@ dd4e6613c4cf4ada677b19c67cfb2656d2849d72410850a80a0d6c76cc4f35bb
 
 root@docker1:~# docker image ls
 REPOSITORY          TAG       IMAGE ID       CREATED          SIZE
-dcpark/web-nginx    1.0       6f10cf278ad2   23 minutes ago   174MB
-dcpark/box          1.0       66ba00ad3de8   5 days ago       4.87MB
+testuser/web-nginx    1.0       6f10cf278ad2   23 minutes ago   174MB
+testuser/box          1.0       66ba00ad3de8   5 days ago       4.87MB
 busybox             latest    66ba00ad3de8   5 days ago       4.87MB
-dcpark/web-server   1.0       1403e55ab369   2 weeks ago      142MB
+testuser/web-server   1.0       1403e55ab369   2 weeks ago      142MB
 nginx               latest    1403e55ab369   2 weeks ago      142MB
 ubuntu              latest    6b7dfa7e8fdb   4 weeks ago      77.8MB
 
@@ -368,7 +368,7 @@ ubuntu              latest    6b7dfa7e8fdb   4 weeks ago      77.8MB
 Every 1.0s: docker container ps -a                                                                                                docker1: Mon Jan  9 14:23:23 2023
 
 CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                                   NAMES
-dd4e6613c4cf   dcpark/web-nginx:1.0   "nginx -g 'daemon of…"   36 seconds ago   Up 35 seconds   0.0.0.0:8080->80/tcp, :::8080->80/tcp   web
+dd4e6613c4cf   testuser/web-nginx:1.0   "nginx -g 'daemon of…"   36 seconds ago   Up 35 seconds   0.0.0.0:8080->80/tcp, :::8080->80/tcp   web
 8a80c4cde61e   ubuntu                 "bash"                   20 minutes ago   Up 20 minutes                                           sample
 ```
 

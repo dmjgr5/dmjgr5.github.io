@@ -64,10 +64,10 @@ root@docker1:~/labfile/dockerfile_dir#
 // testimage 이미지 생성 확인
 root@docker1:~/labfile/dockerfile_dir# docker image ls
 REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
-dcpark/web-nginx    1.0       6f10cf278ad2   24 hours ago    174MB
-dcpark/box          1.0       66ba00ad3de8   6 days ago      4.87MB
+testuser/web-nginx    1.0       6f10cf278ad2   24 hours ago    174MB
+testuser/box          1.0       66ba00ad3de8   6 days ago      4.87MB
 busybox             latest    66ba00ad3de8   6 days ago      4.87MB
-dcpark/web-server   1.0       1403e55ab369   2 weeks ago     142MB
+testuser/web-server   1.0       1403e55ab369   2 weeks ago     142MB
 nginx               latest    1403e55ab369   2 weeks ago     142MB
 ubuntu              latest    6b7dfa7e8fdb   4 weeks ago     77.8MB
 centos              latest    5d0da3dc9764   16 months ago   231MB
@@ -139,11 +139,11 @@ Successfully tagged web-nginx:v1
 root@docker1:~/labfile/dockerfile_dir# docker image ls
 REPOSITORY          TAG       IMAGE ID       CREATED              SIZE
 web-nginx           v1        63123ab8639e   About a minute ago   174MB
-dcpark/web-nginx    1.0       6f10cf278ad2   24 hours ago         174MB
-dcpark/box          1.0       66ba00ad3de8   6 days ago           4.87MB
+testuser/web-nginx    1.0       6f10cf278ad2   24 hours ago         174MB
+testuser/box          1.0       66ba00ad3de8   6 days ago           4.87MB
 busybox             latest    66ba00ad3de8   6 days ago           4.87MB
 nginx               latest    1403e55ab369   2 weeks ago          142MB
-dcpark/web-server   1.0       1403e55ab369   2 weeks ago          142MB
+testuser/web-server   1.0       1403e55ab369   2 weeks ago          142MB
 ubuntu              latest    6b7dfa7e8fdb   4 weeks ago          77.8MB
 centos              latest    5d0da3dc9764   16 months ago        231MB
 testimage           latest    5d0da3dc9764   16 months ago        231MB

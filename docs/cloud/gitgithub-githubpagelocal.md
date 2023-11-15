@@ -119,18 +119,18 @@ Bundler version 2.4.21
 ## 5. dmjgr5.github.io 기준 설정
 
 ```bash
-- dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ ruby -v
+- testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ ruby -v
 ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-
 
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ jekyll --version
+testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ jekyll --version
 Warning: the running version of Bundler (2.1.2) is older than the version that created the lockfile (2.4.21). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.4.21`.
 jekyll 4.3.2
 
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ gem -v
+testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ gem -v
 3.1.2
 
 
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ bundler --version
+testuser@testuser-500R5K-501R5K-500R5Q:~/dmjgr5.github.io$ bundler --version
 Bundler version 2.4.21
 
 
