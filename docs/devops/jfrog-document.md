@@ -22,3 +22,5 @@ This post lists the document for Jfrog Platform to understand the concept and fu
 
 - 2023-11-14 : from first page to [https://jfrog.com/help/r/jfrog-artifactory-documentation/trash-can-settings](https://jfrog.com/help/r/jfrog-artifactory-documentation/trash-can-settings)
 
+- 2023-11-15 : to Import and Export [https://jfrog.com/help/r/jfrog-artifactory-documentation/system-import-and-export-for-an-ha-cluster](https://jfrog.com/help/r/jfrog-artifactory-documentation/system-import-and-export-for-an-ha-cluster)
+
