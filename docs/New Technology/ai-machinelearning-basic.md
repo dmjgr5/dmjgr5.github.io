@@ -22,7 +22,7 @@ nav_order: 1
 
 
 {: .note }
-his is the document written when I research the concept of Machine Learning.
+This is the document written when I research the concept of Machine Learning.
 
 
 
