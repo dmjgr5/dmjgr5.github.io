@@ -131,3 +131,18 @@ root@master:~#
 
 
 ```
+
+
+
+
+## .pem 파일
+
+{: .note}
+PEM (Privacy Enhanced Mail)은 Base64 인코딩된 ASCII 텍스트 입니다. 파일 구분 확장자로 .pem 을 주로 사용하며,  노트패드에서 열기/수정도 가능합니다. 개인키, 서버인증서, 루트인증서, 체인인증서 및  SSL 발급 요청시 생성하는 CSR 등에 사용되는 포맷이며, 가장 광범위하고 거의 99% 대부분의 시스템에 호환되는 산업 표준 포맷입니다. (대부분 텍스트 파일) 
+
+SSH 접속에 사용되는 PEM 파일은 SSH Key-paire 중 Private Key다.
+ 
+SSH 접속을 하려는 Client 측에서 ssh-keygen 명령어를 이용해 Key-pair를 생성한 후
+Private key는 pem 파일로 만들어 SSH 서버 접속 시에 사용하고
+Public key는 서버의 authorized_keys 파일에 추가해 놓아야 SSH 접속이 가능한다.
+ 
