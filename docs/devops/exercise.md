@@ -33,3 +33,12 @@ last_modified_date: 2023-11-01 16:43:00
 [DevOps Architecture On Local environment](https://docs.google.com/presentation/d/1WTRT2jTE8wY92JFQjKV0aHk6835C_8lfZ8vID4O33PQ/edit#slide=id.p)
 
 
+## 구성을 위한 설정
+
+### SpringBoot (Vue.js) 프로젝트 생성하기
+
+### Github Repository 의 webhook 설정하기
+
+### Jenkins 설정하기
+
+### Artifactory 설정하기 (Docker hub, Jfrog)
