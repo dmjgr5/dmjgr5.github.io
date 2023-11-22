@@ -3,7 +3,7 @@ layout: default
 title: Docker Image Layer
 parent: Docker
 grand_parent: Cloud
-permalink: /docs/cloud/docker-dockerfile/
+permalink: /docs/cloud/docker-imagelayer/
 nav_order: 30
 ---
 
