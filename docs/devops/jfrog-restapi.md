@@ -149,14 +149,14 @@ PUT {jfrog-url}/artifactory/pg01/p03/
 PUT {jfrog-url}/artifactory/pg01/p01/docker1.png
 ```
 
-### 서브폴더를 Porject 에 추가
+### 서브폴더를 Project 에 추가
 
 ```bash
 PUT {jfrog-url}/access/api/v1/projects/_/share/repositories/pg01/pg01-project
 
 ```
 
-### 서브폴더를 Porject 에 제거
+### 서브폴더를 Project 에 제거
 
 ```bash
 DELETE  {jfrog-url}/access/api/v1/projects/_/share/repositories/docker-demo-local/pg01-project

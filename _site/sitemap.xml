@@ -103,7 +103,7 @@
 <loc>http://localhost:4000/docs/cloud/docker-dockerfile/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/docs/cloud/docker-dockerfile/</loc>
+<loc>http://localhost:4000/docs/cloud/docker-imagelayer/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/cloud/docker-install-18-04/</loc>
@@ -179,6 +179,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/docs/programming-language/javascript/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/docs/devops/jfrog-aql/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/devops/jfrog-document/</loc>
