@@ -37,7 +37,7 @@ items.find(
 
 ## All Docker Images for All repositories including Tags
 
-```json
+```sh
 items.find(
   {
     "$and":[
