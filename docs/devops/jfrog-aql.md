@@ -241,9 +241,9 @@ items.find({"repo": {"$eq":"spring-vue-starter-repo"}}).include("stat")
             "type": "file",
             "size": 5166,
             "created": "2023-11-14T12:32:55.010Z",
-            "created_by": "dmjgr11@gmail.com",
+            "created_by": "user1@gmail.com",
             "modified": "2023-11-14T12:32:54.939Z",
-            "modified_by": "dmjgr11@gmail.com",
+            "modified_by": "user1@gmail.com",
             "updated": "2023-11-14T12:32:55.012Z",
             "stats": [
                 {
@@ -282,7 +282,7 @@ items.find({
 items.find(
   {
      "type":"file",
-     "created_by":"dmjgr11@gmail.com",
+     "created_by":"user1@gmail.com",
      "size":{"$gt":"100"}
    })
 .sort({"$desc":["size","name"]})
@@ -369,9 +369,9 @@ items.find({"type":"file", "sha256":"4805b83bcfd574ac0201e62861c7077006286a854ca
             "type": "file",
             "size": 1372,
             "created": "2023-11-14T12:32:58.982Z",
-            "created_by": "dmjgr11@gmail.com",
+            "created_by": "user1@gmail.com",
             "modified": "2023-11-14T12:32:58.874Z",
-            "modified_by": "dmjgr11@gmail.com",
+            "modified_by": "user1@gmail.com",
             "updated": "2023-11-14T12:32:58.984Z"
         },
         {
@@ -381,9 +381,9 @@ items.find({"type":"file", "sha256":"4805b83bcfd574ac0201e62861c7077006286a854ca
             "type": "file",
             "size": 1372,
             "created": "2023-11-22T13:56:51.849Z",
-            "created_by": "dmjgr11@gmail.com",
+            "created_by": "user1@gmail.com",
             "modified": "2023-11-22T13:56:51.743Z",
-            "modified_by": "dmjgr11@gmail.com",
+            "modified_by": "user1@gmail.com",
             "updated": "2023-11-22T13:56:51.851Z"
         },
         {
@@ -393,9 +393,9 @@ items.find({"type":"file", "sha256":"4805b83bcfd574ac0201e62861c7077006286a854ca
             "type": "file",
             "size": 1372,
             "created": "2023-11-23T12:27:41.535Z",
-            "created_by": "dmjgr11@gmail.com",
+            "created_by": "user1@gmail.com",
             "modified": "2023-11-23T12:27:41.387Z",
-            "modified_by": "dmjgr11@gmail.com",
+            "modified_by": "user1@gmail.com",
             "updated": "2023-11-23T12:27:41.537Z"
         },
         {
@@ -405,9 +405,9 @@ items.find({"type":"file", "sha256":"4805b83bcfd574ac0201e62861c7077006286a854ca
             "type": "file",
             "size": 1372,
             "created": "2023-11-22T13:56:51.849Z",
-            "created_by": "dmjgr11@gmail.com",
+            "created_by": "user1@gmail.com",
             "modified": "2023-11-22T13:56:51.743Z",
-            "modified_by": "dmjgr11@gmail.com",
+            "modified_by": "user1@gmail.com",
             "updated": "2023-11-22T13:56:51.851Z"
         }
     ],
