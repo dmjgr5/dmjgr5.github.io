@@ -276,7 +276,7 @@ GET {jfrog-url}/xray/api/v2/watches
 ### Layers Visualization
 
 ```bash
-https://dmjgr.jfrog.io/artifactory/api/docker/spring-vue-starter-repo/v2/spring-vue-image-child/manifests/95
+GET https://dmjgr.jfrog.io/artifactory/api/docker/spring-vue-starter-repo/v2/spring-vue-image-child/manifests/95
 
 
 
@@ -359,7 +359,7 @@ https://dmjgr.jfrog.io/artifactory/api/docker/spring-vue-starter-repo/v2/spring-
 ### Checksum Search
 
 ```bash
-https://dmjgr.jfrog.io/artifactory/api/search/checksum?sha256=2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f
+GET https://dmjgr.jfrog.io/artifactory/api/search/checksum?sha256=2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f
 
 
     "results": [
