@@ -31,9 +31,11 @@ Docker Image 의 Base Image 를 확인하기 위한 분석 내용으로 정리�
 
     ㄴ spring-vue-image-child:95
       : FROM dmjgr11.jfrog.io/spring-vue-starter-repo/spring-vue-image:90
+      : ...
 
             ㄴ spring-vue-image-child-child:97
               : FROM dmjgr11.jfrog.io/spring-vue-starter-repo/spring-vue-image-child:95
+              : ...
 
 
 
@@ -280,3 +282,18 @@ GET https://dmjgr11.jfrog.io/artifactory/api/search/checksum?sha256=925cc8c298f9
 ```
 
 조회되지 않는다. 이것은 없다는 것은 베이스 이미지가 로컬에서 관리되지 않는 Public 이라는 것을 추즉할 수 있다. 
+
+
+## 분석 요약
+
+
+
+## 분석 결과
+- 최상위 레이어 즉, Container Layer 에서 "Image" 키값을 이용하여 base image layer 에 해당되는 해쉬값을 추출 및 해당 layer 가 참조되는 Image Name 들을 확인할 수 있다.
+- "tdownloadUrl" 정보는 Origin Layer 라는 것을 확인할 수 있다.
+- base image 삭제 후에도 빌드는 된다. 구글링을 해보니 cache 에 이미지가 남아 있어서 그렇다고 한다.
+- 그렇다고 해도 base image 의 해쉬 즉, 이미지 레이어가 있고 없고는 어떻게 알 수 있을까?
+
+    - 레이어 정보 : `/artifactory/api/docker/spring-vue-starter-repo/v2/spring-vue-image-child-child/manifests/97`
+    - 검색: `GET /artifactory/api/search/checksum?sha256=9xxx` 
+
