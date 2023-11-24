@@ -39,7 +39,7 @@ Docker Image 의 Base Image 를 확인하기 위한 분석 내용으로 정리�
 
 ```
 
-### Base Image 찾기
+### Child of Child Image
 
 ```bash
 https://dmjgr11.jfrog.io/artifactory/api/docker/spring-vue-starter-repo/v2/spring-vue-image-child-child/manifests/97
