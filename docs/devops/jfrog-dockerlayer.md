@@ -25,12 +25,12 @@ Docker Image 의 Base Image 를 확인하기 위한 분석 내용으로 정리�
 예시로서 아래와 같은 Docker Image 가 있다는 가정하에 분석한다.
 ```bash
 
-ㄴ spring-vue-image:93
+ㄴ spring-vue-image:90
   : FROM openjdk:17
   : ...
 
     ㄴ spring-vue-image-child:95
-      : FROM dmjgr11.jfrog.io/spring-vue-starter-repo/spring-vue-image:93
+      : FROM dmjgr11.jfrog.io/spring-vue-starter-repo/spring-vue-image:90
 
             ㄴ spring-vue-image-child-child:97
               : FROM dmjgr11.jfrog.io/spring-vue-starter-repo/spring-vue-image-child:95
