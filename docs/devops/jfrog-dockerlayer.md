@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Docker Layer Analysis on Jfrog
+title: Docker Layer Analysis
 parent: Jfrog
 grand_parent: Devops
 permalink: /docs/devops/jfrog-dockerlayer/
 nav_order: 31
 ---
 
-# Jfrog AQLDocker Layer Analysis on Jfrog
+# Docker Layer Analysis
 {: .no_toc }
 
 ## Table of contents
