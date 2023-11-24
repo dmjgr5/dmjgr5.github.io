@@ -356,8 +356,31 @@ https://dmjgr.jfrog.io/artifactory/api/docker/spring-vue-starter-repo/v2/spring-
 
 ```
 
-### TLS Certificate for RABBIT MQ
+### Checksum Search
 
+```bash
+https://dmjgr.jfrog.io/artifactory/api/search/checksum?sha256=2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f
+
+
+    "results": [
+        {
+            "uri": "https://dmjgr.jfrog.io/artifactory/api/storage/spring-vue-starter-repo/spring-vue-image/94/sha256__2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f"
+        },
+        {
+            "uri": "https://dmjgr.jfrog.io/artifactory/api/storage/spring-vue-starter-repo/spring-vue-image/93/sha256__2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f"
+        },
+        {
+            "uri": "https://dmjgr.jfrog.io/artifactory/api/storage/spring-vue-starter-repo/spring-vue-image-child/95/sha256__2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f"
+        },
+        {
+            "uri": "https://dmjgr.jfrog.io/artifactory/api/storage/spring-vue-starter-repo/spring-vue-image/90/sha256__2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f"
+        },
+        {
+            "uri": "https://dmjgr.jfrog.io/artifactory/api/storage/docker-trial/testimage/1.123/sha256__2bde522f954fe46c4abe389ff03d4f12ef885aa822bf6a9cae730d4f89440d2f"
+        }
+    ]
+}
+```
 
 
 
