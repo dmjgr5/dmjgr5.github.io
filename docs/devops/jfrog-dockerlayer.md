@@ -294,6 +294,5 @@ GET https://dmjgr11.jfrog.io/artifactory/api/search/checksum?sha256=925cc8c298f9
 - base image 삭제 후에도 빌드는 된다. 구글링을 해보니 cache 에 이미지가 남아 있어서 그렇다고 한다.
 - 그렇다고 해도 base image 의 해쉬 즉, 이미지 레이어가 있고 없고는 어떻게 알 수 있을까?
 
-    - 레이어 정보 : `/artifactory/api/docker/spring-vue-starter-repo/v2/spring-vue-image-child-child/manifests/97`
-    - 검색: `GET /artifactory/api/search/checksum?sha256=9xxx` 
+다음 장인 [Docker Layer Analysis 상세 분석] 에서 좀 더 알아보자.
 

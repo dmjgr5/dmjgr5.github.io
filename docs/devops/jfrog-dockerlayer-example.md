@@ -66,6 +66,15 @@ ENV MY_NAME="2nd child"
 {: .highlight }
 ImageName - pring-vue-image-child-child:135
 
+
+![](/assets/images/dockerimage-layers.png)
+
+*[Each Docker Layers]* 
+{: .text-center }
+
+
+
+
 ## Docker History from Jfrog
 
 ### Parent Image 
@@ -414,4 +423,103 @@ GET https://dmjgr11.jfrog.io/artifactory/api/search/checksum?sha256=0e7358f4ed26
     ]
 }
 ```
+
+{: .note}
+아래와 같이 AQL 을 사용하여 상세 정보를 조회할 수 있다.
+```bash
+POST https://dmjgr11.jfrog.io/artifactory/api/search/aql
+
+items.find({
+  "type": "file",
+  "name": "sha256__0e7358f4ed268aad54bdcd325d877e51c1b40dae9ae84cfc335057a51985b33e"
+}).include("property.*")
+
+
+{
+    "results": [
+        {
+            "repo": "spring-vue-starter-repo",
+            "path": "spring-vue-image-child/_uploads",
+            "name": "sha256__0e7358f4ed268aad54bdcd325d877e51c1b40dae9ae84cfc335057a51985b33e",
+            "type": "file",
+            "size": 7152,
+            "created": "2023-11-26T01:33:13.571Z",
+            "created_by": "dmjgr11@gmail.com",
+            "modified": "2023-11-26T01:33:13.435Z",
+            "modified_by": "dmjgr11@gmail.com",
+            "updated": "2023-11-26T01:33:13.573Z",
+            "properties": [
+                {
+                    "key": "sha256",
+                    "value": "0e7358f4ed268aad54bdcd325d877e51c1b40dae9ae84cfc335057a51985b33e"
+                }
+            ]
+        },
+        {
+            "repo": "spring-vue-starter-repo",
+            "path": "spring-vue-image-child/133",
+            "name": "sha256__0e7358f4ed268aad54bdcd325d877e51c1b40dae9ae84cfc335057a51985b33e",
+            "type": "file",
+            "size": 7152,
+            "created": "2023-11-26T01:33:13.571Z",
+            "created_by": "dmjgr11@gmail.com",
+            "modified": "2023-11-26T01:33:13.435Z",
+            "modified_by": "dmjgr11@gmail.com",
+            "updated": "2023-11-26T01:33:13.573Z",
+            "properties": [
+                {
+                    "key": "sha256",
+                    "value": "0e7358f4ed268aad54bdcd325d877e51c1b40dae9ae84cfc335057a51985b33e"
+                }
+            ]
+        }
+    ],
+    "range": {
+        "start_pos": 0,
+        "end_pos": 2,
+        "total": 2
+    }
+}
+```
+
+## 의문 사항
+
+### Dockerfile 작성 시 Base image 유무 확인
+
+Image URL 로부터 Repository, Image name, Tag 정보를 확인할 수 있으므로 해당 이미지 존재 확인이 가능하다.
+
+### 기존 Docker Image 에서의 Base Image 존재 유무 확인 
+
+Dockerfile 에서의 base image 를 삭제하였더라도, 이미 생성된 이미지들은 레이어별로 도커 이미지가 관리되므로 문제가 발생하지 않는다. 단, 해당 Dockerfile 을 재빌드시는 해당 이미지가 존재하지 않으므로 빌드가 되지 않는다.
+
+- 이미지 레이어 확인
+
+```sh
+GET https://dmjgr11.jfrog.io/artifactory/api/docker/{repository}/v2/{imagePath}/manifests/{tag}
+```
+
+- history.v1Compatibility 에서 "Image" 의 해쉬값을 조회하여, 해당 Digest 값을 가지는 도커 이미지들을 조회한다.
+
+```sh
+GET https://dmjgr11.jfrog.io/artifactory/api/search/checksum?sha256={hash}
+
+또는 
+
+POST https://dmjgr11.jfrog.io/artifactory/api/search/aql
+items.find({
+  "type": "file",
+  "name": "{hash}"
+}).include("property.*")
+
+```
+
+어쨋든 기존 이미지의 Base Image 존재 체크는 이미 자기 이미지의 레이어에 내포되어 있기 때문에 체크할 필요는 없다.
+
+
+
+![](/assets/images/dockerlayer2.png)
+
+*[Check Base Images]* 
+{: .text-center }
+
 
