@@ -30,7 +30,7 @@ nav_order: 10
 ## 이벤트 핸들러
 
 ```javascript
-<button @mouseover ="신고수--" @click="신고수++">허위매물신고</button> <span>신고수 : {{신고수}}</span>
+<button @mouseover ="신고수--" @click="신고수++">허위매물신고</button> <span>신고수 : { {신고수} }</span>
 ```
 
 ## 모달창 만들기
@@ -76,6 +76,6 @@ export default {
 
 ```javascript
     <img :src="원룸들[2].image" class="room-img">
-    <h4 @click="모달창열렸니 = true">{{원룸들[2].title}} </h4>
-    <p>{{원룸들[2].price}} 원 </p>
+    <h4 @click="모달창열렸니 = true">{ {원룸들[2].title} } </h4>
+    <p>{ {원룸들[2].price} } 원 </p>
 ```
