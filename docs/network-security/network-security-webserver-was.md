@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Web Server & WAS
+title: Web Server & WAS 개념 익히기
 parent: Network & Security
 nav_order: 2
 ---
 
 
-# Web Server & WAS
+# Web Server & WAS 개념 익히기
 {: .no_toc }
 
 ## Table of contents

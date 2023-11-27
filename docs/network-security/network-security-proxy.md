@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Proxy
+title: Proxy 알아보기
 parent: Network & Security
 nav_order: 1
 --- 
 
-# Proxy
+# Proxy 알아보기
 {: .no_toc }
 
 ## Table of contents

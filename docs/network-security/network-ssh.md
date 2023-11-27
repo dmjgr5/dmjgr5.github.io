@@ -2,7 +2,7 @@
 layout: default
 title: SSH 기본 개념
 parent: Network & Security
-nav_order: 3
+nav_order: 10
 ---
 
 
