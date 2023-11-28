@@ -6,15 +6,21 @@ nav_order: 15
 ---
 
 # 우분투에서 Oracle DB 설치 
+
 {: .no_toc }
 
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 ----
+ 
+{: .note }
+우분투에서 오라클을 설치하기 위해서는 리눅스용 11g, 12g 만 지원한다고 한다. 무료인 XE 버전으로 설치한다.
 
-{. :note}
-우분투에서 오라클을 설치하기 위해서는 리눅스용 11g, 12g 만 지원한다고 한다. 또한 무료인 XE 버전으로 설치한다.
 
-
-### 설치파일 다운로드
+## 설치파일 다운로드
 
 [https://www.oracle.com/database/technologies/xe-prior-release-downloads.html](https://www.oracle.com/database/technologies/xe-prior-release-downloads.html)
 
@@ -23,7 +29,7 @@ nav_order: 15
 다운로드 폴더에서 압축을 해제한다.
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/Downloads$ unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip 
+user1@user1-500R5K-501R5K-500R5Q:~/Downloads$ unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip 
 Archive:  oracle-xe-11.2.0-1.0.x86_64.rpm.zip
    creating: Disk1/
    creating: Disk1/upgrade/
@@ -31,22 +37,22 @@ Archive:  oracle-xe-11.2.0-1.0.x86_64.rpm.zip
    creating: Disk1/response/
   inflating: Disk1/response/xe.rsp   
   inflating: Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm  
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/Downloads$ 
+user1@user1-500R5K-501R5K-500R5Q:~/Downloads$ 
 ```
 
-### 필수 패키지 및 오라클 설치
+## 필수 패키지 및 오라클 설치
 
 
 오라클 설치위한 필수 패키지 들을 설치한다.
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/Downloads$ sudo apt -y install alien libaio1 unixodbc
+user1@user1-500R5K-501R5K-500R5Q:~/Downloads$ sudo apt -y install alien libaio1 unixodbc
 ```
 
 rpm 파일을 deb 로 변환하기 위해 아래 명령어를 실행한다.
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/Downloads/Disk1$ sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm 
+user1@user1-500R5K-501R5K-500R5Q:~/Downloads/Disk1$ sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm 
 
 oracle-xe_11.2.0-2_amd64.deb generated
 ```
@@ -54,7 +60,7 @@ oracle-xe_11.2.0-2_amd64.deb generated
 deb 파일로부터 오라클을 설치한다.
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/Downloads/Disk1$ sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb 
+user1@user1-500R5K-501R5K-500R5Q:~/Downloads/Disk1$ sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb 
 Selecting previously unselected package oracle-xe.
 (Reading database ... 245679 files and directories currently installed.)
 Preparing to unpack oracle-xe_11.2.0-2_amd64.deb ...
@@ -74,7 +80,7 @@ Processing triggers for mime-support (3.64ubuntu1) ...
 위에 언급된 대로 아래 명령어를 실행시켜 기본 설정인 포트, 비밀번호를 설정한다.
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:~/Downloads/Disk1$ sudo /etc/init.d/oracle-xe configure
+user1@user1-500R5K-501R5K-500R5Q:~/Downloads/Disk1$ sudo /etc/init.d/oracle-xe configure
 
 Oracle Database 11g Express Edition Configuration
 -------------------------------------------------
@@ -107,7 +113,7 @@ Installation completed successfully.
 bashrc 로 들어가서 환경 변수를 설정해 준다.
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:~$ vi ~/.bashrc
+user1@user1-500R5K-501R5K-500R5Q:~$ vi ~/.bashrc
 
 #아래 설정을 넣어준다.  
 export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
@@ -118,7 +124,7 @@ export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
 export PATH=$ORACLE_HOME/bin:$PATH
 ```
 
-### 리스너 상태 확인하기 
+## 리스너 상태 확인하기 
 
 
 특히 아래에서 안될때가 많은데 아래 들을 확인해 보는 것이 좋다.
@@ -128,7 +134,7 @@ export PATH=$ORACLE_HOME/bin:$PATH
 
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:/u01/app/oracle/product/11.2.0/xe/bin$ ./lsnrctl 
+user1@user1-500R5K-501R5K-500R5Q:/u01/app/oracle/product/11.2.0/xe/bin$ ./lsnrctl 
 
 LSNRCTL for Linux: Version 11.2.0.2.0 - Production on 28-NOV-2023 22:01:11
 
@@ -149,11 +155,11 @@ Security                  ON: Local OS Authentication
 SNMP                      OFF
 Default Service           XE
 Listener Parameter File   /u01/app/oracle/product/11.2.0/xe/network/admin/listener.ora
-Listener Log File         /u01/app/oracle/diag/tnslsnr/dcpark-500R5K-501R5K-500R5Q/listener/alert/log.xml
+Listener Log File         /u01/app/oracle/diag/tnslsnr/user1-500R5K-501R5K-500R5Q/listener/alert/log.xml
 Listening Endpoints Summary...
   (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC_FOR_XE)))
-  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=dcpark-500R5K-501R5K-500R5Q)(PORT=15217)))
-  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=dcpark-500R5K-501R5K-500R5Q)(PORT=5050))(Presentation=HTTP)(Session=RAW))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=user1-500R5K-501R5K-500R5Q)(PORT=15217)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=user1-500R5K-501R5K-500R5Q)(PORT=5050))(Presentation=HTTP)(Session=RAW))
 Services Summary...
 Service "PLSExtProc" has 1 instance(s).
   Instance "PLSExtProc", status UNKNOWN, has 1 handler(s) for this service...
@@ -166,7 +172,7 @@ LSNRCTL>
 ```
 
 ```sh
-dcpark@dcpark-500R5K-501R5K-500R5Q:/u01/app/oracle/product/11.2.0/xe/bin$ sqlplus system
+user1@user1-500R5K-501R5K-500R5Q:/u01/app/oracle/product/11.2.0/xe/bin$ sqlplus system
 
 SQL*Plus: Release 11.2.0.2.0 Production on Tue Nov 28 22:03:39 2023
 
@@ -187,7 +193,7 @@ SQL>
 ```
 
 
-### 접속 계정 생성
+## 접속 계정 생성
 
 ```sh
 SQL> create user testuser identified by 1234;
@@ -206,6 +212,7 @@ SQL>
 이후에는 DBeaver 과 같은 접속 툴을 활용하여 접속한다.
 
 
+![](/assets/images/dbeaver-install.png)
 
 
 

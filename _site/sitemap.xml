@@ -70,10 +70,16 @@
 <loc>http://localhost:4000/docs/programming-language/css/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/docs/database/database-dbeaverinstall/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/docs/database/database-edgedb/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/database/database-mysqlbasic/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/docs/database/database-oracle-procedure/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/database/database-oracleinstall/</loc>
