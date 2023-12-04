@@ -128,5 +128,14 @@ retry 시도 후 인증이 필요하다는 메시지가 나온다.
 
 docker login 을 실행하면 `~/.docker/config.json` 파일에 계정 인증 정보가 base64 로 인코딩 되어 저장되고, 이후 이 데이터는 유지된다. 유지된다는 말은 이후에도 login 절차 없이 인증 정보를 이용하여 해당 저장소로 접근 가능하다는 의미이다. 반대로 docker logout 을 실행하면 logout 과 함계 config.json 파일에 해당 인증 정보가 사라지며 이후에는 해당 저장소로 접근이 불가능해진다.
 
+![https://stackoverflow.com/questions/36022892/how-to-know-if-docker-is-already-logged-in-to-a-docker-registry-server](https://stackoverflow.com/questions/36022892/how-to-know-if-docker-is-already-logged-in-to-a-docker-registry-server)
+
+위 링크에서도 로그인 관련해서 문답이 있다. 그 중 아래 문구가 확실히 눈에 띈다.
+
+{: .important}
+docker login actually isn't creating any sort of persistent session, it is only storing the user's credentials on disk so that when authentication is required it can read them to login
+
+
+
 
 
