@@ -124,6 +124,9 @@
 <loc>http://localhost:4000/docs/buildpackage/docker-install-image-vb/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/docs/buildpackage/docker-imagelayer/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/docs/buildpackage/docker-network/</loc>
 </url>
 <url>
