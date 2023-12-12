@@ -199,6 +199,12 @@
 <loc>http://localhost:4000/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/docs/cicdtools/jenkins-checkout/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/docs/cicdtools/jenkins/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/docs/cicdtools/jfrog-aql/</loc>
 </url>
 <url>
