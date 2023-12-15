@@ -3,7 +3,7 @@ layout: default
 title: Jfrog Rest API
 parent: Jfrog
 grand_parent: CI/CD Tools 
-permalink: /docs/cicdtools/jfrog-restapi/
+permalink: /docs/cicdtools/jfrog-restapi
 nav_order: 30
 ---
 

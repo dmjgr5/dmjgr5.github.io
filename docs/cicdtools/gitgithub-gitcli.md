@@ -3,7 +3,7 @@ layout: default
 title: Git CLI
 parent: Git & Github
 grand_parent: CI/CD Tools
-permalink: /docs/cicdtools/gitgithub-gitcli/
+permalink: /docs/cicdtools/gitgithub-gitcli
 nav_order: 9
 ---
 

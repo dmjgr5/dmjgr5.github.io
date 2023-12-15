@@ -3,7 +3,7 @@ layout: default
 title: Docker Layer Analysis 상세 분석
 parent: Jfrog
 grand_parent: CI/CD Tools 
-permalink: /docs/cicdtools/jfrog-dockerlayer-example/
+permalink: /docs/cicdtools/jfrog-dockerlayer-example
 nav_order: 32
 ---
 

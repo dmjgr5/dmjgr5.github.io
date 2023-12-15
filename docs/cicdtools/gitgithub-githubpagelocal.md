@@ -3,7 +3,7 @@ layout: default
 title: Github Page On Local
 parent: Git & Github
 grand_parent: CI/CD Tools
-permalink: /docs/cicdtools/gitgithub-githubpagelocal/
+permalink: /docs/cicdtools/gitgithub-githubpagelocal
 nav_order: 81
 ---
 

@@ -3,7 +3,7 @@ layout: default
 title: Set Me Up for Remote Repository
 parent: Jfrog
 grand_parent: CI/CD Tools 
-permalink: /docs/cicdtools/jfrog-setmeuprepo/
+permalink: /docs/cicdtools/jfrog-setmeuprepo
 nav_order: 35
 ---
 

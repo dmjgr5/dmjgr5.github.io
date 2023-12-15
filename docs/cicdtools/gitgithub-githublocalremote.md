@@ -3,7 +3,7 @@ layout: default
 title: Github 로컬/원격 연동
 parent: Git & Github
 grand_parent: CI/CD Tools
-permalink: /docs/cicdtools/gitgithub-githublocalremote/
+permalink: /docs/cicdtools/gitgithub-githublocalremote
 nav_order: 50
 ---
 

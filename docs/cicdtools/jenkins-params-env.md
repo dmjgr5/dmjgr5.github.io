@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Credential 변경을 통한 GitScm Clone 하기
+title: Parameter 와 environment varialble 
 parent: Jenkins
 grand_parent: CI/CD Tools
-permalink: /docs/cicdtools/jenkins-checkout/
+permalink: /docs/cicdtools/params-env
 nav_order: 2
 ---
 
-# Credential 변경을 통한 GitScm Clone 하기
+# Parameter 와 environment varialble 
 {: .no_toc }
 
 ## Table of contents
@@ -21,7 +21,10 @@ nav_order: 2
 ---
 
 {: .note }
-> Github 의 사용자 계정으로 git clone 을 위해 credential 변경과 pipeline script 를 작성하고 실제 fetch 가 되는지 확인해 본다.
+> 요청시 param 을 통해 env 변수 반영 방법과 그 활용 예를 살펴보도록 한다.
+
+{: .warning}
+> 본 장에서 설명한 usernameVariable, passwordVariable 활용 부분은 github private repository 에서의 인증이 안되는 문제가 있으므로 참고만 하기로 한다. 해당 부분은 Credentials 편에서 살펴보도록 하자.
 
 
 

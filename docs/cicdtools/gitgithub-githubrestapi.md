@@ -3,7 +3,7 @@ layout: default
 title: Github Rest API
 parent: Git & Github
 grand_parent: CI/CD Tools
-permalink: /docs/cicdtools/gitgithub-githubrestapi/
+permalink: /docs/cicdtools/gitgithub-githubrestapi
 nav_order: 81
 ---
 

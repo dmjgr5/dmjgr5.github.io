@@ -3,7 +3,7 @@ layout: default
 title: Jfrog Document
 parent: Jfrog
 grand_parent: CI/CD Tools 
-permalink: /docs/cicdtools/jfrog-document/
+permalink: /docs/cicdtools/jfrog-document
 nav_order: 8
 last_modified_date: 2023-11-14 23:21:00
 ---

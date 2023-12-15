@@ -3,7 +3,7 @@ layout: default
 title: Jfrog Trial - Local 
 parent: Jfrog
 grand_parent: CI/CD Tools 
-permalink: /docs/cicdtools/jfrog-triallocal/
+permalink: /docs/cicdtools/jfrog-triallocal
 nav_order: 20
 ---
 

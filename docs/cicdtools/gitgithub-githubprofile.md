@@ -3,7 +3,7 @@ layout: default
 title: Github Profile
 parent: Git & Github
 grand_parent: CI/CD Tools
-permalink: /docs/cicdtools/gitgithub-githubprofile/
+permalink: /docs/cicdtools/gitgithub-githubprofile
 nav_order: 80
 ---
 

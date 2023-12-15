@@ -3,7 +3,7 @@ layout: default
 title: Repository with Project
 parent: Jfrog
 grand_parent: CI/CD Tools 
-permalink: /docs/cicdtools/jfrog-repowithprj/
+permalink: /docs/cicdtools/jfrog-repowithprj
 nav_order: 40
 ---
 
