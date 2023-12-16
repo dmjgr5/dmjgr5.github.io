@@ -1,13 +1,13 @@
 ---
 layout: default
-title: GitSCM Options
+title: GitSCM Extension Options
 parent: Jenkins
 grand_parent: CI/CD Tools
 permalink: /docs/cicdtools/gitscm-option
 nav_order: 5
 ---
 
-# GitSCM Options
+# GitSCM Extension Options
 {: .no_toc }
 
 ## Table of contents

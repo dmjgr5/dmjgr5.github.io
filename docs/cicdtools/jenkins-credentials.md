@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Credentials
+title: Credentials 사용법
 parent: Jenkins
 grand_parent: CI/CD Tools
 permalink: /docs/cicdtools/credentials
 nav_order: 3
 ---
 
-# Credentials
+# Credentials 사용법
 {: .no_toc }
 
 ## Table of contents
