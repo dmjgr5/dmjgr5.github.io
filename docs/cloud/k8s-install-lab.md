@@ -4,7 +4,7 @@ title: Kubernetes 실습 환경
 parent: Kubernetes
 grand_parent: Cloud
 permalink: /docs/cloud/k8s-install-lab/
-nav_order: 9
+nav_order: 5
 ---
 
 # Kubernetes 실습 환경
