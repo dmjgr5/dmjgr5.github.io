@@ -97,3 +97,8 @@ release를 삭제하는 방법은 helm delete(또는 uninstall)명령어를 사�
 
 
 
+## Helm Install
+
+먼저 kubernetes 가 설치되어 있어야 한다. K8s 와 helm 연동을 위해 아래 자료를 참조하자.
+
+[https://computingforgeeks.com/install-and-use-helm-3-on-kubernetes-cluster/](https://computingforgeeks.com/install-and-use-helm-3-on-kubernetes-cluster/)
