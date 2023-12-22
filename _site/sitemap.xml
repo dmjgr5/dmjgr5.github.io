@@ -121,7 +121,7 @@
 <loc>http://localhost:4000/docs/buildpackage/docker-install-image-vb/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/docs/buildpackage/docker-imagelayer/</loc>
+<loc>http://localhost:4000/docs/buildpackage/docker-login/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/buildpackage/docker-network/</loc>
@@ -286,7 +286,13 @@
 <loc>http://localhost:4000/docs/programming-language/markdown/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/docs/network-security/network-security-apache2-ssl/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/docs/network-security/network-security-nginx/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/docs/network-security/network-security-ubuntu-apache2/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/docs/network-security</loc>

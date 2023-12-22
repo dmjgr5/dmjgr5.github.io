@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link rel="stylesheet" href="/assets/css/just-the-docs-default.css"><link rel="stylesheet" href="/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet"><style id="jtd-nav-activation"> .site-nav > ul.nav-list:first-child > li > a, .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(3)) > a, .site-nav > ul.nav-list:first-child > li > ul > li > ul > li > a { background-image: none; } .site-nav > ul.nav-list:not(:first-child) a, .site-nav li.external a { background-image: none; } .site-nav > ul.nav-list:first-child > li:nth-child(2) > ul > li:nth-child(3) > a { font-weight: 600; text-decoration: none; }.site-nav > ul.nav-list:first-child > li:nth-child(2) > button svg, .site-nav > ul.nav-list:first-child > li:nth-child(2) > ul > li:nth-child(3) > button svg { transform: rotate(-90deg); }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list, .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list > li.nav-list-item:nth-child(3) > ul.nav-list { display: block; }</style><script src="/assets/js/vendor/lunr.min.js"></script> <script src="/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico" type="image/x-icon"><title>Ubuntu apache2 에서의 SSL 적용하기 | Just the Notes</title><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="Ubuntu apache2 에서의 SSL 적용하기" /><meta property="og:locale" content="en_US" /><meta name="description" content="Notes for All things" /><meta property="og:description" content="Notes for All things" /><link rel="canonical" href="http://localhost:4000/docs/network-security/network-security-apache2-ssl/" /><meta property="og:url" content="http://localhost:4000/docs/network-security/network-security-apache2-ssl/" /><meta property="og:site_name" content="Just the Notes" /><meta property="og:type" content="website" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Ubuntu apache2 에서의 SSL 적용하기" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"WebPage","description":"Notes for All things","headline":"Ubuntu apache2 에서의 SSL 적용하기","url":"http://localhost:4000/docs/network-security/network-security-apache2-ssl/"}</script> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4875421300871686" crossorigin="anonymous"></script><body> <a class="skip-to-main" href="#main-content">Skip to main content</a> <svg xmlns="http://www.w3.org/2000/svg" class="d-none"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title id="svg-external-link-title">(external link)</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-copy" viewBox="0 0 16 16"><title>Copy</title><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/> </svg> </symbol> <symbol id="svg-copied" viewBox="0 0 16 16"><title>Copied</title><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16"><path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/> </svg> </symbol> </svg><div class="side-bar"><div class="site-header" role="banner"> <a href="/" class="site-title lh-tight"> Just the Notes </a> <button id="menu-button" class="site-button btn-reset" aria-label="Toggle menu" aria-pressed="false"> <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg> </button></div><nav aria-label="Main" id="site-nav" class="site-nav"><ul class="nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link">Home</a><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Network & Security category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/network-security" class="nav-list-link">Network & Security</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/network-security/network-security-nginx/" class="nav-list-link">Nginx 설정</a><li class="nav-list-item"><a href="/docs/network-security/network-security-ubuntu-apache2/" class="nav-list-link">Ubuntu 에서 apache2 설치하기</a><li class="nav-list-item"><a href="/docs/network-security/network-security-apache2-ssl/" class="nav-list-link">Ubuntu apache2 에서의 SSL 적용하기</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in OS Systems category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/os-systems" class="nav-list-link">OS Systems</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Linux category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/os-systems/linux/" class="nav-list-link">Linux</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/os-systems/linux-basics/" class="nav-list-link">Linux Basics</a><li class="nav-list-item"> <a href="/docs/os-systems/linux-command/" class="nav-list-link">Linux Command</a><li class="nav-list-item"> <a href="/docs/os-systems/linux-group/" class="nav-list-link">리눅스 그룹 관리</a></ul></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Database category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/database" class="nav-list-link">Database</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/database/database-mysqlbasic/" class="nav-list-link">MySQL 기본</a><li class="nav-list-item"><a href="/docs/database/database-oracleinstall/" class="nav-list-link">우분투에서 Oracle DB 설치</a><li class="nav-list-item"><a href="/docs/database/database-dbeaverinstall/" class="nav-list-link">우분투에서 DBeaver 설치</a><li class="nav-list-item"><a href="/docs/database/database-edgedb/" class="nav-list-link">Edge DB on Windows10</a><li class="nav-list-item"><a href="/docs/database/database-oracle-procedure/" class="nav-list-link">Oracle Proceduer 생성/실행</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Programming Language category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/programming-language" class="nav-list-link">Programming Language</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/programming-language/html/" class="nav-list-link">HTML</a><li class="nav-list-item"><a href="/docs/programming-language/css/" class="nav-list-link">CSS</a><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in C, C# category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/programming-language/c-csharp/" class="nav-list-link">C, C#</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/programming-language/gcc/" class="nav-list-link">gcc 컴파일하기</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Node.js category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/programming-language/nodejs/" class="nav-list-link">Node.js</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/programming-language/nodejs-basic/" class="nav-list-link">Node.js 기본 개념</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Python category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/programming-language/python/" class="nav-list-link">Python</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/programming-language/flutter-panabara/" class="nav-list-link">Understanding of Python</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Vue.js category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/programming-language/vuejs/" class="nav-list-link">Vue.js</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/programming-language/vuejs-basic/" class="nav-list-link">Vue.js 기본 개념</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Flutter category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/programming-language/flutter/" class="nav-list-link">Flutter</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/programming-language/flutter-basic/" class="nav-list-link">Flutter 기본 개념</a><li class="nav-list-item"> <a href="/docs/programming-language/flutter-example/" class="nav-list-link">Flutter 주요 예제</a><li class="nav-list-item"> <a href="/docs/programming-language/flutter-panabara-pre/" class="nav-list-link">Toy - Panabara 준비</a><li class="nav-list-item"> <a href="/docs/programming-language/flutter-evcharger/" class="nav-list-link">Toy - 전기차충전소 위치찾기</a><li class="nav-list-item"> <a href="/docs/programming-language/flutter-emf/" class="nav-list-link">Toy - 무선국전파노출지수</a><li class="nav-list-item"> <a href="/docs/programming-language/flutter-earth/" class="nav-list-link">Toy - EarthToday</a></ul><li class="nav-list-item"><a href="/docs/programming-language/markdown/" class="nav-list-link">Markdown</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Framework category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/framework" class="nav-list-link">Framework</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Spring category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/framework/spring/" class="nav-list-link">Spring</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/framework/spring-basic/" class="nav-list-link">Spring 기본 개념</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Spring Boot category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/framework/springboot/" class="nav-list-link">Spring Boot</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/framework/spring-reference/" class="nav-list-link">Spring Boot 참조 자료</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Django category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/framework/django/" class="nav-list-link">Django</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/framework/django-project/" class="nav-list-link">Creating Django</a><li class="nav-list-item"> <a href="/docs/framework/django-local/" class="nav-list-link">Djanog on Local</a><li class="nav-list-item"> <a href="/docs/framework/django-aws/" class="nav-list-link">Djanog on AWS EC2</a></ul></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Cloud category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cloud" class="nav-list-link">Cloud</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/cloud/cloud-network/" class="nav-list-link">Cloud Network</a><li class="nav-list-item"><a href="/docs/cloud/cloud-mas/" class="nav-list-link">MAS</a><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Kubernetes category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cloud/k8s/" class="nav-list-link">Kubernetes</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/cloud/k8s-install-lab/" class="nav-list-link">Kubernetes 실습 환경</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-install-lab-local/" class="nav-list-link">Kubernetes 실습 환경(로컬에서 마스터 설치)</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-archi/" class="nav-list-link">Kubernetes Architecture</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-labelselector/" class="nav-list-link">Label & Selector</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-object-controller/" class="nav-list-link">Object & Controller</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-pod/" class="nav-list-link">Pod</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-service/" class="nav-list-link">Service</a><li class="nav-list-item"> <a href="/docs/cloud/k8s-replicaset/" class="nav-list-link">Replicaset</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Helm Chart category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cloud/helmchart/" class="nav-list-link">Helm Chart</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/cloud/helmchart-install/" class="nav-list-link">Helm Chart Installation</a><li class="nav-list-item"> <a href="/docs/cloud/helmchart-create/" class="nav-list-link">Helm Chart 생성</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in AWS category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cloud/aws/" class="nav-list-link">AWS</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/cloud/aws-basic/" class="nav-list-link">AWS Basic</a></ul></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Build & Package category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/buildpackage" class="nav-list-link">Build & Package</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Docker category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/buildpackage/docker/" class="nav-list-link">Docker</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/buildpackage/docker-install-18-04/" class="nav-list-link">Ubuntu 에 Docker 설치</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-install-image-vb/" class="nav-list-link">가상머신 이미지 가져오기</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-container-tech/" class="nav-list-link">Container 기반 기술</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-arch/" class="nav-list-link">Docker Architecture</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-status/" class="nav-list-link">Docker Status</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-command/" class="nav-list-link">Docker Command</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-volume/" class="nav-list-link">Docker Volume</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-network/" class="nav-list-link">Docker Network</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-dockerfile/" class="nav-list-link">Dockerfile</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-imagelayer/" class="nav-list-link">Docker Image Layer</a><li class="nav-list-item"> <a href="/docs/buildpackage/docker-login/" class="nav-list-link">Docker Login 사용법</a></ul><li class="nav-list-item"><a href="/docs/buildpackage/buildpackage-mavenbasic/" class="nav-list-link">Maven 생성 및 실행</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Devops category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/devops" class="nav-list-link">Devops</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/devops/exercise/" class="nav-list-link">DevOps Exercise</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in CI/CD Tools category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cicdtools" class="nav-list-link">CI/CD Tools</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Jenkins category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cicdtools/jenkins/" class="nav-list-link">Jenkins</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/cicdtools/params-env" class="nav-list-link">Parameter 와 environment varialble</a><li class="nav-list-item"> <a href="/docs/cicdtools/credentials" class="nav-list-link">Credentials 사용법</a><li class="nav-list-item"> <a href="/docs/cicdtools/gitscm-option" class="nav-list-link">GitSCM Extension Options</a><li class="nav-list-item"> <a href="/docs/cicdtools/passfail-message" class="nav-list-link">Jenkins Pipeline 결과 메시지 가져오기</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Git & Github category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cicdtools/gitgithub/" class="nav-list-link">Git & Github</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/cicdtools/gitgithub-gitcli" class="nav-list-link">Git CLI</a><li class="nav-list-item"> <a href="/docs/cicdtools/gitgithub-command" class="nav-list-link">Git Command</a><li class="nav-list-item"> <a href="/docs/cicdtools/gitgithub-githublocalremote" class="nav-list-link">Github 로컬/원격 연동</a><li class="nav-list-item"> <a href="/docs/cicdtools/gitgithub-githubprofile" class="nav-list-link">Github Profile</a><li class="nav-list-item"> <a href="/docs/cicdtools/gitgithub-githubpagelocal" class="nav-list-link">Github Page On Local</a><li class="nav-list-item"> <a href="/docs/cicdtools/gitgithub-githubrestapi" class="nav-list-link">Github Rest API</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Jfrog category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/cicdtools/jfrog/" class="nav-list-link">Jfrog</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-document" class="nav-list-link">Jfrog Document</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-trial" class="nav-list-link">Jfrog Trial - Cloud</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-triallocal" class="nav-list-link">Jfrog Trial - Local</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-restapi" class="nav-list-link">Jfrog Rest API</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-aql/" class="nav-list-link">Jfrog AQL</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-dockerlayer" class="nav-list-link">Docker Layer Analysis</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-dockerlayer-example" class="nav-list-link">Docker Layer Analysis 상세 분석</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-setmeuprepo" class="nav-list-link">Set Me Up for Remote Repository</a><li class="nav-list-item"> <a href="/docs/cicdtools/jfrog-repowithprj" class="nav-list-link">Repository with Project</a></ul></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Agile category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/agile" class="nav-list-link">Agile</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/agile/agile-jira/" class="nav-list-link">Jira</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in New Technology category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/newtech" class="nav-list-link">New Technology</a><ul class="nav-list"><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in AI category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/New%20Technology/ai/" class="nav-list-link">AI</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/newtech/ai-machinelearning-basic/" class="nav-list-link">Machine Learning Theory</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Blockchain category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/New%20Technology/blockchain/" class="nav-list-link">Blockchain</a><ul class="nav-list"><li class="nav-list-item"> <a href="/docs/newtech/blockchain-basic/" class="nav-list-link">Blockchain 개요</a><li class="nav-list-item"> <a href="/docs/newtech/blockchain-solidity/" class="nav-list-link">리믹스(Remix) 도구를 이용한 Solidity 이해하기</a><li class="nav-list-item"> <a href="/docs/newtech/blockchain-geth/" class="nav-list-link">geth 설치 및 기본 활용하기</a></ul></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Theoretical category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/theoretical" class="nav-list-link">Theoretical</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/theoretical/theoretical-stats/" class="nav-list-link">통계 분석 기초 용어 정리</a><li class="nav-list-item"><a href="/docs/theoretical/theoretical-5why/" class="nav-list-link">5 Whys 기법</a></ul><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="toggle items in Book Review category" aria-pressed="false"> <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg> </button><a href="/docs/book-review" class="nav-list-link">Book Review</a><ul class="nav-list"><li class="nav-list-item"><a href="/docs/book-review/book-review-blockchain/" class="nav-list-link">블록체인 무엇인가?</a></ul></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/dmjgr5/dmjgr5.github.io">Just the Notes</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search" role="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Just the Notes" aria-label="Search Just the Notes" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div><nav aria-label="Auxiliary" class="aux-nav"><ul class="aux-nav-list"><li class="aux-nav-list-item"> <a href="https://github.com/dmjgr5/dmjgr5.github.io" class="site-button" > Just the Notes on GitHub </a></ul></nav></div><div class="main-content-wrap"><nav aria-label="Breadcrumb" class="breadcrumb-nav"><ol class="breadcrumb-nav-list"><li class="breadcrumb-nav-list-item"><a href="/docs/network-security">Network & Security</a><li class="breadcrumb-nav-list-item"><span>Ubuntu apache2 에서의 SSL 적용하기</span></ol></nav><div id="main-content" class="main-content"><main><h1 class="no_toc" id="ubuntu-에서-apache2-설치하기"> <a href="#ubuntu-에서-apache2-설치하기" class="anchor-heading" aria-labelledby="ubuntu-에서-apache2-설치하기"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Ubuntu 에서 apache2 설치하기</h1><h2 class="no_toc text-delta" id="table-of-contents"> <a href="#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of contents</h2><ol id="markdown-toc"><li><a href="#openssl-설치하기" id="markdown-toc-openssl-설치하기">OpenSSL 설치하기</a><li><a href="#private-keykey-생성하기-openssl-genrsa" id="markdown-toc-private-keykey-생성하기-openssl-genrsa">Private Key(*.key) 생성하기 (openssl genrsa)</a><li><a href="#csrcertificate-sinning-request-인증요청서csr-생성하기-openssl-req" id="markdown-toc-csrcertificate-sinning-request-인증요청서csr-생성하기-openssl-req">CSR(Certificate Sinning Request) 인증요청서(*.csr) 생성하기 (openssl req)</a><li><a href="#자체서명-인증서crt-생성-openssl-x509" id="markdown-toc-자체서명-인증서crt-생성-openssl-x509">자체서명 인증서(*.crt) 생성 (openssl x509)</a><li><a href="#인증서-확인하기-openssl-x509" id="markdown-toc-인증서-확인하기-openssl-x509">인증서 확인하기 (openssl x509)</a><li><a href="#apache2-ssl-적용하기" id="markdown-toc-apache2-ssl-적용하기">Apache2 SSL 적용하기</a><li><a href="#virtualhost-설정하기" id="markdown-toc-virtualhost-설정하기">VirtualHost 설정하기</a><li><a href="#ssl-적용-확인하기-openssl-s_client" id="markdown-toc-ssl-적용-확인하기-openssl-s_client">SSL 적용 확인하기 (openssl s_client)</a></ol><hr /><p class="note">Ubuntu 에서는 apache2 에서의 SSL 적용 방법에 대해 정리해 본다.</p><h2 id="openssl-설치하기"> <a href="#openssl-설치하기" class="anchor-heading" aria-labelledby="openssl-설치하기"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> OpenSSL 설치하기</h2><p>apt install 을 이용하여 openssl 을 설치한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~# <span class="nb">sudo </span>apt <span class="nb">install </span>openssl
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+openssl is already the newest version <span class="o">(</span>1.1.1f-1ubuntu2.20<span class="o">)</span><span class="nb">.</span>
+openssl <span class="nb">set </span>to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 20 not upgraded.
+root@user1-500R5K-501R5K-500R5Q:~# 
+</code></pre></div></div><h2 id="private-keykey-생성하기-openssl-genrsa"> <a href="#private-keykey-생성하기-openssl-genrsa" class="anchor-heading" aria-labelledby="private-keykey-생성하기-openssl-genrsa"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Private Key(*.key) 생성하기 (openssl genrsa)</h2><p><code class="language-plaintext highlighter-rouge">openssl</code> 커맨드로 아래와 같이 개인키를 생성한다. <code class="language-plaintext highlighter-rouge">Enter pass phrase for server.key:</code> 부분에 개인키 암호를 입력하면 <code class="language-plaintext highlighter-rouge">-out</code> 에 입력한 key 파일이 생성됨을 확인할 수 있다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl genrsa <span class="nt">-des3</span> <span class="nt">-out</span> server.key 2048
+Generating RSA private key, 2048 bit long modulus <span class="o">(</span>2 primes<span class="o">)</span>
+.......................................................................................+++++
+..................................+++++
+e is 65537 <span class="o">(</span>0x010001<span class="o">)</span>
+Enter pass phrase <span class="k">for </span>server.key:
+Verifying - Enter pass phrase <span class="k">for </span>server.key:
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls
+</span>server.key
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">cat </span>server.key 
+<span class="nt">-----BEGIN</span> RSA PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: DES-EDE3-CBC,FCD3A5456ED72869
+
+PN0jOfBzKKzBwRkltcVfVGLSkoMYQgCMGqqWo+3RcUjvWD1EA50eugB3G53hxQDl
+xgtYdJ8dzQ+QznQF/08rZk5e+hlixqaC/IFu955tINbSqriMUW4+6qKnzB6pviJz
+xK7LUVyLpbbD6kE75dCt9f0GtVt0byR9CA1IfUD8K2vmDlv8j4aIsb2hKAG74RR3
+MROmleiRPIP89Rbc2qTI9sM6Rmhs3DEnXeA/EOunTyEWPi4ectr+gadyxM0D2yMN
+CsipfwCLNVIVWcYmHCMZwXM5Z0MmmDduHpvBuMYHkDyJK6F6Vu8WuUiIvT+01GT6
+mq9BGfCvUoTCuql7ZuaJui6rtOiUAE/Vo9ouzLsKYSL++zLxYiv1b7iLyuxm2HMf
+0z+im5WP60WMDyzxNEB4UMoiW+V+iPLA4jyGB/uH9bxUZmh7ndMra2at3RopU0zk
+mVNlmCFDRDKeDwql200ahxWI/ioqTiA0Go08SeivwTSZFNUtUpSdy9wyDha+VrZI
+qx8QZBD+K+d/62LLr7Uqgh6T0mlchTIX8W/TpCdDNPDN9u6VRd+3FUGE5FHp9sfD
+053oTVsp6lQwOHm447I+d02g895U4sIHG4DGxC7oPmYy/QdQDLw8RzO93BY51pzQ
+DpnlMjsSvf6FPrcb3UlE4xYFBa6xRHnCNpa1rW/2ZlT6sgNzuwzCMBN7I6bZfJ/2
+HdPOSITuhv25oYgUvcEIJ7p1q6N1ZPNdv8lO56r4rBBYxiYDSt22U9FdT3BpzsPA
+uUPWTgoW5pFAsIZIuNAHZ28391AHTpr4L1IrEQUOo9CSAan4TMfZzHeq5kcYh3LG
+MTv1VyV10MAQAgBJnyEQaMvLXy+djjN6RpXCmdi1xj/guSnsmVhU/yavG8X/ubt7
+WLyUEGgfpcnyzJdS38/rldu472A3iMbOzGVpnmgadB7bL6hBmcce9cI1JrpQ4LCh
+KqVz2FlV3QWFx7Rd6TT9XrvXm4iSOMXy+njid1I4N6LYOprB6VXP0Y/XEt4sZWg9
+VVYdYpZvFSBOsQjwYugP+mT8gs2R1InrAUhR3RpoI5FtM/RI7JVBodubQRjs0rUA
+Al8R/z/sGuKMa/5p2KarASgSmwZ9Iiq6uldQrzwn35lFOCaEJIQmkyme9DFAxiFP
+aq5KBdO76p+7fUC4s566utE4g7Oz3+mQ+kvzx7eI1lQKnCj0m+1cHW/BQmj8AdCm
+B8V5xL+1+pLzyF/T6UFqLH1FU53OiFDGDaHTLJ6v9rWkY6OvIbnZNChD7mu4Ow1d
+ng98Q4RxL+23vKYxVhDsOiIu+6it3Pol/8imGQO8Qc8f64MD2QSC9HYQuJJ/BTkg
+4Mqa1g7NeW1V8acfYiBpadSQxhAmh65bjQuJyX7vivMs9f928wEl8D8qdNsASEKI
+2EKL5a2/lNlv0zkcfNZOF3RUsNrPjEx4kDi1WWnIjFUtwI95ZYFK3uaqgCs6IlGp
+zzJEzUX8sjBCHZvFpdsuP4nfxFBQxwyiJ1mgbWXaJq73jUqwVefP1vndzzM9dFRY
+6aYh+cEzcYD3RYaPFQnkJ0UQAl3fWzmOt1B4JA2wqpHDTL0l3oi8TA<span class="o">==</span>
+<span class="nt">-----END</span> RSA PRIVATE KEY-----
+</code></pre></div></div><h2 id="csrcertificate-sinning-request-인증요청서csr-생성하기-openssl-req"> <a href="#csrcertificate-sinning-request-인증요청서csr-생성하기-openssl-req" class="anchor-heading" aria-labelledby="csrcertificate-sinning-request-인증요청서csr-생성하기-openssl-req"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> CSR(Certificate Sinning Request) 인증요청서(*.csr) 생성하기 (openssl req)</h2><p>생성했던 개인키를 이용하여 CSR 인증서를 생성한다. <code class="language-plaintext highlighter-rouge">Enter pass phrase for server.key:</code> 에는 개인키 암호를 입력하고 그 외에는 적절한 값을 입력한다. <code class="language-plaintext highlighter-rouge">-out</code> 에 설정한 파일이 생성됨을 확인할 수 있다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl req <span class="nt">-new</span>  <span class="nt">-key</span> server.key <span class="nt">-out</span> server.csr
+Enter pass phrase <span class="k">for </span>server.key:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter <span class="s1">'.'</span>, the field will be left blank.
+<span class="nt">-----</span>
+Country Name <span class="o">(</span>2 letter code<span class="o">)</span> <span class="o">[</span>AU]:kr
+State or Province Name <span class="o">(</span>full name<span class="o">)</span> <span class="o">[</span>Some-State]:seoul
+Locality Name <span class="o">(</span>eg, city<span class="o">)</span> <span class="o">[]</span>:seoul
+Organization Name <span class="o">(</span>eg, company<span class="o">)</span> <span class="o">[</span>Internet Widgits Pty Ltd]:test
+Organizational Unit Name <span class="o">(</span>eg, section<span class="o">)</span> <span class="o">[]</span>:test
+Common Name <span class="o">(</span>e.g. server FQDN or YOUR name<span class="o">)</span> <span class="o">[]</span>:test
+Email Address <span class="o">[]</span>:test@test.com
+
+Please enter the following <span class="s1">'extra'</span> attributes
+to be sent with your certificate request
+A challenge password <span class="o">[]</span>:
+An optional company name <span class="o">[]</span>:
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls
+</span>server.csr  server.key
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">cat </span>server.csr 
+<span class="nt">-----BEGIN</span> CERTIFICATE REQUEST-----
+MIICvTCCAaUCAQAweDELMAkGA1UEBhMCa3IxDjAMBgNVBAgMBXNlb3VsMQ4wDAYD
+VQQHDAVzZW91bDENMAsGA1UECgwEdGVzdDENMAsGA1UECwwEdGVzdDENMAsGA1UE
+AwwEdGVzdDEcMBoGCSqGSIb3DQEJARYNdGVzdEB0ZXN0LmNvbTCCASIwDQYJKoZI
+hvcNAQEBBQADggEPADCCAQoCggEBALcKV1HVs6/7PBkaw+tEN2H6kMRLbqnleQo8
+YQunSBeH2K50AGQRLDkQ8TFig4YmHjxwK0/o1OLD1nkkSKI4fGV4guU4mbpR9951
+TJmAEmBLu7JCtOgUFla0pRO9fppJaLEs/n8PhqSjaOz1vrgFQEpsjVMe9uKxsKPA
+Oh5dFVjwM06AmuRbqLn2k8udcgNOikZC+KfSpw7alzUWIgL2tFloK2O2crQ+rXP2
+oWug71J38twdyJX2ifg8eTj96pvVzkGhLSjLqfD4ImJYsn3ySeIjUm4tKCXHYUZT
+/iloGup7HbhlW4NR04goX/c3nchfTMX8T5Zgf1gmDPzeAidP27MCAwEAAaAAMA0G
+CSqGSIb3DQEBCwUAA4IBAQB6IKef/29ePeKWjRypbF8QrrT7xtaUHhF+fkTCCtg1
+jXqikT8GMqMK8+ZT7pqaYyl5UHfccQqJ/aY5jG/jkRq3kczl+LS2N/LfUZdrjGvL
+6LQwnyIJ091EbG6oQ1Dhg58mBym9AEHMLQRrzKZpIEh8tfuWBpXXLMQ1G3t+Pdz2
+LaHDtGlmIOCmrvC7u2xKvRj0CgA4ppaRIE9his4iLktyL9j3RT8k94dmg1ZZCf11
+jJnG4BkZoavb3c5qRM8j0bfvLdt17ESCAS7/DiUvTUdgytSiJWOVyoGXMHWkyPxe
+phdtUhVG6QnUCGcGsf3v+yOZXl0MIiQr4V9g86p4cGbA
+<span class="nt">-----END</span> CERTIFICATE REQUEST-----
+</code></pre></div></div><h2 id="자체서명-인증서crt-생성-openssl-x509"> <a href="#자체서명-인증서crt-생성-openssl-x509" class="anchor-heading" aria-labelledby="자체서명-인증서crt-생성-openssl-x509"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 자체서명 인증서(*.crt) 생성 (openssl x509)</h2><p>이전에 생성했던 개인키와 인증요청서를 이용하여 자체서명인증서를 생성한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-in</span> server.csr <span class="nt">-signkey</span> server.key <span class="nt">-out</span> server.crt
+Signature ok
+<span class="nv">subject</span><span class="o">=</span>C <span class="o">=</span> kr, ST <span class="o">=</span> seoul, L <span class="o">=</span> seoul, O <span class="o">=</span> <span class="nb">test</span>, OU <span class="o">=</span> <span class="nb">test</span>, CN <span class="o">=</span> <span class="nb">test</span>, emailAddress <span class="o">=</span> <span class="nb">test</span>@test.com
+Getting Private key
+Enter pass phrase <span class="k">for </span>server.key:
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls
+</span>server.crt  server.csr  server.key
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">cat </span>server.crt
+<span class="nt">-----BEGIN</span> CERTIFICATE-----
+MIIDdzCCAl8CFGm6Z/Eb6y1CHy7i/cqneSE/6iBnMA0GCSqGSIb3DQEBCwUAMHgx
+CzAJBgNVBAYTAmtyMQ4wDAYDVQQIDAVzZW91bDEOMAwGA1UEBwwFc2VvdWwxDTAL
+BgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxDTALBgNVBAMMBHRlc3QxHDAaBgkq
+hkiG9w0BCQEWDXRlc3RAdGVzdC5jb20wHhcNMjMxMjIyMTI1NjEzWhcNMjQxMjIx
+MTI1NjEzWjB4MQswCQYDVQQGEwJrcjEOMAwGA1UECAwFc2VvdWwxDjAMBgNVBAcM
+BXNlb3VsMQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQLDAR0ZXN0MQ0wCwYDVQQDDAR0
+ZXN0MRwwGgYJKoZIhvcNAQkBFg10ZXN0QHRlc3QuY29tMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAtwpXUdWzr/s8GRrD60Q3YfqQxEtuqeV5CjxhC6dI
+F4fYrnQAZBEsORDxMWKDhiYePHArT+jU4sPWeSRIojh8ZXiC5TiZulH33nVMmYAS
+YEu7skK06BQWVrSlE71+mklosSz+fw+GpKNo7PW+uAVASmyNUx724rGwo8A6Hl0V
+WPAzToCa5FuoufaTy51yA06KRkL4p9KnDtqXNRYiAva0WWgrY7ZytD6tc/aha6Dv
+Unfy3B3IlfaJ+Dx5OP3qm9XOQaEtKMup8PgiYliyffJJ4iNSbi0oJcdhRlP+KWga
+6nsduGVbg1HTiChf9zedyF9MxfxPlmB/WCYM/N4CJ0/bswIDAQABMA0GCSqGSIb3
+DQEBCwUAA4IBAQCZnu4LE5cYyWTOCgQo3mShYyQIqoCK7O0kiZgQovgzF2F8cd/c
+zHwJYxjiTkey84Mz6DXcZFCeyIs5XOJlYASAENmFB/e3LDRD1uKGFZofbmJPf5eN
+1H4c/NrJaWV0RKtV7FrFp1Q1FxSdKgiS4ELWTNlLJrWOPfyh+8HVxChF8J7IgDS5
+aIwJv8r4iRaSzCzcmqMfgnKcg2OWw46UwPDq5tYYJlAi1lNFQWFJRUsRoEHzMKwE
+8Aek5ZH8/xGfpkN697u80C4LHmxMhdPhCzB8r/CJanPgsTUJ2GqIi0B1nPy6u+91
+1zvLH//uOKLvG9msF9LXKKbrS14fswFC4wR9
+<span class="nt">-----END</span> CERTIFICATE-----
+</code></pre></div></div><h2 id="인증서-확인하기-openssl-x509"> <a href="#인증서-확인하기-openssl-x509" class="anchor-heading" aria-labelledby="인증서-확인하기-openssl-x509"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 인증서 확인하기 (openssl x509)</h2><p><code class="language-plaintext highlighter-rouge">-text</code> 옵션을 사용하며 인증서 상세 정보를 확인할 수 있다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl x509 <span class="nt">-in</span> server.crt <span class="nt">-text</span>
+Certificate:
+    Data:
+        Version: 1 <span class="o">(</span>0x0<span class="o">)</span>
+        Serial Number:
+            69:ba:67:f1:1b:eb:2d:42:1f:2e:e2:fd:ca:a7:79:21:3f:ea:20:67
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C <span class="o">=</span> kr, ST <span class="o">=</span> seoul, L <span class="o">=</span> seoul, O <span class="o">=</span> <span class="nb">test</span>, OU <span class="o">=</span> <span class="nb">test</span>, CN <span class="o">=</span> <span class="nb">test</span>, emailAddress <span class="o">=</span> <span class="nb">test</span>@test.com
+        Validity
+            Not Before: Dec 22 12:56:13 2023 GMT
+            Not After : Dec 21 12:56:13 2024 GMT
+        Subject: C <span class="o">=</span> kr, ST <span class="o">=</span> seoul, L <span class="o">=</span> seoul, O <span class="o">=</span> <span class="nb">test</span>, OU <span class="o">=</span> <span class="nb">test</span>, CN <span class="o">=</span> <span class="nb">test</span>, emailAddress <span class="o">=</span> <span class="nb">test</span>@test.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: <span class="o">(</span>2048 bit<span class="o">)</span>
+                Modulus:
+                    00:b7:0a:57:51:d5:b3:af:fb:3c:19:1a:c3:eb:44:
+                    37:61:fa:90:c4:4b:6e:a9:e5:79:0a:3c:61:0b:a7:
+                    48:17:87:d8:ae:74:00:64:11:2c:39:10:f1:31:62:
+                    83:86:26:1e:3c:70:2b:4f:e8:d4:e2:c3:d6:79:24:
+                    48:a2:38:7c:65:78:82:e5:38:99:ba:51:f7:de:75:
+                    4c:99:80:12:60:4b:bb:b2:42:b4:e8:14:16:56:b4:
+                    a5:13:bd:7e:9a:49:68:b1:2c:fe:7f:0f:86:a4:a3:
+                    68:ec:f5:be:b8:05:40:4a:6c:8d:53:1e:f6:e2:b1:
+                    b0:a3:c0:3a:1e:5d:15:58:f0:33:4e:80:9a:e4:5b:
+                    a8:b9:f6:93:cb:9d:72:03:4e:8a:46:42:f8:a7:d2:
+                    a7:0e:da:97:35:16:22:02:f6:b4:59:68:2b:63:b6:
+                    72:b4:3e:ad:73:f6:a1:6b:a0:ef:52:77:f2:dc:1d:
+                    c8:95:f6:89:f8:3c:79:38:fd:ea:9b:d5:ce:41:a1:
+                    2d:28:cb:a9:f0:f8:22:62:58:b2:7d:f2:49:e2:23:
+                    52:6e:2d:28:25:c7:61:46:53:fe:29:68:1a:ea:7b:
+                    1d:b8:65:5b:83:51:d3:88:28:5f:f7:37:9d:c8:5f:
+                    4c:c5:fc:4f:96:60:7f:58:26:0c:fc:de:02:27:4f:
+                    db:b3
+                Exponent: 65537 <span class="o">(</span>0x10001<span class="o">)</span>
+    Signature Algorithm: sha256WithRSAEncryption
+         99:9e:ee:0b:13:97:18:c9:64:ce:0a:04:28:de:64:a1:63:24:
+         08:aa:80:8a:ec:ed:24:89:98:10:a2:f8:33:17:61:7c:71:df:
+         dc:cc:7c:09:63:18:e2:4e:47:b2:f3:83:33:e8:35:dc:64:50:
+         9e:c8:8b:39:5c:e2:65:60:04:80:10:d9:85:07:f7:b7:2c:34:
+         43:d6:e2:86:15:9a:1f:6e:62:4f:7f:97:8d:d4:7e:1c:fc:da:
+         c9:69:65:74:44:ab:55:ec:5a:c5:a7:54:35:17:14:9d:2a:08:
+         92:e0:42:d6:4c:d9:4b:26:b5:8e:3d:fc:a1:fb:c1:d5:c4:28:
+         45:f0:9e:c8:80:34:b9:68:8c:09:bf:ca:f8:89:16:92:cc:2c:
+         dc:9a:a3:1f:82:72:9c:83:63:96:c3:8e:94:c0:f0:ea:e6:d6:
+         18:26:50:22:d6:53:45:41:61:49:45:4b:11:a0:41:f3:30:ac:
+         04:f0:07:a4:e5:91:fc:ff:11:9f:a6:43:7a:f7:bb:bc:d0:2e:
+         0b:1e:6c:4c:85:d3:e1:0b:30:7c:af:f0:89:6a:73:e0:b1:35:
+         09:d8:6a:88:8b:40:75:9c:fc:ba:bb:ef:75:d7:3b:cb:1f:ff:
+         ee:38:a2:ef:1b:d9:ac:17:d2:d7:28:a6:eb:4b:5e:1f:b3:01:
+         42:e3:04:7d
+<span class="nt">-----BEGIN</span> CERTIFICATE-----
+MIIDdzCCAl8CFGm6Z/Eb6y1CHy7i/cqneSE/6iBnMA0GCSqGSIb3DQEBCwUAMHgx
+CzAJBgNVBAYTAmtyMQ4wDAYDVQQIDAVzZW91bDEOMAwGA1UEBwwFc2VvdWwxDTAL
+BgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxDTALBgNVBAMMBHRlc3QxHDAaBgkq
+hkiG9w0BCQEWDXRlc3RAdGVzdC5jb20wHhcNMjMxMjIyMTI1NjEzWhcNMjQxMjIx
+MTI1NjEzWjB4MQswCQYDVQQGEwJrcjEOMAwGA1UECAwFc2VvdWwxDjAMBgNVBAcM
+BXNlb3VsMQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQLDAR0ZXN0MQ0wCwYDVQQDDAR0
+ZXN0MRwwGgYJKoZIhvcNAQkBFg10ZXN0QHRlc3QuY29tMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAtwpXUdWzr/s8GRrD60Q3YfqQxEtuqeV5CjxhC6dI
+F4fYrnQAZBEsORDxMWKDhiYePHArT+jU4sPWeSRIojh8ZXiC5TiZulH33nVMmYAS
+YEu7skK06BQWVrSlE71+mklosSz+fw+GpKNo7PW+uAVASmyNUx724rGwo8A6Hl0V
+WPAzToCa5FuoufaTy51yA06KRkL4p9KnDtqXNRYiAva0WWgrY7ZytD6tc/aha6Dv
+Unfy3B3IlfaJ+Dx5OP3qm9XOQaEtKMup8PgiYliyffJJ4iNSbi0oJcdhRlP+KWga
+6nsduGVbg1HTiChf9zedyF9MxfxPlmB/WCYM/N4CJ0/bswIDAQABMA0GCSqGSIb3
+DQEBCwUAA4IBAQCZnu4LE5cYyWTOCgQo3mShYyQIqoCK7O0kiZgQovgzF2F8cd/c
+zHwJYxjiTkey84Mz6DXcZFCeyIs5XOJlYASAENmFB/e3LDRD1uKGFZofbmJPf5eN
+1H4c/NrJaWV0RKtV7FrFp1Q1FxSdKgiS4ELWTNlLJrWOPfyh+8HVxChF8J7IgDS5
+aIwJv8r4iRaSzCzcmqMfgnKcg2OWw46UwPDq5tYYJlAi1lNFQWFJRUsRoEHzMKwE
+8Aek5ZH8/xGfpkN697u80C4LHmxMhdPhCzB8r/CJanPgsTUJ2GqIi0B1nPy6u+91
+1zvLH//uOKLvG9msF9LXKKbrS14fswFC4wR9
+<span class="nt">-----END</span> CERTIFICATE-----
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+
+</code></pre></div></div><h2 id="apache2-ssl-적용하기"> <a href="#apache2-ssl-적용하기" class="anchor-heading" aria-labelledby="apache2-ssl-적용하기"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Apache2 SSL 적용하기</h2><p><code class="language-plaintext highlighter-rouge">a2enmod ssl</code> 명령어로 SSL 모듈을 enable 한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# a2enmod ssl
+Considering dependency setenvif <span class="k">for </span>ssl:
+Module setenvif already enabled
+Considering dependency mime <span class="k">for </span>ssl:
+Module mime already enabled
+Considering dependency socache_shmcb <span class="k">for </span>ssl:
+Enabling module socache_shmcb.
+Enabling module ssl.
+See /usr/share/doc/apache2/README.Debian.gz on how to configure SSL and create self-signed certificates.
+To activate the new configuration, you need to run:
+  systemctl restart apache2
+</code></pre></div></div><p>SSL 을 위한 임의의 디렉토리를 생성하고 생성한 CA 인증서와 자체 서명인증서를 저장한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">mkdir</span> /etc/apache2/ssl
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">cp </span>server<span class="k">*</span> /etc/apache2/ssl/
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls</span> <span class="nt">-al</span> /etc/apache2/ssl/
+total 20
+drwxr-xr-x 2 root root 4096 12월 22 22:09 <span class="nb">.</span>
+drwxr-xr-x 9 root root 4096 12월 22 22:09 ..
+<span class="nt">-rw-r--r--</span> 1 root root 1261 12월 22 22:09 server.crt
+<span class="nt">-rw-r--r--</span> 1 root root 1025 12월 22 22:09 server.csr
+<span class="nt">-rw-------</span> 1 root root 1743 12월 22 22:09 server.key
+</code></pre></div></div><p>또한 소유권 및 권한 변경을 진행한다. 여기서는 root 를 기준으로 설정한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> root:root /etc/apache2/ssl
+<span class="nv">$ </span><span class="nb">sudo chmod </span>700 /etc/apahce2/ssl
+<span class="nv">$ </span><span class="nb">sudo chmod </span>600 /etc/apache2/ssl/<span class="k">*</span>.<span class="k">*</span>
+</code></pre></div></div><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">chown</span> <span class="nt">-R</span> root:root /etc/apache2/ssl/
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls</span> <span class="nt">-al</span> /etc/apache2/ssl/
+total 20
+drwxr-xr-x 2 root root 4096 12월 22 22:09 <span class="nb">.</span>
+drwxr-xr-x 9 root root 4096 12월 22 22:09 ..
+<span class="nt">-rw-r--r--</span> 1 root root 1261 12월 22 22:09 server.crt
+<span class="nt">-rw-r--r--</span> 1 root root 1025 12월 22 22:09 server.csr
+<span class="nt">-rw-------</span> 1 root root 1743 12월 22 22:09 server.key
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">chmod </span>700 /etc/apache2/ssl
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls</span> <span class="nt">-al</span> /etc/apache2/ssl/
+total 20
+drwx------ 2 root root 4096 12월 22 22:09 <span class="nb">.</span>
+drwxr-xr-x 9 root root 4096 12월 22 22:09 ..
+<span class="nt">-rw-r--r--</span> 1 root root 1261 12월 22 22:09 server.crt
+<span class="nt">-rw-r--r--</span> 1 root root 1025 12월 22 22:09 server.csr
+<span class="nt">-rw-------</span> 1 root root 1743 12월 22 22:09 server.key
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls</span> <span class="nt">-al</span> /etc/apache2/
+total 100
+drwxr-xr-x   9 root root  4096 12월 22 22:09 <span class="nb">.</span>
+drwxr-xr-x 150 root root 12288 12월 22 21:20 ..
+<span class="nt">-rw-r--r--</span>   1 root root  7224 10월 26 22:54 apache2.conf
+drwxr-xr-x   2 root root  4096 12월 22 21:20 conf-available
+drwxr-xr-x   2 root root  4096 12월 22 21:20 conf-enabled
+<span class="nt">-rw-r--r--</span>   1 root root  1782  2월 24  2021 envvars
+<span class="nt">-rw-r--r--</span>   1 root root 31063  2월 24  2021 magic
+drwxr-xr-x   2 root root 12288 12월 22 21:20 mods-available
+drwxr-xr-x   2 root root  4096 12월 22 22:06 mods-enabled
+<span class="nt">-rw-r--r--</span>   1 root root   320  2월 24  2021 ports.conf
+drwxr-xr-x   2 root root  4096 12월 22 21:20 sites-available
+drwxr-xr-x   2 root root  4096 12월 22 21:20 sites-enabled
+drwx------   2 root root  4096 12월 22 22:09 ssl
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">chmod </span>600 /etc/apache2/ssl/<span class="k">*</span>.<span class="k">*</span>
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# <span class="nb">ls</span> <span class="nt">-al</span> /etc/apache2/ssl/
+total 20
+drwx------ 2 root root 4096 12월 22 22:09 <span class="nb">.</span>
+drwxr-xr-x 9 root root 4096 12월 22 22:09 ..
+<span class="nt">-rw-------</span> 1 root root 1261 12월 22 22:09 server.crt
+<span class="nt">-rw-------</span> 1 root root 1025 12월 22 22:09 server.csr
+<span class="nt">-rw-------</span> 1 root root 1743 12월 22 22:09 server.key
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+root@user1-500R5K-501R5K-500R5Q:~/ssltest# 
+</code></pre></div></div><h2 id="virtualhost-설정하기"> <a href="#virtualhost-설정하기" class="anchor-heading" aria-labelledby="virtualhost-설정하기"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> VirtualHost 설정하기</h2><p><code class="language-plaintext highlighter-rouge">/etc/apache2/site-avaiale</code> 디렉토리로 이동하여 default conf 파일을 복사하여 수정한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:~# <span class="nb">cd</span> /etc/apache2/sites-available/
+root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# <span class="nb">ls
+</span>000-default.conf  default-ssl.conf
+root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# <span class="nb">cp </span>default-ssl.conf example-ssl.conf
+root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# <span class="nb">ls
+</span>000-default.conf  default-ssl.conf  example-ssl.conf
+</code></pre></div></div><p>아래 3개 항목을 인증서 위치를 기준으로 수정한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# vim example-ssl.conf 
+
+
+    SSLEngine on
+    SSLCertificateFile      /etc/apache2/ssl/server.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/server.key
+</code></pre></div></div><p>설정 변경한 conf 파일을 enable 한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# <span class="nb">ls
+</span>000-default.conf  default-ssl.conf  example-ssl.conf
+root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# a2ensite example-ssl.conf 
+Enabling site example-ssl.
+To activate the new configuration, you need to run:
+  systemctl reload apache2
+root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# 
+</code></pre></div></div><p>이후 apache 서비스를 restart 한다. 이 때 인증서 생성 시 설정했던 암호를 입력한다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# service apache2 restart
+Enter passphrase <span class="k">for </span>SSL/TLS keys <span class="k">for </span>127.0.0.1:443 <span class="o">(</span>RSA<span class="o">)</span>: <span class="k">****</span>                    
+root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# service apache2 status
+● apache2.service - The Apache HTTP Server
+     Loaded: loaded <span class="o">(</span>/lib/systemd/system/apache2.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabl&gt;
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Fri 2023-12-22 22:21:03 KST<span class="p">;</span> 8s ago
+       Docs: https://httpd.apache.org/docs/2.4/
+    Process: 5762 <span class="nv">ExecStart</span><span class="o">=</span>/usr/sbin/apachectl start <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+   Main PID: 5773 <span class="o">(</span>apache2<span class="o">)</span>
+      Tasks: 55 <span class="o">(</span>limit: 9323<span class="o">)</span>
+     Memory: 5.8M
+     CGroup: /system.slice/apache2.service
+             ├─5773 /usr/sbin/apache2 <span class="nt">-k</span> start
+             ├─5774 /usr/sbin/apache2 <span class="nt">-k</span> start
+             └─5775 /usr/sbin/apache2 <span class="nt">-k</span> start
+
+12월 22 22:20:55 user1-500R5K-501R5K-500R5Q systemd[1]: Starting The Apache HTTP Serve&gt;
+12월 22 22:20:55 user1-500R5K-501R5K-500R5Q apachectl[5765]: AH00558: apache2: Could n&gt;
+12월 22 22:21:03 user1-500R5K-501R5K-500R5Q systemd[1]: Started The Apache HTTP Server.
+lines 1-16/16 <span class="o">(</span>END<span class="o">)</span>
+
+</code></pre></div></div><h2 id="ssl-적용-확인하기-openssl-s_client"> <a href="#ssl-적용-확인하기-openssl-s_client" class="anchor-heading" aria-labelledby="ssl-적용-확인하기-openssl-s_client"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> SSL 적용 확인하기 (openssl s_client)</h2><p>아래와 같이 명령어를 이용하여 생성했던 인증서 정보와 동일함을 확인할 수 있다. 확인 시 중요한 부분은 하단 부분의 <code class="language-plaintext highlighter-rouge">Verify return code: 18 (self signed certificate)</code> 임을 알 수 있다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# openssl s_client <span class="nt">-connect</span> localhost:443
+CONNECTED<span class="o">(</span>00000003<span class="o">)</span>
+Can<span class="s1">'t use SSL_get_servername
+depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+verify return:1
+---
+Certificate chain
+ 0 s:C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+   i:C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIDdzCCAl8CFGm6Z/Eb6y1CHy7i/cqneSE/6iBnMA0GCSqGSIb3DQEBCwUAMHgx
+CzAJBgNVBAYTAmtyMQ4wDAYDVQQIDAVzZW91bDEOMAwGA1UEBwwFc2VvdWwxDTAL
+BgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxDTALBgNVBAMMBHRlc3QxHDAaBgkq
+hkiG9w0BCQEWDXRlc3RAdGVzdC5jb20wHhcNMjMxMjIyMTI1NjEzWhcNMjQxMjIx
+MTI1NjEzWjB4MQswCQYDVQQGEwJrcjEOMAwGA1UECAwFc2VvdWwxDjAMBgNVBAcM
+BXNlb3VsMQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQLDAR0ZXN0MQ0wCwYDVQQDDAR0
+ZXN0MRwwGgYJKoZIhvcNAQkBFg10ZXN0QHRlc3QuY29tMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAtwpXUdWzr/s8GRrD60Q3YfqQxEtuqeV5CjxhC6dI
+F4fYrnQAZBEsORDxMWKDhiYePHArT+jU4sPWeSRIojh8ZXiC5TiZulH33nVMmYAS
+YEu7skK06BQWVrSlE71+mklosSz+fw+GpKNo7PW+uAVASmyNUx724rGwo8A6Hl0V
+WPAzToCa5FuoufaTy51yA06KRkL4p9KnDtqXNRYiAva0WWgrY7ZytD6tc/aha6Dv
+Unfy3B3IlfaJ+Dx5OP3qm9XOQaEtKMup8PgiYliyffJJ4iNSbi0oJcdhRlP+KWga
+6nsduGVbg1HTiChf9zedyF9MxfxPlmB/WCYM/N4CJ0/bswIDAQABMA0GCSqGSIb3
+DQEBCwUAA4IBAQCZnu4LE5cYyWTOCgQo3mShYyQIqoCK7O0kiZgQovgzF2F8cd/c
+zHwJYxjiTkey84Mz6DXcZFCeyIs5XOJlYASAENmFB/e3LDRD1uKGFZofbmJPf5eN
+1H4c/NrJaWV0RKtV7FrFp1Q1FxSdKgiS4ELWTNlLJrWOPfyh+8HVxChF8J7IgDS5
+aIwJv8r4iRaSzCzcmqMfgnKcg2OWw46UwPDq5tYYJlAi1lNFQWFJRUsRoEHzMKwE
+8Aek5ZH8/xGfpkN697u80C4LHmxMhdPhCzB8r/CJanPgsTUJ2GqIi0B1nPy6u+91
+1zvLH//uOKLvG9msF9LXKKbrS14fswFC4wR9
+-----END CERTIFICATE-----
+subject=C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+
+issuer=C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 1447 bytes and written 363 bytes
+Verification error: self signed certificate
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 18 (self signed certificate)
+---
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : TLS_AES_256_GCM_SHA384
+    Session-ID: 006CB978115911FC20746754CF1834E945E8CC7188970B5B7F16684A6226BAFC
+    Session-ID-ctx: 
+    Resumption PSK: 023BA699D9420D33CF65745A204A8A11036D73E49551F4A97A0E758D634E5E1F338EDF6FEF8DC506C62F51F2B2B8BDD6
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - a0 78 0e 9f a2 d0 01 71-65 3b 08 89 ef 0b bf c6   .x.....qe;......
+    0010 - 38 7a a8 6a cd 26 24 20-57 0d d6 97 b8 fc 56 a0   8z.j.&amp;$ W.....V.
+    0020 - 01 a7 6a c3 4f e8 be d4-ee 0c c5 75 68 af 41 9d   ..j.O......uh.A.
+    0030 - 9b 5d 9c f3 76 85 3b 3d-36 33 7e 1f af cc ff 0e   .]..v.;=63~.....
+    0040 - 20 32 46 29 ea c8 57 19-cf 87 1a 26 7d cc 3c e6    2F)..W....&amp;}.&lt;.
+    0050 - 45 8e 91 1a 06 f2 66 0e-65 31 ee 0d 1e b9 f7 11   E.....f.e1......
+    0060 - 58 dc c8 0e a1 02 7c ec-5b 0d 00 08 6e 90 7d 28   X.....|.[...n.}(
+    0070 - 9a 10 31 ae 11 17 20 02-b6 1d f8 2f f0 ec 72 00   ..1... ..../..r.
+    0080 - 6f 91 cf 94 a4 09 bc 8e-18 7b 77 cf b1 33 97 54   o........{w..3.T
+    0090 - b1 4f b7 b2 df 91 4c 61-62 95 07 3e 80 8b 0d 8e   .O....Lab..&gt;....
+    00a0 - 89 13 2a 6a e6 de 9e 99-87 29 c7 0f ea 41 2f ae   ..*j.....)...A/.
+    00b0 - dc 51 85 82 68 eb 48 82-c2 29 a7 89 de 6f e1 95   .Q..h.H..)...o..
+    00c0 - 44 e5 f4 5e 4b a5 c2 d7-5d d1 fe 94 3e ff d0 ed   D..^K...]...&gt;...
+    00d0 - c9 c3 f0 b3 24 93 db 41-78 af d8 e9 a5 ab df 2b   ....$..Ax......+
+
+    Start Time: 1703251583
+    Timeout   : 7200 (sec)
+    Verify return code: 18 (self signed certificate)
+    Extended master secret: no
+    Max Early Data: 0
+---
+read R BLOCK
+---
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    *Cipher    : TLS_AES_256_GCM_SHA384
+    Session-ID: 3662E9A94DD269C167C1BCCEDD33DF8F56ACB5A40F2E885220F9F83641D36C24
+    Session-ID-ctx: 
+    Resumption PSK: C2AC5E0067CF6E11DE2D45C40C7851D270F67AFAC82927603A801C4C746F2EEB471BB6F221CDAEBF260A57B7BCBFA816
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - a0 78 0e 9f a2 d0 01 71-65 3b 08 89 ef 0b bf c6   .x.....qe;......
+    0010 - 45 23 2f e6 e9 d2 6a 81-e2 e7 a1 ce c9 00 29 0e   E#/...j.......).
+    0020 - 71 a3 b5 e1 cb 32 d1 e6-69 46 54 74 64 21 e1 64   q....2..iFTtd!.d
+    0030 - 14 a9 5a 62 0d 73 ca ac-ad 2a 29 7a 46 75 01 eb   ..Zb.s...*)zFu..
+    0040 - 54 58 f4 51 79 a2 45 9c-db 4c de 4d 92 67 27 d7   TX.Qy.E..L.M.g'</span><span class="nb">.</span>
+    0050 - ea 51 23 66 fd da ab d9-72 7c ed 84 f7 17 36 14   .Q#f....r|....6.
+    0060 - 7e 9a 0c <span class="nb">df </span>ed a5 41 e8-5f <span class="nb">df </span>28 63 7c 31 4a e0   ~.....A._.<span class="o">(</span>c|1J.
+    0070 - 20 a4 a7 b5 95 31 b7 14-7d ca e1 34 05 eb f4 97    ....1..<span class="o">}</span>..4....
+    0080 - ad b4 b5 63 7f 72 3a 96-b3 de a0 62 72 d5 3b a8   ...c.r:....br.<span class="p">;</span><span class="nb">.</span>
+    0090 - 40 33 f2 a7 7e <span class="nb">dd </span>a1 94-30 db 6e e0 4d 98 67 5d   @3..~...0.n.M.g]
+    00a0 - e6 23 3f 1a b6 67 b9 cc-d7 16 a2 1e 77 e0 fb b4   .#?..g......w...
+    00b0 - 96 2a 00 <span class="nb">df </span>be 3f 56 9d-ff 24 57 b5 89 9e 43 76   .<span class="k">*</span>...?V..<span class="nv">$W</span>...Cv
+    00c0 - 06 e1 a7 00 2f 37 57 7d-c7 be <span class="nb">dd </span>20 31 61 e6 4e   ..../7W<span class="o">}</span>... 1a.N
+    00d0 - 5c 22 7f d9 90 af f3 41-51 7d <span class="nb">fc </span>52 53 41 19 2b   <span class="se">\"</span>.....AQ<span class="o">}</span>.RSA.+
+
+    Start Time: 1703251583
+    Timeout   : 7200 <span class="o">(</span>sec<span class="o">)</span>
+    Verify <span class="k">return </span>code: 18 <span class="o">(</span>self signed certificate<span class="o">)</span>
+    Extended master secret: no
+    Max Early Data: 0
+<span class="nt">---</span>
+<span class="nb">read </span>R BLOCK
+
+</code></pre></div></div><p>또한 <code class="language-plaintext highlighter-rouge">-dates</code> 옵션으로 시작일, 만료일을 확인할 수 있다.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# openssl s_client <span class="nt">-connect</span> localhost:443 | openssl x509 <span class="nt">-noout</span> <span class="nt">-dates</span>
+Can<span class="s1">'t use SSL_get_servername
+depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com
+verify return:1
+notBefore=Dec 22 12:56:13 2023 GMT
+notAfter=Dec 21 12:56:13 2024 GMT
+</span></code></pre></div></div></main><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2023 dmjgr5. Distributed by an <a href="https://github.com/dmjgr5/dmjgr5.github.io/blob/main/LICENSE.txt">MIT license.</a> <a href="https://www.netlify.com/">This site is powered by Netlify.</a></p><div class="d-flex mt-2"><p class="text-small text-grey-dk-000 mb-0"> <a href="https://github.com/dmjgr5/dmjgr5.github.io/tree/main/docs/network-security/network-security-apache2-ssl.md" id="edit-this-page">Edit this page on GitHub</a></p></div></footer></div></div><div class="search-overlay"></div></div><script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script> <script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>

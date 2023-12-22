@@ -3,7 +3,7 @@ layout: default
 title: Docker Login 사용법
 parent: Docker
 grand_parent: Build & Package
-permalink: /docs/buildpackage/docker-imagelayer/
+permalink: /docs/buildpackage/docker-login/
 nav_order: 35
 ---
 
