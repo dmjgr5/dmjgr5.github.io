@@ -6,7 +6,7 @@ nav_order: 3
 ---
 
 
-# Nginx 설정xxxxxxxxxx
+# Nginx 설정
 {: .no_toc }
 
 ## Table of contents
