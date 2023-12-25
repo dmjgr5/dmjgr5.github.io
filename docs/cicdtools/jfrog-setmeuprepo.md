@@ -27,7 +27,7 @@ Jfrog 에서의 package 관리를 위한 생성 및 각각의 특징에 대해 �
 
 
 
-### PULL from Remote Docker Hub to Remote Repository
+### docker login
 
 
 ```bash
@@ -41,9 +41,13 @@ Configure a credential helper to remove this warning. See
 Login Succeeded
 root@jfrog-ubuntu-18-04:~# docker image ls
 REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+```
 
-## pull : docker pull testuser.jfrog.io/docker-demo-remote/<DOCKER_IMAGE>:<DOCKER_TAG>
+### docker pull
 
+pull : docker pull testuser.jfrog.io/docker-demo-remote/<DOCKER_IMAGE>:<DOCKER_TAG>
+
+```sh
 root@jfrog-ubuntu-18-04:~# docker pull testuser.jfrog.io/docker-demo-remote/nginx:1.9.5
 
 root@jfrog-ubuntu-18-04:~# docker pull testuser.jfrog.io/docker-demo-remote/nginx:latest
@@ -59,7 +63,7 @@ Status: Downloaded newer image for testuser.jfrog.io/docker-demo-remote/nginx:la
 testuser.jfrog.io/docker-demo-remote/nginx:latest
 ```
 
-### PUSH Image from Local to Local Repository
+### docker tag
 
 ```bash
 ## login
@@ -87,9 +91,11 @@ REPOSITORY                                       TAG       IMAGE ID       CREATE
 testuser.jfrog.io/docker-demo-remote/alpine-test   1.1       5fd6cce2f848   27 minutes ago   5.58MB
 alpine-test                                      1.0       5fd6cce2f848   27 minutes ago   5.58MB
 
+```
 
-## push
+### docker push
 
+```sh
 root@jfrog-ubuntu-18-04:~# 
 root@jfrog-ubuntu-18-04:~# docker push testuser.jfrog.io/docker-demo-local/alpine-test:1.2 
 The push refers to repository [testuser.jfrog.io/docker-demo-local/alpine-test]
@@ -99,8 +105,64 @@ root@jfrog-ubuntu-18-04:~#
 
 ```
 
+## Helm Chart 
+
+### helm repo add
 
 
+```sh
+user1@user1-500R5K-501R5K-500R5Q:~/.npm$ helm repo add mytest-helm https://dmjgr13.jfrog.io/artifactory/api/helm/mytest-helm --username dmjgr13@gmail.com --password cmVmdGtuOjAxOjE3MzUwMzYyNDE6am9saUxLYnFSeXRDekN5Wll0amRrQ0FoVEhs 
+```
+
+### helm repo list 
+
+```sh
+user1@user1-500R5K-501R5K-500R5Q:~/.npm$ helm repo list
+NAME         	URL                                                      
+stable       	https://charts.helm.sh/stable                            
+ingress-nginx	https://kubernetes.github.io/ingress-nginx               
+mytest-helm  	https://dmjgr13.jfrog.io/artifactory/api/helm/mytest-helm
+```
+
+
+### helm package {tgz}
+
+```sh
+user1@user1-500R5K-501R5K-500R5Q:~$ ls | grep hello
+hello-world
+user1@user1-500R5K-501R5K-500R5Q:~$ helm package hello-world/
+Successfully packaged chart and saved it to: /home/user1/hello-world-0.1.0.tgz
+
+user1@user1-500R5K-501R5K-500R5Q:~$ 
+user1@user1-500R5K-501R5K-500R5Q:~$ ls | grep hello
+hello-world
+hello-world-0.1.0.tgz
+user1@user1-500R5K-501R5K-500R5Q:~$ 
+```
+
+### upload to repository
+
+```sh
+user1@user1-500R5K-501R5K-500R5Q:~$ curl -udmjgr13@gmail.com:cmVmdGtuOjAxOjE3MzUwMzYyNDE6am9saUxLYnFSeXRDekN5Wll0amRrQ0FoVEhs -T hello-world-0.1.0.tgz "https://dmjgr13.jfrog.io/artifactory/mytest-helm/hello-world-upload"
+{
+  "repo" : "mytest-helm-local",
+  "path" : "/hello-world-upload",
+  "created" : "2023-12-25T10:40:01.969Z",
+  "createdBy" : "dmjgr13@gmail.com",
+  "downloadUri" : "https://dmjgr13.jfrog.io/artifactory/mytest-helm-local/hello-world-upload",
+  "mimeType" : "application/octet-stream",
+  "size" : "2391",
+  "checksums" : {
+    "sha1" : "6f10a1334574f55c232627ec03adb07d77b27697",
+    "md5" : "abb4b8514f5f4421969e6f86fbe80bcf",
+    "sha256" : "7780b41d0839f48c28b7e5aaa24931bab27c5a9742f3580026b69586d4bd0672"
+  },
+  "originalChecksums" : {
+    "sha256" : "7780b41d0839f48c28b7e5aaa24931bab27c5a9742f3580026b69586d4bd0672"
+  },
+  "uri" : "https://dmjgr13.jfrog.io/artifactory/mytest-helm-local/hello-world-upload"
+}user1@user1-500R5K-501R5K-500R5Q:~$ 
+```
 
 ## Maven
 
@@ -110,11 +172,30 @@ root@jfrog-ubuntu-18-04:~#
 
 ### 07-02-03 Build and Deploy Artifacts to Jfrog  자료 참조
 
+
+
+
+
 ## npm
 
-### 사전준비
+### npm config set registry
+
 
 .npmrc 에 아래 추가
+
+```sh
+user1@user1-500R5K-501R5K-500R5Q:~/.npm$ npm config set registry https://dmjgr13.jfrog.io/artifactory/api/npm/testnpm/
+user1@user1-500R5K-501R5K-500R5Q:~/.npm$ cat .npmrc 
+registry=https://dmjgr13.jfrog.io/artifactory/api/npm/dctest-npm/
+_auth=ZG1qZ3IxM0BnbWFpbC5jb206Y21WbWRHdHVPakF4T2pFM016UTFNalF5TmprNlZIWTNjVXh5YXpCa2NraDJUbEYzWVVoamNVRkpPVFkzUkZOQg==
+always-auth=true
+```
+
+또는 .npmrc 에 직접 추가
+
+{: .note}
+> `npm config get userconfig` 명령어를 이용하여 npmrc 파일 위치를 확인할 수 있다. 
+
 
 ```bash
 email=testuser@naver.com
@@ -123,15 +204,21 @@ registry=https://testuser.jfrog.io/artifactory/api/npm/default-demo-npm/
 //testuser.jfrog.io/artifactory/api/npm/default-demo-npm/:_auth="ZGNwYXJrODBAbmF2ZXIuY29tOkFQNmpHS2dTaTdrYmtlOVRBcGlLU25UaTFaTA=="
 ```
 
-### PULL from remote NPM repository
+### npm install
 
 ```bash
 npm install mathjs@^9.4.4
 ```
 
+또는 
+
+```bash
+ npm install mathjs@^9.4.4 --registry https://user1.jfrog.io/artifactory/api/npm/testnpmrepo/
+ ```
+
 ## Pypi
 
-### 사전준비
+### setting pip.ini
 
 1. pip.ini 파일 global 로딩 위치 확인하기
 
@@ -159,7 +246,7 @@ index-url = https://testuser@naver.com:cmVmdGtuOjAxOjE3MTY1NTgzMDA6bkVKcEZ0ZVJJS
 ```
                
 
-### INSTALL from Remote Repository
+### pip install
 
 ```bash
 C:\Users\dcjam\AppData\Local\Programs\Python\Python311>pip install tensorflow
