@@ -20,8 +20,7 @@ nav_order: 20
 ---
 
 
-## Process 확인하기
-
+## ps -ef
 
 전체적인 프로세스와 관련된 옵션이다.
 
@@ -36,7 +35,7 @@ root      1957 15646  0 02:39 pts/0    00:00:00 grep --color=auto docker
 root@master:~/labfile/service#
 ```
 
-## Curl 사용하기
+## curl
 
 `curl`(client url) 명령어는 프로토콜들을 이용해 URL 로 데이터를 전송하여 서버에 데이터를 보내거나 가져올때 사용하기 위한 명령줄 도구 및 라이브러리이다.
 
@@ -60,7 +59,7 @@ root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello
 root@master:~/labfile/service#
 ```
 
-## Shell 스크립트 실행하기
+## sh 또는 ./
 
 `.sh` 확장자가 나오길래, 뭐지 싶었는데 찾아보니 shell script 확장자였다.
 
@@ -81,7 +80,7 @@ helm installed into /usr/local/bin/helm
 root@master:~#
 ```
 
-## 파일 압축 및 해제하기
+## tar
 
 `tar -zcvf target.tar.gz file1 file2 dir1 dir2` : 파일 압축  
 `tar -zxvf target.tar.gz` : 압축 해제
@@ -141,7 +140,7 @@ root@docker1:~/labfile/dockerfile_dir#
 
 ```
 
-## CPU 정보 확인하기
+## lscpu
 
 ```bash
 root@docker1:~# lscpu
@@ -172,7 +171,13 @@ Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cm
 root@docker1:~#
 ```
 
-## Disk 용량 확인 하기
+{: .important}
+> CPU 개수만 조회할 경우 `grep -c processor /proc/cpuinfo` 명령어를 활용할 수 있다.
+
+
+## df
+
+Disk 용량을 확인할 수 있다.
 
 ```bash
 df : 디스크 남은 용량 확인 (기본 명령어)
@@ -187,7 +192,10 @@ du -h : 깔끔하게 보여줌
 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌
 ```
 
-## RAM 사이즈 확인하기
+## free
+
+RAM 사이즈를 확인한다.
+
 
 ```bash
 root@docker1:~# free
@@ -197,9 +205,9 @@ Swap:       2017276           0     2017276
 root@docker1:~#
 ```
 
-## Listen Port 확인하기
+## netstat
 
-`Netstat` 은 아래와 같이 open 되어있는 모든 port를 확인하는데 사용할 수 있다.
+`Netstat` 은 아래와 같이 open 되어있는 모든 listen port를 확인하는데 사용할 수 있다.
 
  
 
@@ -233,7 +241,7 @@ udp6       0      0 [::]:44146              [::]:*                              
 
 
 
-## Alias 설정하기
+## alias
 
 `# nano /root/.bashrc` 파일에서 맨 아래 줄에 다음 내용 추가한다.
 
@@ -242,3 +250,97 @@ alias conrm='docker container rm -f $(docker container ps -aq)'
 ```
 
 이후 ctrl+o (저장) > enter > ctrl+x (종료) 를 통해 저장한다.
+
+## rsync
+
+rsync 는 Remote Sync 의 약자로, rsync 를 통해 서버 간의 동기화나 백업을 진행할 수 있다.
+
+
+사용 방법은 아래와 같다.
+
+`rsync options src dest`
+
+
+
+{: .note}
+> -a, --archive : 압축 모드
+>
+> -v, --verbose : 상세한 정보 출력
+> 
+> -h : human-readable, output numbers in a human-readable format
+ 
+## diff 
+
+diff 는 두 파일 사이의 내용을 비교하는 명령어이다.
+
+{: .note}
+> -r : 두 디렉토리간의 차이점 출력, 서브디렉토리 까지 비교
+
+
+rsync 와 diff 에 대한 예제를 아래와 같이 확인해 보자.
+
+
+```sh 
+# 파일 비교
+user1@user1-500R5K-501R5K-500R5Q:~$ ls ./Documents/
+mystudy.md  _.naver.com
+
+# rsync
+user1@user1-500R5K-501R5K-500R5Q:~$ rsync -avh ./Documents/ ./backup
+sending incremental file list
+created directory ./backup
+./
+_.naver.com
+mystudy.md
+
+sent 8.07K bytes  received 88 bytes  16.31K bytes/sec
+total size is 7.87K  speedup is 0.96
+user1@user1-500R5K-501R5K-500R5Q:~$ 
+
+
+# rsync 결과 확인 - 폴더와 함꼐 파일이 생성됨
+user1@user1-500R5K-501R5K-500R5Q:~$ ls ./backup/
+mystudy.md  _.naver.com
+user1@user1-500R5K-501R5K-500R5Q:~$ 
+
+# 파일 비교 - 내용이 없으므로 동일함 확인
+user1@user1-500R5K-501R5K-500R5Q:~$ diff -r ./Documents/ ./backup/
+
+
+# 파일 수정
+user1@user1-500R5K-501R5K-500R5Q:~$ vi ./Documents/mystudy.md 
+
+
+# 파일 비교 - 내용이 다름을 확인
+user1@user1-500R5K-501R5K-500R5Q:~$ diff -r ./Documents/ ./backup/
+diff -r ./Documents/mystudy.md ./backup/mystudy.md
+2,9d1
+< remote-theme: just-the-docs/just-the-docs
+< update
+< 1
+< 2
+< 3
+< 
+< 
+< remote-theme: just-the-docs/just-the-docs
+193c185
+< [Spring Boot + Nginx 연동해서 배포하기](https://velog.io/@u-nij/Spring-Boot-Nginx-%EC%97%B0%EB%8F%99%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0)
+---
+> [Spring Boot + Nginx 연동해서 배포하기](https://velog.io/@u-nij/Spring-Boot-Nginx-%EC%97%B0%EB%8F%99%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0)
+\ No newline at end of file
+
+# rsync - 다른 부분을 rsync
+user1@user1-500R5K-501R5K-500R5Q:~$ rsync -avh ./Documents/ ./backup
+sending incremental file list
+./
+mystudy.md
+
+sent 5.48K bytes  received 38 bytes  11.03K bytes/sec
+total size is 7.97K  speedup is 1.44
+
+# 파일 비교 - 내용 동일
+user1@user1-500R5K-501R5K-500R5Q:~$ diff -r ./Documents/ ./backup/
+user1@user1-500R5K-501R5K-500R5Q:~$ 
+user1@user1-500R5K-501R5K-500R5Q:~$ 
+
+```
