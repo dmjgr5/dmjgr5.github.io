@@ -199,7 +199,7 @@ If expires_in is not specified, expiry is 1 year as default.
 POST {jfrog-url}/access/api/v1/tokens/
 { 
   "scope":"applied-permissions/user",
-  "username": "mytest",
+  "username": "testuser",
   "expires_in": "0", //second
   "description" : "test1-desc"
 }
@@ -214,21 +214,18 @@ POST {jfrog-url}/access/api/v1/tokens/
 
 ```
 
-### get tokens by Token ID
+### Get tokens by Token ID
 
-```bash
+```sh
 {jfrog-url}/access/api/v1/tokens
 
 {jfrog-url}/access/api/v1/tokens/07e245ce-10ce-4b73-8fff-df873e4f3682
 ```
 
-### get tokens by Username
+### Get tokens by Username
 
-```bash
-POST {jfrog-url}/access/api/v1/tokens/
-{
-    "username" : "jwpark"
-}
+```sh
+GET {jfrog-url}/access/api/v1/tokens?username=testuser
 ```
 
 ### Delete token  by token Id
@@ -248,7 +245,7 @@ POST {jfrog-url}/access/api/v1/tokens/877d0a0b-597d-4f56-9fb6-079ffab20210
 POST {jfrog-url}/access/api/v1/tokens/
 { 
   "scope":"applied-permissions/user",
-  "username": "mytest",
+  "username": "testuser",
   "expires_in": "0", //second
   "description" : "test1-desc"
 }
@@ -265,11 +262,35 @@ POST {jfrog-url}/access/api/v1/tokens/
 
 #### 2. Get Access-token from DB and Connect to Jfrog
 
+
+
 If token_id saved in DB, it is possible to check its expiry date with below using Admin Bearer-Token before using access-token.
 
 ```sh
 GET POST {jfrog-url}/access/api/v1/tokens/76a90d6d-3206-4f23-a72a-fa8d2dd05b0b
 ```
+
+Else if we can check by username, belows.
+
+```sh
+GET POST {jfrog-url}/access/api/v1/tokens?username=testuser
+
+{
+    "tokens": [
+        {
+            "token_id": "f3f35f75-032e-469c-a27c-xxxxxxxxxxxxxxx",
+            "subject": "jfac@xxxxxxxxxxxxxxx/users/testuser",
+            "expiry": 1738256008,
+            "issued_at": 1706720008,
+            "issuer": "jfac@xxxxxxxxxxxxxxx",
+            "refreshable": false,
+            "scope": "applied-permissions/user"
+        }
+...
+}
+
+```
+
 
 #### 3. If 401 error occurs in response, create Token by Username using Admin Bearer-Token and Save user's Access-token in DB 
 
@@ -277,7 +298,7 @@ GET POST {jfrog-url}/access/api/v1/tokens/76a90d6d-3206-4f23-a72a-fa8d2dd05b0b
 POST {jfrog-url}/access/api/v1/tokens/
 { 
   "scope":"applied-permissions/user",
-  "username": "mytest",
+  "username": "testuser",
   "expires_in": "0", //second
   "description" : "test1-desc"
 }
