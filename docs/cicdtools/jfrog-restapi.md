@@ -84,7 +84,15 @@ POST {jfrog-url}//access/api/v1/projects
   "project_key": "pg01-project"
 }
 
+
 ```
+
+### Project list
+
+```bash
+{jfrog-url}/access/api/v1/projects
+```
+
 
 ### Project 에 role 생성
 
@@ -181,6 +189,30 @@ DELETE  {jfrog-url}/access/api/v1/projects/_/share/repositories/docker-demo-loca
 ```bash
 {jfrog-url}/access/api/v1/system/ping
 ```
+ 
+
+### Create Token
+
+If expires_in is not specified, expiry is 1 year as default.
+
+```sh
+POST {jfrog-url}/access/api/v1/tokens/
+{ 
+  "scope":"applied-permissions/user",
+  "username": "mytest",
+  "expires_in": "0", //second
+  "description" : "test1-desc"
+}
+
+{
+    "token_id": "b609b791-415c-48a7-969f-xxx",
+    "access_token": "eyJxxx",
+    "expires_in": 30,
+    "scope": "applied-permissions/user",
+    "token_type": "Bearer",
+    "description": "test1-desc"
+
+```
 
 ### get tokens by Token ID
 
@@ -199,11 +231,69 @@ POST {jfrog-url}/access/api/v1/tokens/
 }
 ```
 
-### project list
+### Delete token  by token Id
 
-```bash
-{jfrog-url}/access/api/v1/projects
+```sh
+POST {jfrog-url}/access/api/v1/tokens/877d0a0b-597d-4f56-9fb6-079ffab20210
 ```
+
+
+### Token process
+
+#### 0. Create Admin Bearer-Token with no expiry date.
+
+#### 1. Create Token by Username using Admin Bearer-Token and Save user's Access-token in DB 
+
+```sh
+POST {jfrog-url}/access/api/v1/tokens/
+{ 
+  "scope":"applied-permissions/user",
+  "username": "mytest",
+  "expires_in": "0", //second
+  "description" : "test1-desc"
+}
+
+{
+    "token_id": "b609b791-415c-48a7-969f-xxx",
+    "access_token": "eyJxxx",
+    "expires_in": 30,
+    "scope": "applied-permissions/user",
+    "token_type": "Bearer",
+    "description": "test1-desc"
+
+```
+
+#### 2. Get Access-token from DB and Connect to Jfrog
+
+If token_id saved in DB, it is possible to check its expiry date with below using Admin Bearer-Token before using access-token.
+
+```sh
+GET POST {jfrog-url}/access/api/v1/tokens/76a90d6d-3206-4f23-a72a-fa8d2dd05b0b
+```
+
+#### 3. If 401 error occurs in response, create Token by Username using Admin Bearer-Token and Save user's Access-token in DB 
+
+```sh
+POST {jfrog-url}/access/api/v1/tokens/
+{ 
+  "scope":"applied-permissions/user",
+  "username": "mytest",
+  "expires_in": "0", //second
+  "description" : "test1-desc"
+}
+
+{
+    "token_id": "b609b791-415c-48a7-969f-xxx",
+    "access_token": "eyJxxx",
+    "expires_in": 30,
+    "scope": "applied-permissions/user",
+    "token_type": "Bearer",
+    "description": "test1-desc"
+ 
+```
+
+#### 4. Keep going 1 ~ 4.
+
 
 ---
 
