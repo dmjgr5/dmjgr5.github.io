@@ -19,6 +19,89 @@ nav_order: 20
 
 ---
 
+## rename -a, hostnamectl 
+
+리눅스 커널 정보를 출력한다.
+
+
+```sh 
+~$ uname -a
+Linux dcpark-500R5K-501R5K-500R5Q 5.15.0-92-generic #102~20.04.1-Ubuntu SMP Mon Jan 15 13:09:14 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+~$ hostnamectl
+   Static hostname: test-500R5K-501R5K-500R5Q
+         Icon name: computer-laptop
+           Chassis: laptop
+        Machine ID: 60c7a7e6eec344e095e9391aa8131f7d
+           Boot ID: f54e9139e9f449bda63e721c9777a514
+  Operating System: Ubuntu 20.04.6 LTS
+            Kernel: Linux 5.15.0-92-generic
+      Architecture: x86-64
+```
+
+ 
+
+## df -h
+
+Disk 용량을 확인할 수 있다.
+
+```bash
+df : 디스크 남은 용량 확인 (기본 명령어)
+df -k : 킬로바이트 단위로 남은 용량 확인
+df -m : 메가 바이트 단위로 남은 용량 확인
+df -h : 깔끔하게 보여줌
+df . : 현재 디렉토리가 포함된 파티션의 남은 용량 확인
+du : 현재 디렉토리에서 서브 디렉토리까지 용량 확인
+du -a : 현재 디렉토리의 사용량 파일단위로 출력
+du -s : 총 사용량
+du -h : 깔끔하게 보여줌
+du -sh * : 한단계 서브 디렉토리 기준으로 보여줌
+```
+
+```sh
+~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.8G     0  3.8G   0% /dev
+tmpfs           785M  2.2M  783M   1% /run
+/dev/sda2       117G   37G   75G  33% /
+tmpfs           3.9G  143M  3.7G   4% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/loop0      160M  160M     0 100% /snap/chromium/2738
+/dev/loop3       56M   56M     0 100% /snap/core18/2796
+```
+
+
+## lscpu
+
+```bash
+~$ lscpu
+Architecture:                       x86_64
+CPU op-mode(s):                     32-bit, 64-bit
+Byte Order:                         Little Endian
+Address sizes:                      39 bits physical, 48 bits virtual
+CPU(s):                             4
+On-line CPU(s) list:                0-3
+Thread(s) per core:                 2
+Core(s) per socket:                 2
+```
+
+{: .important}
+> CPU 개수만 조회할 경우 `grep -c processor /proc/cpuinfo` 명령어를 활용할 수 있다.
+
+
+## free -h      
+
+메모리를 확인한다. -h 옵션은 사람이 읽기 쉬운 단위로 출력한다.
+
+
+```bash
+$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:          7.7Gi       4.6Gi       216Mi       546Mi       2.8Gi       2.2Gi
+Swap:            0B          0B          0B
+
+```
+
 
 ## ps -ef
 
@@ -140,68 +223,6 @@ root@docker1:~/labfile/dockerfile_dir#
 
 ```
 
-
-## df -h
-
-Disk 용량을 확인할 수 있다.
-
-```bash
-df : 디스크 남은 용량 확인 (기본 명령어)
-df -k : 킬로바이트 단위로 남은 용량 확인
-df -m : 메가 바이트 단위로 남은 용량 확인
-df -h : 깔끔하게 보여줌
-df . : 현재 디렉토리가 포함된 파티션의 남은 용량 확인
-du : 현재 디렉토리에서 서브 디렉토리까지 용량 확인
-du -a : 현재 디렉토리의 사용량 파일단위로 출력
-du -s : 총 사용량
-du -h : 깔끔하게 보여줌
-du -sh * : 한단계 서브 디렉토리 기준으로 보여줌
-```
-
-```sh
-~$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-udev            3.8G     0  3.8G   0% /dev
-tmpfs           785M  2.2M  783M   1% /run
-/dev/sda2       117G   37G   75G  33% /
-tmpfs           3.9G  143M  3.7G   4% /dev/shm
-tmpfs           5.0M  4.0K  5.0M   1% /run/lock
-tmpfs           3.9G     0  3.9G   0% /sys/fs/cgroup
-/dev/loop0      160M  160M     0 100% /snap/chromium/2738
-/dev/loop3       56M   56M     0 100% /snap/core18/2796
-```
-
-
-## lscpu
-
-```bash
-~$ lscpu
-Architecture:                       x86_64
-CPU op-mode(s):                     32-bit, 64-bit
-Byte Order:                         Little Endian
-Address sizes:                      39 bits physical, 48 bits virtual
-CPU(s):                             4
-On-line CPU(s) list:                0-3
-Thread(s) per core:                 2
-Core(s) per socket:                 2
-```
-
-{: .important}
-> CPU 개수만 조회할 경우 `grep -c processor /proc/cpuinfo` 명령어를 활용할 수 있다.
-
-
-## free -h      
-
-메모리를 확인한다. -h 옵션은 사람이 읽기 쉬운 단위로 출력한다.
-
-
-```bash
-$ free -h
-              total        used        free      shared  buff/cache   available
-Mem:          7.7Gi       4.6Gi       216Mi       546Mi       2.8Gi       2.2Gi
-Swap:            0B          0B          0B
-
-```
 
 ## Listen port 확인하기
 
