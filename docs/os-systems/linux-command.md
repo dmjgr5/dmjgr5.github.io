@@ -140,42 +140,8 @@ root@docker1:~/labfile/dockerfile_dir#
 
 ```
 
-## lscpu
 
-```bash
-root@docker1:~# lscpu
-Architecture:        x86_64
-CPU op-mode(s):      32-bit, 64-bit
-Byte Order:          Little Endian
-CPU(s):              1
-On-line CPU(s) list: 0
-Thread(s) per core:  1
-Core(s) per socket:  1
-Socket(s):           1
-NUMA node(s):        1
-Vendor ID:           GenuineIntel
-CPU family:          6
-Model:               140
-Model name:          11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz
-Stepping:            1
-CPU MHz:             2803.200
-BogoMIPS:            5606.40
-Hypervisor vendor:   KVM
-Virtualization type: full
-L1d cache:           48K
-L1i cache:           32K
-L2 cache:            1280K
-L3 cache:            12288K
-NUMA node0 CPU(s):   0
-Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq monitor ssse3 cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single fsgsbase avx2 invpcid rdseed clflushopt md_clear flush_l1d arch_capabilities
-root@docker1:~#
-```
-
-{: .important}
-> CPU 개수만 조회할 경우 `grep -c processor /proc/cpuinfo` 명령어를 활용할 수 있다.
-
-
-## df
+## df -h
 
 Disk 용량을 확인할 수 있다.
 
@@ -192,20 +158,57 @@ du -h : 깔끔하게 보여줌
 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌
 ```
 
-## free
+```sh
+~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.8G     0  3.8G   0% /dev
+tmpfs           785M  2.2M  783M   1% /run
+/dev/sda2       117G   37G   75G  33% /
+tmpfs           3.9G  143M  3.7G   4% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/loop0      160M  160M     0 100% /snap/chromium/2738
+/dev/loop3       56M   56M     0 100% /snap/core18/2796
+```
 
-RAM 사이즈를 확인한다.
+
+## lscpu
+
+```bash
+~$ lscpu
+Architecture:                       x86_64
+CPU op-mode(s):                     32-bit, 64-bit
+Byte Order:                         Little Endian
+Address sizes:                      39 bits physical, 48 bits virtual
+CPU(s):                             4
+On-line CPU(s) list:                0-3
+Thread(s) per core:                 2
+Core(s) per socket:                 2
+```
+
+{: .important}
+> CPU 개수만 조회할 경우 `grep -c processor /proc/cpuinfo` 명령어를 활용할 수 있다.
+
+
+## free -h      
+
+메모리를 확인한다. -h 옵션은 사람이 읽기 쉬운 단위로 출력한다.
 
 
 ```bash
-root@docker1:~# free
+$ free -h
               total        used        free      shared  buff/cache   available
-Mem:        4039328     1140088     1636088       34088     1263152     2608324
-Swap:       2017276           0     2017276
-root@docker1:~#
+Mem:          7.7Gi       4.6Gi       216Mi       546Mi       2.8Gi       2.2Gi
+Swap:            0B          0B          0B
+
 ```
 
-## netstat
+## Listen port 확인하기
+
+아래와 같이 3가지 방법으로 확인이 가능하다.
+
+
+### sudo netstat -ltup
 
 `Netstat` 은 아래와 같이 open 되어있는 모든 listen port를 확인하는데 사용할 수 있다.
 
@@ -238,6 +241,43 @@ udp6       0      0 [::]:mdns               [::]:*                              
 udp6       0      0 [::]:44146              [::]:*                              894/avahi-daemon: r 
 ```
 
+### sudo ss -lntu
+
+netstat 과 유사하여, 위 옵션은 TCP/UDP 에대한 수신 대기 포트를 숫자로 표시한다.
+
+```sh 
+~$ sudo ss -lntu
+Netid            State             Recv-Q             Send-Q                         Local Address:Port                          Peer Address:Port            Process            
+udp              UNCONN            0                  0                                    0.0.0.0:57192                              0.0.0.0:*                                  
+udp              UNCONN            0                  0                              127.0.0.53%lo:53                                 0.0.0.0:*                                  
+udp              UNCONN            0                  0                                    0.0.0.0:631                                0.0.0.0:*                                  
+udp              UNCONN            0                  0                                224.0.0.251:5353                               0.0.0.0:*                                  
+udp              UNCONN            0                  0                                224.0.0.251:5353                               0.0.0.0:*                                  
+udp              UNCONN            0                  0                                    0.0.0.0:5353                               0.0.0.0:*                                  
+udp              UNCONN            0                  0                                       [::]:38371                                 [::]:*                                  
+udp              UNCONN            0                  0                                          *:1716                                     *:*                                  
+udp              UNCONN            0                  0                                       [::]:5353                                  [::]:*                                  
+tcp              LISTEN            0                  4096                               127.0.0.1:41397                              0.0.0.0:*                                  
+tcp              LISTEN            0                  4096                           127.0.0.53%lo:53                                 0.0.0.0:*                                  
+tcp              LISTEN            0                  511                                  0.0.0.0:8887                               0.0.0.0:*                                  
+tcp              LISTEN            0                  5                                  127.0.0.1:631                                0.0.0.0:*                                  
+tcp              LISTEN            0                  244                                127.0.0.1:5432                               0.0.0.0:*                                  
+tcp              LISTEN            0                  4096                               127.0.0.1:4000                               0.0.0.0:*                                  
+tcp              LISTEN            0                  50                                         *:1716                                     *:*                                  
+tcp              LISTEN            0                  5                                      [::1]:631                                   [::]:*                                  
+tcp              LISTEN            0                  511                                        *:15611                                    *:*                                  
+tcp              LISTEN            0                  50                                         *:9090                                     *:*         
+```
+
+### sudo lsof -i:포트번호
+
+openfile 에서 확인하며 -i 옵션은 모든 네트워크 파일을 확인할 수 있다. 특정 포트를 확인하고 싶은 경우는 :포트번호를 입력한다.
+
+```sh
+~$ sudo lsof -i:4000
+COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+ruby2.7 7795 root   11u  IPv4  87943      0t0  TCP localhost:4000 (LISTEN)
+```
 
 
 
@@ -344,3 +384,45 @@ user1@user1-500R5K-501R5K-500R5Q:~$
 user1@user1-500R5K-501R5K-500R5Q:~$ 
 
 ```
+## vi 편집기
+
+### yy , #yy	
+커서가 위치한 행을 복사한다. # 에는 복사할 행의 수를 지정
+
+
+### p	
+
+커서가 위치한 행의 아래쪽에 붙인다.
+
+### P	
+
+커서가 위치한 행의 위쪽에 붙인다.
+
+### dd, #dd	
+
+커서가 위치한 행을 잘라둔다. 삭제와 같은 기능 , # 에는 잘라둘 행의 수를 지정한다. 
+
+### /{키워드}
+
+찾기 명령어로, 다음 찾기는 n 이전 찾기는 N 으로 찾을 수 있다.
+
+
+
+### ctrl+f , ctrl+b
+
+다음 또는 이전 페이지로 이동한다.
+
+### gg, G
+
+파일의 제일 첫 문장이나 끝 문장으로 이동한다.
+ 
+ 
+### :set number, :set nonumber
+
+좌측에 라인번호를 표시하거나 숨길 수 있다.
+
+
+### :{숫자}  
+
+숫자 번째 문장으로 이동한다.
+ 
