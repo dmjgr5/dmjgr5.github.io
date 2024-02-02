@@ -38,6 +38,18 @@ Linux dcpark-500R5K-501R5K-500R5Q 5.15.0-92-generic #102~20.04.1-Ubuntu SMP Mon 
       Architecture: x86-64
 ```
 
+## lsb_release -a
+
+배포 버전을 확인할 수 있다. 
+
+```sh
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 20.04.6 LTS
+Release:	20.04
+Codename:	focal
+```
  
 
 ## df -h
@@ -61,7 +73,7 @@ du -sh * : 한단계 서브 디렉토리 기준으로 보여줌
 ~$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 udev            3.8G     0  3.8G   0% /dev
-tmpfs           785M  2.2M  783M   1% /run
+tmperfs           785M  2.2M  783M   1% /run
 /dev/sda2       117G   37G   75G  33% /
 tmpfs           3.9G  143M  3.7G   4% /dev/shm
 tmpfs           5.0M  4.0K  5.0M   1% /run/lock
