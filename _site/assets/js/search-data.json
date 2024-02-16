@@ -2367,7 +2367,7 @@
   },"338": {
     "doc": "Kubernetes 실습 환경 - Minikube 설치",
     "title": "Table of contents",
-    "content": ". | MINIKUBE 설치 | CLUSTER 시작 | CLUSTER 확인 및 kubectl 설치 | alias 설정 | . 로컬에서 테스트를 위해 간단히 설치하고 싶을 경우엔 Minikube 가 유용하다. 아래 블로그를 참조하여 작성하였다. | https://www.joinc.co.kr/w/man/12/kubernetes/minikube | . ",
+    "content": ". | MINIKUBE 설치 | CLUSTER 시작 | CLUSTER 확인 및 kubectl 설치 | alias 설정 | Minikube 사용법 | . 로컬에서 테스트를 위해 간단히 설치하고 싶을 경우엔 Minikube 가 유용하다. 아래 블로그를 참조하여 작성하였다. | https://www.joinc.co.kr/w/man/12/kubernetes/minikube | . ",
     "url": "/docs/cloud/k8s-install-lab-minikube/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-install-lab-minikube/#table-of-contents"
@@ -2400,1105 +2400,1112 @@
     
     "relUrl": "/docs/cloud/k8s-install-lab-minikube/#alias-설정"
   },"343": {
+    "doc": "Kubernetes 실습 환경 - Minikube 설치",
+    "title": "Minikube 사용법",
+    "content": "아래를 참조하여 진행해 보자. https://www.joinc.co.kr/w/man/12/kubernetes/minikube . ",
+    "url": "/docs/cloud/k8s-install-lab-minikube/#minikube-%EC%82%AC%EC%9A%A9%EB%B2%95",
+    
+    "relUrl": "/docs/cloud/k8s-install-lab-minikube/#minikube-사용법"
+  },"344": {
     "doc": "Kubernetes 실습 환경",
     "title": "Kubernetes 실습 환경",
     "content": " ",
     "url": "/docs/cloud/k8s-install-lab/",
     
     "relUrl": "/docs/cloud/k8s-install-lab/"
-  },"344": {
+  },"345": {
     "doc": "Kubernetes 실습 환경",
     "title": "Table of contents",
     "content": ". | 도커 실습에 사용되었던 컨테이너, 이미지 모두 삭제하기 | 쿠버네티스 클러스터를 구성하기전 요구사항 확인 . | A compatible Linux host | 2 GB or more of RAM per machine | 2 CPUs or more | Full network connectivity between all machines in the cluster | Unique hostname, MAC address, and product_uuid for every node | . | kubelet 의 적절한 동작을 위해서 swap을 사용하지 않는다. | SELinux 와 방화벽을 해제한다. | br_netfilter 모듈을 load하고 관련된 네트워크 파라미터를 설정 | . | kubeadm, kubelet and kubectl 패키지 설치하기 . | Update the apt package index and install packages needed to use the Kubernetes apt repository: | Download the Google Cloud public signing key: | Add the Kubernetes apt repository: | Update apt package index, install kubelet, kubeadm and kubectl, and pin their version: | . | Configuring the kubelet &amp; cgroup | 시스템 구성 | worker1, worker2 가상 머신 추가 . | 생성을 위해서 master 가상 머신 종료 | 가상 머신 CPU 수 수정 | worker1 가상 머신 복제 | worker2 가상 머신 복제 | master 가상 머신 구동 | . | NatNetwork port-forwarding 설정 | putty 연결 설정 . | worker1 putty 연결 설정 | worker2 putty 연결 설정 | . | (마스터 노드에서만 실행 )kubeadm init 명령을 통해서 클러스터를 생성한다. | kubeadm init 명령어로 마스터 서버를 만든다. | . | 쿠버네티스 클러스터에 조인하기 위한 명령어 구문을 저장 | kubeconfig 파일의 위치를 KUBECONFIG 쉘 변수에 설정 . | Pod 네트워크 추가 기능 구성 | . | [마스터 노드에서만 실행] 클러스터 구성 상태 확인 | [마스터 노드에서만 실행] 생성한 # kubeadm join 구문이 든 쉘 스크립트를 워커 노드로 복사 | [워커 노드에서만 실행] 복사된 스크립트를 실행하여 클러스터에 조인 | [마스터 노드에서만 실행] 클러스터 조인 상태 확인 | . Kubernetes 실습 환경을 위해 아래와 같이 구성한다. | master 에 kubeadm, kubelet and kubectl 패키지 설치 | master 로부터 worker1, worker2 복제하기 | master 에서 kubectl init 하여 조인구문 생성 및 worker1,2 로 복제 | worker1,2 에서 조인구문 실행 | . ",
     "url": "/docs/cloud/k8s-install-lab/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#table-of-contents"
-  },"345": {
+  },"346": {
     "doc": "Kubernetes 실습 환경",
     "title": "도커 실습에 사용되었던 컨테이너, 이미지 모두 삭제하기",
     "content": "root@docker1:~# docker container rm -f $(docker container ps -aq) root@docker1:~# docker image prune -a . ",
     "url": "/docs/cloud/k8s-install-lab/#%EB%8F%84%EC%BB%A4-%EC%8B%A4%EC%8A%B5%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EC%97%88%EB%8D%98-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%AA%A8%EB%91%90-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#도커-실습에-사용되었던-컨테이너-이미지-모두-삭제하기"
-  },"346": {
+  },"347": {
     "doc": "Kubernetes 실습 환경",
     "title": "쿠버네티스 클러스터를 구성하기전 요구사항 확인",
     "content": "A compatible Linux host . The Kubernetes project provides generic instructions for Linux distributions based on Debian and Red Hat, and those distributions without a package manager. 2 GB or more of RAM per machine . Any less will leave little room for your apps. root@docker1:~# free total used free shared buff/cache available Mem: 4039328 1140088 1636088 34088 1263152 2608324 Swap: 2017276 0 2017276 root@docker1:~# . 2 CPUs or more . root@docker1:~# lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian CPU(s): 1 On-line CPU(s) list: 0 Thread(s) per core: 1 Core(s) per socket: 1 Socket(s): 1 NUMA node(s): 1 Vendor ID: GenuineIntel CPU family: 6 Model: 140 Model name: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz Stepping: 1 CPU MHz: 2803.200 BogoMIPS: 5606.40 Hypervisor vendor: KVM Virtualization type: full L1d cache: 48K L1i cache: 32K L2 cache: 1280K L3 cache: 12288K NUMA node0 CPU(s): 0 Flags: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq monitor ssse3 cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single fsgsbase avx2 invpcid rdseed clflushopt md_clear flush_l1d arch_capabilities root@docker1:~# . Full network connectivity between all machines in the cluster . Public or private network is fine. Unique hostname, MAC address, and product_uuid for every node . - hostname : # hostname # hostnamectl set-hostname master # nano /etc/hosts .... (맨 아래에 다음 내용 추가 ) 192.168.137.101 master 192.168.137.102 worker1 192.168.137.103 worker2 ctrl+o (저장) --&gt; enter --&gt; ctrl+x (종료) # cat /etc/hosts 192.168.137.101 master 192.168.137.102 worker1 192.168.137.103 worker2 - MAC address : # ip addr , # ifconfig - product_uuid : # cat /sys/class/dmi/id/product_uuid . ",
     "url": "/docs/cloud/k8s-install-lab/#%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A5%BC-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0%EC%A0%84-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD-%ED%99%95%EC%9D%B8",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#쿠버네티스-클러스터를-구성하기전-요구사항-확인"
-  },"347": {
+  },"348": {
     "doc": "Kubernetes 실습 환경",
     "title": "kubelet 의 적절한 동작을 위해서 swap을 사용하지 않는다.",
     "content": "# swapon &amp;&amp; cat /etc/fstab # swapoff -a &amp;&amp; sed -i '/swap/s/^/#/' /etc/fstab (stream editor: 일괄 문서 편집기) . SELinux 와 방화벽을 해제한다. # setenforce 0 // redhat 계열 # ufw disable // ubuntu 계열 . br_netfilter 모듈을 load하고 관련된 네트워크 파라미터를 설정 . Linux 노드의 iptables가 bridged traffic을 정확하게 확인하고 제어 할 수 있도록한다. # cat &lt;&lt;EOF | sudo tee /etc/modules-load.d/k8s.conf br_netfilter EOF -------------------------------------------------------- # cat &lt;&lt;EOF | sudo tee /etc/sysctl.d/k8s.conf net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 EOF -------------------------------------------------------- # sysctl --system . ",
     "url": "/docs/cloud/k8s-install-lab/#kubelet-%EC%9D%98-%EC%A0%81%EC%A0%88%ED%95%9C-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%9C%84%ED%95%B4%EC%84%9C-swap%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#kubelet-의-적절한-동작을-위해서-swap을-사용하지-않는다"
-  },"348": {
+  },"349": {
     "doc": "Kubernetes 실습 환경",
     "title": "kubeadm, kubelet and kubectl 패키지 설치하기",
     "content": "Update the apt package index and install packages needed to use the Kubernetes apt repository: . # apt-get update # apt-get install -y apt-transport-https ca-certificates curl . Download the Google Cloud public signing key: . root@docker1:~# curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg . Add the Kubernetes apt repository: . root@docker1:~# echo \"deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main\" | sudo tee /etc/apt/sources.list.d/kubernetes.list deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main . Update apt package index, install kubelet, kubeadm and kubectl, and pin their version: . # apt-get update # apt-get install -y kubelet=1.21.0-00 kubeadm=1.21.0-00 kubectl=1.21.0-00 # apt-mark hold kubelet kubeadm kubectl . ",
     "url": "/docs/cloud/k8s-install-lab/#kubeadm-kubelet-and-kubectl-%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#kubeadm-kubelet-and-kubectl-패키지-설치하기"
-  },"349": {
+  },"350": {
     "doc": "Kubernetes 실습 환경",
     "title": "Configuring the kubelet &amp; cgroup",
     "content": "cgroupfs를 컨테이너 런타임과 kubelet 에 의해서 제어할 수 있도록 구성 . root@docker1:~# cat &lt;&lt;EOF | sudo tee /etc/docker/daemon.json &gt; { &gt; \"exec-opts\": [\"native.cgroupdriver=systemd\"], &gt; \"log-driver\": \"json-file\", &gt; \"log-opts\": { &gt; \"max-size\": \"100m\" &gt; }, &gt; \"storage-driver\": \"overlay2\" &gt; } &gt; EOF { \"exec-opts\": [\"native.cgroupdriver=systemd\"], \"log-driver\": \"json-file\", \"log-opts\": { \"max-size\": \"100m\" }, \"storage-driver\": \"overlay2\" } root@docker1:~# cat /etc/docker/daemon.json { \"exec-opts\": [\"native.cgroupdriver=systemd\"], \"log-driver\": \"json-file\", \"log-opts\": { \"max-size\": \"100m\" }, \"storage-driver\": \"overlay2\" } . ",
     "url": "/docs/cloud/k8s-install-lab/#configuring-the-kubelet--cgroup",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#configuring-the-kubelet--cgroup"
-  },"350": {
+  },"351": {
     "doc": "Kubernetes 실습 환경",
     "title": "시스템 구성",
     "content": "# systemctl enable docker (부팅시 자동으로 docker 시작) # systemctl daemon-reload # systemctl restart docker # docker info . ",
     "url": "/docs/cloud/k8s-install-lab/#%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%84%B1",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#시스템-구성"
-  },"351": {
+  },"352": {
     "doc": "Kubernetes 실습 환경",
     "title": "worker1, worker2 가상 머신 추가",
     "content": "생성을 위해서 master 가상 머신 종료 . root@docker1:~# poweroff . 가상 머신 CPU 수 수정 . Oracle VM VirtualBox 관리자 master 가상 머신 선택 --&gt; \"시스템\" 글자를 클릭 --&gt; 마더보드/프로세서/가속 중 프로세서 선택 --&gt; 프로세서(탭) --&gt; 프로세서 개수 2개로 수정 --&gt; 확인 . worker1 가상 머신 복제 . Oracle VM VirtualBox 관리자 master 가상 머신 선택 --&gt; 우클릭 --&gt; 복제 이름 : worker1 MAC 주소 정책 : 모든 네트워크 어댑터의 새 MAC 주소 생성 --&gt; 다음 --&gt; 복제 방식 --&gt; 완전한 복제 --&gt; 복제 worker1 가상 머신 선택 --&gt; 시작 --&gt; 로그인 --&gt; worker1 / ubuntu --&gt; 바탕화면 --&gt; 우클릭 --&gt; Open Teminal $ su - root &lt;-- 관리자 root 로 전환 Password : ubuntu # hostnamectl set-hostname worker1 # hostname worker1 # ip addr # nano /etc/netplan/00-installer-config.yaml addresses: [192.168.137.101/24] --&gt; 192.168.137.102/24 ctrl+o (저장) --&gt; enter --&gt; ctrl+x (종료 ) # netplan apply # ip addr enp0s3 inet 192.168.137.102/24 . worker2 가상 머신 복제 . Oracle VM VirtualBox 관리자 master 가상 머신 선택 --&gt; 우클릭 --&gt; 복제 이름 : worker2 MAC 주소 정책 : 모든 네트워크 어댑터의 새 MAC 주소 생성 --&gt; 다음 --&gt; 복제 방식 --&gt; 완전한 복제 --&gt; 복제 worker2 가상 머신 선택 --&gt; 시작 --&gt; 로그인 --&gt; worker1 / ubuntu --&gt; 바탕화면 --&gt; 우클릭 --&gt; Open Teminal $ su - root Password : ubuntu # hostnamectl set-hostname worker2 # hostname worker2 # ip addr # nano /etc/netplan/00-installer-config.yaml addresses: [192.168.137.101/24] --&gt; 192.168.137.103/24 ctrl+o (저장) ---&gt; enter ---&gt; ctrl+x (종료) # netplan apply # ip addr enp0s3 inet 192.168.137.103/24 . master 가상 머신 구동 . Oracle VM VirtualBox 관리자 master 가상 머신 선택 --&gt; 시작 . ",
     "url": "/docs/cloud/k8s-install-lab/#worker1-worker2-%EA%B0%80%EC%83%81-%EB%A8%B8%EC%8B%A0-%EC%B6%94%EA%B0%80",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#worker1-worker2-가상-머신-추가"
-  },"352": {
+  },"353": {
     "doc": "Kubernetes 실습 환경",
     "title": "NatNetwork port-forwarding 설정",
     "content": "Oracle VM VirtualBox 관리자 파일 --&gt; 환경설정 --&gt; 네트워크 --&gt; NatNetwork --&gt; 톱니바퀴 (설정) --&gt; 포트포워딩 --&gt; [+] 이름 프로토콜 호스트IP 호스트 포트 게스트IP 게스트포트 worker1 TCP 192.168.56.1 102 192.168.137.102 22 worker2 TCP 192.168.56.1 103 192.168.137.103 22 . ",
     "url": "/docs/cloud/k8s-install-lab/#natnetwork-port-forwarding-%EC%84%A4%EC%A0%95",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#natnetwork-port-forwarding-설정"
-  },"353": {
+  },"354": {
     "doc": "Kubernetes 실습 환경",
     "title": "putty 연결 설정",
     "content": "worker1 putty 연결 설정 . putty.exe 실행 --&gt; master 선택 --&gt; Load Host Name : 192.168.56.1 Port:102 Window --&gt; Colours --&gt; Default Foreground(글자색) ,Default Background(배경색) Session --&gt; Saved Sessions : worker1 --&gt; Save worker1 연결 Accept login as : root Password : [ubuntu] . worker2 putty 연결 설정 . putty.exe 실행 --&gt; master 선택 --&gt; Load Host Name : 192.168.56.1 Port:103 Window --&gt; Colours --&gt; Default Foreground(글자색) Session --&gt; Saved Sessions : worker2 --&gt; Save worker2 연결 Accept login as : root Password : [ubuntu] . ",
     "url": "/docs/cloud/k8s-install-lab/#putty-%EC%97%B0%EA%B2%B0-%EC%84%A4%EC%A0%95",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#putty-연결-설정"
-  },"354": {
+  },"355": {
     "doc": "Kubernetes 실습 환경",
     "title": "(마스터 노드에서만 실행 )kubeadm init 명령을 통해서 클러스터를 생성한다.",
     "content": "kubeadm init 명령어로 마스터 서버를 만든다. root@master:~# kubeadm init I0112 13:27:59.287535 4305 version.go:254] remote version is much newer: v1.2 6.0; falling back to: stable-1.21 [init] Using Kubernetes version: v1.21.14 [preflight] Running pre-flight checks [preflight] Pulling images required for setting up a Kubernetes cluster ... 중략 Then you can join any number of worker nodes by running the following on each as root: kubeadm join 192.168.137.101:6443 --token d77u1g.yknmv3qjjf6knxf1 \\ --discovery-token-ca-cert-hash sha256:c78641cda30821182794b94198cf0a17144cebbb4b1ae54daff71f9fd48f91d0 . ",
     "url": "/docs/cloud/k8s-install-lab/#%EB%A7%88%EC%8A%A4%ED%84%B0-%EB%85%B8%EB%93%9C%EC%97%90%EC%84%9C%EB%A7%8C-%EC%8B%A4%ED%96%89-kubeadm-init-%EB%AA%85%EB%A0%B9%EC%9D%84-%ED%86%B5%ED%95%B4%EC%84%9C-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A5%BC-%EC%83%9D%EC%84%B1%ED%95%9C%EB%8B%A4",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#마스터-노드에서만-실행-kubeadm-init-명령을-통해서-클러스터를-생성한다"
-  },"355": {
+  },"356": {
     "doc": "Kubernetes 실습 환경",
     "title": "쿠버네티스 클러스터에 조인하기 위한 명령어 구문을 저장",
     "content": "root@master:~# cat &gt; token.sh kubeadm join 192.168.137.101:6443 --token d77u1g.yknmv3qjjf6knxf1 \\ --discovery-token-ca-cert-hash sha256:c78641cda30821182794b94198cf0a17144cebbb4b1ae54daff71f9fd48f91d0 root@master:~# root@master:~# root@master:~# cat token.sh kubeadm join 192.168.137.101:6443 --token d77u1g.yknmv3qjjf6knxf1 \\ --discovery-token-ca-cert-hash sha256:c78641cda30821182794b94198cf0a17144cebbb4b1ae54daff71f9fd48f91d0 . ",
     "url": "/docs/cloud/k8s-install-lab/#%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EC%97%90-%EC%A1%B0%EC%9D%B8%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-%EB%AA%85%EB%A0%B9%EC%96%B4-%EA%B5%AC%EB%AC%B8%EC%9D%84-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#쿠버네티스-클러스터에-조인하기-위한-명령어-구문을-저장"
-  },"356": {
+  },"357": {
     "doc": "Kubernetes 실습 환경",
     "title": "kubeconfig 파일의 위치를 KUBECONFIG 쉘 변수에 설정",
     "content": "root 사용자가 쿠버네티스 클러스터의 API에 접근할 수 있도록 인증하기 위함이다. # nano ~/.bashrc export KUBECONFIG=/etc/kubernetes/admin.conf &lt;---- 파일 맨 아래 줄에 추가한다. ctrl+o (저장) --&gt; enter --&gt; ctrl+x (종료) # source ~/.bashrc # echo $KUBECONFIG /etc/kubernetes/admin.conf . Pod 네트워크 추가 기능 구성 . Pod가 서로 통신 할 수 있도록 CNI (Container Network Interface) 기반 Pod 네트워크 추가 기능 구성한다. 네트워크가 설치되기 전에 클러스터 DNS (CoreDNS)가 시작되지 않는다. calico (https://docs.projectcalico.org/getting-started/kubernetes/self-managed-onprem/onpremises) # wget https://docs.projectcalico.org/manifests/calico.yaml # kubectl apply -f calico.yaml . 안될땐 아래 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml . ",
     "url": "/docs/cloud/k8s-install-lab/#kubeconfig-%ED%8C%8C%EC%9D%BC%EC%9D%98-%EC%9C%84%EC%B9%98%EB%A5%BC-kubeconfig-%EC%89%98-%EB%B3%80%EC%88%98%EC%97%90-%EC%84%A4%EC%A0%95",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#kubeconfig-파일의-위치를-kubeconfig-쉘-변수에-설정"
-  },"357": {
+  },"358": {
     "doc": "Kubernetes 실습 환경",
     "title": "[마스터 노드에서만 실행] 클러스터 구성 상태 확인",
     "content": "root@master:~# kubectl get nodes NAME STATUS ROLES AGE VERSION master Ready control-plane,master 10m v1.21.0 root@master:~# kubectl get pods --all-namespaces NAMESPACE NAME READY STATUS RESTARTS AGE kube-system calico-kube-controllers-846d7f49d8-hmc2h 1/1 Running 0 4m47s kube-system calico-node-2tvpz 1/1 Running 0 4m47s kube-system coredns-558bd4d5db-cnnwp 1/1 Running 0 9m52s kube-system coredns-558bd4d5db-skncw 1/1 Running 0 9m52s kube-system etcd-master 1/1 Running 0 10m kube-system kube-apiserver-master 1/1 Running 0 10m kube-system kube-controller-manager-master 1/1 Running 0 10m kube-system kube-proxy-ln6sg 1/1 Running 0 9m52s kube-system kube-scheduler-master 1/1 Running 0 10m root@master:~# . ",
     "url": "/docs/cloud/k8s-install-lab/#%EB%A7%88%EC%8A%A4%ED%84%B0-%EB%85%B8%EB%93%9C%EC%97%90%EC%84%9C%EB%A7%8C-%EC%8B%A4%ED%96%89-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1-%EC%83%81%ED%83%9C-%ED%99%95%EC%9D%B8",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#마스터-노드에서만-실행-클러스터-구성-상태-확인"
-  },"358": {
+  },"359": {
     "doc": "Kubernetes 실습 환경",
     "title": "[마스터 노드에서만 실행] 생성한 # kubeadm join 구문이 든 쉘 스크립트를 워커 노드로 복사",
     "content": "root@master:~# scp token.sh worker1:/root/token.sh The authenticity of host 'worker1 (192.168.137.102)' can't be established. ECDSA key fingerprint is SHA256:BYy8+Ddey03hnid+vAJg4KqojvmM1PMVQK0zZReh71s. Are you sure you want to continue connecting (yes/no)? yes Warning: Permanently added 'worker1,192.168.137.102' (ECDSA) to the list of known hosts. root@worker1's password: Permission denied, please try again. root@worker1's password: token.sh 100% 179 130.5KB/s 00:00 root@master:~# scp token.sh worker2:/root/token.sh The authenticity of host 'worker2 (192.168.137.103)' can't be established. ECDSA key fingerprint is SHA256:BYy8+Ddey03hnid+vAJg4KqojvmM1PMVQK0zZReh71s. Are you sure you want to continue connecting (yes/no)? yes Warning: Permanently added 'worker2,192.168.137.103' (ECDSA) to the list of known hosts. root@worker2's password: token.sh 100% 179 102.4KB/s 00:00 . ",
     "url": "/docs/cloud/k8s-install-lab/#%EB%A7%88%EC%8A%A4%ED%84%B0-%EB%85%B8%EB%93%9C%EC%97%90%EC%84%9C%EB%A7%8C-%EC%8B%A4%ED%96%89-%EC%83%9D%EC%84%B1%ED%95%9C--kubeadm-join-%EA%B5%AC%EB%AC%B8%EC%9D%B4-%EB%93%A0-%EC%89%98-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A5%BC-%EC%9B%8C%EC%BB%A4-%EB%85%B8%EB%93%9C%EB%A1%9C-%EB%B3%B5%EC%82%AC",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#마스터-노드에서만-실행-생성한--kubeadm-join-구문이-든-쉘-스크립트를-워커-노드로-복사"
-  },"359": {
+  },"360": {
     "doc": "Kubernetes 실습 환경",
     "title": "[워커 노드에서만 실행] 복사된 스크립트를 실행하여 클러스터에 조인",
     "content": "worker1, worker2 # chmod +x token.sh worker1, worker2 # ./token.sh . root@worker1:~# chmod +x token.sh root@worker1:~# ./token.sh [preflight] Running pre-flight checks [preflight] Reading configuration from the cluster... [preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml' [kubelet-start] Writing kubelet configuration to file \"/var/lib/kubelet/config.yaml\" [kubelet-start] Writing kubelet environment file with flags to file \"/var/lib/kubelet/kubeadm-flags.env\" [kubelet-start] Starting the kubelet [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap... This node has joined the cluster: * Certificate signing request was sent to apiserver and a response was received. * The Kubelet was informed of the new secure connection details. Run 'kubectl get nodes' on the control-plane to see this node join the cluster. ",
     "url": "/docs/cloud/k8s-install-lab/#%EC%9B%8C%EC%BB%A4-%EB%85%B8%EB%93%9C%EC%97%90%EC%84%9C%EB%A7%8C-%EC%8B%A4%ED%96%89-%EB%B3%B5%EC%82%AC%EB%90%9C-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A5%BC-%EC%8B%A4%ED%96%89%ED%95%98%EC%97%AC-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EC%97%90-%EC%A1%B0%EC%9D%B8",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#워커-노드에서만-실행-복사된-스크립트를-실행하여-클러스터에-조인"
-  },"360": {
+  },"361": {
     "doc": "Kubernetes 실습 환경",
     "title": "[마스터 노드에서만 실행] 클러스터 조인 상태 확인",
     "content": "root@master:~# kubectl cluster-info Kubernetes control plane is running at https://192.168.137.101:6443 CoreDNS is running at https://192.168.137.101:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy . root@master:~# kubectl get nodes NAME STATUS ROLES AGE VERSION master Ready control-plane,master 13m v1.21.0 worker1 NotReady &lt;none&gt; 62s v1.21.0 worker2 NotReady &lt;none&gt; 59s v1.21.0 . root@master:~# kubectl get pods --all-namespaces NAMESPACE NAME READY STATUS RESTARTS AGE kube-system calico-kube-controllers-846d7f49d8-hmc2h 1/1 Running 0 8m7s kube-system calico-node-2tvpz 1/1 Running 0 8m7s kube-system calico-node-ndnrd 0/1 Init:0/3 0 78s kube-system calico-node-s99pf 0/1 Init:1/3 0 75s kube-system coredns-558bd4d5db-cnnwp 1/1 Running 0 13m kube-system coredns-558bd4d5db-skncw 1/1 Running 0 13m kube-system etcd-master 1/1 Running 0 13m kube-system kube-apiserver-master 1/1 Running 0 13m kube-system kube-controller-manager-master 1/1 Running 0 13m kube-system kube-proxy-cbkjv 1/1 Running 0 75s kube-system kube-proxy-ln6sg 1/1 Running 0 13m kube-system kube-proxy-rvdnm 1/1 Running 0 78s kube-system kube-scheduler-master 1/1 Running 0 13m . 아래 그림을 보며 이해해 보자. [쿠버네티스 아키텍쳐 (https://kubernetes.io/docs/concepts/architecture/)] . ",
     "url": "/docs/cloud/k8s-install-lab/#%EB%A7%88%EC%8A%A4%ED%84%B0-%EB%85%B8%EB%93%9C%EC%97%90%EC%84%9C%EB%A7%8C-%EC%8B%A4%ED%96%89-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%A1%B0%EC%9D%B8-%EC%83%81%ED%83%9C-%ED%99%95%EC%9D%B8",
     
     "relUrl": "/docs/cloud/k8s-install-lab/#마스터-노드에서만-실행-클러스터-조인-상태-확인"
-  },"361": {
+  },"362": {
     "doc": "Label & Selector",
     "title": "Label &amp; Selector",
     "content": " ",
     "url": "/docs/cloud/k8s-labelselector/#label--selector",
     
     "relUrl": "/docs/cloud/k8s-labelselector/#label--selector"
-  },"362": {
+  },"363": {
     "doc": "Label & Selector",
     "title": "Table of contents",
     "content": ". | Labels | NodeSelector | . Label &amp; Selector 에 관해 설명한다. ",
     "url": "/docs/cloud/k8s-labelselector/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-labelselector/#table-of-contents"
-  },"363": {
+  },"364": {
     "doc": "Label & Selector",
     "title": "Labels",
     "content": "클러스트 내 오브젝트 생성 시의 메타 데이터로 설정한다. 키-값으로 구성되어 있으며 컨트롤러들이 관리할 파드를 선택하고 구분하기 위해 사용된다. 라벨이 서로 다른 yaml 4개를 준비한다. root@master:~/labfile/label# ls annotation.yaml label02.yaml label04.yaml label01.yaml label03.yaml nodeselector.yaml root@master:~/labfile/label# cat label01.yaml apiVersion: v1 kind: Pod metadata: name: label-app01 labels: app: nodejs environment: develop release: beta spec: containers: - name: nodejs image: takytaky/app:v1 ports: - containerPort: 80 root@master:~/labfile/label# root@master:~/labfile/label# cat label02.yaml apiVersion: v1 kind: Pod metadata: name: label-app02 labels: app: nodejs environment: production release: beta spec: containers: - name: nodejs image: takytaky/app:v1 ports: - containerPort: 80 root@master:~/labfile/label# root@master:~/labfile/label# cat label03.yaml apiVersion: v1 kind: Pod metadata: name: label-app03 labels: app: nodejs environment: develop release: stable spec: containers: - name: nodejs image: takytaky/app:v1 ports: - containerPort: 80 root@master:~/labfile/label# root@master:~/labfile/label# cat label04.yaml apiVersion: v1 kind: Pod metadata: name: label-app04 labels: app: nodejs environment: production release: stable spec: containers: - name: nodejs image: takytaky/app:v1 ports: - containerPort: 80 root@master:~/labfile/label# . | 4개의 컨테이너를 생성한다. | . kubectl apply -f label01.yaml -f label02.yaml -f label03.yaml -f label04.yaml . | pod 조회 | . kubectl get pods --show-labels . root@master:~/labfile/label# kubectl get pods --show-labels NAME READY STATUS RESTARTS AGE LABELS init-demo 1/1 Running 0 14h &lt;none&gt; root@master:~/labfile/label# root@master:~/labfile/label# kubectl apply -f label01.yaml -f label02.yaml -f la bel03.yaml -f label04.yaml pod/label-app01 created pod/label-app02 created pod/label-app03 created pod/label-app04 created root@master:~/labfile/label# // labels 조회 root@master:~/labfile/label# kubectl get pods --show-labels NAME READY STATUS RESTARTS AGE LABELS init-demo 1/1 Running 0 14h &lt;none&gt; label-app01 1/1 Running 0 22s app=nodejs,environment=develop,release=beta label-app02 1/1 Running 0 22s app=nodejs,environment=production,release=beta label-app03 1/1 Running 0 21s app=nodejs,environment=develop,release=stable label-app04 1/1 Running 0 21s app=nodejs,environment=production,release=stable root@master:~/labfile/label# . // -l 옵션을 사용한 조회 . root@master:~/labfile/label# kubectl get pods -l environment=production,release=stable --show-labels NAME READY STATUS RESTARTS AGE LABELS label-app04 1/1 Running 0 2m48s app=nodejs,environment=production,release=stable root@master:~/labfile/label# kubectl get pods -l \"app=nodejs,environment notin (develop)\" NAME READY STATUS RESTARTS AGE label-app02 1/1 Running 0 3m label-app04 1/1 Running 0 2m59s root@master:~/labfile/label# kubectl get pods -l \"release\" --show-labels NAME READY STATUS RESTARTS AGE LABELS label-app01 1/1 Running 0 3m13s app=nodejs,environment=develop,release=beta label-app02 1/1 Running 0 3m13s app=nodejs,environment=production,release=beta label-app03 1/1 Running 0 3m12s app=nodejs,environment=develop,release=stable label-app04 1/1 Running 0 3m12s app=nodejs,environment=production,release=stable root@master:~/labfile/label# . ",
     "url": "/docs/cloud/k8s-labelselector/#labels",
     
     "relUrl": "/docs/cloud/k8s-labelselector/#labels"
-  },"364": {
+  },"365": {
     "doc": "Label & Selector",
     "title": "NodeSelector",
     "content": "Label 을 통해서 노드를 선택할 수 있다. | spec &gt; nodeSelector 정의 in YAML | . apiVersion: v1 kind: Pod metadata: name: nodeselector-pod spec: nodeSelector: disk: ssd . | 라벨과 함께 노드 정보를 보여준다. | . kubectl get nodes --show-labels . | worker1 노드에 disk=ssd 라벨를 추가한다. | . kubectl label nodes worker1 disk=ssd . // worker1 에 disk=ssd 라벨 정의 root@master:~/labfile/label# kubectl label nodes worker1 disk=ssd node/worker1 labeled // 확인 root@master:~/labfile/label# kubectl get nodes --show-labels NAME STATUS ROLES AGE VERSION LABELS master Ready control-plane,master 2d10h v1.21.0 beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers= worker1 Ready &lt;none&gt; 2d10h v1.21.0 beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disk=ssd,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker1,kubernetes.io/os=linux worker2 Ready &lt;none&gt; 2d10h v1.21.0 beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker2,kubernetes.io/os=linux root@master:~/labfile/label# root@master:~/labfile/label# cat nodeselector.yaml apiVersion: v1 kind: Pod metadata: name: nodeselector-pod spec: nodeSelector: disk: ssd containers: - name: nodeselector-pod image: takytaky/app:v1 ports: - containerPort: 80 root@master:~/labfile/label# // 생성 root@master:~/labfile/label# kubectl apply -f nodeselector.yaml pod/nodeselector-pod created root@master:~/labfile/label# kubectl get pods NAME READY STATUS RESTARTS AGE nodeselector-pod 1/1 Running 0 24s // disk=ssd 로 지정된 worker1 에서 생성됨 확인 root@master:~/labfile/label# kubectl get pods -o wide NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES nodeselector-pod 1/1 Running 0 44s 172.16.235.136 worker1 &lt;none&gt; &lt;none&gt; root@master:~/labfile/label# . | annotation : 사용자가 오브젝트를 구분하고 필터링 하기 위한 용도이다. | 파드 상세 조회 kubectl describe pod annotation-nodejs . | -o json 의미는 output 을 json 포맷으로 한다. | . kubectl get pod annotation-nodejs -o json . | metadata.annotations 부분만 보여줄것 | . kubectl get pod annotation-nodejs -o jsonpath='{.metadata.annotations}' . root@master:~/labfile/label# cat annotation.yaml apiVersion: v1 kind: Pod metadata: name: annotation-nodejs labels: app: nodejs annotations: manufacturer: \"takytaky\" e-mail: \"takytaky@example.com\" release-version: \"v1\" spec: containers: - name: nodejs image: takytaky/app:v1 ports: - containerPort: 80 root@master:~/labfile/label# root@master:~/labfile/label# kubectl apply -f annotation.yaml pod/annotation-nodejs created root@master:~/labfile/label# // 파드 상세 조회 root@master:~/labfile/label# kubectl describe pod annotation-nodejs Name: annotation-nodejs Namespace: default Priority: 0 Node: worker1/192.168.137.102 Start Time: Sun, 15 Jan 2023 00:10:46 +0000 Labels: app=nodejs Annotations: cni.projectcalico.org/containerID: 3ab7969b5b88a8fc45a563d107daeb401ab1b6ddc0618ab3e04d3036ea8f9e7e cni.projectcalico.org/podIP: 172.16.235.137/32 cni.projectcalico.org/podIPs: 172.16.235.137/32 e-mail: takytaky@example.com manufacturer: takytaky release-version: v1 Status: Running IP: 172.16.235.137... 중략 Events: Type Reason Age From Message ---- ------ ---- ---- ------- Normal Scheduled 27s default-scheduler Successfully assigned default/annotation-nodejs to worker1 Normal Pulled 26s kubelet Container image \"takytaky/app:v1\" already present on machine Normal Created 26s kubelet Created container nodejs Normal Started 26s kubelet Started container nodejs root@master:~/labfile/label# root@master:~/labfile/label# ^C root@master:~/labfile/label# kubectl get pod annotation-nodejs -o json { \"apiVersion\": \"v1\", \"kind\": \"Pod\", \"metadata\": { \"annotations\": { \"cni.projectcalico.org/containerID\": \"3ab7969b5b88a8fc45a563d107daeb401ab1b6ddc0618ab3e04d3036ea8f9e7e\", \"cni.projectcalico.org/podIP\": \"172.16.235.137/32\", \"cni.projectcalico.org/podIPs\": \"172.16.235.137/32\", \"e-mail\": \"takytaky@example.com\", \"kubectl.kubernetes.io/last-applied-configuration\": \"{\\\"apiVersion\\\":\\\"v1\\\",\\\"kind\\\":\\\"Pod\\\",\\\"metadata\\\":{\\\"annotations\\\":{\\\"e-mail\\\":\\\"takytaky@example.com\\\",\\\"manufacturer\\\":\\\"takytaky\\\",\\\"release-version\\\":\\\"v1\\\"},\\\"labels\\\":{\\\"app\\\":\\\"nodejs\\\"},\\\"name\\\":\\\"annotation-nodejs\\\",\\\"namespace\\\":\\\"default\\\"},\\\"spec\\\":{\\\"containers\\\":[{\\\"image\\\":\\\"takytaky/app:v1\\\",\\\"name\\\":\\\"nodejs\\\",\\\"ports\\\":[{\\\"containerPort\\\":80}]}]}}\\n\", \"manufacturer\": \"takytaky\", \"release-version\": \"v1\" }, \"creationTimestamp\": \"2023-01-15T00:10:46Z\", \"labels\": { \"app\": \"nodejs\" }, \"name\": \"annotation-nodejs\", \"namespace\": \"default\", \"resourceVersion\": \"24929\", \"uid\": \"9283cd0a-907c-4e57-bb06-c5f01934d36e\" }, \"spec\": { \"containers\": [ { \"image\": \"takytaky/app:v1\", \"imagePullPolicy\": \"IfNotPresent\", \"name\": \"nodejs\", \"ports\": [ { \"containerPort\": 80, \"protocol\": \"TCP\" } ], \"resources\": {}, \"terminationMessagePath\": \"/dev/termination-log\", \"terminationMessagePolicy\": \"File\", \"volumeMounts\": [ { \"mountPath\": \"/var/run/secrets/kubernetes.io/serviceaccount\", \"name\": \"kube-api-access-n2bwn\", \"readOnly\": true } ] } ], \"dnsPolicy\": \"ClusterFirst\", \"enableServiceLinks\": true, \"nodeName\": \"worker1\", \"preemptionPolicy\": \"PreemptLowerPriority\", \"priority\": 0, \"restartPolicy\": \"Always\", \"schedulerName\": \"default-scheduler\", \"securityContext\": {}, \"serviceAccount\": \"default\", \"serviceAccountName\": \"default\", \"terminationGracePeriodSeconds\": 30, \"tolerations\": [ { \"effect\": \"NoExecute\", \"key\": \"node.kubernetes.io/not-ready\", \"operator\": \"Exists\", \"tolerationSeconds\": 300 }, { \"effect\": \"NoExecute\", \"key\": \"node.kubernetes.io/unreachable\", \"operator\": \"Exists\", \"tolerationSeconds\": 300 } ], \"volumes\": [ { \"name\": \"kube-api-access-n2bwn\", \"projected\": { \"defaultMode\": 420, \"sources\": [ { \"serviceAccountToken\": { \"expirationSeconds\": 3607, \"path\": \"token\" } }, { \"configMap\": { \"items\": [ { \"key\": \"ca.crt\", \"path\": \"ca.crt\" } ], \"name\": \"kube-root-ca.crt\" } }, { \"downwardAPI\": { \"items\": [ { \"fieldRef\": { \"apiVersion\": \"v1\", \"fieldPath\": \"metadata.namespace\" }, \"path\": \"namespace\" } ] } } ] } } ] }, \"status\": { \"conditions\": [ { \"lastProbeTime\": null, \"lastTransitionTime\": \"2023-01-15T00:10:46Z\", \"status\": \"True\", \"type\": \"Initialized\" }, { \"lastProbeTime\": null, \"lastTransitionTime\": \"2023-01-15T00:10:48Z\", \"status\": \"True\", \"type\": \"Ready\" }, { \"lastProbeTime\": null, \"lastTransitionTime\": \"2023-01-15T00:10:48Z\", \"status\": \"True\", \"type\": \"ContainersReady\" }, { \"lastProbeTime\": null, \"lastTransitionTime\": \"2023-01-15T00:10:46Z\", \"status\": \"True\", \"type\": \"PodScheduled\" } ], \"containerStatuses\": [ { \"containerID\": \"docker://ff1ca04c7800af5f0c600aeff6d6a8131761cf826ea9e5a1e82c673011c82372\", \"image\": \"takytaky/app:v1\", \"imageID\": \"docker-pullable://takytaky/app@sha256:a0893a44ecbc0c74e022175caa64748077ed8a6502c4e35516df2797fc530804\", \"lastState\": {}, \"name\": \"nodejs\", \"ready\": true, \"restartCount\": 0, \"started\": true, \"state\": { \"running\": { \"startedAt\": \"2023-01-15T00:10:48Z\" } } } ], \"hostIP\": \"192.168.137.102\", \"phase\": \"Running\", \"podIP\": \"172.16.235.137\", \"podIPs\": [ { \"ip\": \"172.16.235.137\" } ], \"qosClass\": \"BestEffort\", \"startTime\": \"2023-01-15T00:10:46Z\" } } root@master:~/labfile/label# ^C // metadata.annotations 부분만 보여줄것 root@master:~/labfile/label# kubectl get pod annotation-nodejs -o jsonpath='{.metadata.annotations}' {\"cni.projectcalico.org/containerID\":\"3ab7969b5b88a8fc45a563d107daeb401ab1b6ddc0618ab3e04d3036ea8f9e7e\",\"cni.projectcalico.org/podIP\":\"172.16.235.137/32\",\"cni.projectcalico.org/podIPs\":\"172.16.235.137/32\",\"e-mail\":\"takytaky@example.com\",\"kubectl.kubernetes.io/last-applied-configuration\":\"{\\\"apiVersion\\\":\\\"v1\\\",\\\"kind\\\":\\\"Pod\\\",\\\"metadata\\\":{\\\"annotations\\\":{\\\"e-mail\\\":\\\"takytaky@example.com\\\",\\\"manufacturer\\\":\\\"takytaky\\\",\\\"release-version\\\":\\\"v1\\\"},\\\"labels\\\":{\\\"app\\\":\\\"nodejs\\\"},\\\"name\\\":\\\"annotation-nodejs\\\",\\\"namespace\\\":\\\"default\\\"},\\\"spec\\\":{\\\"containers\\\":[{\\\"image\\\":\\\"takytaky/app:v1\\\",\\\"name\\\":\\\"nodejs\\\",\\\"ports\\\":[{\\\"containerPort\\\":80}]}]}}\\n\",\"manufacturer\":\"takytaky\",\"release-version\":\"v1\"}root@master:~/labfile/label# root@master:~/labfile/label# ^C root@master:~/labfile/label# root@master:~/labfile/label# apt install -y jq Reading package lists... Done Building dependency tree Reading state information... Done The following additional packages will be installed: libjq1 libonig4 The following NEW packages will be installed: jq libjq1 libonig4 0 upgraded, 3 newly installed, 0 to remove and 87 not upgraded. Need to get 276 kB of archives. After this operation, 930 kB of additional disk space will be used. Get:1 http://kr.archive.ubuntu.com/ubuntu bionic/universe amd64 libonig4 amd64 6.7.0-1 [119 kB] Get:2 http://kr.archive.ubuntu.com/ubuntu bionic/universe amd64 libjq1 amd64 1.5+dfsg-2 [111 kB] Get:3 http://kr.archive.ubuntu.com/ubuntu bionic/universe amd64 jq amd64 1.5+dfsg-2 [45.6 kB] Fetched 276 kB in 2s (139 kB/s) Selecting previously unselected package libonig4:amd64. (Reading database ... 173940 files and directories currently installed.) Preparing to unpack .../libonig4_6.7.0-1_amd64.deb ... Unpacking libonig4:amd64 (6.7.0-1) ... Selecting previously unselected package libjq1:amd64. Preparing to unpack .../libjq1_1.5+dfsg-2_amd64.deb ... Unpacking libjq1:amd64 (1.5+dfsg-2) ... Selecting previously unselected package jq. Preparing to unpack .../jq_1.5+dfsg-2_amd64.deb ... Unpacking jq (1.5+dfsg-2) ... Setting up libonig4:amd64 (6.7.0-1) ... Setting up libjq1:amd64 (1.5+dfsg-2) ... Setting up jq (1.5+dfsg-2) ... Processing triggers for man-db (2.8.3-2ubuntu0.1) ... Processing triggers for libc-bin (2.27-3ubuntu1.5) ... root@master:~/labfile/label# kubectl get pod annotation-nodejs -o jsonpath='{.metadata.annotations}' | jq { \"cni.projectcalico.org/containerID\": \"3ab7969b5b88a8fc45a563d107daeb401ab1b6ddc0618ab3e04d3036ea8f9e7e\", \"cni.projectcalico.org/podIP\": \"172.16.235.137/32\", \"cni.projectcalico.org/podIPs\": \"172.16.235.137/32\", \"e-mail\": \"takytaky@example.com\", \"kubectl.kubernetes.io/last-applied-configuration\": \"{\\\"apiVersion\\\":\\\"v1\\\",\\\"kind\\\":\\\"Pod\\\",\\\"metadata\\\":{\\\"annotations\\\":{\\\"e-mail\\\":\\\"takytaky@example.com\\\",\\\"manufacturer\\\":\\\"takytaky\\\",\\\"release-version\\\":\\\"v1\\\"},\\\"labels\\\":{\\\"app\\\":\\\"nodejs\\\"},\\\"name\\\":\\\"annotation-nodejs\\\",\\\"namespace\\\":\\\"default\\\"},\\\"spec\\\":{\\\"containers\\\":[{\\\"image\\\":\\\"takytaky/app:v1\\\",\\\"name\\\":\\\"nodejs\\\",\\\"ports\\\":[{\\\"containerPort\\\":80}]}]}}\\n\", \"manufacturer\": \"takytaky\", \"release-version\": \"v1\" } . jq 사용법 . json 포맷에서의 색깔을 구분하여 보여준다. # apt install -y jq 설치 후 아래와 같이 jq 옵션을 추가한다. # kubectl get pod annotation-nodejs -o jsonpath='{.metadata.annotations}' | jq . ",
     "url": "/docs/cloud/k8s-labelselector/#nodeselector",
     
     "relUrl": "/docs/cloud/k8s-labelselector/#nodeselector"
-  },"365": {
+  },"366": {
     "doc": "Label & Selector",
     "title": "Label & Selector",
     "content": " ",
     "url": "/docs/cloud/k8s-labelselector/",
     
     "relUrl": "/docs/cloud/k8s-labelselector/"
-  },"366": {
+  },"367": {
     "doc": "Object & Controller",
     "title": "Object &amp; Controller",
     "content": " ",
     "url": "/docs/cloud/k8s-object-controller/#object--controller",
     
     "relUrl": "/docs/cloud/k8s-object-controller/#object--controller"
-  },"367": {
+  },"368": {
     "doc": "Object & Controller",
     "title": "Table of contents",
     "content": ". | Object . | Pod | Service | Volume | NameSpace | . | Controller . | ReplicaSet | Deployment | StatefulSet | DaemonSet | Job | CronJob | . | . 컨네이너는 크게 오브젝트(Object) 와 오브젝트를 관리하는 Controller 로 나뉜다. ",
     "url": "/docs/cloud/k8s-object-controller/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-object-controller/#table-of-contents"
-  },"368": {
+  },"369": {
     "doc": "Object & Controller",
     "title": "Object",
     "content": "관리 대상이다. Pod . Pod 란 콩깍지라는 어원으로 어플리케이션 기본 실행 단위(컨테이너) 를 배포할 수 있는 가장 작은 단위를 말한다. 즉, 하나의 컨테이너 또는 그를 보조하는 컨테이너까지 포함하여 이를 Pod 라고 일컫는다. Service . 파드는 일회성으로 제거 후 다시 생성되는데 이때 노드가 바뀔 경우 IP 도 달라지게 된다. 서비스로 인해 노드 외부에서는 고정 IP 주소 로 파드에 접근할 수 있다. Volume . 컨테이너가 삭제되더라고 데이터는 유지되어야 하므로 볼륩 을 통해 데이터를 관리한다. 도커의 볼륨과 의미는 동일하다. | PV (PersistantVolume) | PVC (PersistantVolumeClame) | . NameSpace . 동일 물리 클러스터에서 논리적으로 구분된 가상 클러스터를 일컫는다. 여러 팀이나 많은 사용자가 있을 경우 클러스터 내에서 여러 어플리케이션을 실행할 경우 사용한다. default 가 기본값이다. root@master:~# kubectl get namespace NAME STATUS AGE default Active 41h // 기본 네임스페이스 kube-node-lease Active 41h // 스케일링 관련 네임스페이스 kube-public Active 41h // 모든 사용자가 읽기 가능한 네임스페이스 kube-system Active 41h // 쿠버네티스 시스템에서 생성한 네임스페이스 . 추가/삭제 테스트 . root@master:~# kubectl get ns NAME STATUS AGE default Active 41h kube-node-lease Active 41h kube-public Active 41h kube-system Active 41h root@master:~# root@master:~# kubectl create ns test-system namespace/test-system created root@master:~# root@master:~# kubectl get ns NAME STATUS AGE default Active 42h kube-node-lease Active 42h kube-public Active 42h kube-system Active 42h test-system Active 4s root@master:~# root@master:~# kubectl delete ns test-system namespace \"test-system\" deleted root@master:~# kubectl get ns \\NAME STATUS AGE default Active 42h kube-node-lease Active 42h kube-public Active 42h kube-system Active 42h root@master:~# \\ . root@master:~# kubectl config current-context kubernetes-admin@kubernetes root@master:~# root@master:~# kubectl config get-contexts kubernetes-admin@kubernetes CURRENT NAME CLUSTER AUTHINFO NAMESPACE * kubernetes-admin@kubernetes kubernetes kubernetes-admin // namespace 수정 root@master:~# kubectl config set-context kubernetes-admin@kubernetes --namespace=kube-system Context \"kubernetes-admin@kubernetes\" modified. root@master:~# root@master:~# kubectl config get-contexts kubernetes-admin@kubernetes CURRENT NAME CLUSTER AUTHINFO NAMESPACE * kubernetes-admin@kubernetes kubernetes kubernetes-admin kube-system root@master:~# kubectl get pods NAME READY STATUS RESTARTS AGE calico-kube-controllers-846d7f49d8-hmc2h 1/1 Running 1 41h calico-node-2tvpz 1/1 Running 2 41h calico-node-ndnrd 1/1 Running 2 41h calico-node-s99pf 1/1 Running 1 41h coredns-558bd4d5db-cnnwp 1/1 Running 1 42h coredns-558bd4d5db-skncw 1/1 Running 1 42h etcd-master 1/1 Running 2 42h kube-apiserver-master 1/1 Running 2 42h kube-controller-manager-master 1/1 Running 2 42h kube-proxy-cbkjv 1/1 Running 2 41h kube-proxy-ln6sg 1/1 Running 2 42h kube-proxy-rvdnm 1/1 Running 2 41h kube-scheduler-master 1/1 Running 2 42h root@master:~# root@master:~# kubectl config set-context kubernetes-admin@kubernetes --namespace=default Context \"kubernetes-admin@kubernetes\" modified. root@master:~# kubectl get pods No resources found in default namespace. ",
     "url": "/docs/cloud/k8s-object-controller/#object",
     
     "relUrl": "/docs/cloud/k8s-object-controller/#object"
-  },"369": {
+  },"370": {
     "doc": "Object & Controller",
     "title": "Controller",
     "content": "Object 를 관리하는 얘들이다. 파드가 원하는 수만큼 배포/유지되도록 한다. ReplicaSet . 지정한 수만큼의 파드가 항상 실행되도록 관리한다. Deployment . 일정수의 파드 수 유지, 롤아웃/롤백, 배포 중 일시정지 등의 기능이 있다. 기존에는 Replicaset 을 사용했지만 현재는 Deployment 를 가장 많이 사용한다. StatefulSet . DaemonSet . Job . CronJob . ",
     "url": "/docs/cloud/k8s-object-controller/#controller",
     
     "relUrl": "/docs/cloud/k8s-object-controller/#controller"
-  },"370": {
+  },"371": {
     "doc": "Object & Controller",
     "title": "Object & Controller",
     "content": " ",
     "url": "/docs/cloud/k8s-object-controller/",
     
     "relUrl": "/docs/cloud/k8s-object-controller/"
-  },"371": {
+  },"372": {
     "doc": "Pod",
     "title": "Pod",
     "content": " ",
     "url": "/docs/cloud/k8s-pod/",
     
     "relUrl": "/docs/cloud/k8s-pod/"
-  },"372": {
+  },"373": {
     "doc": "Pod",
     "title": "Table of contents",
     "content": ". | Pod 생명 주기 | Pod 생성하기 . | Pod 관련 조회 . | kubectl get pods | kubectl describe pod [app] | kubectl delete pod --all | . | 명령으로 Pod 생성 . | kubectl run app --image takytaky/app:v1 | kubectl delete pod app | . | YAML 파일 사용하여 Pod 생성 . | kubectl apply -f app.yaml | kubectl delete -f app.yaml | . | . | Pod 리소스 할당 . | CPU | Memory | . | initContainer (초기화 컨테이너) | Static Pod (스태틱 파드) | . Pod 에 관해 설명한다. ",
     "url": "/docs/cloud/k8s-pod/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-pod/#table-of-contents"
-  },"373": {
+  },"374": {
     "doc": "Pod",
     "title": "Pod 생명 주기",
     "content": ". [Pod 및 컨테이너 ] . Pod 란 콩깍지라는 어원으로 어플리케이션 기본 실행 단위(컨테이너) 를 배포할 수 있는 가장 작은 단위를 말한다. 즉, 하나의 컨테이너 또는 그를 보조하는 컨테이너까지 포함하여 이를 Pod 라고 일컫는다. | Pending | Running | Succeeded | Failed | Unknown | . ",
     "url": "/docs/cloud/k8s-pod/#pod-%EC%83%9D%EB%AA%85-%EC%A3%BC%EA%B8%B0",
     
     "relUrl": "/docs/cloud/k8s-pod/#pod-생명-주기"
-  },"374": {
+  },"375": {
     "doc": "Pod",
     "title": "Pod 생성하기",
     "content": "Pod 관련 조회 . kubectl get pods . pod 조회한다. kubectl describe pod [app] . 상세 조회 . kubectl delete pod --all . 모든 파드를 삭제 . 명령으로 Pod 생성 . kubectl run app --image takytaky/app:v1 . kubectl delete pod app . root@master:~# kubectl delete pod app ^[[A^[[5~pod \"app\" deleted root@master:~# kubectl run app --image takytaky/app:v1 pod/app created root@master:~# kubectl describe pod app . YAML 파일 사용하여 Pod 생성 . yaml 파일 설정은 아래와 같은 때를 예로 한다. root@master:~/labfile/pod# cat app.yaml apiVersion: v1 kind: Pod metadata: name: app // 파드의 이름(Namespace 에서 유일한 식별정보) labels: app: webapp // 오브젝트를 식별하는 라벨(유일 X) spec: containers: - image: takytaky/app:v1 // 컨테이너에 사용할 이미지 name: app-container ports: - containerPort: 80 // 컨테이너에 접속할 포트 번호 protocol: TCP root@master:~/labfile/pod# . kubectl apply -f app.yaml . Pod 생성 명령어를 입력한다. root@master:~/labfile/pod# kubectl apply -f app.yaml pod/app created root@master:~/labfile/pod# // 확인 root@master:~/labfile/pod# kubectl get pods NAME READY STATUS RESTARTS AGE app 1/1 Running 0 17s root@master:~/labfile/pod# . kubectl delete -f app.yaml . root@master:~/labfile/pod# kubectl delete -f app.yaml pod “app” deleted . ",
     "url": "/docs/cloud/k8s-pod/#pod-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/cloud/k8s-pod/#pod-생성하기"
-  },"375": {
+  },"376": {
     "doc": "Pod",
     "title": "Pod 리소스 할당",
     "content": "CPU . root@master:~/labfile/pod/pod-resources# cat cpu-request-limit.yaml apiVersion: v1 kind: Pod metadata: name: cpu-demo namespace: cpu-example spec: containers: - name: cpu-demo-ctr image: vish/stress resources: limits: cpu: \"1\" requests: cpu: \"0.5\" args: - -cpus - \"2\" root@master:~/labfile/pod/pod-resources# root@master:~/labfile/pod/pod-resources# kubectl create namespace cpu-example namespace/cpu-example created root@master:~/labfile/pod/pod-resources# kubectl get ns NAME STATUS AGE cpu-example Active 5s default Active 43h kube-node-lease Active 43h kube-public Active 43h kube-system Active 43h root@master:~/labfile/pod/pod-resources# kubectl apply -f cpu-request-limit.yaml pod/cpu-demo created . worker1 에 생성됨 . Every 1.0s: kubectl get pods -o wide -n cpu-example master: Sat Jan 14 08:33:37 2023 NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES cpu-demo 1/1 Running 0 2m46s 172.16.235.131 worker1 &lt;none&gt; &lt;none&gt; . worker1 에서 docker stats 실시간 자원 사용량 조회 . CONTAINER ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS f82cf3210728 k8s_cpu-demo-ctr_cpu-demo_cpu-example_01bcc06c-4fb9-4d41-9ec0-8ed06f9a8f45_0 97.67% 1.191MiB / 3.852GiB 0.03% 0B / 0B 0B / 0B 5 7c06002bc43e k8s_POD_cpu-demo_cpu-example_01bcc06c-4fb9-4d41-9ec0-8ed06f9a8f45_0 0.00% 564KiB / 3.852GiB 0.01% 0B / 0B 0B / 0B 1 b2938116ec2a k8s_calico-node_calico-node-ndnrd_kube-system_8f163faa-d00f-4ed4-8a43-70239433078b_2 2.20% 93.87MiB / 3.852GiB 2.38% 0B / 0B 30.5MB / 233kB 64 db016fb7b959 k8s_kube-proxy_kube-proxy-rvdnm_kube-system_b0fd824c-953a-4014-8397-419a58d57d6c_2 0.00% 16.69MiB / 3.852GiB 0.42% 0B / 0B 44MB / 12.3kB 7 2d58d5594367 k8s_POD_calico-node-ndnrd_kube-system_8f163faa-d00f-4ed4-8a43-70239433078b_2 0.00% 1.312MiB / 3.852GiB 0.03% 0B / 0B 627kB / 0B 1 6b4b7d59384d k8s_POD_kube-proxy-rvdnm_kube-system_b0fd824c-953a-4014-8397-419a58d57d6c_2 0.00% 740KiB / 3.852GiB 0.02% 0B / 0B 0B / 0B 1 . Memory . root@master:~/labfile/pod/pod-resources# cat memory-request-limit.yaml apiVersion: v1 kind: Pod metadata: name: memory-demo namespace: mem-example spec: containers: - name: memory-demo-ctr image: polinux/stress resources: limits: memory: \"200Mi\" requests: memory: \"100Mi\" command: [\"stress\"] args: [\"--vm\", \"1\", \"--vm-bytes\", \"150M\", \"--vm-hang\", \"1\"] root@master:~/labfile/pod/pod-resources# // NS 생성 root@master:~/labfile/pod/pod-resources# kubectl create ns mem-example namespace/mem-example created root@master:~/labfile/pod/pod-resources# kubectl get ns NAME STATUS AGE default Active 43h kube-node-lease Active 43h kube-public Active 43h kube-system Active 43h mem-example Active 4s // 컨테이너 생성 root@master:~/labfile/pod/pod-resources# kubectl apply -f memory-request-limit.yaml pod/memory-demo created root@master:~/labfile/pod/pod-resources# root@master:~/labfile/pod/pod-resources# . 컨테이너 생성 확인한다. Every 1.0s: kubectl get pods -o wide -n mem-example master: Sat Jan 14 08:39:18 2023 NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES memory-demo 1/1 Running 0 2m43s 172.16.189.69 worker2 &lt;none&gt; &lt;none&gt; . worker2 에서 메모리 사용량 확인한다. root@worker2:~# docker stats --no-stream CONTAINER ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS 373dff622661 k8s_memory-demo-ctr_memory-demo_mem-example_4a24635a-760d-4e8b-93f1-db0d45f4f7a8_0 15.75% 151.1MiB / 200MiB 75.54% 0B / 0B 0B / 0B 2 38ce1f8aecee k8s_POD_memory-demo_mem-example_4a24635a-760d-4e8b-93f1-db0d45f4f7a8_0 0.00% 628KiB / 3.852GiB 0.02% 0B / 0B 0B / 0B 1 8479dcbb9470 k8s_calico-node_calico-node-s99pf_kube-system_640bad34-5dc5-4c64-91cb-5b21aeee4dce_1 2.07% 91.51MiB / 3.852GiB 2.32% 0B / 0B 29.2MB / 233kB 63 ee914529a024 k8s_kube-proxy_kube-proxy-cbkjv_kube-system_ad42f097-9ee0-4659-b46f-d01757439edd_2 0.00% 16.6MiB / 3.852GiB 0.42% 0B / 0B 44MB / 12.3kB 7 db632c6cc766 k8s_POD_calico-node-s99pf_kube-system_640bad34-5dc5-4c64-91cb-5b21aeee4dce_2 0.00% 760KiB / 3.852GiB 0.02% 0B / 0B 0B / 0B 1 47f87181b42e k8s_POD_kube-proxy-cbkjv_kube-system_ad42f097-9ee0-4659-b46f-d01757439edd_2 0.00% 1.305MiB / 3.852GiB 0.03% 0B / 0B 627kB / 0B 1 root@worker2:~# . ",
     "url": "/docs/cloud/k8s-pod/#pod-%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%A0%EB%8B%B9",
     
     "relUrl": "/docs/cloud/k8s-pod/#pod-리소스-할당"
-  },"376": {
+  },"377": {
     "doc": "Pod",
     "title": "initContainer (초기화 컨테이너)",
     "content": "컨테이너가 실행되기 전에 파드를 초기화 할 목적으로 사용된다. [초기화 컨테이너 예시] . root@master:~/labfile/pod# cat init-containers.yaml apiVersion: v1 kind: Pod metadata: name: init-demo spec: containers: - name: nginx image: nginx ports: - containerPort: 80 volumeMounts: - name: workdir mountPath: /usr/share/nginx/html # These containers are run during pod initialization initContainers: - name: install image: busybox command: - wget - \"-O\" - \"/work-dir/index.html\" - http://info.cern.ch volumeMounts: - name: workdir mountPath: \"/work-dir\" dnsPolicy: Default volumes: - name: workdir emptyDir: {} root@master:~/labfile/pod# kubectl apply -f init-containers.yaml pod/init-demo created root@master:~/labfile/pod# root@master:~/labfile/pod# curl -sf http://172.16.235.132 &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;header&gt; &lt;title&gt;http://info.cern.ch&lt;/title&gt; &lt;/header&gt; &lt;h1&gt;http://info.cern.ch - home of the first website&lt;/h1&gt; &lt;p&gt;From here you can:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;a href=\"http://info.cern.ch/hypertext/WWW/TheProject.html\"&gt;Browse the first website&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=\"http://line-mode.cern.ch/www/hypertext/WWW/TheProject.html\"&gt;Browse the first website using the line-mode browser simulator&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=\"http://home.web.cern.ch/topics/birth-web\"&gt;Learn about the birth of the web&lt;/a&gt;&lt;/li&gt; &lt;li&gt;&lt;a href=\"http://home.web.cern.ch/about\"&gt;Learn about CERN, the physics laboratory where the web was born&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; &lt;/body&gt;&lt;/html&gt; . ",
     "url": "/docs/cloud/k8s-pod/#initcontainer-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88",
     
     "relUrl": "/docs/cloud/k8s-pod/#initcontainer-초기화-컨테이너"
-  },"377": {
+  },"378": {
     "doc": "Pod",
     "title": "Static Pod (스태틱 파드)",
     "content": "apiserver 를 통하지 않고, kubelet 이 직접 실행하는 파드이며, 기본 경로는 /etc/kubernetes/manifests 이다. root@master:~/labfile/pod# cd /etc/kubernetes/manifests root@master:/etc/kubernetes/manifests# ll total 24 drwxr-xr-x 2 root root 4096 Jan 12 13:29 ./ drwxr-xr-x 4 root root 4096 Jan 14 07:35 ../ -rw------- 1 root root 2195 Jan 12 13:29 etcd.yaml -rw------- 1 root root 3978 Jan 12 13:29 kube-apiserver.yaml -rw------- 1 root root 3351 Jan 12 13:29 kube-controller-manager.yaml -rw------- 1 root root 1385 Jan 12 13:29 kube-scheduler.yaml . master 시작 시 kubelet 데몬 실행에서 위 static pod 가 실행된다. ",
     "url": "/docs/cloud/k8s-pod/#static-pod-%EC%8A%A4%ED%83%9C%ED%8B%B1-%ED%8C%8C%EB%93%9C",
     
     "relUrl": "/docs/cloud/k8s-pod/#static-pod-스태틱-파드"
-  },"378": {
+  },"379": {
     "doc": "Replicaset",
     "title": "Replicaset",
     "content": " ",
     "url": "/docs/cloud/k8s-replicaset/",
     
     "relUrl": "/docs/cloud/k8s-replicaset/"
-  },"379": {
+  },"380": {
     "doc": "Replicaset",
     "title": "Table of contents",
     "content": ". | YAML 포맷 | Replica 생성 . | kubectl apply -f deploy-nginx.yaml | . | Replica 변경 . | kubectl scale rs replicaset-nginx --replicas=4 | . | Replica 삭제 | . Replicatset 에 관해 설명한다. ",
     "url": "/docs/cloud/k8s-replicaset/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-replicaset/#table-of-contents"
-  },"380": {
+  },"381": {
     "doc": "Replicaset",
     "title": "YAML 포맷",
     "content": ". | kind : Replicaset . | spec &gt; selector &gt; matchLabels . | 여기에 정의된 라벨을 가진 파드에 대해서 먼저 확인한다. | . | spec &gt; template &gt; metadata &gt; labels . | 실행할 파드의 라벨을 정한다. | . | spec &gt; replicas . | 실행할 파드의 개수를 정한다. | . | . ",
     "url": "/docs/cloud/k8s-replicaset/#yaml-%ED%8F%AC%EB%A7%B7",
     
     "relUrl": "/docs/cloud/k8s-replicaset/#yaml-포맷"
-  },"381": {
+  },"382": {
     "doc": "Replicaset",
     "title": "Replica 생성",
     "content": "kubectl apply -f deploy-nginx.yaml . ",
     "url": "/docs/cloud/k8s-replicaset/#replica-%EC%83%9D%EC%84%B1",
     
     "relUrl": "/docs/cloud/k8s-replicaset/#replica-생성"
-  },"382": {
+  },"383": {
     "doc": "Replicaset",
     "title": "Replica 변경",
     "content": "kubectl scale rs replicaset-nginx --replicas=4 . ",
     "url": "/docs/cloud/k8s-replicaset/#replica-%EB%B3%80%EA%B2%BD",
     
     "relUrl": "/docs/cloud/k8s-replicaset/#replica-변경"
-  },"383": {
+  },"384": {
     "doc": "Replicaset",
     "title": "Replica 삭제",
     "content": "kubectl delete rs replicaset-nginx . | 레플리카셋 + 파드들 삭제 | . kubectl delete rs replicaset-nginx --cascade=orphan . | 레플리카셋만 삭제된다. | . terminal 2 # watch -n 1 kubectl get rs,pods -o wide # cd /root/labfile/controller/replicaset # cat rs-nginx.yaml # kubectl apply -f rs-nginx.yaml # kubectl get pods --show-labels # kubectl delete pod replicaset-nginx-p9bqp --&gt; 레플리카셋에 의해서 생성된 파드 이름 확인 후 진행 # kubectl scale rs replicaset-nginx --replicas=4 # kubectl scale rs replicaset-nginx --replicas=3 # kubectl delete rs replicaset-nginx --&gt; 레플리카셋 + 파드들 삭제 # kubectl apply -f rs-nginx.yaml # kubectl delete rs replicaset-nginx --cascade=orphan # kubectl apply -f rs-nginx.yaml . | kubectl delete rs replicaset-nginx . | kubectl delete rs --all . | . 실습 정리 . kubectl delete rs replicaset-nginx kubectl delete rs --all . ",
     "url": "/docs/cloud/k8s-replicaset/#replica-%EC%82%AD%EC%A0%9C",
     
     "relUrl": "/docs/cloud/k8s-replicaset/#replica-삭제"
-  },"384": {
+  },"385": {
     "doc": "Service",
     "title": "Service",
     "content": " ",
     "url": "/docs/cloud/k8s-service/",
     
     "relUrl": "/docs/cloud/k8s-service/"
-  },"385": {
+  },"386": {
     "doc": "Service",
     "title": "Table of contents",
     "content": ". | ClusterIP . | Deployment 실행하기 | 연결 확인 (curl -sf http://172.16.189.89 | grep Hello) | 서비스 생성하기 (spec &gt; type : ClusterIP) | 서비스 추가 확인하기 | . | NodePort . | 파드 생성하기 (hostname-server) | 서비스 생성하기 (spec &gt; type : NodePort) | pod, service 생성 확인 | 네트워크 환경 세팅하기 | 외부에서 접속하기 | . | NodeBalancer . | To install MetalLB, apply the manifest: | LoadBalancer 의 IP 정보 구성 | . | . Service 를 사용하면 파드가 클러스터 안 어디에 있던 고정 IP 주소 를 통해서 접근할 수 있다. 서비스는 아래와 같이 세가지의 타입이 있다. ",
     "url": "/docs/cloud/k8s-service/#table-of-contents",
     
     "relUrl": "/docs/cloud/k8s-service/#table-of-contents"
-  },"386": {
+  },"387": {
     "doc": "Service",
     "title": "ClusterIP",
     "content": "기본 서비스 타입으로 클러스터 내부에서만 사용가능하며 외부에서는 사용할 수 없다. Deployment 실행하기 . kubectl apply -f hostname-server.yaml 을 통해 파드를 생성한다. root@master:~/labfile/service# cat hostname-server.yaml apiVersion: apps/v1 kind: Deployment metadata: name: hostname-server labels: app: hostname-server spec: replicas: 2 selector: matchLabels: app: hostname-server template: metadata: labels: app: hostname-server spec: containers: - name: hostname-server image: takytaky/hostname ports: - containerPort: 80 root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# kubectl apply -f hostname-server.yaml deployment.apps/hostname-server created root@master:~/labfile/service# . 두 worker 노드에 172.16.189.89, 172.16.235.162 로 파드가 생성되었다. Every 1.0s: kubectl get svc,deploy,pods -o wide master: Sun Jan 15 02:23:53 2023 NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE SELECTOR service/kubernetes ClusterIP 10.96.0.1 &lt;none&gt; 443/TCP 2d12h &lt;none&gt; NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR deployment.apps/hostname-server 2/2 2 2 2m58s hostname-server takytaky/hostname app=hostname-server NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES pod/hostname-server-7c85cc96dc-2j9lv 1/1 Running 0 2m58s 172.16.189.89 worker2 &lt;none&gt; &lt;none&gt; pod/hostname-server-7c85cc96dc-gbvd8 1/1 Running 0 2m58s 172.16.235.162 worker1 &lt;none&gt; &lt;none&gt; . 연결 확인 (curl -sf http://172.16.189.89 | grep Hello) . root@master:~/labfile/service# curl -sf http://172.16.189.89 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://172.16.235.162 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-gbvd8&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . 서비스 생성하기 (spec &gt; type : ClusterIP) . root@master:~/labfile/service# cat clusterip-hostname.yaml apiVersion: v1 kind: Service metadata: name: clusterip-hostname-service spec: type: ClusterIP selector: app: hostname-server ports: - protocol: TCP port: 80 targetPort: 80 root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# kubectl apply -f clusterip-hostname.yaml service/clusterip-hostname-service created . 서비스 추가 확인하기 . Every 1.0s: kubectl get svc,deploy,pods -o wide master: Sun Jan 15 02:27:33 2023 NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE SELECTOR service/clusterip-hostname-service ClusterIP 10.105.74.121 &lt;none&gt; 80/TCP 74s app=hostname-server service/kubernetes ClusterIP 10.96.0.1 &lt;none&gt; 443/TCP 2d12h &lt;none&gt; NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR deployment.apps/hostname-server 2/2 2 2 6m39s hostname-server takytaky/hostname app=hostname-server NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES pod/hostname-server-7c85cc96dc-2j9lv 1/1 Running 0 6m39s 172.16.189.89 worker2 &lt;none&gt; &lt;none&gt; pod/hostname-server-7c85cc96dc-gbvd8 1/1 Running 0 6m39s 172.16.235.162 worker1 &lt;none&gt; &lt;none&gt; . ClusterIP 타입의 서비스 IP 확인한다. root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-gbvd8&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . 실습 정리 해당 서비스 및 deploy 삭제한다. root@master:~/labfile/service# kubectl delete svc clusterip-hostname-service service \"clusterip-hostname-service\" deleted root@master:~/labfile/service# root@master:~/labfile/service# curl http://10.105.74.121 | grep Hello^C root@master:~/labfile/service# kubectl delete deploy hostname-server deployment.apps \"hostname-server\" deleted . ",
     "url": "/docs/cloud/k8s-service/#clusterip",
     
     "relUrl": "/docs/cloud/k8s-service/#clusterip"
-  },"387": {
+  },"388": {
     "doc": "Service",
     "title": "NodePort",
     "content": "ClusterIP + 노드 포트 번호까지 할당하므로 클러스터 안 뿐만아니라 외부에서도 접근할 수 있따. 파드 생성하기 (hostname-server) . 서비스 생성하기 (spec &gt; type : NodePort) . root@master:~/labfile/service# cat nodeport-hostname.yaml apiVersion: v1 kind: Service metadata: name: nodeport-hostname-service spec: type: NodePort selector: app: hostname-server ports: - protocol: TCP port: 80 targetPort: 80 nodePort: 30080 root@master:~/labfile/service# root@master:~/labfile/service# kubectl apply -f nodeport-hostname.yaml service/nodeport-hostname-service created root@master:~/labfile/service# root@master:~/labfile/service# cat nodeport-hostname.yaml^C root@master:~/labfile/service# kubectl apply -f hostname-server.yaml deployment.apps/hostname-server created root@master:~/labfile/service# kubectl apply -f nodeport-hostname.yaml service/nodeport-hostname-service unchanged root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.97.128.131 | egrep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-95ltj&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . pod, service 생성 확인 . Every 1.0s: kubectl get svc,deploy,pods -o wide master: Sun Jan 15 03:02:14 2023 NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE SELECTOR service/kubernetes ClusterIP 10.96.0.1 &lt;none&gt; 443/TCP 2d13h &lt;none&gt; service/nodeport-hostname-service NodePort 10.97.128.131 &lt;none&gt; 80:30080/TCP 8m41s app=hostname-server NAME READY UP-TO-DATE AVAILABLE AGE CONTAINERS IMAGES SELECTOR deployment.apps/hostname-server 2/2 2 2 7m55s hostname-server takytaky/hostname app=hostname-server NAME READY STATUS RESTARTS AGE IP NODE NOMINATED NODE READINESS GATES pod/hostname-server-7c85cc96dc-95ltj 1/1 Running 0 7m55s 172.16.189.90 worker2 &lt;none&gt; &lt;none&gt; pod/hostname-server-7c85cc96dc-fv42w 1/1 Running 0 7m55s 172.16.235.164 worker1 &lt;none&gt; &lt;none&gt; . 네트워크 환경 세팅하기 . Oracle VM VirtualBox 관리자 파일 --&gt; 환경설정 --&gt; 네트워크 --&gt; NatNetwork --&gt; 톱니바퀴 (설정) --&gt; 포트포워딩 --&gt; [+] (다음 항목 추가) 이름 프로토콜 호스트IP 호스트 포트 게스트IP 게스트포트 nodeport TCP 192.168.56.1 30080 192.168.137.101 30080 loadbalancer TCP 192.168.56.1 80 192.168.137.200 80 . 외부에서 접속하기 . 아래 ip 로 접속확인한다. | [##_Image | kage@cNK1FM/btsjnG3cPea/GHzVGkANwjdVRfgOCld2YK/img.png | CDM | 1.3 | {“originWidth”:800,”originHeight”:258,”style”:”alignLeft”}_##] | . 테스트 이후 서비스 삭제한다. kubectl delete svc nodeport-hostname-service . ",
     "url": "/docs/cloud/k8s-service/#nodeport",
     
     "relUrl": "/docs/cloud/k8s-service/#nodeport"
-  },"388": {
+  },"389": {
     "doc": "Service",
     "title": "NodeBalancer",
     "content": "가장 많은 기능을 가진 타입이다. (참고 : https://metallb.universe.tf/installation ) . To install MetalLB, apply the manifest: . # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml # kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml # kubectl get pods -n metallb-system . 1) The metallb-system/controller deployment. This is the cluster-wide controller that handles IP address assignments. 2) The metallb-system/speaker daemonset. This is the component that speaks the protocol(s) of your choice to make the services reachable. Service accounts for the controller and speaker, along with the RBAC permissions that the components need to function. LoadBalancer 의 IP 정보 구성 . # cat metallb-ip-config.yaml apiVersion: v1 kind: ConfigMap metadata: namespace: metallb-system name: config data: config: | address-pools: - name: my-ip protocol: layer2 addresses: - 192.168.137.200-192.168.137.209 # kubectl apply -f metallb-ip-config.yaml # cat loadbalancer-hostname.yaml apiVersion: v1 kind: Service metadata: name: loadbalancer-hostname-service spec: type: LoadBalancer selector: app: hostname-server ports: - protocol: TCP port: 80 targetPort: 80 # kubectl apply -f loadbalancer-hostname.yaml # curl -sf http://192.168.137.200 | grep Hello . 실습 정리 . kubectl delete svc nodeport-hostname-service kubectl delete svc loadbalancer-hostname-service kubectl delete deploy hostname-server . ",
     "url": "/docs/cloud/k8s-service/#nodebalancer",
     
     "relUrl": "/docs/cloud/k8s-service/#nodebalancer"
-  },"389": {
+  },"390": {
     "doc": "Kubernetes",
     "title": "Kubernetes",
     "content": " ",
     "url": "/docs/cloud/k8s/",
     
     "relUrl": "/docs/cloud/k8s/"
-  },"390": {
+  },"391": {
     "doc": "Linux Basics",
     "title": "Linux Basics",
     "content": " ",
     "url": "/docs/os-systems/linux-basics/",
     
     "relUrl": "/docs/os-systems/linux-basics/"
-  },"391": {
+  },"392": {
     "doc": "Linux Basics",
     "title": "Table of contents",
     "content": ". | PID = 1 번 프로세스는 무엇인가 | 파일 권한 알아보기 . | 파일 종류 및 유저/그룹 | 약자의 의미 | . | . 주요 개념을 정리해 본다. ",
     "url": "/docs/os-systems/linux-basics/#table-of-contents",
     
     "relUrl": "/docs/os-systems/linux-basics/#table-of-contents"
-  },"392": {
+  },"393": {
     "doc": "Linux Basics",
     "title": "PID = 1 번 프로세스는 무엇인가",
     "content": "PID = 1 번 프로세스는 systemd 이다. root@docker1:~# top top - 15:55:44 up 57 min, 2 users, load average: 0.00, 0.08, 0.07 Tasks: 208 total, 1 running, 165 sleeping, 0 stopped, 0 zombie %Cpu(s): 0.0 us, 0.7 sy, 0.0 ni, 99.3 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st KiB Mem : 4039384 total, 1208128 free, 1027444 used, 1803812 buff/cache KiB Swap: 2017276 total, 2017276 free, 0 used. 2730296 avail Mem PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND 1896 root 20 0 107788 7120 6116 S 0.3 0.2 0:00.59 sshd 4038 root 20 0 42952 3992 3300 R 0.3 0.1 0:00.04 top 1 root 20 0 160148 9288 6548 S 0.0 0.2 0:02.30 systemd . ",
     "url": "/docs/os-systems/linux-basics/#pid--1-%EB%B2%88-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80",
     
     "relUrl": "/docs/os-systems/linux-basics/#pid--1-번-프로세스는-무엇인가"
-  },"393": {
+  },"394": {
     "doc": "Linux Basics",
     "title": "파일 권한 알아보기",
     "content": "파일 종류 및 유저/그룹 . 파일 권한은 4개로 등분하여 확인할 수 있다. | 1번은 파일의 종류 | 2번은 파일과 폴더의 유저 권한 | 3번은 파일과 폴더의 그룹 권한 | 4번은 파일에 대한 모든 유저의 권한 | . 약자의 의미 . | r : read | w : wrtie | x : excute | d : Directory | r : Regular file | s : Symbolic link | . ",
     "url": "/docs/os-systems/linux-basics/#%ED%8C%8C%EC%9D%BC-%EA%B6%8C%ED%95%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-basics/#파일-권한-알아보기"
-  },"394": {
+  },"395": {
     "doc": "Linux Command",
     "title": "Linux Command",
     "content": " ",
     "url": "/docs/os-systems/linux-command/",
     
     "relUrl": "/docs/os-systems/linux-command/"
-  },"395": {
+  },"396": {
     "doc": "Linux Command",
     "title": "Table of contents",
     "content": ". | rename -a, hostnamectl | lsb_release -a | df -h | du -sh | lscpu | free -h | ps -ef | curl | sh 또는 ./ | tar | Listen port 확인하기 . | sudo netstat -ltup | sudo ss -lntu | sudo lsof -i:포트번호 | . | alias | rsync | diff | vi 편집기 . | yy , #yy | p | P | dd, #dd | /{키워드} | ctrl+f , ctrl+b | gg, G | :set number, :set nonumber | :{숫자} | . | . ",
     "url": "/docs/os-systems/linux-command/#table-of-contents",
     
     "relUrl": "/docs/os-systems/linux-command/#table-of-contents"
-  },"396": {
+  },"397": {
     "doc": "Linux Command",
     "title": "rename -a, hostnamectl",
     "content": "리눅스 커널 정보를 출력한다. ~$ uname -a Linux dcpark-500R5K-501R5K-500R5Q 5.15.0-92-generic #102~20.04.1-Ubuntu SMP Mon Jan 15 13:09:14 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux ~$ hostnamectl Static hostname: test-500R5K-501R5K-500R5Q Icon name: computer-laptop Chassis: laptop Machine ID: 60c7a7e6eec344e095e9391aa8131f7d Boot ID: f54e9139e9f449bda63e721c9777a514 Operating System: Ubuntu 20.04.6 LTS Kernel: Linux 5.15.0-92-generic Architecture: x86-64 . ",
     "url": "/docs/os-systems/linux-command/#rename--a-hostnamectl",
     
     "relUrl": "/docs/os-systems/linux-command/#rename--a-hostnamectl"
-  },"397": {
+  },"398": {
     "doc": "Linux Command",
     "title": "lsb_release -a",
     "content": "배포 버전을 확인할 수 있다. $ lsb_release -a No LSB modules are available. Distributor ID: Ubuntu Description: Ubuntu 20.04.6 LTS Release: 20.04 Codename: focal . ",
     "url": "/docs/os-systems/linux-command/#lsb_release--a",
     
     "relUrl": "/docs/os-systems/linux-command/#lsb_release--a"
-  },"398": {
+  },"399": {
     "doc": "Linux Command",
     "title": "df -h",
     "content": "Disk 용량을 확인할 수 있다. df : 디스크 남은 용량 확인 (기본 명령어) df -k : 킬로바이트 단위로 남은 용량 확인 df -m : 메가 바이트 단위로 남은 용량 확인 df -h : 깔끔하게 보여줌 df . : 현재 디렉토리가 포함된 파티션의 남은 용량 확인 . ~$ df -h Filesystem Size Used Avail Use% Mounted on udev 3.8G 0 3.8G 0% /dev tmperfs 785M 2.2M 783M 1% /run /dev/sda2 117G 37G 75G 33% / tmpfs 3.9G 143M 3.7G 4% /dev/shm tmpfs 5.0M 4.0K 5.0M 1% /run/lock tmpfs 3.9G 0 3.9G 0% /sys/fs/cgroup /dev/loop0 160M 160M 0 100% /snap/chromium/2738 /dev/loop3 56M 56M 0 100% /snap/core18/2796 . ",
     "url": "/docs/os-systems/linux-command/#df--h",
     
     "relUrl": "/docs/os-systems/linux-command/#df--h"
-  },"399": {
+  },"400": {
     "doc": "Linux Command",
     "title": "du -sh",
     "content": "선택한 폴더나 파일의 용량을 확인한다. du : 현재 디렉토리에서 서브 디렉토리까지 용량 확인 du -a : 현재 디렉토리의 사용량 파일단위로 출력 du -s : 총 사용량 du -h : 깔끔하게 보여줌 du -sh * : 한단계 서브 디렉토리 기준으로 보여줌 . $ du -sh Templates/ 4.0K Templates/ . ",
     "url": "/docs/os-systems/linux-command/#du--sh",
     
     "relUrl": "/docs/os-systems/linux-command/#du--sh"
-  },"400": {
+  },"401": {
     "doc": "Linux Command",
     "title": "lscpu",
     "content": "~$ lscpu Architecture: x86_64 CPU op-mode(s): 32-bit, 64-bit Byte Order: Little Endian Address sizes: 39 bits physical, 48 bits virtual CPU(s): 4 On-line CPU(s) list: 0-3 Thread(s) per core: 2 Core(s) per socket: 2 . CPU 개수만 조회할 경우 grep -c processor /proc/cpuinfo 명령어를 활용할 수 있다. ",
     "url": "/docs/os-systems/linux-command/#lscpu",
     
     "relUrl": "/docs/os-systems/linux-command/#lscpu"
-  },"401": {
+  },"402": {
     "doc": "Linux Command",
     "title": "free -h",
     "content": "메모리를 확인한다. -h 옵션은 사람이 읽기 쉬운 단위로 출력한다. $ free -h total used free shared buff/cache available Mem: 7.7Gi 4.6Gi 216Mi 546Mi 2.8Gi 2.2Gi Swap: 0B 0B 0B . ",
     "url": "/docs/os-systems/linux-command/#free--h",
     
     "relUrl": "/docs/os-systems/linux-command/#free--h"
-  },"402": {
+  },"403": {
     "doc": "Linux Command",
     "title": "ps -ef",
     "content": "전체적인 프로세스와 관련된 옵션이다. | -e : 커널 프로세스를 제외한 모든 프로세스를 보여준다. | f : UID, PID, PPID, C, STIME, TTY, TIME, CMD 등의 필드목록으로, CMD필드의 전체 명령어 형태를 보여준다. | . root@master:~/labfile/service# ps -ef | grep docker root 1485 1 1 Jan14 ? 00:11:50 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock root 1939 6201 0 02:39 ? 00:00:00 runc --root /var/run/docker/runtime-runc/moby --log /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/log.json --log-format json --systemd-cgroup exec --process /tmp/runc-process236202202 --detach --pid-file /run/containerd/io.containerd.runtime.v2.task/moby/f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a/0a2cb1a2031224ed66bb0bb8b9a23bc295c7b0c7d29a37ed774f14d8072f8f6d.pid f15696723766975a8c120d6cd8a6d77161135b013c13ed80c158331843cd1a6a root 1957 15646 0 02:39 pts/0 00:00:00 grep --color=auto docker root@master:~/labfile/service# . ",
     "url": "/docs/os-systems/linux-command/#ps--ef",
     
     "relUrl": "/docs/os-systems/linux-command/#ps--ef"
-  },"403": {
+  },"404": {
     "doc": "Linux Command",
     "title": "curl",
     "content": "curl(client url) 명령어는 프로토콜들을 이용해 URL 로 데이터를 전송하여 서버에 데이터를 보내거나 가져올때 사용하기 위한 명령줄 도구 및 라이브러리이다. 쉽게말해 예를들어 자바스크립트 환경에서 REST API(http)를 테스트하고싶다면 보통 ajax, fetch 를 이용해 요청을 보내는 것과 같이, SHELL(커맨드라인 환경)에서 REST API(http) 테스트 하고 싶으면 curl 명령어를 이용하면 된다 라고 이해하면 된다. -s : –silent 진행 내용이나 메시지들을 출력하지 않음 -f : –fail HTTP 오류 시 자동으로 실패 (출력 없음) . root@master:~/labfile/service# curl http://10.105.74.121 | grep Hello % Total % Received % Xferd Average Speed Time Time Time Current Dload Upload Total Spent Left Speed 100 318 100 318 0 0 63600 0 --:--:-- --:--:-- --:--:-- 63600 &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# root@master:~/labfile/service# root@master:~/labfile/service# curl -sf http://10.105.74.121 | grep Hello &lt;p&gt;Hello, hostname-server-7c85cc96dc-2j9lv&lt;/p&gt; &lt;/blockquote&gt; root@master:~/labfile/service# . ",
     "url": "/docs/os-systems/linux-command/#curl",
     
     "relUrl": "/docs/os-systems/linux-command/#curl"
-  },"404": {
+  },"405": {
     "doc": "Linux Command",
     "title": "sh 또는 ./",
     "content": ".sh 확장자가 나오길래, 뭐지 싶었는데 찾아보니 shell script 확장자였다. 실행하는 방법은 파일 권한을 변경 후 실행하면 된다…고 한다. 우선 파일 권한은 chmod 명령어를 사용하여 변경해준다. 744 등을 주어도 되지만, 간단하게 $chmod +x filename.sh &lt;– 쓰기 권한 추가하기 로 실행이 된다. sh filename.sh 또는 ./filename.sh 으로 실행한다. root@master:~# ./get_helm.sh Downloading https://get.helm.sh/helm-v3.10.3-linux-amd64.tar.gz Verifying checksum... Done. Preparing to install helm into /usr/local/bin helm installed into /usr/local/bin/helm root@master:~# . ",
     "url": "/docs/os-systems/linux-command/#sh-%EB%98%90%EB%8A%94-",
     
     "relUrl": "/docs/os-systems/linux-command/#sh-또는-"
-  },"405": {
+  },"406": {
     "doc": "Linux Command",
     "title": "tar",
     "content": "tar -zcvf target.tar.gz file1 file2 dir1 dir2 : 파일 압축 tar -zxvf target.tar.gz : 압축 해제 . -c : –create 신규 아카이브 생성 -x : –extract 아카이브 풀기 -v : –verbose 처리 과정을 상세히 표시 -f : –file=ARCHIVE 파일을 대상으로 아카이빙 . root@master:~# tar -zcvf testtar2.tar.gz a.out b.out a.out b.out root@master:~# root@master:~# root@master:~# mv testtar1.tar.gz ./test/testtar1.tar.gz^C root@master:~# mkdir testtar root@master:~# mv testtar1.tar.gz ./testtar/testtar1.tar.gz root@master:~# root@master:~# cd testtar/ root@master:~/testtar# ls testtar1.tar.gz root@master:~/testtar# tar zxvf testtar1.tar.gz a.out b.out root@master:~/testtar# ls a.out b.out testtar1.tar.gz . root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile Dockerfile.11 Dockerfile.3 Dockerfile.5 host.html copy_data.tgz Dockerfile.1 Dockerfile.2 Dockerfile.4 Dockerfile.6 index.html root@docker1:~/labfile/dockerfile_dir# // 파일 압축 root@docker1:~/labfile/dockerfile_dir# tar -cvf target.tar Dockerfile.1 Dockerfile.2 Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# // 압축 해제 root@docker1:~/labfile/dockerfile_dir# tar -xvf target.tar Dockerfile.1 Dockerfile.2 root@docker1:~/labfile/dockerfile_dir# root@docker1:~/labfile/dockerfile_dir# ls add_data.tgz Dockerfile.1 Dockerfile.3 Dockerfile.6 target.tar copy_data.tgz Dockerfile.11 Dockerfile.4 host.html Dockerfile Dockerfile.2 Dockerfile.5 index.html root@docker1:~/labfile/dockerfile_dir# . ",
     "url": "/docs/os-systems/linux-command/#tar",
     
     "relUrl": "/docs/os-systems/linux-command/#tar"
-  },"406": {
+  },"407": {
     "doc": "Linux Command",
     "title": "Listen port 확인하기",
     "content": "아래와 같이 3가지 방법으로 확인이 가능하다. sudo netstat -ltup . Netstat 은 아래와 같이 open 되어있는 모든 listen port를 확인하는데 사용할 수 있다. | -l 옵션 : netstat에 모든 수신 소켓을 표시한다. | -t 옵션 : 모든 TCP 연결을 표시한다. | -u 옵션 : 모든 UDP 연결을 표시한다. | -p 옵션 : 포트에서 수신하는 어플리케이션/데몬의 이름을 표시한다. | -n 옵션 : 서비스 이름 대신 port 번호를 표시한다. | . user@user:~$ sudo netstat -ltup Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State PID/Program name tcp 0 0 localhost:ipp 0.0.0.0:* LISTEN 899/cupsd tcp 0 0 localhost:37485 0.0.0.0:* LISTEN 1034/containerd tcp 0 0 localhost:postgresql 0.0.0.0:* LISTEN 1129/postgres tcp 0 0 localhost:domain 0.0.0.0:* LISTEN 796/systemd-resolve tcp 0 0 localhost:4000 0.0.0.0:* LISTEN 35497/ruby2.7 tcp6 0 0 ip6-localhost:ipp [::]:* LISTEN 899/cupsd tcp6 0 0 [::]:9090 [::]:* LISTEN 982/java udp 0 0 0.0.0.0:58210 0.0.0.0:* 894/avahi-daemon: r udp 0 0 mdns.mcast.net:mdns 0.0.0.0:* 2999/chrome udp 0 0 0.0.0.0:mdns 0.0.0.0:* 894/avahi-daemon: r udp 0 0 testuser-500R5K-501:34197 0.0.0.0:* 2999/chrome udp 0 0 localhost:domain 0.0.0.0:* 796/systemd-resolve udp 0 0 0.0.0.0:631 0.0.0.0:* 975/cups-browsed udp6 0 0 [::]:mdns [::]:* 894/avahi-daemon: r udp6 0 0 [::]:44146 [::]:* 894/avahi-daemon: r . sudo ss -lntu . netstat 과 유사하여, 위 옵션은 TCP/UDP 에대한 수신 대기 포트를 숫자로 표시한다. ~$ sudo ss -lntu Netid State Recv-Q Send-Q Local Address:Port Peer Address:Port Process udp UNCONN 0 0 0.0.0.0:57192 0.0.0.0:* udp UNCONN 0 0 127.0.0.53%lo:53 0.0.0.0:* udp UNCONN 0 0 0.0.0.0:631 0.0.0.0:* udp UNCONN 0 0 224.0.0.251:5353 0.0.0.0:* udp UNCONN 0 0 224.0.0.251:5353 0.0.0.0:* udp UNCONN 0 0 0.0.0.0:5353 0.0.0.0:* udp UNCONN 0 0 [::]:38371 [::]:* udp UNCONN 0 0 *:1716 *:* udp UNCONN 0 0 [::]:5353 [::]:* tcp LISTEN 0 4096 127.0.0.1:41397 0.0.0.0:* tcp LISTEN 0 4096 127.0.0.53%lo:53 0.0.0.0:* tcp LISTEN 0 511 0.0.0.0:8887 0.0.0.0:* tcp LISTEN 0 5 127.0.0.1:631 0.0.0.0:* tcp LISTEN 0 244 127.0.0.1:5432 0.0.0.0:* tcp LISTEN 0 4096 127.0.0.1:4000 0.0.0.0:* tcp LISTEN 0 50 *:1716 *:* tcp LISTEN 0 5 [::1]:631 [::]:* tcp LISTEN 0 511 *:15611 *:* tcp LISTEN 0 50 *:9090 *:* . sudo lsof -i:포트번호 . openfile 에서 확인하며 -i 옵션은 모든 네트워크 파일을 확인할 수 있다. 특정 포트를 확인하고 싶은 경우는 :포트번호를 입력한다. ~$ sudo lsof -i:4000 COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME ruby2.7 7795 root 11u IPv4 87943 0t0 TCP localhost:4000 (LISTEN) . ",
     "url": "/docs/os-systems/linux-command/#listen-port-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#listen-port-확인하기"
-  },"407": {
+  },"408": {
     "doc": "Linux Command",
     "title": "alias",
     "content": "# nano /root/.bashrc 파일에서 맨 아래 줄에 다음 내용 추가한다. alias conrm='docker container rm -f $(docker container ps -aq)' . 이후 ctrl+o (저장) &gt; enter &gt; ctrl+x (종료) 를 통해 저장한다. ",
     "url": "/docs/os-systems/linux-command/#alias",
     
     "relUrl": "/docs/os-systems/linux-command/#alias"
-  },"408": {
+  },"409": {
     "doc": "Linux Command",
     "title": "rsync",
     "content": "rsync 는 Remote Sync 의 약자로, rsync 를 통해 서버 간의 동기화나 백업을 진행할 수 있다. 사용 방법은 아래와 같다. rsync options src dest . -a, –archive : 압축 모드 . -v, –verbose : 상세한 정보 출력 . -h : human-readable, output numbers in a human-readable format . ",
     "url": "/docs/os-systems/linux-command/#rsync",
     
     "relUrl": "/docs/os-systems/linux-command/#rsync"
-  },"409": {
+  },"410": {
     "doc": "Linux Command",
     "title": "diff",
     "content": "diff 는 두 파일 사이의 내용을 비교하는 명령어이다. -r : 두 디렉토리간의 차이점 출력, 서브디렉토리 까지 비교 . rsync 와 diff 에 대한 예제를 아래와 같이 확인해 보자. # 파일 비교 user1@user1-500R5K-501R5K-500R5Q:~$ ls ./Documents/ mystudy.md _.naver.com # rsync user1@user1-500R5K-501R5K-500R5Q:~$ rsync -avh ./Documents/ ./backup sending incremental file list created directory ./backup ./ _.naver.com mystudy.md sent 8.07K bytes received 88 bytes 16.31K bytes/sec total size is 7.87K speedup is 0.96 user1@user1-500R5K-501R5K-500R5Q:~$ # rsync 결과 확인 - 폴더와 함꼐 파일이 생성됨 user1@user1-500R5K-501R5K-500R5Q:~$ ls ./backup/ mystudy.md _.naver.com user1@user1-500R5K-501R5K-500R5Q:~$ # 파일 비교 - 내용이 없으므로 동일함 확인 user1@user1-500R5K-501R5K-500R5Q:~$ diff -r ./Documents/ ./backup/ # 파일 수정 user1@user1-500R5K-501R5K-500R5Q:~$ vi ./Documents/mystudy.md # 파일 비교 - 내용이 다름을 확인 user1@user1-500R5K-501R5K-500R5Q:~$ diff -r ./Documents/ ./backup/ diff -r ./Documents/mystudy.md ./backup/mystudy.md 2,9d1 &lt; remote-theme: just-the-docs/just-the-docs &lt; update &lt; 1 &lt; 2 &lt; 3 &lt; &lt; &lt; remote-theme: just-the-docs/just-the-docs 193c185 &lt; [Spring Boot + Nginx 연동해서 배포하기](https://velog.io/@u-nij/Spring-Boot-Nginx-%EC%97%B0%EB%8F%99%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0) --- &gt; [Spring Boot + Nginx 연동해서 배포하기](https://velog.io/@u-nij/Spring-Boot-Nginx-%EC%97%B0%EB%8F%99%ED%95%B4%EC%84%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0) \\ No newline at end of file # rsync - 다른 부분을 rsync user1@user1-500R5K-501R5K-500R5Q:~$ rsync -avh ./Documents/ ./backup sending incremental file list ./ mystudy.md sent 5.48K bytes received 38 bytes 11.03K bytes/sec total size is 7.97K speedup is 1.44 # 파일 비교 - 내용 동일 user1@user1-500R5K-501R5K-500R5Q:~$ diff -r ./Documents/ ./backup/ user1@user1-500R5K-501R5K-500R5Q:~$ user1@user1-500R5K-501R5K-500R5Q:~$ . ",
     "url": "/docs/os-systems/linux-command/#diff",
     
     "relUrl": "/docs/os-systems/linux-command/#diff"
-  },"410": {
+  },"411": {
     "doc": "Linux Command",
     "title": "vi 편집기",
     "content": "yy , #yy . 커서가 위치한 행을 복사한다. # 에는 복사할 행의 수를 지정 . p . 커서가 위치한 행의 아래쪽에 붙인다. P . 커서가 위치한 행의 위쪽에 붙인다. dd, #dd . 커서가 위치한 행을 잘라둔다. 삭제와 같은 기능 , # 에는 잘라둘 행의 수를 지정한다. /{키워드} . 찾기 명령어로, 다음 찾기는 n 이전 찾기는 N 으로 찾을 수 있다. ctrl+f , ctrl+b . 다음 또는 이전 페이지로 이동한다. gg, G . 파일의 제일 첫 문장이나 끝 문장으로 이동한다. :set number, :set nonumber . 좌측에 라인번호를 표시하거나 숨길 수 있다. :{숫자} . 숫자 번째 문장으로 이동한다. ",
     "url": "/docs/os-systems/linux-command/#vi-%ED%8E%B8%EC%A7%91%EA%B8%B0",
     
     "relUrl": "/docs/os-systems/linux-command/#vi-편집기"
-  },"411": {
+  },"412": {
     "doc": "리눅스 그룹 관리",
     "title": "리눅스 그룹 관리",
     "content": " ",
     "url": "/docs/os-systems/linux-group/",
     
     "relUrl": "/docs/os-systems/linux-group/"
-  },"412": {
+  },"413": {
     "doc": "리눅스 그룹 관리",
     "title": "Table of contents",
     "content": ". | 그룹 추가 . | groupadd | groupadd -g | 이후의 groupadd | /etc/group | groupadd -r | . | 그룹 삭제 . | groupdel | . | 그룹 확인 . | groups | . | 그룹에 사용자 추가 . | gpasswd -a | gpasswd -d | . | . 리눅스 시스템은 사용자를 생성하면 사용자명과 동일한 그룹이 생성된다. 또한 특정 그룹을 만들어 기존 사용자를 그룹에 추가할 수 있다. ",
     "url": "/docs/os-systems/linux-group/#table-of-contents",
     
     "relUrl": "/docs/os-systems/linux-group/#table-of-contents"
-  },"413": {
+  },"414": {
     "doc": "리눅스 그룹 관리",
     "title": "그룹 추가",
     "content": "groupadd . root@user1-500R5K-501R5K-500R5Q:~# groupadd testgroup1 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup1 /etc/group testgroup1:x:1002: . groupadd -g . -g 옵션을 사용하면 특정 GID 를 부여할 수 있다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groupadd -g 1004 testgroup1004 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup1004 /etc/group testgroup1004:x:1004: . 이후의 groupadd . 이후부터 생성되는 GID 는 가장 마지막 GID 다음 번호로 할당된다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groupadd testgroup2 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup2 /etc/group testgroup2:x:1005: . /etc/group . 각 그룹의 GID를 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# tail -f /etc/group snapd-range-524288-root:x:524288: snap_daemon:x:584788: _cvsadmin:x:136: jenkins:x:137: docker:x:138:user1 postgres:x:139: tg100:x:1001: testgroup1:x:1002: testgroup1004:x:1004: testgroup2:x:1005: . groupadd -r . -r 옵션을 사용하면 0 번 부터 499 까지의 할당되어 있지 않은 GID 중 가장 높은 번호를 할당해 준다. root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groupadd -r testgroup3 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup3 /etc/group testgroup3:x:998: . ",
     "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9-%EC%B6%94%EA%B0%80",
     
     "relUrl": "/docs/os-systems/linux-group/#그룹-추가"
-  },"414": {
+  },"415": {
     "doc": "리눅스 그룹 관리",
     "title": "그룹 삭제",
     "content": "groupdel . root@user1-500R5K-501R5K-500R5Q:~# groupdel testgroup3 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# grep testgroup3 /etc/group root@user1-500R5K-501R5K-500R5Q:~# . ",
     "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9-%EC%82%AD%EC%A0%9C",
     
     "relUrl": "/docs/os-systems/linux-group/#그룹-삭제"
-  },"415": {
+  },"416": {
     "doc": "리눅스 그룹 관리",
     "title": "그룹 확인",
     "content": "groups . 현재 사용자가 속한 그룹을 확인한다. user1@user1-500R5K-501R5K-500R5Q:~$ groups user1 adm cdrom sudo dip plugdev lpadmin lxd sambashare docker . ",
     "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9-%ED%99%95%EC%9D%B8",
     
     "relUrl": "/docs/os-systems/linux-group/#그룹-확인"
-  },"416": {
+  },"417": {
     "doc": "리눅스 그룹 관리",
     "title": "그룹에 사용자 추가",
     "content": "특정 그룹에 사용자를 추가하거나 제거하고 특정 그룹에 패스워드를 설정하는 작업은 gpasswd를 이용한다. -a user : 특정 그룹에 새로운 그룹멤버를 추가함. -d user : 특정 그룹에서 지정한 그룹멤버를 제거함. -r : 특정 그룹의 패스워드를 제거함 . -R : 특정 그룹에 접근을 제한함 . -A user, … : 특정 그룹의 그룹관리자를 설정함 . -M user, … : 특정 그룹의 그룹멤버를 새로 설정함. gpasswd -a . user1 사용자를 testgroup2 에 추가 . root@user1-500R5K-501R5K-500R5Q:~# gpasswd -a user1 testgroup2 Adding user user1 to group testgroup2 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groups user1 user1 : user1 adm cdrom sudo dip plugdev lpadmin lxd sambashare docker testgroup2 . gpasswd -d . user1 사용자를 testgroup2 에서 삭제 . root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# gpasswd -d user1 testgroup2 Removing user user1 from group testgroup2 root@user1-500R5K-501R5K-500R5Q:~# root@user1-500R5K-501R5K-500R5Q:~# groups user1 user1 : user1 adm cdrom sudo dip plugdev lpadmin lxd sambashare docker . ",
     "url": "/docs/os-systems/linux-group/#%EA%B7%B8%EB%A3%B9%EC%97%90-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%B6%94%EA%B0%80",
     
     "relUrl": "/docs/os-systems/linux-group/#그룹에-사용자-추가"
-  },"417": {
+  },"418": {
     "doc": "Linux",
     "title": "Linuxs",
     "content": " ",
     "url": "/docs/os-systems/linux/#linuxs",
     
     "relUrl": "/docs/os-systems/linux/#linuxs"
-  },"418": {
+  },"419": {
     "doc": "Linux",
     "title": "Linux",
     "content": " ",
     "url": "/docs/os-systems/linux/",
     
     "relUrl": "/docs/os-systems/linux/"
-  },"419": {
+  },"420": {
     "doc": "Markdown",
     "title": "Markdown",
     "content": " ",
     "url": "/docs/programming-language/markdown/",
     
     "relUrl": "/docs/programming-language/markdown/"
-  },"420": {
+  },"421": {
     "doc": "Markdown",
     "title": "Table of contents",
     "content": ". | 코드블럭 | 글씨 포맷 | . 일정한 형식을 갖춘 문서를 작성하거나 체계적인 메모 시 손쉽게 작성할 수 있는 마크다운 문법에 대해 정리하고자 합니다. ",
     "url": "/docs/programming-language/markdown/#table-of-contents",
     
     "relUrl": "/docs/programming-language/markdown/#table-of-contents"
-  },"421": {
+  },"422": {
     "doc": "Markdown",
     "title": "코드블럭",
     "content": "``` 로 시작과 종료 부분에 삽입하며, 동일한 구분으로 종료되는 블럭 내의 코드들을 블록으로 표현하여 코드별 색깔 지정은 옆에 아래와 같은 키워드를 추가하여 지정할 수 있다. | 언어 | Markdown | 언어 | Markdown | . | Bash | bash | JSON | json | . | C# | cs | Java | java | . | C++ | cpp | JavaScript | javascript | . | CSS | css | PHP | php | . | Diff | diff | Perl | perl | . | HTML, XML | html | Python | python | . | HTTP | http | Ruby | ruby | . | Ini | ini | SQL | sql | . ",
     "url": "/docs/programming-language/markdown/#%EC%BD%94%EB%93%9C%EB%B8%94%EB%9F%AD",
     
     "relUrl": "/docs/programming-language/markdown/#코드블럭"
-  },"422": {
+  },"423": {
     "doc": "Markdown",
     "title": "글씨 포맷",
     "content": ". | **굵게**라 적으면 굵게 처럼 글자를 굵게 표시할 수 있습니다. | ***굵게 기울기***라 적으면 굵게 기울기 처럼 글자를 굵으면서도 기울게 표시할 수 있습니다. | &lt;U&gt;밑줄&lt;/U&gt; 라 적으면 밑줄 처럼 밑줄을 그을 수 있습니다. | . ",
     "url": "/docs/programming-language/markdown/#%EA%B8%80%EC%94%A8-%ED%8F%AC%EB%A7%B7",
     
     "relUrl": "/docs/programming-language/markdown/#글씨-포맷"
-  },"423": {
+  },"424": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "Ubuntu 에서 apache2 설치하기",
     "content": " ",
     "url": "/docs/network-security/network-security-apache2-ssl/#ubuntu-%EC%97%90%EC%84%9C-apache2-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#ubuntu-에서-apache2-설치하기"
-  },"424": {
+  },"425": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "Table of contents",
     "content": ". | OpenSSL 설치하기 | Private Key(*.key) 생성하기 (openssl genrsa) | CSR(Certificate Sinning Request) 인증요청서(*.csr) 생성하기 (openssl req) | 자체서명 인증서(*.crt) 생성 (openssl x509) | 인증서 확인하기 (openssl x509) | Apache2 SSL 적용하기 | VirtualHost 설정하기 | SSL 적용 확인하기 (openssl s_client) | . Ubuntu 에서는 apache2 에서의 SSL 적용 방법에 대해 정리해 본다. ",
     "url": "/docs/network-security/network-security-apache2-ssl/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#table-of-contents"
-  },"425": {
+  },"426": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "OpenSSL 설치하기",
     "content": "apt install 을 이용하여 openssl 을 설치한다. root@user1-500R5K-501R5K-500R5Q:~# sudo apt install openssl Reading package lists... Done Building dependency tree Reading state information... Done openssl is already the newest version (1.1.1f-1ubuntu2.20). openssl set to manually installed. 0 upgraded, 0 newly installed, 0 to remove and 20 not upgraded. root@user1-500R5K-501R5K-500R5Q:~# . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#openssl-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#openssl-설치하기"
-  },"426": {
+  },"427": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "Private Key(*.key) 생성하기 (openssl genrsa)",
     "content": "openssl 커맨드로 아래와 같이 개인키를 생성한다. Enter pass phrase for server.key: 부분에 개인키 암호를 입력하면 -out 에 입력한 key 파일이 생성됨을 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl genrsa -des3 -out server.key 2048 Generating RSA private key, 2048 bit long modulus (2 primes) .......................................................................................+++++ ..................................+++++ e is 65537 (0x010001) Enter pass phrase for server.key: Verifying - Enter pass phrase for server.key: root@user1-500R5K-501R5K-500R5Q:~/ssltest# root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls server.key root@user1-500R5K-501R5K-500R5Q:~/ssltest# cat server.key -----BEGIN RSA PRIVATE KEY----- Proc-Type: 4,ENCRYPTED DEK-Info: DES-EDE3-CBC,FCD3A5456ED72869 PN0jOfBzKKzBwRkltcVfVGLSkoMYQgCMGqqWo+3RcUjvWD1EA50eugB3G53hxQDl xgtYdJ8dzQ+QznQF/08rZk5e+hlixqaC/IFu955tINbSqriMUW4+6qKnzB6pviJz xK7LUVyLpbbD6kE75dCt9f0GtVt0byR9CA1IfUD8K2vmDlv8j4aIsb2hKAG74RR3 MROmleiRPIP89Rbc2qTI9sM6Rmhs3DEnXeA/EOunTyEWPi4ectr+gadyxM0D2yMN CsipfwCLNVIVWcYmHCMZwXM5Z0MmmDduHpvBuMYHkDyJK6F6Vu8WuUiIvT+01GT6 mq9BGfCvUoTCuql7ZuaJui6rtOiUAE/Vo9ouzLsKYSL++zLxYiv1b7iLyuxm2HMf 0z+im5WP60WMDyzxNEB4UMoiW+V+iPLA4jyGB/uH9bxUZmh7ndMra2at3RopU0zk mVNlmCFDRDKeDwql200ahxWI/ioqTiA0Go08SeivwTSZFNUtUpSdy9wyDha+VrZI qx8QZBD+K+d/62LLr7Uqgh6T0mlchTIX8W/TpCdDNPDN9u6VRd+3FUGE5FHp9sfD 053oTVsp6lQwOHm447I+d02g895U4sIHG4DGxC7oPmYy/QdQDLw8RzO93BY51pzQ DpnlMjsSvf6FPrcb3UlE4xYFBa6xRHnCNpa1rW/2ZlT6sgNzuwzCMBN7I6bZfJ/2 HdPOSITuhv25oYgUvcEIJ7p1q6N1ZPNdv8lO56r4rBBYxiYDSt22U9FdT3BpzsPA uUPWTgoW5pFAsIZIuNAHZ28391AHTpr4L1IrEQUOo9CSAan4TMfZzHeq5kcYh3LG MTv1VyV10MAQAgBJnyEQaMvLXy+djjN6RpXCmdi1xj/guSnsmVhU/yavG8X/ubt7 WLyUEGgfpcnyzJdS38/rldu472A3iMbOzGVpnmgadB7bL6hBmcce9cI1JrpQ4LCh KqVz2FlV3QWFx7Rd6TT9XrvXm4iSOMXy+njid1I4N6LYOprB6VXP0Y/XEt4sZWg9 VVYdYpZvFSBOsQjwYugP+mT8gs2R1InrAUhR3RpoI5FtM/RI7JVBodubQRjs0rUA Al8R/z/sGuKMa/5p2KarASgSmwZ9Iiq6uldQrzwn35lFOCaEJIQmkyme9DFAxiFP aq5KBdO76p+7fUC4s566utE4g7Oz3+mQ+kvzx7eI1lQKnCj0m+1cHW/BQmj8AdCm B8V5xL+1+pLzyF/T6UFqLH1FU53OiFDGDaHTLJ6v9rWkY6OvIbnZNChD7mu4Ow1d ng98Q4RxL+23vKYxVhDsOiIu+6it3Pol/8imGQO8Qc8f64MD2QSC9HYQuJJ/BTkg 4Mqa1g7NeW1V8acfYiBpadSQxhAmh65bjQuJyX7vivMs9f928wEl8D8qdNsASEKI 2EKL5a2/lNlv0zkcfNZOF3RUsNrPjEx4kDi1WWnIjFUtwI95ZYFK3uaqgCs6IlGp zzJEzUX8sjBCHZvFpdsuP4nfxFBQxwyiJ1mgbWXaJq73jUqwVefP1vndzzM9dFRY 6aYh+cEzcYD3RYaPFQnkJ0UQAl3fWzmOt1B4JA2wqpHDTL0l3oi8TA== -----END RSA PRIVATE KEY----- . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#private-keykey-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0-openssl-genrsa",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#private-keykey-생성하기-openssl-genrsa"
-  },"427": {
+  },"428": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "CSR(Certificate Sinning Request) 인증요청서(*.csr) 생성하기 (openssl req)",
     "content": "생성했던 개인키를 이용하여 CSR 인증서를 생성한다. Enter pass phrase for server.key: 에는 개인키 암호를 입력하고 그 외에는 적절한 값을 입력한다. -out 에 설정한 파일이 생성됨을 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl req -new -key server.key -out server.csr Enter pass phrase for server.key: You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN. There are quite a few fields but you can leave some blank For some fields there will be a default value, If you enter '.', the field will be left blank. ----- Country Name (2 letter code) [AU]:kr State or Province Name (full name) [Some-State]:seoul Locality Name (eg, city) []:seoul Organization Name (eg, company) [Internet Widgits Pty Ltd]:test Organizational Unit Name (eg, section) []:test Common Name (e.g. server FQDN or YOUR name) []:test Email Address []:test@test.com Please enter the following 'extra' attributes to be sent with your certificate request A challenge password []: An optional company name []: root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls server.csr server.key root@user1-500R5K-501R5K-500R5Q:~/ssltest# cat server.csr -----BEGIN CERTIFICATE REQUEST----- MIICvTCCAaUCAQAweDELMAkGA1UEBhMCa3IxDjAMBgNVBAgMBXNlb3VsMQ4wDAYD VQQHDAVzZW91bDENMAsGA1UECgwEdGVzdDENMAsGA1UECwwEdGVzdDENMAsGA1UE AwwEdGVzdDEcMBoGCSqGSIb3DQEJARYNdGVzdEB0ZXN0LmNvbTCCASIwDQYJKoZI hvcNAQEBBQADggEPADCCAQoCggEBALcKV1HVs6/7PBkaw+tEN2H6kMRLbqnleQo8 YQunSBeH2K50AGQRLDkQ8TFig4YmHjxwK0/o1OLD1nkkSKI4fGV4guU4mbpR9951 TJmAEmBLu7JCtOgUFla0pRO9fppJaLEs/n8PhqSjaOz1vrgFQEpsjVMe9uKxsKPA Oh5dFVjwM06AmuRbqLn2k8udcgNOikZC+KfSpw7alzUWIgL2tFloK2O2crQ+rXP2 oWug71J38twdyJX2ifg8eTj96pvVzkGhLSjLqfD4ImJYsn3ySeIjUm4tKCXHYUZT /iloGup7HbhlW4NR04goX/c3nchfTMX8T5Zgf1gmDPzeAidP27MCAwEAAaAAMA0G CSqGSIb3DQEBCwUAA4IBAQB6IKef/29ePeKWjRypbF8QrrT7xtaUHhF+fkTCCtg1 jXqikT8GMqMK8+ZT7pqaYyl5UHfccQqJ/aY5jG/jkRq3kczl+LS2N/LfUZdrjGvL 6LQwnyIJ091EbG6oQ1Dhg58mBym9AEHMLQRrzKZpIEh8tfuWBpXXLMQ1G3t+Pdz2 LaHDtGlmIOCmrvC7u2xKvRj0CgA4ppaRIE9his4iLktyL9j3RT8k94dmg1ZZCf11 jJnG4BkZoavb3c5qRM8j0bfvLdt17ESCAS7/DiUvTUdgytSiJWOVyoGXMHWkyPxe phdtUhVG6QnUCGcGsf3v+yOZXl0MIiQr4V9g86p4cGbA -----END CERTIFICATE REQUEST----- . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#csrcertificate-sinning-request-%EC%9D%B8%EC%A6%9D%EC%9A%94%EC%B2%AD%EC%84%9Ccsr-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0-openssl-req",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#csrcertificate-sinning-request-인증요청서csr-생성하기-openssl-req"
-  },"428": {
+  },"429": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "자체서명 인증서(*.crt) 생성 (openssl x509)",
     "content": "이전에 생성했던 개인키와 인증요청서를 이용하여 자체서명인증서를 생성한다. root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt Signature ok subject=C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com Getting Private key Enter pass phrase for server.key: root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls server.crt server.csr server.key root@user1-500R5K-501R5K-500R5Q:~/ssltest# cat server.crt -----BEGIN CERTIFICATE----- MIIDdzCCAl8CFGm6Z/Eb6y1CHy7i/cqneSE/6iBnMA0GCSqGSIb3DQEBCwUAMHgx CzAJBgNVBAYTAmtyMQ4wDAYDVQQIDAVzZW91bDEOMAwGA1UEBwwFc2VvdWwxDTAL BgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxDTALBgNVBAMMBHRlc3QxHDAaBgkq hkiG9w0BCQEWDXRlc3RAdGVzdC5jb20wHhcNMjMxMjIyMTI1NjEzWhcNMjQxMjIx MTI1NjEzWjB4MQswCQYDVQQGEwJrcjEOMAwGA1UECAwFc2VvdWwxDjAMBgNVBAcM BXNlb3VsMQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQLDAR0ZXN0MQ0wCwYDVQQDDAR0 ZXN0MRwwGgYJKoZIhvcNAQkBFg10ZXN0QHRlc3QuY29tMIIBIjANBgkqhkiG9w0B AQEFAAOCAQ8AMIIBCgKCAQEAtwpXUdWzr/s8GRrD60Q3YfqQxEtuqeV5CjxhC6dI F4fYrnQAZBEsORDxMWKDhiYePHArT+jU4sPWeSRIojh8ZXiC5TiZulH33nVMmYAS YEu7skK06BQWVrSlE71+mklosSz+fw+GpKNo7PW+uAVASmyNUx724rGwo8A6Hl0V WPAzToCa5FuoufaTy51yA06KRkL4p9KnDtqXNRYiAva0WWgrY7ZytD6tc/aha6Dv Unfy3B3IlfaJ+Dx5OP3qm9XOQaEtKMup8PgiYliyffJJ4iNSbi0oJcdhRlP+KWga 6nsduGVbg1HTiChf9zedyF9MxfxPlmB/WCYM/N4CJ0/bswIDAQABMA0GCSqGSIb3 DQEBCwUAA4IBAQCZnu4LE5cYyWTOCgQo3mShYyQIqoCK7O0kiZgQovgzF2F8cd/c zHwJYxjiTkey84Mz6DXcZFCeyIs5XOJlYASAENmFB/e3LDRD1uKGFZofbmJPf5eN 1H4c/NrJaWV0RKtV7FrFp1Q1FxSdKgiS4ELWTNlLJrWOPfyh+8HVxChF8J7IgDS5 aIwJv8r4iRaSzCzcmqMfgnKcg2OWw46UwPDq5tYYJlAi1lNFQWFJRUsRoEHzMKwE 8Aek5ZH8/xGfpkN697u80C4LHmxMhdPhCzB8r/CJanPgsTUJ2GqIi0B1nPy6u+91 1zvLH//uOKLvG9msF9LXKKbrS14fswFC4wR9 -----END CERTIFICATE----- . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#%EC%9E%90%EC%B2%B4%EC%84%9C%EB%AA%85-%EC%9D%B8%EC%A6%9D%EC%84%9Ccrt-%EC%83%9D%EC%84%B1-openssl-x509",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#자체서명-인증서crt-생성-openssl-x509"
-  },"429": {
+  },"430": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "인증서 확인하기 (openssl x509)",
     "content": "-text 옵션을 사용하며 인증서 상세 정보를 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:~/ssltest# openssl x509 -in server.crt -text Certificate: Data: Version: 1 (0x0) Serial Number: 69:ba:67:f1:1b:eb:2d:42:1f:2e:e2:fd:ca:a7:79:21:3f:ea:20:67 Signature Algorithm: sha256WithRSAEncryption Issuer: C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com Validity Not Before: Dec 22 12:56:13 2023 GMT Not After : Dec 21 12:56:13 2024 GMT Subject: C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com Subject Public Key Info: Public Key Algorithm: rsaEncryption RSA Public-Key: (2048 bit) Modulus: 00:b7:0a:57:51:d5:b3:af:fb:3c:19:1a:c3:eb:44: 37:61:fa:90:c4:4b:6e:a9:e5:79:0a:3c:61:0b:a7: 48:17:87:d8:ae:74:00:64:11:2c:39:10:f1:31:62: 83:86:26:1e:3c:70:2b:4f:e8:d4:e2:c3:d6:79:24: 48:a2:38:7c:65:78:82:e5:38:99:ba:51:f7:de:75: 4c:99:80:12:60:4b:bb:b2:42:b4:e8:14:16:56:b4: a5:13:bd:7e:9a:49:68:b1:2c:fe:7f:0f:86:a4:a3: 68:ec:f5:be:b8:05:40:4a:6c:8d:53:1e:f6:e2:b1: b0:a3:c0:3a:1e:5d:15:58:f0:33:4e:80:9a:e4:5b: a8:b9:f6:93:cb:9d:72:03:4e:8a:46:42:f8:a7:d2: a7:0e:da:97:35:16:22:02:f6:b4:59:68:2b:63:b6: 72:b4:3e:ad:73:f6:a1:6b:a0:ef:52:77:f2:dc:1d: c8:95:f6:89:f8:3c:79:38:fd:ea:9b:d5:ce:41:a1: 2d:28:cb:a9:f0:f8:22:62:58:b2:7d:f2:49:e2:23: 52:6e:2d:28:25:c7:61:46:53:fe:29:68:1a:ea:7b: 1d:b8:65:5b:83:51:d3:88:28:5f:f7:37:9d:c8:5f: 4c:c5:fc:4f:96:60:7f:58:26:0c:fc:de:02:27:4f: db:b3 Exponent: 65537 (0x10001) Signature Algorithm: sha256WithRSAEncryption 99:9e:ee:0b:13:97:18:c9:64:ce:0a:04:28:de:64:a1:63:24: 08:aa:80:8a:ec:ed:24:89:98:10:a2:f8:33:17:61:7c:71:df: dc:cc:7c:09:63:18:e2:4e:47:b2:f3:83:33:e8:35:dc:64:50: 9e:c8:8b:39:5c:e2:65:60:04:80:10:d9:85:07:f7:b7:2c:34: 43:d6:e2:86:15:9a:1f:6e:62:4f:7f:97:8d:d4:7e:1c:fc:da: c9:69:65:74:44:ab:55:ec:5a:c5:a7:54:35:17:14:9d:2a:08: 92:e0:42:d6:4c:d9:4b:26:b5:8e:3d:fc:a1:fb:c1:d5:c4:28: 45:f0:9e:c8:80:34:b9:68:8c:09:bf:ca:f8:89:16:92:cc:2c: dc:9a:a3:1f:82:72:9c:83:63:96:c3:8e:94:c0:f0:ea:e6:d6: 18:26:50:22:d6:53:45:41:61:49:45:4b:11:a0:41:f3:30:ac: 04:f0:07:a4:e5:91:fc:ff:11:9f:a6:43:7a:f7:bb:bc:d0:2e: 0b:1e:6c:4c:85:d3:e1:0b:30:7c:af:f0:89:6a:73:e0:b1:35: 09:d8:6a:88:8b:40:75:9c:fc:ba:bb:ef:75:d7:3b:cb:1f:ff: ee:38:a2:ef:1b:d9:ac:17:d2:d7:28:a6:eb:4b:5e:1f:b3:01: 42:e3:04:7d -----BEGIN CERTIFICATE----- MIIDdzCCAl8CFGm6Z/Eb6y1CHy7i/cqneSE/6iBnMA0GCSqGSIb3DQEBCwUAMHgx CzAJBgNVBAYTAmtyMQ4wDAYDVQQIDAVzZW91bDEOMAwGA1UEBwwFc2VvdWwxDTAL BgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxDTALBgNVBAMMBHRlc3QxHDAaBgkq hkiG9w0BCQEWDXRlc3RAdGVzdC5jb20wHhcNMjMxMjIyMTI1NjEzWhcNMjQxMjIx MTI1NjEzWjB4MQswCQYDVQQGEwJrcjEOMAwGA1UECAwFc2VvdWwxDjAMBgNVBAcM BXNlb3VsMQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQLDAR0ZXN0MQ0wCwYDVQQDDAR0 ZXN0MRwwGgYJKoZIhvcNAQkBFg10ZXN0QHRlc3QuY29tMIIBIjANBgkqhkiG9w0B AQEFAAOCAQ8AMIIBCgKCAQEAtwpXUdWzr/s8GRrD60Q3YfqQxEtuqeV5CjxhC6dI F4fYrnQAZBEsORDxMWKDhiYePHArT+jU4sPWeSRIojh8ZXiC5TiZulH33nVMmYAS YEu7skK06BQWVrSlE71+mklosSz+fw+GpKNo7PW+uAVASmyNUx724rGwo8A6Hl0V WPAzToCa5FuoufaTy51yA06KRkL4p9KnDtqXNRYiAva0WWgrY7ZytD6tc/aha6Dv Unfy3B3IlfaJ+Dx5OP3qm9XOQaEtKMup8PgiYliyffJJ4iNSbi0oJcdhRlP+KWga 6nsduGVbg1HTiChf9zedyF9MxfxPlmB/WCYM/N4CJ0/bswIDAQABMA0GCSqGSIb3 DQEBCwUAA4IBAQCZnu4LE5cYyWTOCgQo3mShYyQIqoCK7O0kiZgQovgzF2F8cd/c zHwJYxjiTkey84Mz6DXcZFCeyIs5XOJlYASAENmFB/e3LDRD1uKGFZofbmJPf5eN 1H4c/NrJaWV0RKtV7FrFp1Q1FxSdKgiS4ELWTNlLJrWOPfyh+8HVxChF8J7IgDS5 aIwJv8r4iRaSzCzcmqMfgnKcg2OWw46UwPDq5tYYJlAi1lNFQWFJRUsRoEHzMKwE 8Aek5ZH8/xGfpkN697u80C4LHmxMhdPhCzB8r/CJanPgsTUJ2GqIi0B1nPy6u+91 1zvLH//uOKLvG9msF9LXKKbrS14fswFC4wR9 -----END CERTIFICATE----- root@user1-500R5K-501R5K-500R5Q:~/ssltest# . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#%EC%9D%B8%EC%A6%9D%EC%84%9C-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0-openssl-x509",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#인증서-확인하기-openssl-x509"
-  },"430": {
+  },"431": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "Apache2 SSL 적용하기",
     "content": "a2enmod ssl 명령어로 SSL 모듈을 enable 한다. root@user1-500R5K-501R5K-500R5Q:~/ssltest# a2enmod ssl Considering dependency setenvif for ssl: Module setenvif already enabled Considering dependency mime for ssl: Module mime already enabled Considering dependency socache_shmcb for ssl: Enabling module socache_shmcb. Enabling module ssl. See /usr/share/doc/apache2/README.Debian.gz on how to configure SSL and create self-signed certificates. To activate the new configuration, you need to run: systemctl restart apache2 . SSL 을 위한 임의의 디렉토리를 생성하고 생성한 CA 인증서와 자체 서명인증서를 저장한다. root@user1-500R5K-501R5K-500R5Q:~/ssltest# mkdir /etc/apache2/ssl root@user1-500R5K-501R5K-500R5Q:~/ssltest# cp server* /etc/apache2/ssl/ root@user1-500R5K-501R5K-500R5Q:~/ssltest# root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls -al /etc/apache2/ssl/ total 20 drwxr-xr-x 2 root root 4096 12월 22 22:09 . drwxr-xr-x 9 root root 4096 12월 22 22:09 .. -rw-r--r-- 1 root root 1261 12월 22 22:09 server.crt -rw-r--r-- 1 root root 1025 12월 22 22:09 server.csr -rw------- 1 root root 1743 12월 22 22:09 server.key . 또한 소유권 및 권한 변경을 진행한다. 여기서는 root 를 기준으로 설정한다. $ sudo chown -R root:root /etc/apache2/ssl $ sudo chmod 700 /etc/apahce2/ssl $ sudo chmod 600 /etc/apache2/ssl/*.* . root@user1-500R5K-501R5K-500R5Q:~/ssltest# chown -R root:root /etc/apache2/ssl/ root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls -al /etc/apache2/ssl/ total 20 drwxr-xr-x 2 root root 4096 12월 22 22:09 . drwxr-xr-x 9 root root 4096 12월 22 22:09 .. -rw-r--r-- 1 root root 1261 12월 22 22:09 server.crt -rw-r--r-- 1 root root 1025 12월 22 22:09 server.csr -rw------- 1 root root 1743 12월 22 22:09 server.key root@user1-500R5K-501R5K-500R5Q:~/ssltest# root@user1-500R5K-501R5K-500R5Q:~/ssltest# chmod 700 /etc/apache2/ssl root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls -al /etc/apache2/ssl/ total 20 drwx------ 2 root root 4096 12월 22 22:09 . drwxr-xr-x 9 root root 4096 12월 22 22:09 .. -rw-r--r-- 1 root root 1261 12월 22 22:09 server.crt -rw-r--r-- 1 root root 1025 12월 22 22:09 server.csr -rw------- 1 root root 1743 12월 22 22:09 server.key root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls -al /etc/apache2/ total 100 drwxr-xr-x 9 root root 4096 12월 22 22:09 . drwxr-xr-x 150 root root 12288 12월 22 21:20 .. -rw-r--r-- 1 root root 7224 10월 26 22:54 apache2.conf drwxr-xr-x 2 root root 4096 12월 22 21:20 conf-available drwxr-xr-x 2 root root 4096 12월 22 21:20 conf-enabled -rw-r--r-- 1 root root 1782 2월 24 2021 envvars -rw-r--r-- 1 root root 31063 2월 24 2021 magic drwxr-xr-x 2 root root 12288 12월 22 21:20 mods-available drwxr-xr-x 2 root root 4096 12월 22 22:06 mods-enabled -rw-r--r-- 1 root root 320 2월 24 2021 ports.conf drwxr-xr-x 2 root root 4096 12월 22 21:20 sites-available drwxr-xr-x 2 root root 4096 12월 22 21:20 sites-enabled drwx------ 2 root root 4096 12월 22 22:09 ssl root@user1-500R5K-501R5K-500R5Q:~/ssltest# root@user1-500R5K-501R5K-500R5Q:~/ssltest# chmod 600 /etc/apache2/ssl/*.* root@user1-500R5K-501R5K-500R5Q:~/ssltest# ls -al /etc/apache2/ssl/ total 20 drwx------ 2 root root 4096 12월 22 22:09 . drwxr-xr-x 9 root root 4096 12월 22 22:09 .. -rw------- 1 root root 1261 12월 22 22:09 server.crt -rw------- 1 root root 1025 12월 22 22:09 server.csr -rw------- 1 root root 1743 12월 22 22:09 server.key root@user1-500R5K-501R5K-500R5Q:~/ssltest# root@user1-500R5K-501R5K-500R5Q:~/ssltest# . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#apache2-ssl-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#apache2-ssl-적용하기"
-  },"431": {
+  },"432": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "VirtualHost 설정하기",
     "content": "/etc/apache2/site-avaiale 디렉토리로 이동하여 default conf 파일을 복사하여 수정한다. root@user1-500R5K-501R5K-500R5Q:~# cd /etc/apache2/sites-available/ root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# ls 000-default.conf default-ssl.conf root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# cp default-ssl.conf example-ssl.conf root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# ls 000-default.conf default-ssl.conf example-ssl.conf . 아래 3개 항목을 인증서 위치를 기준으로 수정한다. root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# vim example-ssl.conf SSLEngine on SSLCertificateFile /etc/apache2/ssl/server.crt SSLCertificateKeyFile /etc/apache2/ssl/server.key . 설정 변경한 conf 파일을 enable 한다. root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# ls 000-default.conf default-ssl.conf example-ssl.conf root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# a2ensite example-ssl.conf Enabling site example-ssl. To activate the new configuration, you need to run: systemctl reload apache2 root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# . 이후 apache 서비스를 restart 한다. 이 때 인증서 생성 시 설정했던 암호를 입력한다. root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# service apache2 restart Enter passphrase for SSL/TLS keys for 127.0.0.1:443 (RSA): **** root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# service apache2 status ● apache2.service - The Apache HTTP Server Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabl&gt; Active: active (running) since Fri 2023-12-22 22:21:03 KST; 8s ago Docs: https://httpd.apache.org/docs/2.4/ Process: 5762 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS) Main PID: 5773 (apache2) Tasks: 55 (limit: 9323) Memory: 5.8M CGroup: /system.slice/apache2.service ├─5773 /usr/sbin/apache2 -k start ├─5774 /usr/sbin/apache2 -k start └─5775 /usr/sbin/apache2 -k start 12월 22 22:20:55 user1-500R5K-501R5K-500R5Q systemd[1]: Starting The Apache HTTP Serve&gt; 12월 22 22:20:55 user1-500R5K-501R5K-500R5Q apachectl[5765]: AH00558: apache2: Could n&gt; 12월 22 22:21:03 user1-500R5K-501R5K-500R5Q systemd[1]: Started The Apache HTTP Server. lines 1-16/16 (END) . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#virtualhost-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#virtualhost-설정하기"
-  },"432": {
+  },"433": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "SSL 적용 확인하기 (openssl s_client)",
     "content": "아래와 같이 명령어를 이용하여 생성했던 인증서 정보와 동일함을 확인할 수 있다. 확인 시 중요한 부분은 하단 부분의 Verify return code: 18 (self signed certificate) 임을 알 수 있다. root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# openssl s_client -connect localhost:443 CONNECTED(00000003) Can't use SSL_get_servername depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com verify error:num=18:self signed certificate verify return:1 depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com verify return:1 --- Certificate chain 0 s:C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com i:C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com --- Server certificate -----BEGIN CERTIFICATE----- MIIDdzCCAl8CFGm6Z/Eb6y1CHy7i/cqneSE/6iBnMA0GCSqGSIb3DQEBCwUAMHgx CzAJBgNVBAYTAmtyMQ4wDAYDVQQIDAVzZW91bDEOMAwGA1UEBwwFc2VvdWwxDTAL BgNVBAoMBHRlc3QxDTALBgNVBAsMBHRlc3QxDTALBgNVBAMMBHRlc3QxHDAaBgkq hkiG9w0BCQEWDXRlc3RAdGVzdC5jb20wHhcNMjMxMjIyMTI1NjEzWhcNMjQxMjIx MTI1NjEzWjB4MQswCQYDVQQGEwJrcjEOMAwGA1UECAwFc2VvdWwxDjAMBgNVBAcM BXNlb3VsMQ0wCwYDVQQKDAR0ZXN0MQ0wCwYDVQQLDAR0ZXN0MQ0wCwYDVQQDDAR0 ZXN0MRwwGgYJKoZIhvcNAQkBFg10ZXN0QHRlc3QuY29tMIIBIjANBgkqhkiG9w0B AQEFAAOCAQ8AMIIBCgKCAQEAtwpXUdWzr/s8GRrD60Q3YfqQxEtuqeV5CjxhC6dI F4fYrnQAZBEsORDxMWKDhiYePHArT+jU4sPWeSRIojh8ZXiC5TiZulH33nVMmYAS YEu7skK06BQWVrSlE71+mklosSz+fw+GpKNo7PW+uAVASmyNUx724rGwo8A6Hl0V WPAzToCa5FuoufaTy51yA06KRkL4p9KnDtqXNRYiAva0WWgrY7ZytD6tc/aha6Dv Unfy3B3IlfaJ+Dx5OP3qm9XOQaEtKMup8PgiYliyffJJ4iNSbi0oJcdhRlP+KWga 6nsduGVbg1HTiChf9zedyF9MxfxPlmB/WCYM/N4CJ0/bswIDAQABMA0GCSqGSIb3 DQEBCwUAA4IBAQCZnu4LE5cYyWTOCgQo3mShYyQIqoCK7O0kiZgQovgzF2F8cd/c zHwJYxjiTkey84Mz6DXcZFCeyIs5XOJlYASAENmFB/e3LDRD1uKGFZofbmJPf5eN 1H4c/NrJaWV0RKtV7FrFp1Q1FxSdKgiS4ELWTNlLJrWOPfyh+8HVxChF8J7IgDS5 aIwJv8r4iRaSzCzcmqMfgnKcg2OWw46UwPDq5tYYJlAi1lNFQWFJRUsRoEHzMKwE 8Aek5ZH8/xGfpkN697u80C4LHmxMhdPhCzB8r/CJanPgsTUJ2GqIi0B1nPy6u+91 1zvLH//uOKLvG9msF9LXKKbrS14fswFC4wR9 -----END CERTIFICATE----- subject=C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com issuer=C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com --- No client certificate CA names sent Peer signing digest: SHA256 Peer signature type: RSA-PSS Server Temp Key: X25519, 253 bits --- SSL handshake has read 1447 bytes and written 363 bytes Verification error: self signed certificate --- New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384 Server public key is 2048 bit Secure Renegotiation IS NOT supported Compression: NONE Expansion: NONE No ALPN negotiated Early data was not sent Verify return code: 18 (self signed certificate) --- --- Post-Handshake New Session Ticket arrived: SSL-Session: Protocol : TLSv1.3 Cipher : TLS_AES_256_GCM_SHA384 Session-ID: 006CB978115911FC20746754CF1834E945E8CC7188970B5B7F16684A6226BAFC Session-ID-ctx: Resumption PSK: 023BA699D9420D33CF65745A204A8A11036D73E49551F4A97A0E758D634E5E1F338EDF6FEF8DC506C62F51F2B2B8BDD6 PSK identity: None PSK identity hint: None SRP username: None TLS session ticket lifetime hint: 300 (seconds) TLS session ticket: 0000 - a0 78 0e 9f a2 d0 01 71-65 3b 08 89 ef 0b bf c6 .x.....qe;...... 0010 - 38 7a a8 6a cd 26 24 20-57 0d d6 97 b8 fc 56 a0 8z.j.&amp;$ W.....V. 0020 - 01 a7 6a c3 4f e8 be d4-ee 0c c5 75 68 af 41 9d ..j.O......uh.A. 0030 - 9b 5d 9c f3 76 85 3b 3d-36 33 7e 1f af cc ff 0e .]..v.;=63~..... 0040 - 20 32 46 29 ea c8 57 19-cf 87 1a 26 7d cc 3c e6 2F)..W....&amp;}.&lt;. 0050 - 45 8e 91 1a 06 f2 66 0e-65 31 ee 0d 1e b9 f7 11 E.....f.e1...... 0060 - 58 dc c8 0e a1 02 7c ec-5b 0d 00 08 6e 90 7d 28 X.....|.[...n.}( 0070 - 9a 10 31 ae 11 17 20 02-b6 1d f8 2f f0 ec 72 00 ..1....../..r. 0080 - 6f 91 cf 94 a4 09 bc 8e-18 7b 77 cf b1 33 97 54 o........{w..3.T 0090 - b1 4f b7 b2 df 91 4c 61-62 95 07 3e 80 8b 0d 8e .O....Lab..&gt;.... 00a0 - 89 13 2a 6a e6 de 9e 99-87 29 c7 0f ea 41 2f ae ..*j.....)...A/. 00b0 - dc 51 85 82 68 eb 48 82-c2 29 a7 89 de 6f e1 95 .Q..h.H..)...o.. 00c0 - 44 e5 f4 5e 4b a5 c2 d7-5d d1 fe 94 3e ff d0 ed D..^K...]...&gt;... 00d0 - c9 c3 f0 b3 24 93 db 41-78 af d8 e9 a5 ab df 2b ....$..Ax......+ Start Time: 1703251583 Timeout : 7200 (sec) Verify return code: 18 (self signed certificate) Extended master secret: no Max Early Data: 0 --- read R BLOCK --- Post-Handshake New Session Ticket arrived: SSL-Session: Protocol : TLSv1.3 *Cipher : TLS_AES_256_GCM_SHA384 Session-ID: 3662E9A94DD269C167C1BCCEDD33DF8F56ACB5A40F2E885220F9F83641D36C24 Session-ID-ctx: Resumption PSK: C2AC5E0067CF6E11DE2D45C40C7851D270F67AFAC82927603A801C4C746F2EEB471BB6F221CDAEBF260A57B7BCBFA816 PSK identity: None PSK identity hint: None SRP username: None TLS session ticket lifetime hint: 300 (seconds) TLS session ticket: 0000 - a0 78 0e 9f a2 d0 01 71-65 3b 08 89 ef 0b bf c6 .x.....qe;...... 0010 - 45 23 2f e6 e9 d2 6a 81-e2 e7 a1 ce c9 00 29 0e E#/...j.......). 0020 - 71 a3 b5 e1 cb 32 d1 e6-69 46 54 74 64 21 e1 64 q....2..iFTtd!.d 0030 - 14 a9 5a 62 0d 73 ca ac-ad 2a 29 7a 46 75 01 eb ..Zb.s...*)zFu.. 0040 - 54 58 f4 51 79 a2 45 9c-db 4c de 4d 92 67 27 d7 TX.Qy.E..L.M.g'. 0050 - ea 51 23 66 fd da ab d9-72 7c ed 84 f7 17 36 14 .Q#f....r|....6. 0060 - 7e 9a 0c df ed a5 41 e8-5f df 28 63 7c 31 4a e0 ~.....A._.(c|1J. 0070 - 20 a4 a7 b5 95 31 b7 14-7d ca e1 34 05 eb f4 97 ....1..}..4.... 0080 - ad b4 b5 63 7f 72 3a 96-b3 de a0 62 72 d5 3b a8 ...c.r:....br.;. 0090 - 40 33 f2 a7 7e dd a1 94-30 db 6e e0 4d 98 67 5d @3..~...0.n.M.g] 00a0 - e6 23 3f 1a b6 67 b9 cc-d7 16 a2 1e 77 e0 fb b4 .#?..g......w... 00b0 - 96 2a 00 df be 3f 56 9d-ff 24 57 b5 89 9e 43 76 .*...?V..$W...Cv 00c0 - 06 e1 a7 00 2f 37 57 7d-c7 be dd 20 31 61 e6 4e ..../7W}... 1a.N 00d0 - 5c 22 7f d9 90 af f3 41-51 7d fc 52 53 41 19 2b \\\".....AQ}.RSA.+ Start Time: 1703251583 Timeout : 7200 (sec) Verify return code: 18 (self signed certificate) Extended master secret: no Max Early Data: 0 --- read R BLOCK . 또한 -dates 옵션으로 시작일, 만료일을 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:/etc/apache2/sites-available# openssl s_client -connect localhost:443 | openssl x509 -noout -dates Can't use SSL_get_servername depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com verify error:num=18:self signed certificate verify return:1 depth=0 C = kr, ST = seoul, L = seoul, O = test, OU = test, CN = test, emailAddress = test@test.com verify return:1 notBefore=Dec 22 12:56:13 2023 GMT notAfter=Dec 21 12:56:13 2024 GMT . ",
     "url": "/docs/network-security/network-security-apache2-ssl/#ssl-%EC%A0%81%EC%9A%A9-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0-openssl-s_client",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/#ssl-적용-확인하기-openssl-s_client"
-  },"433": {
+  },"434": {
     "doc": "Ubuntu apache2 에서의 SSL 적용하기",
     "title": "Ubuntu apache2 에서의 SSL 적용하기",
     "content": " ",
     "url": "/docs/network-security/network-security-apache2-ssl/",
     
     "relUrl": "/docs/network-security/network-security-apache2-ssl/"
-  },"434": {
+  },"435": {
     "doc": "Nginx 설정",
     "title": "Nginx 설정",
     "content": " ",
     "url": "/docs/network-security/network-security-nginx/",
     
     "relUrl": "/docs/network-security/network-security-nginx/"
-  },"435": {
+  },"436": {
     "doc": "Nginx 설정",
     "title": "Table of contents",
     "content": ". | 사전 준비 | nginx 설치하기 | 설정 변경하기 | 서비스 재시작 | 리버시 프록시 확인 | . Nginx 기본 설정에 대해 알아보자. ",
     "url": "/docs/network-security/network-security-nginx/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-nginx/#table-of-contents"
-  },"436": {
+  },"437": {
     "doc": "Nginx 설정",
     "title": "사전 준비",
     "content": "테스트용 서버로 간단한 springboot 로 구성된 jar 파일을 실행 시킨 후 접속을 확인한다. 포트는 8888 로 설정하였다. [localhost:8888 접속] . ",
     "url": "/docs/network-security/network-security-nginx/#%EC%82%AC%EC%A0%84-%EC%A4%80%EB%B9%84",
     
     "relUrl": "/docs/network-security/network-security-nginx/#사전-준비"
-  },"437": {
+  },"438": {
     "doc": "Nginx 설정",
     "title": "nginx 설치하기",
     "content": "아래 명령어를 이용하여 nginx 를 설치한다. sudo apt-get install nginx . ",
     "url": "/docs/network-security/network-security-nginx/#nginx-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-nginx/#nginx-설치하기"
-  },"438": {
+  },"439": {
     "doc": "Nginx 설정",
     "title": "설정 변경하기",
     "content": "/etc/nginx/sites-available 폴더의 defalut 파일 내의 내용을 모두 삭제한 후 아래와 같이 변경한다. servername:listen 주소로 접근 시 proxy_pass 에 위치한 서버의 / 위치로 프록시를 한다. root@user1-500R5K-501R5K-500R5Q:/etc/nginx/sites-available# cat default #아래는 로드 밸런싱 시 추가 #upstream backend { # server localhost:8080; # server localhost:8081; # server localhost:8082; #} server { listen 8887; server_name localhost; location / { proxy_pass http://localhost:8888; } } . ",
     "url": "/docs/network-security/network-security-nginx/#%EC%84%A4%EC%A0%95-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-nginx/#설정-변경하기"
-  },"439": {
+  },"440": {
     "doc": "Nginx 설정",
     "title": "서비스 재시작",
     "content": "sudo service nginx restart . ",
     "url": "/docs/network-security/network-security-nginx/#%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9E%AC%EC%8B%9C%EC%9E%91",
     
     "relUrl": "/docs/network-security/network-security-nginx/#서비스-재시작"
-  },"440": {
+  },"441": {
     "doc": "Nginx 설정",
     "title": "리버시 프록시 확인",
     "content": "서비스 재시작 후 8887 포트로 접근하면 아래와 같이 proxy 서버로 연결됨을 확인할 수 있다. [localhost:8887 접속] . ",
     "url": "/docs/network-security/network-security-nginx/#%EB%A6%AC%EB%B2%84%EC%8B%9C-%ED%94%84%EB%A1%9D%EC%8B%9C-%ED%99%95%EC%9D%B8",
     
     "relUrl": "/docs/network-security/network-security-nginx/#리버시-프록시-확인"
-  },"441": {
+  },"442": {
     "doc": "Ubuntu 에서 apache2 설치하기",
     "title": "Ubuntu 에서 apache2 설치하기",
     "content": " ",
     "url": "/docs/network-security/network-security-ubuntu-apache2/",
     
     "relUrl": "/docs/network-security/network-security-ubuntu-apache2/"
-  },"442": {
+  },"443": {
     "doc": "Ubuntu 에서 apache2 설치하기",
     "title": "Table of contents",
     "content": ". | apache2 설치하기 | apache2 설치 확인하기 | apache2 접속 확인하기 | apache2 서비스 종료, 재시작하기 | . 아파치를 설치하기 위해서는 CentOS 에서는 httpd 을 설치하는 반면, Ubuntu 에서는 apache2 를 설치한다. Ubuntu 에서 apache2 를 설치해본다. ",
     "url": "/docs/network-security/network-security-ubuntu-apache2/#table-of-contents",
     
     "relUrl": "/docs/network-security/network-security-ubuntu-apache2/#table-of-contents"
-  },"443": {
+  },"444": {
     "doc": "Ubuntu 에서 apache2 설치하기",
     "title": "apache2 설치하기",
     "content": "아래 명령어로 apache2 를 install 한다. root@user1-500R5K-501R5K-500R5Q:~# apt-get install apache2 . ",
     "url": "/docs/network-security/network-security-ubuntu-apache2/#apache2-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-ubuntu-apache2/#apache2-설치하기"
-  },"444": {
+  },"445": {
     "doc": "Ubuntu 에서 apache2 설치하기",
     "title": "apache2 설치 확인하기",
     "content": "설치가 완료되면 아래와 같이 서비스 상태가 running 상태로 조회된다. root@user1-500R5K-501R5K-500R5Q:~# systemctl status apache2.service ● apache2.service - The Apache HTTP Server Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled) Active: active (running) since Fri 2023-12-22 21:20:11 KST; 26s ago Docs: https://httpd.apache.org/docs/2.4/ Main PID: 8164 (apache2) Tasks: 55 (limit: 9323) Memory: 5.2M CGroup: /system.slice/apache2.service ├─8164 /usr/sbin/apache2 -k start ├─8165 /usr/sbin/apache2 -k start └─8166 /usr/sbin/apache2 -k start 12월 22 21:20:11 user1-500R5K-501R5K-500R5Q systemd[1]: Starting The Apache HTTP Server... 12월 22 21:20:11 user1-500R5K-501R5K-500R5Q apachectl[8163]: AH00558: apache2: Could not reliably determine the &gt; 12월 22 21:20:11 user1-500R5K-501R5K-500R5Q systemd[1]: Started The Apache HTTP Server. 또한 /etc/init.d 라는 데몬 프로그램을 관리하는 디렉토리에 apache2 가 설치된 것을 확인할 수 있다. root@user1-500R5K-501R5K-500R5Q:~# ls -al /etc/init.d/ total 244 drwxr-xr-x 2 root root 4096 12월 22 21:20 . drwxr-xr-x 150 root root 12288 12월 22 21:20 .. -rwxr-xr-x 1 root root 2269 11월 28 2019 acpid -rwxr-xr-x 1 root root 5574 11월 6 2019 alsa-utils -rwxr-xr-x 1 root root 2055 7월 17 2019 anacron -rwxr-xr-x 1 root root 8181 2월 24 2021 apache2 -rwxr-xr-x 1 root root 2489 2월 24 2021 apache-htcacheclean -rwxr-xr-x 1 root root 3740 4월 1 2020 apparmor -rwxr-xr-x 1 root root 2915 6월 29 2022 apport . ",
     "url": "/docs/network-security/network-security-ubuntu-apache2/#apache2-%EC%84%A4%EC%B9%98-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-ubuntu-apache2/#apache2-설치-확인하기"
-  },"445": {
+  },"446": {
     "doc": "Ubuntu 에서 apache2 설치하기",
     "title": "apache2 접속 확인하기",
     "content": "아래와 같이 localhost 로 브라우저에서 접속하면 기본 페이지를 확인할 수 있다. ",
     "url": "/docs/network-security/network-security-ubuntu-apache2/#apache2-%EC%A0%91%EC%86%8D-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-ubuntu-apache2/#apache2-접속-확인하기"
-  },"446": {
+  },"447": {
     "doc": "Ubuntu 에서 apache2 설치하기",
     "title": "apache2 서비스 종료, 재시작하기",
     "content": "root@user1-500R5K-501R5K-500R5Q:~# systemctl stop apache2.service root@user1-500R5K-501R5K-500R5Q:~# systemctl status apache2.service ● apache2.service - The Apache HTTP Server Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled) Active: inactive (dead) since Fri 2023-12-22 21:30:44 KST; 6s ago Docs: https://httpd.apache.org/docs/2.4/ Process: 9735 ExecStop=/usr/sbin/apachectl stop (code=exited, status=0/SUCCESS) Main PID: 8164 (code=exited, status=0/SUCCESS) 12월 22 21:20:11 user1-500R5K-501R5K-500R5Q systemd[1]: Starting The Apache HTTP Server... 12월 22 21:20:11 user1-500R5K-501R5K-500R5Q apachectl[8163]: AH00558: apache2: Could not reliably determine the &gt; 12월 22 21:20:11 user1-500R5K-501R5K-500R5Q systemd[1]: Started The Apache HTTP Server. 12월 22 21:30:44 user1-500R5K-501R5K-500R5Q systemd[1]: Stopping The Apache HTTP Server... 12월 22 21:30:44 user1-500R5K-501R5K-500R5Q apachectl[9737]: AH00558: apache2: Could not reliably determine the &gt; 12월 22 21:30:44 user1-500R5K-501R5K-500R5Q systemd[1]: apache2.service: Succeeded. 12월 22 21:30:44 user1-500R5K-501R5K-500R5Q systemd[1]: Stopped The Apache HTTP Server. root@user1-500R5K-501R5K-500R5Q:~# systemctl restart apache2.service root@user1-500R5K-501R5K-500R5Q:~# systemctl status apache2.service ● apache2.service - The Apache HTTP Server Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled) Active: active (running) since Fri 2023-12-22 21:31:47 KST; 3s ago Docs: https://httpd.apache.org/docs/2.4/ Process: 9805 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS) Main PID: 9809 (apache2) Tasks: 55 (limit: 9323) Memory: 5.0M CGroup: /system.slice/apache2.service ├─9809 /usr/sbin/apache2 -k start ├─9810 /usr/sbin/apache2 -k start └─9811 /usr/sbin/apache2 -k start 12월 22 21:31:47 user1-500R5K-501R5K-500R5Q systemd[1]: Starting The Apache HTTP Server... 12월 22 21:31:47 user1-500R5K-501R5K-500R5Q apachectl[9808]: AH00558: apache2: Could not reliably determine the &gt; 12월 22 21:31:47 user1-500R5K-501R5K-500R5Q systemd[1]: Started The Apache HTTP Server. ",
     "url": "/docs/network-security/network-security-ubuntu-apache2/#apache2-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%A2%85%EB%A3%8C-%EC%9E%AC%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0",
     
     "relUrl": "/docs/network-security/network-security-ubuntu-apache2/#apache2-서비스-종료-재시작하기"
-  },"447": {
+  },"448": {
     "doc": "Network & Security",
     "title": "Network &amp; Security",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/network-security#network--security",
     
     "relUrl": "/docs/network-security#network--security"
-  },"448": {
+  },"449": {
     "doc": "Network & Security",
     "title": "Network & Security",
     "content": " ",
     "url": "/docs/network-security",
     
     "relUrl": "/docs/network-security"
-  },"449": {
+  },"450": {
     "doc": "New Technology",
     "title": "New Technology",
     "content": "New Technology 관련 기술 개요 및 현황에 대해 정리한다. ",
     "url": "/docs/newtech",
     
     "relUrl": "/docs/newtech"
-  },"450": {
+  },"451": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/nodejs-basic/",
     
     "relUrl": "/docs/programming-language/nodejs-basic/"
-  },"451": {
+  },"452": {
     "doc": "Node.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Node.js 의 특징 | 모듈 설치 및 실행 | 실습 예제 . | 이메일 전송하기 | 웹서버 만들기 | MySQL 사용하기 | . | . ​node.js 의 종류와 사용방법에 대해 정리한다. 참고 자료 . 한시간만에 끝내는 Node.js 입문 . ",
     "url": "/docs/programming-language/nodejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#table-of-contents"
-  },"452": {
+  },"453": {
     "doc": "Node.js 기본 개념",
     "title": "Node.js 의 특징",
     "content": ". | javaScript 를 이용한다. | 엄청나게 많은 패키지를 이용할 수 있다. | . ",
     "url": "/docs/programming-language/nodejs-basic/#nodejs-%EC%9D%98-%ED%8A%B9%EC%A7%95",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#nodejs-의-특징"
-  },"453": {
+  },"454": {
     "doc": "Node.js 기본 개념",
     "title": "모듈 설치 및 실행",
     "content": "https://www.npmjs.com/ 에서 원하는 모듈을 찾는다. npm install [모듈명] 으로 아래와 같이 설치한다. nodemailer 라는 모듈을 예시로 든다. D:\\99_nodeJs&gt;npm install nodemailer added 1 package, and audited 2 packages in 1s found 0 vulnerabilitie . 아래 그림과 같이 node_modules, package json 파일 등이 생성된다. require 를 이용해서 패키지를 불러온다. const nodemailer = require('nodemailer'); . ",
     "url": "/docs/programming-language/nodejs-basic/#%EB%AA%A8%EB%93%88-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%8B%A4%ED%96%89",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#모듈-설치-및-실행"
-  },"454": {
+  },"455": {
     "doc": "Node.js 기본 개념",
     "title": "실습 예제",
     "content": "이메일 전송하기 . nodemailer 모듈을 사용한다. const nodemailer = require('nodemailer'); const email= { host: \"smtp.mailtrap.io\", port: 2525, auth: { user: \"80e8c610c6dace\", pass: \"aad60e1f687512\" } }; const send = async (option) =&gt; { nodemailer.createTransport( email ).sendMail(option, (error, info) =&gt; { if(error){ console.log(error) } else { console.log(info); return info.response; } }); }; let email_data = { from: \"dmjgr5@gmail.com\", to: \"dmjgr5@gmail.com\", subject: \"테스트 메일입니다.\", text: \"node.js 테스트입니다. \" } send(email_data); . 웹서버 만들기 . express 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); app.set('views', __dirname + '/views'); app.set('view engine', 'ejs'); app.engine('html', require('ejs').renderFile); app.get('/', function (req, res) { res.render('index.html'); }) app.get('/about', function (req, res) { res.render('about.html'); }) . `node test.js’ . MySQL 사용하기 . npm install mysql --save 모듈을 사용한다. const express = require('express'); // 모듈 호출 const app = express(); const server = app.listen(3000, () =&gt; { //3000 번 포트로 지정 console.log('start server : localhost:3000'); }); var mysql = require('mysql'); var pool = mysql.createPool({ host : '127.0.0.1', user : 'root', password : '', database : 'yse_spring_mvc' }); app.get('/db', function (req, res) { pool.getConnection(function(err, connection) { if (err) throw err; // not connected! // Use the connection connection.query('select 1+1 sum from dual', function (error, results, fields) { res.send(JSON.stringify(results)); console.log('results', results); // When done with the connection, release it. connection.release(); // Handle error after the release. if (error) throw error; // Don't use the connection here, it has been returned to the pool. }); }); }) . ",
     "url": "/docs/programming-language/nodejs-basic/#%EC%8B%A4%EC%8A%B5-%EC%98%88%EC%A0%9C",
     
     "relUrl": "/docs/programming-language/nodejs-basic/#실습-예제"
-  },"455": {
+  },"456": {
     "doc": "Node.js",
     "title": "Node.js",
     "content": " ",
     "url": "/docs/programming-language/nodejs/",
     
     "relUrl": "/docs/programming-language/nodejs/"
-  },"456": {
+  },"457": {
     "doc": "OS Systems",
     "title": "OS Systems",
     "content": "To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed. ",
     "url": "/docs/os-systems",
     
     "relUrl": "/docs/os-systems"
-  },"457": {
+  },"458": {
     "doc": "Programming Language",
     "title": "Programming Language",
     "content": "프로그래밍 언어에 대해 정리해 보고, 언어별 특징 및 기본 개념에 대해 정리해 보고자 한다. ",
     "url": "/docs/programming-language",
     
     "relUrl": "/docs/programming-language"
-  },"458": {
+  },"459": {
     "doc": "Understanding of Python",
     "title": "Understanding of Python",
     "content": " ",
     "url": "/docs/programming-language/flutter-panabara/",
     
     "relUrl": "/docs/programming-language/flutter-panabara/"
-  },"459": {
+  },"460": {
     "doc": "Understanding of Python",
     "title": "Table of contents",
     "content": ". | Python Installation | Python Type | Shallow Copy and Deep Copy | Garbage Collection | Variable Parameter | Lambda Function | yield | Private Member | Inheritance | PYTHONPATH in System Variables | __pycache__ folder | Exception | Input and Output | Pickle | Regular Expression | Time, Math and Random | OS | Database with SQLite3 | Web Crawling with BeautifulSoup | PyQt5 GUI | Pandas | . This is the document for Python, which is basic instruction like Python Installation, Data Types and so on. Let me explain briefly about Python language. Python Installation . | Using python IDLE https://www.python.org | Using Visual Studio Code after extension installation [https://code.visualstudio.com] (https://code.visualstudio.com/) | . Python Type . | List [ ] . | Ordered List | . | Tuple ( ) . | Ordered List, not changed | . | Set { } . | Type with Set (used with Union, Intersection, Difference) | . | Dictionary {“key”:”value”} . | Paired with Key and Value, No ordered list | . | . Shallow Copy and Deep Copy . | Shallow Copy | . a = [1,2,3] b =a import copy a = [1,2,3] b = copy.copy(a) . | Deep Copy | . a = [1,2,3] b = a[:] import copy a = [1,2,3] b = copy.deepcopy(a) . Garbage Collection . | The data type of int, float, complex, String and tuple are immutable, therefore if the variable is updated, it make another new object, so old object which is not used, garbage collection executed. Mostly list and dictionary used because it is mutable type. The immutable type and global variable should be used with ‘global’ to update its value. | Test | . &gt;&gt;&gt; g = 1 &gt;&gt;&gt; def testScope(a): global g g = 2 return g + a print(\"testScoope(1) : \", testScoope(1)) print(\"g : \",g) . | Output | . testScoope(1) : 3 g : 1 . Variable Parameter . | Any number of parameters can be used by adding * (different a pointer from C)in front of parameters | . &gt;&gt;&gt; def test(*args): print(type(args)) &gt;&gt;&gt; test(1, 2) &lt;type 'tuple'&gt; # tuple type &gt;&gt;&gt; def union(*ar): res = [] for item in ar: for x in item: if not x in res: res.append(x) return res &gt;&gt;&gt; union(\"HAM\", \"EGG\", \"SPAM\") ['H', 'A', 'M', 'E', 'G', 'S', 'P'] &gt;&gt;&gt; union(\"gir\", \"generation\", \"gee\") ['g', 'i', 'r', 'e', 'n', 'a', 't', 'o'] . | Any number of parameters (key-value type) can be used by adding ** in front of parameters. It is option where it requires or not. Option parameter is handled as a dictionary type. | . &gt;&gt;&gt; def userURIBuilder(server, port, **user): str = \"http://\" + server + \":\" + port + \"/?\" for key in user.keys(): str += key + \"=\" + user[key] + \"&amp;\" return str &gt;&gt;&gt; userURIBuilder(\"test.com\", \"8080\", id='userid', passwd='1234') 'http://test.com:8080/?passwd=1234&amp;id=userid&amp;' &gt;&gt;&gt; userURIBuilder(\"test.com\", \"8080\", id='userid', passwd='1234', name='mike', age='20') 'http://test.com:8080/?passwd=1234&amp;age=20&amp;id=userid&amp;name=mike&amp;' . Lambda Function . | There is no name, anonymous function. In case of sample function, it is better to use lambda function. | Example : lambda : . | . &gt;&gt;&gt; g = lambda x, y : x * y &gt;&gt;&gt; g(2,3) 6 &gt;&gt;&gt; (lambda x: x * x)(3) 9 . yield . | returns value in real time, used in RANGE phrase. | . &gt;&gt;&gt; def reverse(data): for index in range(len(data) - 1, -1, -1): yield data[index] &gt;&gt;&gt; for char in reverse('gold'): print(char) d l o g . Private Member . | Add __&lt;member variable&gt;, changed _&lt;className&gt;__&lt;memberName&gt; | . class BankAccount: def __init__(self, id, name, balance): self. __ id = id self. __ name = name self. __ balance = balance def deposit(self, amount): self. __ balance += amount def withdraw(self, amount): self. __ balance -= amount def __str__(self): return \"{0}, {1}, {2}\".format(self.__id, self.__name, \\ self.__balance) . Inheritance . | Example : Class Student(Person): | . class Person: … class Student(Person): \"\"\"sub class\"\"\" def __init__(self, name, phoneNumber, subject, studentID): Person.__init__(self, name, phoneNumber) # Call Person Init self.subject = subject self.studentID = studentID . PYTHONPATH in System Variables . | When creating module, we can allocate the module location in specific folder using system properties path named as PYTHONPATH and the absolute path. Classes and Functions can be defined in Module. | Module example . | . from functools import * def intersect(*ar): return reduce(__intersectSC,ar) def __intersectSC(listX, listY): setList = [] for x in listX: if x in listY: setList.append(x) return setList def difference(*ar): setList = [] intersectSet = intersect(*ar) unionSet = union(*ar) for x in unionSet: if not x in intersectSet: setList.append(x) return setList def union(*ar): setList = [] for item in ar: for x in item: if not x in setList: setList.append(x) return setList . | Module Importing Style . | import simpleset . | get from global namespace, get all functions | check with command like dir() | . | from simpleset import union . | specific functions, ex) union function Only | check with command like dir(union) | . | from simpleset import * . | all functions, except the function start with __(double-underlined) | check with command like dir() | . | import simpleset as test1 . | make alias named as test1 | . | . | . __pycache__ folder . | After compile a pyc file, it is generated in __pycache__, as well we can share this file to others as a module, not to show the source code. Pyinstaller is useful for this case : . | pip3 install pyinstaller | python BankAccout.py | BankAccount in ‘dist’ folder | . | . Exception . def divide(a,b): return a/b try: c = divide(5, 2) except ZeroDivisionError: print('0 is not allowed') except TypeError: print(\"All parameters must be numbers\") except: print(\"Not defined\") else: print(\"Result : {0}\", c) finally: print(\"do anything\") . Input and Output . | Output | . import sys f = open(\"C:\\\\work\\\\test.txt\", \"wt\") print(\"file write\", file=f) f.close() . | read() : returns string all from a file | readline() : returns string line by line | readlines() : returns a list with line by line at once | . &gt;&gt;&gt; f = open(\"c:\\\\work\\\\demo.txt\") &gt;&gt;&gt; result = f.read() &gt;&gt;&gt; result 'qqqq\\nabcd\\n1234\\n' &gt;&gt;&gt; print(result) qqqq abcd 1234 &gt;&gt;&gt; f.tell() 25 &gt;&gt;&gt; f.seek(0) 0 &gt;&gt;&gt; f.tell() 0 &gt;&gt;&gt; f.readline() 'qqqq\\n' &gt;&gt;&gt; f.readline() 'abcd\\n' &gt;&gt;&gt; f.readline() '1234\\n' &gt;&gt;&gt; f.seek(0) 0 &gt;&gt;&gt; lst = f.readlines() &gt;&gt;&gt; lst ['qqqq\\n', 'abcd\\n', '1234\\n'] . | Input f = open(\"c:\\\\work\\\\demo1.txt\", \"wt\") f.write(\"qqqq\\nabcd\\n1234\\n\") f.close() . | . Pickle . | Save information temporarily | . import pickle colors = [\"red\", \"blue\", \"gree\"] # Write f = open(\"c:\\\\work\\\\colors\",\"wb\") # write binary pickle.dump(colors,f) # back up with .dump function f.close() # Read f = open(\"c:\\\\work\\\\colors\",\"rb\") # read binary colors = pickle.load(f) # open with .load function print(colors) f.close() del colors # delete list import os os.remove(\"c:\\\\work\\\\colors\") # delete file . Regular Expression . import re f=open('c:\\\\work\\\\PV3.txt','rt') g=open('c:\\\\work\\\\PV3_copy.txt','wt') line = f.readline() while (line != ''): if (re.search(\"\\d{4}\", line)): g.write(line + \"\\n\") line = f.readline() f.close() g.close() . Time, Math and Random . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . &gt;&gt;&gt; import random &gt;&gt;&gt; random.random() 0.35173868090650484 &gt;&gt;&gt; random.random() 0.5306281074635111 &gt;&gt;&gt; random.uniform(3,4) 3.5888882103413913 &gt;&gt;&gt; for i in range(3): random.gauss(1, 1.0) 0.9384305864119867 1.8460570340312912 1.3857190077793522 &gt;&gt;&gt; [random.randrange(20) for i in range(10)] [12, 2, 4, 11, 2, 15, 7, 13, 17, 15] &gt;&gt;&gt; random.sample(range(20), 10) [8, 6, 0, 7, 2, 4, 10, 11, 12, 18] . OS . &gt;&gt;&gt; from os.path import * &gt;&gt;&gt; abspath('tmp') 'C:\\\\Python35\\\\tmp' &gt;&gt;&gt; basename('c:\\\\python35\\\\tmp') 'tmp' &gt;&gt;&gt; basename('c:\\\\python35\\\\tmp\\\\test.txt') 'test.txt' &gt;&gt;&gt; commonprefix(['c:\\\\python35\\\\lib', 'c:\\\\python35\\tools', 'c:\\\\python35']) 'c:\\\\python35' &gt;&gt;&gt; exists('c:\\\\python35\\\\tmp') False &gt;&gt;&gt; exists('c:\\\\python35') True &gt;&gt;&gt; getsize('c:\\\\python35\\\\python.exe') 26624 &gt;&gt;&gt; isfile('c:\\\\python35\\\\python.exe') True . Database with SQLite3 . SQLite3 is an opensource, which is embedded in Python library. | sqlite3.connect(database[, timeout, isolation_level, detect_types, factory]) | sqlite3.complete_statement(sql) | sqlite3.register_adapter(type, callable) | sqlite3.register_converter(typename, callable) . | Connection Class | Connection.cursor() | Connection.rollback() | Connection.close() | Connection.isolation_level | Connection.execute(sql[, parameters]) | . | Cursor Class . | Cursor.execute(sql[, parameters]) | Cursor.executemany(sql, seq_of_parameters) | Cursor.executescript(sql_script) | Cursor.fetchone() | Cursor.fetchmany([size=cursor.arraysize]) | Cursor.fetchall() | . | Connection.iterdump() . | CRUD example | . import sqlite3 #generate connection object con = sqlite3.connect(\":memory:\") # in memory # con = sqlite3.connect(\"test.db\") # in file #generate cursor cur = con.cursor() # create ( use text intead of varchar2 in SQLite3) cur.execute(\"create table PhoneBook (Name text, PhoneNum text);\") # insert cur.execute(\"insert into PhoneBook values ('derick', '010-111');\") # insert using variables name = \"gil dong\" phoneNumber = \"010-222\" cur.execute(\"insert into PhoneBook values ( ?, ?);\", (name, phoneNumber)) # input using Tuple type # multiple record datalist = ((\"tom\",\"010-123\"),(\"dsp\",\"010-567\")) # tuple in tuple cur.executemany(\"insert into PhoneBook values ( ?, ?);\", datalist) # input using Tuple type, with executemany function # search cur.execute(\"select * from PhoneBook;\") print(cur.fetchone()) print(cur.fetchmany(2)) cur.execute(\"select * from PhoneBook;\") print(cur.fetchall()) # dump print(\"--------- db dump ---------\") for i in con.iterdump(): print(i) # *** Result =&gt; results out as tuple type # ('derick', '010-111') # [('gil dong', '010-222'), ('tom', '010-123')] # [('derick', '010-111'), ('gil dong', '010-222'), ('tom', '010-123'), ('dsp', '010-567')] # --------- db dump --------- # BEGIN TRANSACTION; # CREATE TABLE PhoneBook (Name text, PhoneNum text); # INSERT INTO \"PhoneBook\" VALUES('derick','010-111'); # INSERT INTO \"PhoneBook\" VALUES('gil dong','010-222'); # INSERT INTO \"PhoneBook\" VALUES('tom','010-123'); # INSERT INTO \"PhoneBook\" VALUES('dsp','010-567'); # COMMIT; . | executemany example with tuple data | . import sqlite3 #generate connection object # con = sqlite3.connect(\":memory:\") # in memory con = sqlite3.connect(\"c:\\\\work\\\\sample.db\") # in file #generate cursor cur = con.cursor() # create ( use text intead of varchar2 in SQLite3) cur.execute(\"create table PhoneBook (Name text, PhoneNum text);\") # insert cur.execute(\"insert into PhoneBook values ('derick', '010-111');\") # insert using variables name = \"gil dong\" phoneNumber = \"010-222\" cur.execute(\"insert into PhoneBook values ( ?, ?);\", (name, phoneNumber)) # input using Tuple type # multiple record datalist = ((\"tom\",\"010-123\"),(\"dsp\",\"010-567\")) # tuple in tuple cur.executemany(\"insert into PhoneBook values ( ?, ?);\", datalist) # input using Tuple type, with executemany function # search cur.execute(\"select * from PhoneBook;\") for row in cur: print(row) # commit con.commit() # *** Result =&gt; results out as tuple type # ('derick', '010-111') # ('gil dong', '010-222') # ('tom', '010-123') # ('dsp', '010-567') . | Backup example | . import sqlite3 #generate connection object con = sqlite3.connect(\":memory:\") # in memory # con = sqlite3.connect(\"test.db\") # in file #generate cursor cur = con.cursor() # create ( use text intead of varchar2 in SQLite3) cur.execute(\"create table PhoneBook (Name text, PhoneNum text);\") # insert cur.execute(\"insert into PhoneBook values ('derick', '010-111');\") # insert using variables name = \"gil dong\" phoneNumber = \"010-222\" cur.execute(\"insert into PhoneBook values ( ?, ?);\", (name, phoneNumber)) # input using Tuple type # multiple record datalist = ((\"tom\",\"010-123\"),(\"dsp\",\"010-567\")) # tuple in tuple cur.executemany(\"insert into PhoneBook values ( ?, ?);\", datalist) # input using Tuple type, with executemany function # database dump with open(\"c:\\\\work\\\\dump.sql\",\"wt\") as f: for item in con.iterdump(): print(item) f.write(\"{0}\\n\".format(item)) print(\"backup completed\") # *** Result =&gt; results out as tuple type # BEGIN TRANSACTION; # CREATE TABLE PhoneBook (Name text, PhoneNum text); # INSERT INTO \"PhoneBook\" VALUES('derick','010-111'); # INSERT INTO \"PhoneBook\" VALUES('gil dong','010-222'); # INSERT INTO \"PhoneBook\" VALUES('tom','010-123'); # INSERT INTO \"PhoneBook\" VALUES('dsp','010-567'); # COMMIT; # backup completed . | Restore example | . # open new dump &gt;&gt;&gt; con = sqlite3.connect(\"c:\\\\work\\\\demo.db\") # read old dump &gt;&gt;&gt; with open(\"c:\\\\work\\\\dump.sql\") as f: SQLScript = f.read() # check dump script &gt;&gt;&gt; SQLScript 'BEGIN TRANSACTION;\\nCREATE TABLE PhoneBook (Name text, PhoneNum text);\\nINSERT INTO \"PhoneBook\" VALUES(\\'derick\\',\\'010-111\\');\\nINSERT INTO \"PhoneBook\" VALUES(\\'gil dong\\',\\'010-222\\');\\nINSERT INTO \"PhoneBook\" VALUES(\\'tom\\',\\'010-123\\');\\nINSERT INTO \"PhoneBook\" VALUES(\\'dsp\\',\\'010-567\\');\\nCOMMIT;\\n' # create cursor &gt;&gt;&gt; cur = con.cursor() # execute script &gt;&gt;&gt; cur.executescript(SQLScript) &lt;sqlite3.Cursor object at 0x03F4B7E0&gt; # select &gt;&gt;&gt; cur.execute(\"select * from PhoneBook;\") &lt;sqlite3.Cursor object at 0x03F4B7E0&gt; # fetch all &gt;&gt;&gt; cur.fetchall() [('derick', '010-111'), ('gil dong', '010-222'), ('tom', '010-123'), ('dsp', '010-567')] . Web Crawling with BeautifulSoup . | pip3 list | pip3 install BeautifulSoup4 | pip install requests | pip list . | Example of Webcrawling | . # request webserver import urllib.request from bs4 import BeautifulSoup data = urllib.request.urlopen(\"http://comic.naver.com/webtoon/list.nhn?titleId=20853&amp;weekday=fri\") soup = BeautifulSoup(data, \"html.parser\") cartoons = soup.find_all(\"td\", class_=\"title\") title = cartoons[0].find('a').text link = cartoons[0].find('a')[\"href\"] # print(title) # print(link) for item in cartoons: title = item.find(\"a\").text print(title.strip()) . | Save file and web crawling for all pages | . # coding:utf-8 from bs4 import BeautifulSoup import urllib.request import re for n in range(0,10): #address of clien data ='https://www.clien.net/service/board/sold?&amp;od=T31&amp;po=' + str(n) req = urllib.request.Request(data) data = urllib.request.urlopen(req).read() page = data.decode('utf-8', 'ignore') soup = BeautifulSoup(page, 'html.parser') list = soup.find_all('span', attrs={'data-role':'list-title-text'}) f = open(\"C:\\\\work\\\\clien.txt\", \"a+\", encoding=\"utf-8\") # incase of new, use wt for item in list: try: title = item.text if (re.search('갤럭시', title)): print(title.strip()) f.write(title.strip() + \"\\n\") except: pass f.close() print(\"end of web crawling\") . | Add user-agent in header | . # coding:utf-8 from bs4 import BeautifulSoup import urllib.request import re #User-Agent add hdr = {'User-agent':'Mozila/5.0 (compatible; MSIE 5.5; Windows NT)'} # make request by adding client info with Internet explorer for n in range(1,11): data ='https://dvdprime.com/g2/bbs/board.php?bo_table=comm&amp;page=' + str(n) req = urllib.request.Request(data, \\ headers = hdr) data = urllib.request.urlopen(req).read() page = data.decode('utf-8', 'ignore') soup = BeautifulSoup(page, 'html.parser') # &lt;span class='list_subject_span_pc'&gt;contents&lt;/span&gt; list = soup.find_all('span', attrs={'class':'list_subject_span_pc'}) for item in list: try: title = item.text if (re.search('회사', title)): print(title.strip()) except: pass . PyQt5 GUI . Install PyQt5-5.6-gpl-Py3.5-Qt5.6.0-x32-2.exe, make sure same version with python . | .ui file . | XML format | Make mapping signal and slot in Signal/Slot Editor on Qt designer | . | .py file . | Add login in py file | . | . # demo.ui (display) + demo.py(logic) import sys from PyQt5.QtWidgets import * from PyQt5 import uic import urllib.request from bs4 import BeautifulSoup form_class = uic.loadUiType(\"demo2.ui\")[0] #parent class((QMainWindow)) class DemoForm(QMainWindow, form_class): def __init__(self): super().__init__() self.setupUi(self) def firstClick(self): data = urllib.request.urlopen(\"http://comic.naver.com/webtoon/list.nhn?titleId=20853&amp;weekday=fri\") soup = BeautifulSoup(data, \"html.parser\") cartoons = soup.find_all(\"td\", class_=\"title\") # title = cartoons[0].find('a').text # link = cartoons[0].find('a')[\"href\"] # print(title) # print(link) for item in cartoons: title = item.find(\"a\").text print(title.strip()) def secondClick(self): self.label.setText(\"clicked second\") def thirdClick(self): self.label.setText(\"clicked third\") if __name__ == \"__main__\": app = QApplication(sys.argv) demoWindow = DemoForm() demoWindow.show() app.exec_() . | Get data and show table and link to browser. | . import sys from PyQt5.QtWidgets import * import urllib.request from bs4 import BeautifulSoup import webbrowser import re class Form(QMainWindow): def __init__(self): super().__init__() self.setupUI() def setupUI(self): # (x,y,width,height) self.setGeometry(200, 200, 800, 800) # INPUT self.lineEdit = QLineEdit(\"\", self) self.lineEdit.move(20, 20) #BUTTON self.btn = QPushButton(\"검색\", self) self.btn.move(120, 20) self.btn.clicked.connect(self.setTableWidgetData) self.tableWidget = QTableWidget(self) self.tableWidget.move(20, 70) self.tableWidget.resize(800, 600) self.tableWidget.setRowCount(50) self.tableWidget.setColumnCount(2) self.tableWidget.setColumnWidth(0, 300) self.tableWidget.setColumnWidth(1, 300) self.tableWidget.doubleClicked.connect(self.doubleClicked) def setTableWidgetData(self): row = 0 for n in range(0,5): data ='https://www.clien.net/service/board/sold?&amp;od=T31&amp;po=' + str(n) req = urllib.request.Request(data) data = urllib.request.urlopen(req).read() page = data.decode('utf-8', 'ignore') soup = BeautifulSoup(page, 'html.parser') list = soup.find_all('a', attrs={'class':'list_subject'}) f = open(\"clien.txt\", \"a+\", encoding=\"utf-8\") for item in list: try: span = item.contents[3] title = item.text.strip() if (re.search(self.lineEdit.text(), title)): title = title.replace(\"\\t\", \"\") title = title.replace(\"\\n\", \"\") print(title) link = 'https://www.clien.net' + item['href'] print(link.strip()) f.write(title+\"\\n\") f.write(link + \"\\n\") self.tableWidget.setItem(row, 0, QTableWidgetItem(title)) self.tableWidget.setItem(row, 1, QTableWidgetItem(link)) row += 1 print(\"row: \", row) except: pass f.close() def doubleClicked(self): url = self.tableWidget.item(self.tableWidget.currentRow(), 1).text() webbrowser.open(url) if __name__ == \"__main__\": app = QApplication(sys.argv) mywindow = Form() mywindow.show() app.exec_() . Pandas . | Import type . | from pandas import Series, DataFrame | import pandas as pd | . | Datatypes . | Series . | It is similar to list | . | Dataframe . | 2 array list | . | . | Read function . | read_csv : based on csv from DB mainly | read_table : based on tab key | read_fwf : based on fixed width | read_excel : based on excel | . | Functions . | plt.plot | plt.scatter | plt.bar | . # make one frame years = range(1880,2011) pieces = [] columns = [\"name\", \"sex\", \"births\"] for year in years: path = \"c:\\\\work\\\\yob%d.txt\" % year frame = pd.read_csv(path, names = columns) frame[\"year\"] = year pieces.append(frame) names = pd.concat(pieces, ignore_index=True) . | Summary . total_births = names.pivot_table(\"births\", index = 'year', columns='sex', aggfunc=sum) . | Plot . total_births.plot(title=\"년도별 성별 출생 숫자\") . | . ",
     "url": "/docs/programming-language/flutter-panabara/#table-of-contents",
     
     "relUrl": "/docs/programming-language/flutter-panabara/#table-of-contents"
-  },"460": {
+  },"461": {
     "doc": "Python",
     "title": "Python",
     "content": " ",
     "url": "/docs/programming-language/python/",
     
     "relUrl": "/docs/programming-language/python/"
-  },"461": {
+  },"462": {
     "doc": "Spring 기본 개념",
     "title": "Spring 기본 개념",
     "content": " ",
     "url": "/docs/framework/spring-basic/",
     
     "relUrl": "/docs/framework/spring-basic/"
-  },"462": {
+  },"463": {
     "doc": "Spring 기본 개념",
     "title": "Table of contents",
     "content": ". | Tomcat | HTTP 요청과 응답 | WAS | 설정파일 . | server.xml | web.xml | . | Tabbed Postman | 저장소 . | pageContext : page 별 | request : request 별 | session : 사용자별 | application : context 전체 | . | 서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트 | @RequestParam 과 @ModelAttribute | @GetMapping , @PostMapping | redirect 와 forward | 쿠키 : 브라우저에 저장 | 세션 : 서버에 저장 | 예외처리 | Spring DI | Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean | SQL &amp; SQL Workbench | Spring DB 다루기 &amp; Junit Test | DAO | AOP 개념과 용어 : 중복코드 분리위함 | Controller &gt; Service &gt; Repository(Dao) &gt; DB | @Transactional : 롤백 가능 | Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청 | Forward : 다른 곳으로 요청 | . 남궁성의 Spring framework 강좌 가 개인적으로 가장 잘 설명해주시고 이해하기 쉬웠던 강의라 생각한다. 잊지 않기 위해 정리한다. 참조자료 : https://github.com/castello/spring_basic . ",
     "url": "/docs/framework/spring-basic/#table-of-contents",
     
     "relUrl": "/docs/framework/spring-basic/#table-of-contents"
-  },"463": {
+  },"464": {
     "doc": "Spring 기본 개념",
     "title": "Tomcat",
     "content": ". | webapps 폴더에 war 파일을 넣어주면 해당 파일 압축 후에 서비스 된다. | . ",
     "url": "/docs/framework/spring-basic/#tomcat",
     
     "relUrl": "/docs/framework/spring-basic/#tomcat"
-  },"464": {
+  },"465": {
     "doc": "Spring 기본 개념",
     "title": "HTTP 요청과 응답",
     "content": ". | QueryString 을 처리하는 방법 . | @Controller -&gt; @RequestMapping -&gt; request.getParameter(\"aaa\") | . | HTTP 요청 -&gt; HttpServeltRequest request 매개변수 를 받아서 톰캣에서 처리한다. | . [실행결과] http://localhost:8080/ch2/requestInfo?year=2021&amp;month=10&amp;day=1 request.getCharacterEncoding()=UTF-8 request.getContentLength()=-1 request.getContentType()=null request.getMethod()=GET request.getProtocol()=HTTP/1.1 request.getScheme()=http request.getServerName()=localhost request.getServerPort()=8080 request.getRequestURI()=http://localhost:8080/ch2/requestInfo request.getRequestURI()=/ch2/requestInfo request.getContextPath()=/ch2 request.getServletPath()=/requestInfo request.getQueryString()=year=2021&amp;month=10&amp;day=1 request.getLocalName()=localhost request.getLocalPort()=8080 request.getRemoteAddr()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemoteHost()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemotePort()=54855 . | HttpServeltResponse 를 매개변수에 넣어 response 객체를 얻는다. | . ",
     "url": "/docs/framework/spring-basic/#http-%EC%9A%94%EC%B2%AD%EA%B3%BC-%EC%9D%91%EB%8B%B5",
     
     "relUrl": "/docs/framework/spring-basic/#http-요청과-응답"
-  },"465": {
+  },"466": {
     "doc": "Spring 기본 개념",
     "title": "WAS",
     "content": "Web Application Server : 서버에 프로그램을 설치한다. 예) 프로그램 업데이트를 서버에서만 하면 된다. ",
     "url": "/docs/framework/spring-basic/#was",
     
     "relUrl": "/docs/framework/spring-basic/#was"
-  },"466": {
+  },"467": {
     "doc": "Spring 기본 개념",
     "title": "설정파일",
     "content": "server.xml . | 톰캣 설치경로/conf/server.xml : 톰갯 서버 설정파일 | . web.xml . | 톰갯 설치경로/conf/web.xml : Tomcat 의 모든 web app 의 공통설정 | 웹앱이름/WEB-INF/web.xml : wep app 의 개별 설정 | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC",
     
     "relUrl": "/docs/framework/spring-basic/#설정파일"
-  },"467": {
+  },"468": {
     "doc": "Spring 기본 개념",
     "title": "Tabbed Postman",
     "content": ". | 크롬 확장프로그램에서 제공되는 Rest Client 로 포스트맨 설치 대신 사용이 가능하다. | . ",
     "url": "/docs/framework/spring-basic/#tabbed-postman",
     
     "relUrl": "/docs/framework/spring-basic/#tabbed-postman"
-  },"468": {
+  },"469": {
     "doc": "Spring 기본 개념",
     "title": "저장소",
     "content": "pageContext : page 별 . request : request 별 . session : 사용자별 . application : context 전체 . ",
     "url": "/docs/framework/spring-basic/#%EC%A0%80%EC%9E%A5%EC%86%8C",
     
     "relUrl": "/docs/framework/spring-basic/#저장소"
-  },"469": {
+  },"470": {
     "doc": "Spring 기본 개념",
     "title": "서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%84%9C%EB%B8%94%EB%A6%BF--jsp--%EC%8A%A4%ED%94%84%EB%A7%81--%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
     
     "relUrl": "/docs/framework/spring-basic/#서블릿--jsp--스프링--스프링부트"
-  },"470": {
+  },"471": {
     "doc": "Spring 기본 개념",
     "title": "@RequestParam 과 @ModelAttribute",
     "content": " ",
     "url": "/docs/framework/spring-basic/#requestparam-%EA%B3%BC-modelattribute",
     
     "relUrl": "/docs/framework/spring-basic/#requestparam-과-modelattribute"
-  },"471": {
+  },"472": {
     "doc": "Spring 기본 개념",
     "title": "@GetMapping , @PostMapping",
     "content": " ",
     "url": "/docs/framework/spring-basic/#getmapping--postmapping",
     
     "relUrl": "/docs/framework/spring-basic/#getmapping--postmapping"
-  },"472": {
+  },"473": {
     "doc": "Spring 기본 개념",
     "title": "redirect 와 forward",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect-%EC%99%80-forward",
     
     "relUrl": "/docs/framework/spring-basic/#redirect-와-forward"
-  },"473": {
+  },"474": {
     "doc": "Spring 기본 개념",
     "title": "쿠키 : 브라우저에 저장",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%BF%A0%ED%82%A4--%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#쿠키--브라우저에-저장"
-  },"474": {
+  },"475": {
     "doc": "Spring 기본 개념",
     "title": "세션 : 서버에 저장",
     "content": ". | 무조건 서버에서 생성하여 response 헤더에 세션정보를 넣어준다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%B8%EC%85%98--%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#세션--서버에-저장"
-  },"475": {
+  },"476": {
     "doc": "Spring 기본 개념",
     "title": "예외처리",
     "content": ". | try-catch 를 사용한다. | @ContrlloerAdvice 내 @ExceptionHandler 에서 처리하도록 한다. | @ResponseStatus : 응답메시지의 상태코드를 변경할 때 사용한다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC",
     
     "relUrl": "/docs/framework/spring-basic/#예외처리"
-  },"476": {
+  },"477": {
     "doc": "Spring 기본 개념",
     "title": "Spring DI",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-di",
     
     "relUrl": "/docs/framework/spring-basic/#spring-di"
-  },"477": {
+  },"478": {
     "doc": "Spring 기본 개념",
     "title": "Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean",
     "content": " ",
     "url": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb%EB%B3%B5%EC%9E%A1--spring-bean",
     
     "relUrl": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb복잡--spring-bean"
-  },"478": {
+  },"479": {
     "doc": "Spring 기본 개념",
     "title": "SQL &amp; SQL Workbench",
     "content": " ",
     "url": "/docs/framework/spring-basic/#sql--sql-workbench",
     
     "relUrl": "/docs/framework/spring-basic/#sql--sql-workbench"
-  },"479": {
+  },"480": {
     "doc": "Spring 기본 개념",
     "title": "Spring DB 다루기 &amp; Junit Test",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-db-%EB%8B%A4%EB%A3%A8%EA%B8%B0--junit-test",
     
     "relUrl": "/docs/framework/spring-basic/#spring-db-다루기--junit-test"
-  },"480": {
+  },"481": {
     "doc": "Spring 기본 개념",
     "title": "DAO",
     "content": " ",
     "url": "/docs/framework/spring-basic/#dao",
     
     "relUrl": "/docs/framework/spring-basic/#dao"
-  },"481": {
+  },"482": {
     "doc": "Spring 기본 개념",
     "title": "AOP 개념과 용어 : 중복코드 분리위함",
     "content": ". | 메서드의 시작 또는 끝에 자동으로 코드(advice) 를 실행 중에 추가 | 횡단관심사 : 예) logging | @Before, @After, @Around | . ",
     "url": "/docs/framework/spring-basic/#aop-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%9A%A9%EC%96%B4--%EC%A4%91%EB%B3%B5%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9C%84%ED%95%A8",
     
     "relUrl": "/docs/framework/spring-basic/#aop-개념과-용어--중복코드-분리위함"
-  },"482": {
+  },"483": {
     "doc": "Spring 기본 개념",
     "title": "Controller &gt; Service &gt; Repository(Dao) &gt; DB",
     "content": ". | 위 3개 모두 Component 스캔이 된다. | . ",
     "url": "/docs/framework/spring-basic/#controller--service--repositorydao--db",
     
     "relUrl": "/docs/framework/spring-basic/#controller--service--repositorydao--db"
-  },"483": {
+  },"484": {
     "doc": "Spring 기본 개념",
     "title": "@Transactional : 롤백 가능",
     "content": ". | REQUIRES_NEW : 현재와 다른 새로운 transaction 생성한다. (default : REQUIRED) | . ",
     "url": "/docs/framework/spring-basic/#transactional--%EB%A1%A4%EB%B0%B1-%EA%B0%80%EB%8A%A5",
     
     "relUrl": "/docs/framework/spring-basic/#transactional--롤백-가능"
-  },"484": {
+  },"485": {
     "doc": "Spring 기본 개념",
     "title": "Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect--300%EB%B2%88-%EC%9D%91%EB%8B%B5-2%EB%B2%88-%EC%9A%94%EC%B2%AD-2%EB%B2%88-%EC%9D%91%EB%8B%B5-%EB%91%90%EB%B2%88%EC%A8%B0%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EA%B0%80-%EC%9E%90%EB%8F%99-get-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#redirect--300번-응답-2번-요청-2번-응답-두번쨰는-브라우저가-자동-get-요청"
-  },"485": {
+  },"486": {
     "doc": "Spring 기본 개념",
     "title": "Forward : 다른 곳으로 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#forward--%EB%8B%A4%EB%A5%B8-%EA%B3%B3%EC%9C%BC%EB%A1%9C-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#forward--다른-곳으로-요청"
-  },"486": {
+  },"487": {
     "doc": "Spring",
     "title": "Spring",
     "content": " ",
     "url": "/docs/framework/spring/",
     
     "relUrl": "/docs/framework/spring/"
-  },"487": {
+  },"488": {
     "doc": "Spring Boot 참조 자료",
     "title": "Spring Boot 참조 자료",
     "content": ". Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다. 추천 자료 . | 점프 투 스프링부트 . | 남궁성의 Spring Boot 강좌 - 기본편 . | . ",
     "url": "/docs/framework/spring-reference/",
     
     "relUrl": "/docs/framework/spring-reference/"
-  },"488": {
+  },"489": {
     "doc": "Spring Boot",
     "title": "Spring Boot",
     "content": " ",
     "url": "/docs/framework/springboot/",
     
     "relUrl": "/docs/framework/springboot/"
-  },"489": {
+  },"490": {
     "doc": "5 Whys 기법",
     "title": "5 Whys 기법",
     "content": ". 한 플랫폼 기업에서는 장애 원인 분석을 찾기 위한 기법으로 5 Whys 기법을 활용한다고 합니다. 5 Whys 기법는 장애 분석 기법이 아닌 어떠한 상황이 발생했을 때 그에 대한 원인을 파악하기 위해 착안한 방법의 일종이라고 합니다. 일상 생활에서도 특정 원인을 분석할 때 좋을 것 같아 아래와 같이 정리하고자 합니다. 배경 . 5 Whys 는 도요타의 Taiichi Ohno 가 체계적인 문제를 위해 개발한 도구로, 어떠한 문제 상황에 대해 그러한 상황이 발생하게 된 원인을 ‘왜 그러한 상황이 발생했는가?’ 라는 질문을 여러 번 반복해 나가면 문제의 근본 원인에 도달할 수 있다는 방법론입니다. 기법 사례 . 미국 제퍼슨 독립기념관의 대리석 기둥이 해마다 지속적으로 부식되자 많은 보수 비용이 발생하게 되고 기념관의 이미지가 훼손되었습니다. 5Whys 를 통해 이러한 문제를 해결한 사례를 들어보겠습니다. | Why 1. 왜 대리석들이 빨리 부식되는가? . | 비누 청소를 자주 하기 떄문이다. | . | Why 2. 왜 비누 청소를 자주 하는가? . | 비둘기 배설물이 많이 묻기 때문이다. | . | Why 3. 왜 비둘기 배설물이 많은가? . | 비둘기의 먹잇감인 거미줄이 많기 때문이다. | . | Why 4. 왜 거미줄이 많은가? . | 거미의 먹잇감인 불나방이 많이 있었기 때문이다. | . | Why 5. 왜 불나방이 많은가? . | 실내 전등을 주변보다 일찍 켜기 때문이다. | . | . 이를 통해 도출된 근본 원인을 해결하기 위해서 제퍼슨 독립 기념관은 주변보다 2시간 늦게 전등을 밝히는 것으로 문제를 해결했다고 합니다. 정리 . 위와 같이 여러 단계를 거쳐 근본 원인을 도출할 수 있는데, 반드시 5개일 필요는 없다고 합니다. 단계를 거쳐가며 합리적인 원인을 찾아 나가며 근본 원인(root cause) 를 찾는 것으로도 충분하다고 생각합니다. 자신의 고민거리나 상대방의 의견을 파악하는 등 평소 생활 속에서도 많은 도움이 될 것 같기도 하네요. ",
     "url": "/docs/theoretical/theoretical-5why/",
     
     "relUrl": "/docs/theoretical/theoretical-5why/"
-  },"490": {
+  },"491": {
     "doc": "통계 분석 기초 용어 정리",
     "title": "통계 분석 기초 용어 정리",
     "content": ". 빅데이터를 학습하기 전에 가장 먼저 맞닥뜨리는 것이 아무래도 통계일 것입니다. 수집된 자료를 정리, 분석하고 일정한 패턴 분석 및 인과관계를 파악하기 위해서는 기본이 되는 통계 개념을 이해하고 넘어가고자 아래와 같이 정리합니다. ■ 평균 . | 자료의 합 / 자료의 개수 | . ■ 중앙값(Median)      . | 자료를 크기순서로 나열했을 때 가장 중앙에 위치한 값이다.      ㄴ = MEDIAN(범위) | . ■ 최빈값(mode)  . | 자료 중에서 가장 출현빈도가 높은 값이다. | = MODE(범위) | . ■ 분산(Variance)      ㄴ평균을 중심으로 관찰값들이 얼마나 떨어져 분포하는가를 나타낸다.      ㄴ편차제곱합 : 편차1^2 + 편차2^2 + …..      ㄴ분산 = 편차제곱합 / 데이터 수 = VAR(범위) . ■ 표준편차(standard deviation) . | 분산의 양의 제곱근으로 원 자료 측정단위와 같은 단위로 퍼짐 정도를 나타낸다. | 표준편차 = 분산^(1/2) = STDEV(범위) | . ■ 변동계수(coefficient of variation, CV) . | 평균이 크게 다른 두 개 이상의 집단을 비교할 때 또는 각 집단의 상대적 동질성을 비교할 때 주로 사용 | CV = 표준편차 / 평균 | . ■ 범위 . | 최대값 - 최소값, 가장 간단하게 퍼짐 정도를 파악할 수 있는 척도이다. | . ■ 사분위수 범위(IQR : Interquartile Range) . | 제 3사분위수와 제 1사분위수의 차를 의미, 자료의 가운데 부분에 위치한 50%의미 | 사분위수 = 3사분위수 - 1사분위수 = QUARTILE(범위, quart) | . ■ 상자그림 . | 최소값, 1사분위, 2사분위, 3사분위, 최대값을 이용하여 그림을 그린다. | . ■ 백분위수 . | 어떤 숫자들의 집합에서 제c백분위수는 수들의 c% 가 그 값보다 작고 나머지는 그 값보다 큰 값을 말한다. | . ■ 데이터의 Z 값 . | 어떤 특정한 자료값이 평균으로부터 표준편차의 몇 배 만큼 떨어져 있는가를 측정한다. | Z = (변량(x) - 평균) / 표준편차 = STANDARIDZE(x, mean, standard_dev) | . ",
     "url": "/docs/theoretical/theoretical-stats/",
     
     "relUrl": "/docs/theoretical/theoretical-stats/"
-  },"491": {
+  },"492": {
     "doc": "Theoretical",
     "title": "Theoretical",
     "content": "이론적인 내용들을 정리하였습니다. ",
     "url": "/docs/theoretical",
     
     "relUrl": "/docs/theoretical"
-  },"492": {
+  },"493": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/",
     
     "relUrl": "/docs/programming-language/vuejs-basic/"
-  },"493": {
+  },"494": {
     "doc": "Vue.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Vue 설치 | 데이터 바인딩 | 반복문 | 이벤트 핸들러 | 모달창 만들기 | export defalut . | 데이터 부분 | 가져오는 부분 | . | . 참조 자료 : [인스타그램을 만들며 배워보는 Vue.js 3 완벽 가이드] (https://codingapple.com/course/vue-js/) . ",
     "url": "/docs/programming-language/vuejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#table-of-contents"
-  },"494": {
+  },"495": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue 설치",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#vue-%EC%84%A4%EC%B9%98",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#vue-설치"
-  },"495": {
+  },"496": {
     "doc": "Vue.js 기본 개념",
     "title": "데이터 바인딩",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#데이터-바인딩"
-  },"496": {
+  },"497": {
     "doc": "Vue.js 기본 개념",
     "title": "반복문",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%B0%98%EB%B3%B5%EB%AC%B8",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#반복문"
-  },"497": {
+  },"498": {
     "doc": "Vue.js 기본 개념",
     "title": "이벤트 핸들러",
     "content": "&lt;button @mouseover =\"신고수--\" @click=\"신고수++\"&gt;허위매물신고&lt;/button&gt; &lt;span&gt;신고수 : { {신고수} }&lt;/span&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%9F%AC",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#이벤트-핸들러"
-  },"498": {
+  },"499": {
     "doc": "Vue.js 기본 개념",
     "title": "모달창 만들기",
     "content": "모달창을 미리 만들어 클릭 시 상태조건을 변경한다. &lt;div class=\"black-bg\" v-if=\"모달창열렸니 == true\"&gt; &lt;div class=\"white-bg\"&gt; &lt;h4&gt;상세페이지임&lt;/h4&gt; &lt;p&gt;상세페이지 내용임&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#모달창-만들기"
-  },"499": {
+  },"500": {
     "doc": "Vue.js 기본 개념",
     "title": "export defalut",
     "content": "데이터 부분 . export default [{ id : 0, title: \"Sinrim station 30 meters away\", image: \"https://codingapple1.github.io/vue/room0.jpg\", content: \"18년 신축공사한 남향 원룸 ☀️, 공기청정기 제공\", price: 340000 }, { . 가져오는 부분 . import data from './assets/oneroom.js'; export default { name: 'App', data() { return { 원룸들 : data, . &lt;img :src=\"원룸들[2].image\" class=\"room-img\"&gt; &lt;h4 @click=\"모달창열렸니 = true\"&gt;{ {원룸들[2].title} } &lt;/h4&gt; &lt;p&gt;{ {원룸들[2].price} } 원 &lt;/p&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#export-defalut",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#export-defalut"
-  },"500": {
+  },"501": {
     "doc": "Vue.js",
     "title": "Vue.js",
     "content": " ",

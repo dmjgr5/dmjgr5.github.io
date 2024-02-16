@@ -53,3 +53,8 @@ minikube kubectl -- get pods -A
 alias kubectl="minikube kubectl --"
 ```
 
+## Minikube 사용법
+
+아래를 참조하여 진행해 보자.
+
+`https://www.joinc.co.kr/w/man/12/kubernetes/minikube`
