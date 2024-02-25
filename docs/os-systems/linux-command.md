@@ -128,6 +128,19 @@ Swap:            0B          0B          0B
 ```
 
 
+## systemctl list-units -t service
+
+service 프로세스 항목과 상태를 조회한다.
+
+```sh
+user:~$ systemctl list-units -t service 
+  UNIT                                                  LOAD   ACTIVE SUB     DESCRIPTION                                                       
+  accounts-daemon.service                               loaded active running Accounts Service                                                  
+  acpid.service                                         loaded active running ACPI event daemon                                                 
+  alsa-restore.service                                  loaded active exited  Save/Restore Sound Card State   
+```
+
+
 ## ps -ef
 
 전체적인 프로세스와 관련된 옵션이다.
