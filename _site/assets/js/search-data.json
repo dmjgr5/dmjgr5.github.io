@@ -3318,32 +3318,32 @@
     "relUrl": "/docs/programming-language/python/"
   },"474": {
     "doc": "References",
-    "title": "References",
-    "content": ". ",
-    "url": "/references/",
-    
-    "relUrl": "/references/"
-  },"475": {
-    "doc": "References",
     "title": "Maven",
     "content": ". | Maven clean, compile, package, install, deploy | . ",
     "url": "/references/#maven",
     
     "relUrl": "/references/#maven"
-  },"476": {
+  },"475": {
     "doc": "References",
     "title": "Helm Chart",
     "content": ". | Helm chart 생성, 테스트, 패키징, Helm Repository에 배포하기 | . ",
     "url": "/references/#helm-chart",
     
     "relUrl": "/references/#helm-chart"
-  },"477": {
+  },"476": {
     "doc": "References",
     "title": "Docker Image",
     "content": ". | Spring Boot 컨테이너 이미지 사이즈 경량화 방법 | . ",
     "url": "/references/#docker-image",
     
     "relUrl": "/references/#docker-image"
+  },"477": {
+    "doc": "References",
+    "title": "References",
+    "content": " ",
+    "url": "/references/",
+    
+    "relUrl": "/references/"
   },"478": {
     "doc": "Spring 기본 개념",
     "title": "Spring 기본 개념",
