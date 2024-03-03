@@ -3325,299 +3325,306 @@
     "relUrl": "/references/#maven"
   },"475": {
     "doc": "References",
-    "title": "Helm Chart",
-    "content": ". | Helm chart 생성, 테스트, 패키징, Helm Repository에 배포하기 | . ",
-    "url": "/references/#helm-chart",
-    
-    "relUrl": "/references/#helm-chart"
-  },"476": {
-    "doc": "References",
     "title": "Docker Image",
     "content": ". | Spring Boot 컨테이너 이미지 사이즈 경량화 방법 | . ",
     "url": "/references/#docker-image",
     
     "relUrl": "/references/#docker-image"
+  },"476": {
+    "doc": "References",
+    "title": "Helm Chart",
+    "content": ". | Helm chart 생성, 테스트, 패키징, Helm Repository에 배포하기 | . ",
+    "url": "/references/#helm-chart",
+    
+    "relUrl": "/references/#helm-chart"
   },"477": {
+    "doc": "References",
+    "title": "Kubernetes",
+    "content": ". | Job, CronJob에 대해 이해하고 실습해보기 | . ",
+    "url": "/references/#kubernetes",
+    
+    "relUrl": "/references/#kubernetes"
+  },"478": {
     "doc": "References",
     "title": "References",
     "content": " ",
     "url": "/references/",
     
     "relUrl": "/references/"
-  },"478": {
+  },"479": {
     "doc": "Spring 기본 개념",
     "title": "Spring 기본 개념",
     "content": " ",
     "url": "/docs/framework/spring-basic/",
     
     "relUrl": "/docs/framework/spring-basic/"
-  },"479": {
+  },"480": {
     "doc": "Spring 기본 개념",
     "title": "Table of contents",
     "content": ". | Tomcat | HTTP 요청과 응답 | WAS | 설정파일 . | server.xml | web.xml | . | Tabbed Postman | 저장소 . | pageContext : page 별 | request : request 별 | session : 사용자별 | application : context 전체 | . | 서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트 | @RequestParam 과 @ModelAttribute | @GetMapping , @PostMapping | redirect 와 forward | 쿠키 : 브라우저에 저장 | 세션 : 서버에 저장 | 예외처리 | Spring DI | Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean | SQL &amp; SQL Workbench | Spring DB 다루기 &amp; Junit Test | DAO | AOP 개념과 용어 : 중복코드 분리위함 | Controller &gt; Service &gt; Repository(Dao) &gt; DB | @Transactional : 롤백 가능 | Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청 | Forward : 다른 곳으로 요청 | . 남궁성의 Spring framework 강좌 가 개인적으로 가장 잘 설명해주시고 이해하기 쉬웠던 강의라 생각한다. 잊지 않기 위해 정리한다. 참조자료 : https://github.com/castello/spring_basic . ",
     "url": "/docs/framework/spring-basic/#table-of-contents",
     
     "relUrl": "/docs/framework/spring-basic/#table-of-contents"
-  },"480": {
+  },"481": {
     "doc": "Spring 기본 개념",
     "title": "Tomcat",
     "content": ". | webapps 폴더에 war 파일을 넣어주면 해당 파일 압축 후에 서비스 된다. | . ",
     "url": "/docs/framework/spring-basic/#tomcat",
     
     "relUrl": "/docs/framework/spring-basic/#tomcat"
-  },"481": {
+  },"482": {
     "doc": "Spring 기본 개념",
     "title": "HTTP 요청과 응답",
     "content": ". | QueryString 을 처리하는 방법 . | @Controller -&gt; @RequestMapping -&gt; request.getParameter(\"aaa\") | . | HTTP 요청 -&gt; HttpServeltRequest request 매개변수 를 받아서 톰캣에서 처리한다. | . [실행결과] http://localhost:8080/ch2/requestInfo?year=2021&amp;month=10&amp;day=1 request.getCharacterEncoding()=UTF-8 request.getContentLength()=-1 request.getContentType()=null request.getMethod()=GET request.getProtocol()=HTTP/1.1 request.getScheme()=http request.getServerName()=localhost request.getServerPort()=8080 request.getRequestURI()=http://localhost:8080/ch2/requestInfo request.getRequestURI()=/ch2/requestInfo request.getContextPath()=/ch2 request.getServletPath()=/requestInfo request.getQueryString()=year=2021&amp;month=10&amp;day=1 request.getLocalName()=localhost request.getLocalPort()=8080 request.getRemoteAddr()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemoteHost()=0:0:0:0:0:0:0:1 &lt;--- AWS에 배포(deploy)한 다음에 실행하면, 실제 ip주소를 확인할 수 있음. request.getRemotePort()=54855 . | HttpServeltResponse 를 매개변수에 넣어 response 객체를 얻는다. | . ",
     "url": "/docs/framework/spring-basic/#http-%EC%9A%94%EC%B2%AD%EA%B3%BC-%EC%9D%91%EB%8B%B5",
     
     "relUrl": "/docs/framework/spring-basic/#http-요청과-응답"
-  },"482": {
+  },"483": {
     "doc": "Spring 기본 개념",
     "title": "WAS",
     "content": "Web Application Server : 서버에 프로그램을 설치한다. 예) 프로그램 업데이트를 서버에서만 하면 된다. ",
     "url": "/docs/framework/spring-basic/#was",
     
     "relUrl": "/docs/framework/spring-basic/#was"
-  },"483": {
+  },"484": {
     "doc": "Spring 기본 개념",
     "title": "설정파일",
     "content": "server.xml . | 톰캣 설치경로/conf/server.xml : 톰갯 서버 설정파일 | . web.xml . | 톰갯 설치경로/conf/web.xml : Tomcat 의 모든 web app 의 공통설정 | 웹앱이름/WEB-INF/web.xml : wep app 의 개별 설정 | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC",
     
     "relUrl": "/docs/framework/spring-basic/#설정파일"
-  },"484": {
+  },"485": {
     "doc": "Spring 기본 개념",
     "title": "Tabbed Postman",
     "content": ". | 크롬 확장프로그램에서 제공되는 Rest Client 로 포스트맨 설치 대신 사용이 가능하다. | . ",
     "url": "/docs/framework/spring-basic/#tabbed-postman",
     
     "relUrl": "/docs/framework/spring-basic/#tabbed-postman"
-  },"485": {
+  },"486": {
     "doc": "Spring 기본 개념",
     "title": "저장소",
     "content": "pageContext : page 별 . request : request 별 . session : 사용자별 . application : context 전체 . ",
     "url": "/docs/framework/spring-basic/#%EC%A0%80%EC%9E%A5%EC%86%8C",
     
     "relUrl": "/docs/framework/spring-basic/#저장소"
-  },"486": {
+  },"487": {
     "doc": "Spring 기본 개념",
     "title": "서블릿 &gt; JSP &gt; 스프링 &gt; 스프링부트",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%84%9C%EB%B8%94%EB%A6%BF--jsp--%EC%8A%A4%ED%94%84%EB%A7%81--%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8",
     
     "relUrl": "/docs/framework/spring-basic/#서블릿--jsp--스프링--스프링부트"
-  },"487": {
+  },"488": {
     "doc": "Spring 기본 개념",
     "title": "@RequestParam 과 @ModelAttribute",
     "content": " ",
     "url": "/docs/framework/spring-basic/#requestparam-%EA%B3%BC-modelattribute",
     
     "relUrl": "/docs/framework/spring-basic/#requestparam-과-modelattribute"
-  },"488": {
+  },"489": {
     "doc": "Spring 기본 개념",
     "title": "@GetMapping , @PostMapping",
     "content": " ",
     "url": "/docs/framework/spring-basic/#getmapping--postmapping",
     
     "relUrl": "/docs/framework/spring-basic/#getmapping--postmapping"
-  },"489": {
+  },"490": {
     "doc": "Spring 기본 개념",
     "title": "redirect 와 forward",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect-%EC%99%80-forward",
     
     "relUrl": "/docs/framework/spring-basic/#redirect-와-forward"
-  },"490": {
+  },"491": {
     "doc": "Spring 기본 개념",
     "title": "쿠키 : 브라우저에 저장",
     "content": " ",
     "url": "/docs/framework/spring-basic/#%EC%BF%A0%ED%82%A4--%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#쿠키--브라우저에-저장"
-  },"491": {
+  },"492": {
     "doc": "Spring 기본 개념",
     "title": "세션 : 서버에 저장",
     "content": ". | 무조건 서버에서 생성하여 response 헤더에 세션정보를 넣어준다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%84%B8%EC%85%98--%EC%84%9C%EB%B2%84%EC%97%90-%EC%A0%80%EC%9E%A5",
     
     "relUrl": "/docs/framework/spring-basic/#세션--서버에-저장"
-  },"492": {
+  },"493": {
     "doc": "Spring 기본 개념",
     "title": "예외처리",
     "content": ". | try-catch 를 사용한다. | @ContrlloerAdvice 내 @ExceptionHandler 에서 처리하도록 한다. | @ResponseStatus : 응답메시지의 상태코드를 변경할 때 사용한다. | . ",
     "url": "/docs/framework/spring-basic/#%EC%98%88%EC%99%B8%EC%B2%98%EB%A6%AC",
     
     "relUrl": "/docs/framework/spring-basic/#예외처리"
-  },"493": {
+  },"494": {
     "doc": "Spring 기본 개념",
     "title": "Spring DI",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-di",
     
     "relUrl": "/docs/framework/spring-basic/#spring-di"
-  },"494": {
+  },"495": {
     "doc": "Spring 기본 개념",
     "title": "Java Beans &gt; Servlet &amp; JSP bean &gt; EJB(복잡) &gt; Spring Bean",
     "content": " ",
     "url": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb%EB%B3%B5%EC%9E%A1--spring-bean",
     
     "relUrl": "/docs/framework/spring-basic/#java-beans--servlet--jsp-bean--ejb복잡--spring-bean"
-  },"495": {
+  },"496": {
     "doc": "Spring 기본 개념",
     "title": "SQL &amp; SQL Workbench",
     "content": " ",
     "url": "/docs/framework/spring-basic/#sql--sql-workbench",
     
     "relUrl": "/docs/framework/spring-basic/#sql--sql-workbench"
-  },"496": {
+  },"497": {
     "doc": "Spring 기본 개념",
     "title": "Spring DB 다루기 &amp; Junit Test",
     "content": " ",
     "url": "/docs/framework/spring-basic/#spring-db-%EB%8B%A4%EB%A3%A8%EA%B8%B0--junit-test",
     
     "relUrl": "/docs/framework/spring-basic/#spring-db-다루기--junit-test"
-  },"497": {
+  },"498": {
     "doc": "Spring 기본 개념",
     "title": "DAO",
     "content": " ",
     "url": "/docs/framework/spring-basic/#dao",
     
     "relUrl": "/docs/framework/spring-basic/#dao"
-  },"498": {
+  },"499": {
     "doc": "Spring 기본 개념",
     "title": "AOP 개념과 용어 : 중복코드 분리위함",
     "content": ". | 메서드의 시작 또는 끝에 자동으로 코드(advice) 를 실행 중에 추가 | 횡단관심사 : 예) logging | @Before, @After, @Around | . ",
     "url": "/docs/framework/spring-basic/#aop-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%9A%A9%EC%96%B4--%EC%A4%91%EB%B3%B5%EC%BD%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9C%84%ED%95%A8",
     
     "relUrl": "/docs/framework/spring-basic/#aop-개념과-용어--중복코드-분리위함"
-  },"499": {
+  },"500": {
     "doc": "Spring 기본 개념",
     "title": "Controller &gt; Service &gt; Repository(Dao) &gt; DB",
     "content": ". | 위 3개 모두 Component 스캔이 된다. | . ",
     "url": "/docs/framework/spring-basic/#controller--service--repositorydao--db",
     
     "relUrl": "/docs/framework/spring-basic/#controller--service--repositorydao--db"
-  },"500": {
+  },"501": {
     "doc": "Spring 기본 개념",
     "title": "@Transactional : 롤백 가능",
     "content": ". | REQUIRES_NEW : 현재와 다른 새로운 transaction 생성한다. (default : REQUIRED) | . ",
     "url": "/docs/framework/spring-basic/#transactional--%EB%A1%A4%EB%B0%B1-%EA%B0%80%EB%8A%A5",
     
     "relUrl": "/docs/framework/spring-basic/#transactional--롤백-가능"
-  },"501": {
+  },"502": {
     "doc": "Spring 기본 개념",
     "title": "Redirect : 300번 응답, 2번 요청 2번 응답, 두번쨰는 브라우저가 자동 GET 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#redirect--300%EB%B2%88-%EC%9D%91%EB%8B%B5-2%EB%B2%88-%EC%9A%94%EC%B2%AD-2%EB%B2%88-%EC%9D%91%EB%8B%B5-%EB%91%90%EB%B2%88%EC%A8%B0%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EA%B0%80-%EC%9E%90%EB%8F%99-get-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#redirect--300번-응답-2번-요청-2번-응답-두번쨰는-브라우저가-자동-get-요청"
-  },"502": {
+  },"503": {
     "doc": "Spring 기본 개념",
     "title": "Forward : 다른 곳으로 요청",
     "content": " ",
     "url": "/docs/framework/spring-basic/#forward--%EB%8B%A4%EB%A5%B8-%EA%B3%B3%EC%9C%BC%EB%A1%9C-%EC%9A%94%EC%B2%AD",
     
     "relUrl": "/docs/framework/spring-basic/#forward--다른-곳으로-요청"
-  },"503": {
+  },"504": {
     "doc": "Spring",
     "title": "Spring",
     "content": " ",
     "url": "/docs/framework/spring/",
     
     "relUrl": "/docs/framework/spring/"
-  },"504": {
+  },"505": {
     "doc": "Spring Boot 참조 자료",
     "title": "Spring Boot 참조 자료",
     "content": ". Spring boot 관련하여 이해하기 쉽고 예제 중심으로 설명된 추천할 만한 자료를 기록한다. 추천 자료 . | 점프 투 스프링부트 . | 남궁성의 Spring Boot 강좌 - 기본편 . | . ",
     "url": "/docs/framework/spring-reference/",
     
     "relUrl": "/docs/framework/spring-reference/"
-  },"505": {
+  },"506": {
     "doc": "Spring Boot",
     "title": "Spring Boot",
     "content": " ",
     "url": "/docs/framework/springboot/",
     
     "relUrl": "/docs/framework/springboot/"
-  },"506": {
+  },"507": {
     "doc": "5 Whys 기법",
     "title": "5 Whys 기법",
     "content": ". 한 플랫폼 기업에서는 장애 원인 분석을 찾기 위한 기법으로 5 Whys 기법을 활용한다고 합니다. 5 Whys 기법는 장애 분석 기법이 아닌 어떠한 상황이 발생했을 때 그에 대한 원인을 파악하기 위해 착안한 방법의 일종이라고 합니다. 일상 생활에서도 특정 원인을 분석할 때 좋을 것 같아 아래와 같이 정리하고자 합니다. 배경 . 5 Whys 는 도요타의 Taiichi Ohno 가 체계적인 문제를 위해 개발한 도구로, 어떠한 문제 상황에 대해 그러한 상황이 발생하게 된 원인을 ‘왜 그러한 상황이 발생했는가?’ 라는 질문을 여러 번 반복해 나가면 문제의 근본 원인에 도달할 수 있다는 방법론입니다. 기법 사례 . 미국 제퍼슨 독립기념관의 대리석 기둥이 해마다 지속적으로 부식되자 많은 보수 비용이 발생하게 되고 기념관의 이미지가 훼손되었습니다. 5Whys 를 통해 이러한 문제를 해결한 사례를 들어보겠습니다. | Why 1. 왜 대리석들이 빨리 부식되는가? . | 비누 청소를 자주 하기 떄문이다. | . | Why 2. 왜 비누 청소를 자주 하는가? . | 비둘기 배설물이 많이 묻기 때문이다. | . | Why 3. 왜 비둘기 배설물이 많은가? . | 비둘기의 먹잇감인 거미줄이 많기 때문이다. | . | Why 4. 왜 거미줄이 많은가? . | 거미의 먹잇감인 불나방이 많이 있었기 때문이다. | . | Why 5. 왜 불나방이 많은가? . | 실내 전등을 주변보다 일찍 켜기 때문이다. | . | . 이를 통해 도출된 근본 원인을 해결하기 위해서 제퍼슨 독립 기념관은 주변보다 2시간 늦게 전등을 밝히는 것으로 문제를 해결했다고 합니다. 정리 . 위와 같이 여러 단계를 거쳐 근본 원인을 도출할 수 있는데, 반드시 5개일 필요는 없다고 합니다. 단계를 거쳐가며 합리적인 원인을 찾아 나가며 근본 원인(root cause) 를 찾는 것으로도 충분하다고 생각합니다. 자신의 고민거리나 상대방의 의견을 파악하는 등 평소 생활 속에서도 많은 도움이 될 것 같기도 하네요. ",
     "url": "/docs/theoretical/theoretical-5why/",
     
     "relUrl": "/docs/theoretical/theoretical-5why/"
-  },"507": {
+  },"508": {
     "doc": "통계 분석 기초 용어 정리",
     "title": "통계 분석 기초 용어 정리",
     "content": ". 빅데이터를 학습하기 전에 가장 먼저 맞닥뜨리는 것이 아무래도 통계일 것입니다. 수집된 자료를 정리, 분석하고 일정한 패턴 분석 및 인과관계를 파악하기 위해서는 기본이 되는 통계 개념을 이해하고 넘어가고자 아래와 같이 정리합니다. ■ 평균 . | 자료의 합 / 자료의 개수 | . ■ 중앙값(Median)      . | 자료를 크기순서로 나열했을 때 가장 중앙에 위치한 값이다.      ㄴ = MEDIAN(범위) | . ■ 최빈값(mode)  . | 자료 중에서 가장 출현빈도가 높은 값이다. | = MODE(범위) | . ■ 분산(Variance)      ㄴ평균을 중심으로 관찰값들이 얼마나 떨어져 분포하는가를 나타낸다.      ㄴ편차제곱합 : 편차1^2 + 편차2^2 + …..      ㄴ분산 = 편차제곱합 / 데이터 수 = VAR(범위) . ■ 표준편차(standard deviation) . | 분산의 양의 제곱근으로 원 자료 측정단위와 같은 단위로 퍼짐 정도를 나타낸다. | 표준편차 = 분산^(1/2) = STDEV(범위) | . ■ 변동계수(coefficient of variation, CV) . | 평균이 크게 다른 두 개 이상의 집단을 비교할 때 또는 각 집단의 상대적 동질성을 비교할 때 주로 사용 | CV = 표준편차 / 평균 | . ■ 범위 . | 최대값 - 최소값, 가장 간단하게 퍼짐 정도를 파악할 수 있는 척도이다. | . ■ 사분위수 범위(IQR : Interquartile Range) . | 제 3사분위수와 제 1사분위수의 차를 의미, 자료의 가운데 부분에 위치한 50%의미 | 사분위수 = 3사분위수 - 1사분위수 = QUARTILE(범위, quart) | . ■ 상자그림 . | 최소값, 1사분위, 2사분위, 3사분위, 최대값을 이용하여 그림을 그린다. | . ■ 백분위수 . | 어떤 숫자들의 집합에서 제c백분위수는 수들의 c% 가 그 값보다 작고 나머지는 그 값보다 큰 값을 말한다. | . ■ 데이터의 Z 값 . | 어떤 특정한 자료값이 평균으로부터 표준편차의 몇 배 만큼 떨어져 있는가를 측정한다. | Z = (변량(x) - 평균) / 표준편차 = STANDARIDZE(x, mean, standard_dev) | . ",
     "url": "/docs/theoretical/theoretical-stats/",
     
     "relUrl": "/docs/theoretical/theoretical-stats/"
-  },"508": {
+  },"509": {
     "doc": "Theoretical",
     "title": "Theoretical",
     "content": "이론적인 내용들을 정리하였습니다. ",
     "url": "/docs/theoretical",
     
     "relUrl": "/docs/theoretical"
-  },"509": {
+  },"510": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue.js 기본 개념",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/",
     
     "relUrl": "/docs/programming-language/vuejs-basic/"
-  },"510": {
+  },"511": {
     "doc": "Vue.js 기본 개념",
     "title": "Table of contents",
     "content": ". | Vue 설치 | 데이터 바인딩 | 반복문 | 이벤트 핸들러 | 모달창 만들기 | export defalut . | 데이터 부분 | 가져오는 부분 | . | . 참조 자료 : [인스타그램을 만들며 배워보는 Vue.js 3 완벽 가이드] (https://codingapple.com/course/vue-js/) . ",
     "url": "/docs/programming-language/vuejs-basic/#table-of-contents",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#table-of-contents"
-  },"511": {
+  },"512": {
     "doc": "Vue.js 기본 개념",
     "title": "Vue 설치",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#vue-%EC%84%A4%EC%B9%98",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#vue-설치"
-  },"512": {
+  },"513": {
     "doc": "Vue.js 기본 개념",
     "title": "데이터 바인딩",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#데이터-바인딩"
-  },"513": {
+  },"514": {
     "doc": "Vue.js 기본 개념",
     "title": "반복문",
     "content": " ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%B0%98%EB%B3%B5%EB%AC%B8",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#반복문"
-  },"514": {
+  },"515": {
     "doc": "Vue.js 기본 개념",
     "title": "이벤트 핸들러",
     "content": "&lt;button @mouseover =\"신고수--\" @click=\"신고수++\"&gt;허위매물신고&lt;/button&gt; &lt;span&gt;신고수 : { {신고수} }&lt;/span&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%9F%AC",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#이벤트-핸들러"
-  },"515": {
+  },"516": {
     "doc": "Vue.js 기본 개념",
     "title": "모달창 만들기",
     "content": "모달창을 미리 만들어 클릭 시 상태조건을 변경한다. &lt;div class=\"black-bg\" v-if=\"모달창열렸니 == true\"&gt; &lt;div class=\"white-bg\"&gt; &lt;h4&gt;상세페이지임&lt;/h4&gt; &lt;p&gt;상세페이지 내용임&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#%EB%AA%A8%EB%8B%AC%EC%B0%BD-%EB%A7%8C%EB%93%A4%EA%B8%B0",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#모달창-만들기"
-  },"516": {
+  },"517": {
     "doc": "Vue.js 기본 개념",
     "title": "export defalut",
     "content": "데이터 부분 . export default [{ id : 0, title: \"Sinrim station 30 meters away\", image: \"https://codingapple1.github.io/vue/room0.jpg\", content: \"18년 신축공사한 남향 원룸 ☀️, 공기청정기 제공\", price: 340000 }, { . 가져오는 부분 . import data from './assets/oneroom.js'; export default { name: 'App', data() { return { 원룸들 : data, . &lt;img :src=\"원룸들[2].image\" class=\"room-img\"&gt; &lt;h4 @click=\"모달창열렸니 = true\"&gt;{ {원룸들[2].title} } &lt;/h4&gt; &lt;p&gt;{ {원룸들[2].price} } 원 &lt;/p&gt; . ",
     "url": "/docs/programming-language/vuejs-basic/#export-defalut",
     
     "relUrl": "/docs/programming-language/vuejs-basic/#export-defalut"
-  },"517": {
+  },"518": {
     "doc": "Vue.js",
     "title": "Vue.js",
     "content": " ",
