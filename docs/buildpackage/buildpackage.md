@@ -28,7 +28,15 @@ permalink: /docs/buildpackage
 - mvn install
 - mvn deploy
 
-## python
+## python 
+- 가입 : https://pypi.org/ , dmjgr5/aa1111@aa
+
+
+- python -m pip install --upgrade build //빌드 모듈 설치
+- python -m build // 빌드 하기(wheel, tgz)
+
+- python -m pip install --upgrade twine // 업로드 모듈 설치
+- python -m twine upload dist/* // 업로드
 
 - setting pip.ini
 - pip install

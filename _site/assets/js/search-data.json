@@ -330,7 +330,7 @@
   },"47": {
     "doc": "Build & Package",
     "title": "python",
-    "content": ". | setting pip.ini | pip install | . ",
+    "content": ". | https://pypi.org/ , dmjgr5/aa1111@aa . | setting pip.ini | pip install | . ",
     "url": "/docs/buildpackage#python",
     
     "relUrl": "/docs/buildpackage#python"
