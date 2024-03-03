@@ -15,6 +15,8 @@ permalink: /docs/buildpackage
 ## npm 
 
 - setting .npmrc
+    - npm config list
+    - @scope
 - setting package.json & *.js
 - npm publish
 - npm cache clean –force
