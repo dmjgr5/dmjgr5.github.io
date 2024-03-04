@@ -9,6 +9,10 @@ nav_order: 100
 
 - [Maven clean, compile, package, install, deploy](https://wikidocs.net/book/1910)
 
+## npm
+
+- [Verdaccio 를 이용한 private registry 구축하기](https://mygumi.tistory.com/371)
+
 
 ## Docker Image
 
