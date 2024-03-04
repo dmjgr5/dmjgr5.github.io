@@ -16,7 +16,11 @@ nav_order: 100
 
 ## Helm Chart
 
+- [helm chart 문법 알아보기](https://devocean.sk.com/blog/techBoardDetail.do?page=&boardType=undefined&query=&ID=165503&searchData=&subIndex=)
+
 - [Helm chart 생성, 테스트, 패키징, Helm Repository에 배포하기](https://happycloud-lee.tistory.com/5)
+
+
 
 ## Kubernetes
 
