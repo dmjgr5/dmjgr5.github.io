@@ -13,6 +13,7 @@ permalink: /docs/buildpackage
 
 
 ## npm 
+- npmjs.com / dmjgr5 / ab1234@ab1234
 
 - setting .npmrc
     - npm config list

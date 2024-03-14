@@ -12,6 +12,8 @@ nav_order: 100
 ## npm
 
 - [Verdaccio 를 이용한 private registry 구축하기](https://mygumi.tistory.com/371)
+- [npm 모듈 작성부터 publish](https://kdydesign.github.io/2020/08/28/npm-tutorial/)
+- [외부 패키지 install 하여 사용하기](https://developer3.tistory.com/46)
 
 
 ## Docker Image
