@@ -26,7 +26,7 @@ nav_order: 20
 
 ```sh 
 ~$ uname -a
-Linux dcpark-500R5K-501R5K-500R5Q 5.15.0-92-generic #102~20.04.1-Ubuntu SMP Mon Jan 15 13:09:14 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+Linux user-500R5K-501R5K-500R5Q 5.15.0-92-generic #102~20.04.1-Ubuntu SMP Mon Jan 15 13:09:14 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
 ~$ hostnamectl
    Static hostname: test-500R5K-501R5K-500R5Q
          Icon name: computer-laptop
