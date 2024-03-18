@@ -235,6 +235,40 @@ Oracle VM VirtualBox  관리자
 
 
 
+### 로컬에서 접속하기
+
+테스트 시 쿠버네티스를 설치한 로컬에서 접속이 필요한 경우 NodePort 상태에서는 아래와 같이 접속할 수 있다.
+
+`kubectl get node -o wide` 를 통해 node 의 INTERNAL-IP 를 확인한다.
+
+```sh
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/helm-test/hello-helm/charts$ kubectl get node -o wide
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+minikube   Ready    control-plane   30d   v1.28.3   192.168.49.2   <none>        Ubuntu 22.04.3 LTS   5.15.0-100-generic   docker://24.0.7
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/helm-test/hello-helm/charts$ 
+```
+
+해당 파드를 조회하여 Target Port 를 확인한다.
+
+```sh
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/helm-test/hello-helm/charts$ 
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/helm-test/hello-helm/charts$ kubectl get svc -A
+NAMESPACE              NAME                        TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+default                kubernetes                  ClusterIP   10.96.0.1       <none>        443/TCP                  16d
+default                testhelm-hello-helm         NodePort    10.100.230.96   <none>        80:30823/TCP             5m48s
+kube-system            kube-dns                    ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   30d
+kubernetes-dashboard   dashboard-metrics-scraper   ClusterIP   10.105.75.95    <none>        8000/TCP                 30d
+kubernetes-dashboard   kubernetes-dashboard        ClusterIP   10.100.155.51   <none>        80/TCP                   30d
+dcpark@dcpark-500R5K-501R5K-500R5Q:~/helm-test/hello-helm/charts$ 
+```
+
+아래와 같이 브라우저에서 접속한다.
+
+`192.168.49.2:30823`
+
+
+
+### 서비스 삭제
 
 
 테스트 이후 서비스 삭제한다.  
