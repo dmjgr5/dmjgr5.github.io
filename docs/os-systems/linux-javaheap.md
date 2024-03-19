@@ -4,7 +4,7 @@ title: Java Heap 분석
 parent: Linux
 grand_parent: OS Systems
 permalink: /docs/os-systems/linux-javaheap/
-nav_order: 30
+nav_order: 35
 ---
 
 # Jps, Jmap,Jhat 을 이용한 Java Heap 분석
