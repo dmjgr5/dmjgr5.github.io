@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Oracle 변경(테이블명, 컬럼명, 제약조건명)
+title: Oracle 에서 ALTER 이용하기
 parent: Database
 nav_order: 22
 ---
