@@ -5,7 +5,7 @@ parent: Database
 nav_order: 23
 ---
 
-# Oracle 에서 테이블과 데이터 복사하기
+# Oracle 에서 테이블과 데이터 복사하기 
 
 {: .no_toc }
 
