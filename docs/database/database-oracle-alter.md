@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Oracle 에서 ALTER 이용하기
+title: Oracle 에서 ALTER 이용하기 
 parent: Database
 nav_order: 22
 ---
@@ -17,9 +17,10 @@ nav_order: 22
 
 ----
 
-오라클에서 DB 작업 시 테이블, 컬럼 또는 제약조건 명을 변경할 일이 생긴다. ALTER 구문을 활용해 보자.
+오라클에서 DB 작업 시 테이블, 컬럼 또는 제약조건 명을 변경할 일이 생긴다. 
+ALTER 구문을 활용해 보자.
 
-참조자료 : [https://m.blog.naver.com/regenesis90/222200592868](https://m.blog.naver.com/regenesis90/222200592868)
+참조자료: [https://m.blog.naver.com/regenesis90/222200592868](https://m.blog.naver.com/regenesis90/222200592868)
 
 
 ## 테이블명 변경

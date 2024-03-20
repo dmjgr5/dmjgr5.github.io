@@ -128,7 +128,7 @@ export PATH=$ORACLE_HOME/bin:$PATH
 
 
 특히 아래에서 안될때가 많은데 아래 들을 확인해 보는 것이 좋다.
-- 재부팅하기
+- 재부팅하기 
 - etc/hosts 에 사용자 계정으로 localhost 추가하기
 - oracle service restart 하기
 
